@@ -9,54 +9,60 @@
 package main
 
 import (
-	"database/sql"
+	"encoding/json"
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/gorilla/mux"
 	_ "github.com/gorilla/mux"
+	"github.com/jinzhu/gorm"
 	"log"
 	"net/http"
 )
+var db *gorm.DB
+var err error
 
-func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Welcome to Repota %s!", r.URL.Path[1:])
+type Automobiles struct{
+	Id    int    `json:"id"`
+	Brand string `json:"brand"`
+	Model string  `json:"model"`
+}
+
+func handleRequests() {
+	log.Println("Server started on: http://localhost:8080")
+	log.Println("Quit the server with CONTROL-C.")
+	// creates a new instance of a mux router
+	myRouter := mux.NewRouter().StrictSlash(true)
+	myRouter.HandleFunc("/", homePage)
+	myRouter.HandleFunc("/Automobiles", returnAllAutomobiles)
+	log.Fatal(http.ListenAndServe(":8080", myRouter))
+}
+
+// home page for Repota
+func homePage(w http.ResponseWriter, r *http.Request){
+	fmt.Fprintf(w, "Welcome to Repota!")
+	fmt.Println("Endpoint Hit: HomePage")
+}
+
+// display automobiles table
+func returnAllAutomobiles(w http.ResponseWriter, r *http.Request) {
+	var automobiles []Automobiles
+	db.Find(&automobiles)
+	fmt.Println("Endpoint Hit: returnAllAutomobiles")
+	json.NewEncoder(w).Encode(automobiles)
 }
 
 func main() {
-	//launch server
-	http.HandleFunc("/", handler)
-	log.Println("Server started on: http://localhost:8080")
-	log.Fatal(http.ListenAndServe(":8080", nil))
-
-	connDB()
-}
-
-func connDB() {
-	// connect to mysql
+	// connect to mysql database
 	fmt.Println("Go connect to MySQL")
-	db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/repotadb")
+	db, err = gorm.Open("mysql", "root:@tcp(127.0.0.1:3306)/repotadb")
 
-	if err != nil {
-		log.Fatal("Unable to connect to repotadb")
+	if err!=nil{
+		log.Println("Database connection Failed to Open")
+	}else{
+		log.Println("Database connection Established")
 	}
 
-	fmt.Println("Connected to repotadb")
-	defer db.Close()
-
-	results, err := db.Query("select * from automobiles")
-	if err != nil {
-		log.Fatal("Unable to fetch table rows")
-	}
-	for results.Next() {
-		var (
-			id    int
-			brand string
-			model string
-		)
-		err = results.Scan(&id, &brand, &model)
-		if err != nil {
-			log.Fatal("Unable to parse row")
-		}
-		fmt.Printf("\n ID: %d, Brand: %s, Model: %d \n", id, brand, model)
-
-	}
+	db.AutoMigrate(&Automobiles{})
+	// calls requests to be made
+	handleRequests()
 }

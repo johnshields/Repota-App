@@ -29,11 +29,13 @@ app.use(cors(corsOptions = {
       console.log("\n\n CONNECTED TO DATABASE \n\n");
   });
 
-
+///////////////
+// Get Request
+//////////////
   var Autos = {
     getAutos: function (callback) {
       // run query
-      return connection.query('show tables', callback);
+      return connection.query('select * from automobiles', callback);
     }
   }
   
@@ -49,6 +51,6 @@ app.use(cors(corsOptions = {
   });
 
   //Express Server
-app.listen('8081', () => console.log("Express Server Running on port no : 8081"));
+app.listen('8081', () => console.log("Express Server Running on port no : 8081 http://localhost:8081"));
 
 module.exports = connection;
