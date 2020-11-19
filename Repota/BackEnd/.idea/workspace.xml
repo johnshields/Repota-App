@@ -109,9 +109,10 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="752" y="455" key="#GOROOT/0.0.1920.1050/-1366.312.1366.738@0.0.1920.1050" timestamp="1605193309768" />
-    <state x="552" y="183" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605193389951">
+    <state x="379" y="74" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605800263122">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
+    <state x="379" y="74" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1050/-1366.130.1366.738@0.0.1920.1050" timestamp="1605800263122" />
     <state x="552" y="183" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1050/-1366.312.1366.738@0.0.1920.1050" timestamp="1605193389951" />
     <state x="740" y="279" key="FileChooserDialogImpl" timestamp="1605786929182">
       <screen x="0" y="0" width="1920" height="1050" />
@@ -126,6 +127,10 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="552" y="257" key="Vcs.Push.Dialog.v2/0.0.1920.1050/-1366.312.1366.738@0.0.1920.1050" timestamp="1605212091711" />
+    <state x="621" y="174" width="609" height="455" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1605800683919">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="621" y="174" width="609" height="455" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1920.1050/-1366.130.1366.738@0.0.1920.1050" timestamp="1605800683919" />
     <state x="385" y="0" width="1551" height="732" key="dock-window-1" timestamp="1605785092574">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>

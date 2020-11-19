@@ -1,10 +1,6 @@
 // golang server
 // mysql database
-// https://golang.org/doc/articles/wiki/
-// https://godoc.org/github.com/go-sql-driver/mysql
-// https://www.golangprograms.com/example-of-golang-crud-using-mysql-from-scratch.html
-// https://golangbot.com/connect-create-db-mysql/
-// https://medium.com/@hugo.bjarred/mysql-and-golang-ea0d620574d2
+//https://levelup.gitconnected.com/build-a-rest-api-using-go-mysql-gorm-and-mux-a02e9a2865ee
 
 package main
 
@@ -21,19 +17,22 @@ import (
 var db *gorm.DB
 var err error
 
+// table data
 type Automobiles struct{
 	Id    int    `json:"id"`
 	Brand string `json:"brand"`
 	Model string  `json:"model"`
 }
 
+// request handler
 func handleRequests() {
 	log.Println("Server started on: http://localhost:8080")
+	log.Println("Server started on: http://52.51.6.178:8080")
 	log.Println("Quit the server with CONTROL-C.")
 	// creates a new instance of a mux router
 	myRouter := mux.NewRouter().StrictSlash(true)
 	myRouter.HandleFunc("/", homePage)
-	myRouter.HandleFunc("/Automobiles", returnAllAutomobiles)
+	myRouter.HandleFunc("/automobiles", returnAllAutomobiles)
 	log.Fatal(http.ListenAndServe(":8080", myRouter))
 }
 
@@ -55,6 +54,7 @@ func main() {
 	// connect to mysql database
 	fmt.Println("Go connect to MySQL")
 	db, err = gorm.Open("mysql", "root:@tcp(127.0.0.1:3306)/repotadb")
+	//db, err = gorm.Open("mysql", "john:root@tcp(127.0.0.1:3306)/repotadb")
 
 	if err!=nil{
 		log.Println("Database connection Failed to Open")
@@ -65,4 +65,5 @@ func main() {
 	db.AutoMigrate(&Automobiles{})
 	// calls requests to be made
 	handleRequests()
+	defer db.Close()
 }

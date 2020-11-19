@@ -23,24 +23,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="482634a4-5787-4500-80ad-42f57017f05c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BackEnd/.idea/BackEnd.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BackEnd/.idea/dataSources.local.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BackEnd/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BackEnd/.idea/dataSources/7898c214-8d5d-43f9-b066-7fd5c0d78dc7.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BackEnd/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BackEnd/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BackEnd/.idea/shelf/Uncommitted_changes_before_Update_at_12_11_2020_20_14_[Default_Changelist]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BackEnd/.idea/shelf/Uncommitted_changes_before_Update_at_12_11_2020_20_14__Default_Changelist_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BackEnd/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BackEnd/BackEnd.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/.idea/dataSources/7898c214-8d5d-43f9-b066-7fd5c0d78dc7.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/.idea/dataSources/7898c214-8d5d-43f9-b066-7fd5c0d78dc7.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BackEnd/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/server.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/tab1/tab1.page.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/tab1/tab1.page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/server.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,6 +89,7 @@
       <workItem from="1605192864152" duration="3108000" />
       <workItem from="1605782096882" duration="3457000" />
       <workItem from="1605795752064" duration="49000" />
+      <workItem from="1605795898600" duration="1884000" />
     </task>
     <servers />
   </component>
