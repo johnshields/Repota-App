@@ -1,3 +1,0 @@
-# Repota Database
-
-Database script for Repota ...

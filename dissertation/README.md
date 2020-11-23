@@ -1,3 +1,0 @@
-# Repota Dissertation
-
-The project's dissertation ...
