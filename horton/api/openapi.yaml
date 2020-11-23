@@ -1,0 +1,359 @@
+openapi: 3.0.2
+info:
+  title: John Golang Server
+  version: 1.0.0
+servers:
+- url: /api/v1
+paths:
+  /login:
+    post:
+      description: Attempts to log a user in
+      operationId: login
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object'
+      responses:
+        "204":
+          description: Login sucessful
+        "403":
+          content:
+            application/json:
+              examples:
+                LoginFailed:
+                  value:
+                    code: 403
+                    messages: Invalid Name and/or password
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Login Unsucessful
+        "500":
+          content:
+            application/json:
+              examples:
+                InternalServerError:
+                  value:
+                    code: 500
+                    messages: Unable to process request
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unable to process request
+      security:
+      - {}
+      summary: Log in
+      tags:
+      - Account
+  /register:
+    post:
+      description: Attempts to register a new user
+      operationId: register
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object'
+      responses:
+        "204":
+          description: Successfuly registered a new User
+        "400":
+          content:
+            application/json:
+              examples:
+                InvalidNameOrPassword:
+                  value:
+                    code: 400
+                    messages: Password insufficiently complex
+                NameTooShort:
+                  value:
+                    code: 400
+                    messages: Name too short
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Problem with username or password
+        "409":
+          content:
+            application/json:
+              examples:
+                NameTaken:
+                  value:
+                    code: 409
+                    messages: NameTaken
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Name is taken
+        "500":
+          content:
+            application/json:
+              examples:
+                InternalServerError:
+                  value:
+                    code: 500
+                    messages: Unable to process request
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unable to process request
+      security:
+      - {}
+      summary: Registers User
+      tags:
+      - Account
+    summary: Path used to register a new User
+  /jobReports:
+    description: Get all reports
+    get:
+      description: Get all reports
+      operationId: get_reports
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/JobReport'
+                type: array
+          description: Successful response - returns an array of Job Report entities.
+        "500":
+          content:
+            application/json:
+              examples:
+                InternalServerError:
+                  value:
+                    code: 500
+                    messages: Unable to retrieve reports
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unable to retrieve reports
+      summary: List All report
+      tags:
+      - Job Report
+    post:
+      description: Creates a new instance of a Job Report.
+      operationId: create_report
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobReport'
+        description: A new report to be created.
+        required: true
+      responses:
+        "201":
+          description: Successful response.
+        "500":
+          content:
+            application/json:
+              examples:
+                InternalServerError:
+                  value:
+                    code: 500
+                    messages: Unable to create a new report
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unable to create a new job report
+      summary: Create a report
+      tags:
+      - Job Report
+    summary: Path used to manage the list of reports.
+  /jobReports/{jobReportId}:
+    delete:
+      description: Deletes an existing report.
+      operationId: delete_report
+      parameters:
+      - description: A unique identifier for a Report.
+        explode: false
+        in: path
+        name: jobReportId
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "204":
+          description: Successful response.
+        "404":
+          content:
+            application/json:
+              examples:
+                ReportNotFound:
+                  value:
+                    code: 404
+                    messages: Report not found
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Could not locate Report
+        "500":
+          content:
+            application/json:
+              examples:
+                InternalServerError:
+                  value:
+                    code: 500
+                    messages: Unable to process request
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unable to process request
+      summary: Delete a Job Report
+      tags:
+      - Job Report
+    get:
+      description: Gets the details of a single instance of a report.
+      operationId: get_report
+      parameters:
+      - description: A unique identifier for a report.
+        explode: false
+        in: path
+        name: jobReportId
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobReport'
+          description: Successful response - returns a single job report.
+        "404":
+          content:
+            application/json:
+              examples:
+                ReportNotFound:
+                  value:
+                    code: 404
+                    messages: Report not found
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Could not locate Report
+        "500":
+          content:
+            application/json:
+              examples:
+                InternalServerError:
+                  value:
+                    code: 500
+                    messages: Unable to process request
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unable to process request
+      summary: Get a job report
+      tags:
+      - Job Report
+    put:
+      description: Updates an existing job report.
+      operationId: update_report
+      parameters:
+      - description: A unique identifier for a report.
+        explode: false
+        in: path
+        name: jobReportId
+        required: true
+        schema:
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobReport'
+        description: Updated report information.
+        required: true
+      responses:
+        "204":
+          description: Job report has been updated.
+        "404":
+          content:
+            application/json:
+              examples:
+                ReportNotFound:
+                  value:
+                    code: 404
+                    messages: Job report not found
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Could not locate job report
+        "500":
+          content:
+            application/json:
+              examples:
+                InternalServerError:
+                  value:
+                    code: 500
+                    messages: Unable to process request
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unable to process request
+      summary: Update a job report
+      tags:
+      - Job Report
+    summary: Path used to manage a single report.
+components:
+  requestBodies:
+    inline_object:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_object'
+      required: true
+  responses:
+    ReportNotFound:
+      content:
+        application/json:
+          examples:
+            ChannelNotFound:
+              value:
+                code: 404
+                messages: Report not found
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Could not locate job report
+    InternalServerIssue:
+      content:
+        application/json:
+          examples:
+            ChannelNotFound:
+              value:
+                code: 500
+                messages: Unable to process request
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Unable to create user
+  schemas:
+    inline_object:
+      example:
+        username: John Doe
+        password: password
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      type: object
+    Error:
+      properties:
+        code:
+          type: integer
+        messages:
+          type: string
+      required:
+      - code
+      - messages
+      type: object
+    JobReport:
+      example:
+        id: 1
+        timeDate: 09:00 10/10/2020
+        location: Galway City
+        vehicle: Dumper
+        description: Job complete
+        solution: Hello world
+      properties:
+        id:
+          type: integer
+        timeDate:
+          format: date-time
+          type: string
+        location:
+          type: string
+        vehicle:
+          type: string
+        description:
+          type: string
+        solution:
+          type: string
+      type: object

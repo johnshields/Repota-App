@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="482634a4-5787-4500-80ad-42f57017f05c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../APMD_dissertation/images/gmit-logo.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../APMD_dissertation/images/repotaLogo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../APMD_dissertation/introduction.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../APMD_dissertation/main.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/.idea/BackEnd.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/.idea/dataSources.local.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/.idea/dataSources/7898c214-8d5d-43f9-b066-7fd5c0d78dc7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/.idea/dataSources/7898c214-8d5d-43f9-b066-7fd5c0d78dc7/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/.idea/shelf/Uncommitted_changes_before_Update_at_12_11_2020_20_14_[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/.idea/shelf/Uncommitted_changes_before_Update_at_12_11_2020_20_14__Default_Changelist_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/BackEnd.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/server.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/repotadb.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/tab1/tab1-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/home/tab1-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/tab1/tab1.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/home/tab1.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/tab1/tab1.page.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/home/tab1.page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/tab1/tab1.page.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/home/tab1.page.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/tab1/tab1.page.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/home/tab1.page.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/tab1/tab1.page.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/home/tab1.page.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/tab2/tab2-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/account/tab2-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/tab2/tab2.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/account/tab2.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/tab2/tab2.page.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/account/tab2.page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/tab2/tab2.page.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/account/tab2.page.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/tab2/tab2.page.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/account/tab2.page.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/tab2/tab2.page.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/account/tab2.page.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/tab3/tab3-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/settings/tab3-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/tab3/tab3.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/settings/tab3.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/tab3/tab3.page.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/settings/tab3.page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/tab3/tab3.page.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/settings/tab3.page.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/tab3/tab3.page.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/settings/tab3.page.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/tab3/tab3.page.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/settings/tab3.page.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/tabs/tabs-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/tabs/tabs-routing.module.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/node_modules/@capacitor/cli/assets/android-template">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/node_modules/@capacitor/cli/assets/capacitor-cordova-android-plugins">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.2.2\plugins\maven\lib\maven3" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1jbN5pJi8hxdCfpJwW6eSaMLhIu" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../database/repotadb.sql" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="ts.external.directory.path" value="C:\Users\johnd\OneDrive\Desktop\Home\Projects\Final Year Project\repota\Repota\node_modules\typescript\lib" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="482634a4-5787-4500-80ad-42f57017f05c" name="Default Changelist" comment="" />
+      <created>1604068651180</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1604068651180</updated>
+      <workItem from="1605192864152" duration="3108000" />
+      <workItem from="1605782096882" duration="3457000" />
+      <workItem from="1605795752064" duration="49000" />
+      <workItem from="1605795898600" duration="1884000" />
+      <workItem from="1606145494964" duration="150000" />
+      <workItem from="1606145657910" duration="1721000" />
+      <workItem from="1606154326221" duration="5917000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="334" y="360" key="#SQL_Dialects" timestamp="1606154504507">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="334" y="360" key="#SQL_Dialects/0.0.1920.1050/-1366.130.1366.738@0.0.1920.1050" timestamp="1606154504507" />
+    <state x="552" y="183" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606157507408">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="552" y="183" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1050/-1366.130.1366.738@0.0.1920.1050" timestamp="1606157507408" />
+    <state x="739" y="279" key="FileChooserDialogImpl" timestamp="1606154445699">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="-840" y="326" key="FileChooserDialogImpl/0.0.1920.1050/-1366.130.1366.738@-1366.130.1366.738" timestamp="1606145645070" />
+    <state x="739" y="279" key="FileChooserDialogImpl/0.0.1920.1050/-1366.130.1366.738@0.0.1920.1050" timestamp="1606154445699" />
+    <state x="740" y="279" key="FileChooserDialogImpl/0.0.1920.1050/-1366.312.1366.738@0.0.1920.1050" timestamp="1604074286145" />
+    <state width="1323" height="175" key="GridCell.Tab.0.bottom" timestamp="1606147623044">
+      <screen x="-1366" y="130" width="1366" height="738" />
+    </state>
+    <state width="1323" height="175" key="GridCell.Tab.0.bottom/0.0.1920.1050/-1366.130.1366.738@-1366.130.1366.738" timestamp="1606147623044" />
+    <state width="1323" height="175" key="GridCell.Tab.0.center" timestamp="1606147623044">
+      <screen x="-1366" y="130" width="1366" height="738" />
+    </state>
+    <state width="1323" height="175" key="GridCell.Tab.0.center/0.0.1920.1050/-1366.130.1366.738@-1366.130.1366.738" timestamp="1606147623044" />
+    <state width="1323" height="175" key="GridCell.Tab.0.left" timestamp="1606147623044">
+      <screen x="-1366" y="130" width="1366" height="738" />
+    </state>
+    <state width="1323" height="175" key="GridCell.Tab.0.left/0.0.1920.1050/-1366.130.1366.738@-1366.130.1366.738" timestamp="1606147623044" />
+    <state width="1323" height="175" key="GridCell.Tab.0.right" timestamp="1606147623044">
+      <screen x="-1366" y="130" width="1366" height="738" />
+    </state>
+    <state width="1323" height="175" key="GridCell.Tab.0.right/0.0.1920.1050/-1366.130.1366.738@-1366.130.1366.738" timestamp="1606147623044" />
+    <state x="540" y="259" key="IDE.errors.dialog" timestamp="1606154393220">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="540" y="259" key="IDE.errors.dialog/0.0.1920.1050/-1366.130.1366.738@0.0.1920.1050" timestamp="1606154393220" />
+    <state x="540" y="259" key="IDE.errors.dialog/0.0.1920.1050/-1366.312.1366.738@0.0.1920.1050" timestamp="1604070358686" />
+    <state x="461" y="169" key="SettingsEditor" timestamp="1605785211255">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="461" y="169" key="SettingsEditor/0.0.1920.1050/-1366.130.1366.738@0.0.1920.1050" timestamp="1605785211255" />
+    <state x="461" y="169" key="SettingsEditor/0.0.1920.1050/-1366.312.1366.738@0.0.1920.1050" timestamp="1605206262409" />
+  </component>
+</project>
