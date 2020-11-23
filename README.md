@@ -1,12 +1,12 @@
 # Applied Project and Minor Dissertation
 John Shields - G00348436
 
-#### Repota 
+### Repota 
 Repota Application ...
-#### Dissertation
+### Dissertation
 The project's dissertation ...
-#### Horton
+### Horton
 Backend Server for Repota ...
-#### Database
+### Database
 Database script for Repota ...
 
