@@ -64,9 +64,9 @@ CREATE TABLE IF NOT EXISTS jobReports
 INSERT INTO jobReports (job_report_id, worker_id, work_done_id, time_date_stamp, vehicle_model, vehicle_reg,
                         vehicle_location,
                         miles_on_vehicle, warranty, breakdown)
-VALUES (1, 1, 1, '21/11/2020', 'Ford Focus', '151-DL-2308', 'Gort, Co. Galway', '508538', 'YES', 'YES'),
-       (2, 2, 2, '23/11/2020', 'Toyota Yaris', '08-KY-667', 'Laban , Co. Galway', '648598', 'YES', 'YES'),
-       (3, 3, 3, '27/11/2020', 'Hyundai i30', '163-TS-1459', 'Barefield, Co. Clare', '700891', 'YES', 'YES');
+VALUES (1, 1, 1, '21/11/2020', 'Ford Focus', '151-DL-2308', 'Gort, Co. Galway', '508538', 'YES', 'NO'),
+       (2, 2, 2, '23/11/2020', 'Toyota Yaris', '08-KY-667', 'Laban , Co. Galway', '648598', 'YES', 'NO'),
+       (3, 3, 3, '27/11/2020', 'Hyundai i30', '163-TS-1459', 'Barefield, Co. Clare', '700891', 'YES', 'NO');
 COMMIT;
 
 -- customers table --
@@ -88,6 +88,16 @@ VALUES (1, 1, 'Jack Brown', 'The passenger side door will not open'),
        (3, 3, 'Lucy ONeill', 'Radio not turning on');
 COMMIT;
 
-
-
- 
+-- useful queries --
+-- select all tables' data --
+SELECT * FROM jobreports; SELECT * FROM customers; SELECT * FROM workdone; SELECT * FROM workers;
+-- display workers card --
+SELECT a.job_report_id, a.worker_id, b.worker_name FROM jobreports a LEFT JOIN workers b ON a.worker_id = b.worker_id;
+-- display job card --
+-- job_report_id, time_date_stamp, customer_name, vehicle_model, vehicle_reg, vehicle_location, miles_on_vehicle, warranty, breakdown --
+SELECT a.job_report_id, a.time_date_stamp, b.customer_name, a.vehicle_model, a.vehicle_reg, a.vehicle_location, a.miles_on_vehicle, a.warranty, a.breakdown
+FROM jobreports a, customers b WHERE a.job_report_id = b.job_report_id;
+-- customer_complaint, cause, correction, parts --
+SELECT a.customer_complaint, b.cause, b.correction, b.parts FROM customers a, workdone b WHERE a.customer_id = b.work_id;
+-- worker_name + work hours --
+SELECT a.worker_name, b.work_hours FROM workers a, workdone b WHERE a.worker_id = b.work_id;
