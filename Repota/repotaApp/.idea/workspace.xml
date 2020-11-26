@@ -22,49 +22,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="482634a4-5787-4500-80ad-42f57017f05c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../APMD_dissertation/images/gmit-logo.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../APMD_dissertation/images/repotaLogo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../APMD_dissertation/introduction.tex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../APMD_dissertation/main.tex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/.idea/BackEnd.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/.idea/dataSources.local.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/.idea/dataSources/7898c214-8d5d-43f9-b066-7fd5c0d78dc7.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/.idea/dataSources/7898c214-8d5d-43f9-b066-7fd5c0d78dc7/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/.idea/shelf/Uncommitted_changes_before_Update_at_12_11_2020_20_14_[Default_Changelist]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/.idea/shelf/Uncommitted_changes_before_Update_at_12_11_2020_20_14__Default_Changelist_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/BackEnd.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/server.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/repotadb.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/tab1/tab1-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/home/tab1-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/tab1/tab1.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/home/tab1.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/tab1/tab1.page.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/home/tab1.page.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/tab1/tab1.page.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/home/tab1.page.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/tab1/tab1.page.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/home/tab1.page.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/tab1/tab1.page.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/home/tab1.page.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/tab2/tab2-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/account/tab2-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/tab2/tab2.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/account/tab2.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/tab2/tab2.page.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/account/tab2.page.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/tab2/tab2.page.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/account/tab2.page.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/tab2/tab2.page.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/account/tab2.page.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/tab2/tab2.page.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/account/tab2.page.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/tab3/tab3-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/settings/tab3-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/tab3/tab3.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/settings/tab3.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/tab3/tab3.page.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/settings/tab3.page.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/tab3/tab3.page.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/settings/tab3.page.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/tab3/tab3.page.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/settings/tab3.page.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/tab3/tab3.page.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/settings/tab3.page.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/tabs/tabs-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/tabs/tabs-routing.module.ts" afterDir="false" />
-    </list>
+    <list default="true" id="482634a4-5787-4500-80ad-42f57017f05c" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -158,10 +116,18 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="552" y="183" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1050/-1366.130.1366.738@0.0.1920.1050" timestamp="1606157507408" />
-    <state x="739" y="279" key="FileChooserDialogImpl" timestamp="1606154445699">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state x="-953" y="245" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1606403217492">
+      <screen x="-1366" y="130" width="1366" height="738" />
     </state>
-    <state x="-840" y="326" key="FileChooserDialogImpl/0.0.1920.1050/-1366.130.1366.738@-1366.130.1366.738" timestamp="1606145645070" />
+    <state x="-953" y="245" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1050/-1366.130.1366.738@-1366.130.1366.738" timestamp="1606403217492" />
+    <state x="-1016" y="276" key="EditFileWatcherDialog" timestamp="1606402210584">
+      <screen x="-1366" y="130" width="1366" height="738" />
+    </state>
+    <state x="-1016" y="276" key="EditFileWatcherDialog/0.0.1920.1050/-1366.130.1366.738@-1366.130.1366.738" timestamp="1606402210584" />
+    <state x="-840" y="326" key="FileChooserDialogImpl" timestamp="1606409323639">
+      <screen x="-1366" y="130" width="1366" height="738" />
+    </state>
+    <state x="-840" y="326" key="FileChooserDialogImpl/0.0.1920.1050/-1366.130.1366.738@-1366.130.1366.738" timestamp="1606409323639" />
     <state x="739" y="279" key="FileChooserDialogImpl/0.0.1920.1050/-1366.130.1366.738@0.0.1920.1050" timestamp="1606154445699" />
     <state x="740" y="279" key="FileChooserDialogImpl/0.0.1920.1050/-1366.312.1366.738@0.0.1920.1050" timestamp="1604074286145" />
     <state width="1323" height="175" key="GridCell.Tab.0.bottom" timestamp="1606147623044">
@@ -190,5 +156,9 @@
     </state>
     <state x="461" y="169" key="SettingsEditor/0.0.1920.1050/-1366.130.1366.738@0.0.1920.1050" timestamp="1605785211255" />
     <state x="461" y="169" key="SettingsEditor/0.0.1920.1050/-1366.312.1366.738@0.0.1920.1050" timestamp="1605206262409" />
+    <state x="-1020" y="189" width="672" height="678" key="search.everywhere.popup" timestamp="1606415163793">
+      <screen x="-1366" y="130" width="1366" height="738" />
+    </state>
+    <state x="-1020" y="189" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050/-1366.130.1366.738@-1366.130.1366.738" timestamp="1606415163793" />
   </component>
 </project>

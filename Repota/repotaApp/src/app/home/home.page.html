@@ -1,0 +1,20 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-title class="toolbar">Repota</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="home">
+    <div class="image">
+        <ion-button [routerLink]="['/tabs/create']" class="create" color="NONE">
+            <ion-text>
+                Create
+            </ion-text>
+        </ion-button>
+        <ion-button [routerLink]="['/tabs/report-history']" class="report" color="NONE">
+            <ion-text>
+                Reports
+            </ion-text>
+        </ion-button>
+    </div>
+</ion-content>

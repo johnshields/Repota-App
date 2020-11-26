@@ -94,10 +94,16 @@ SELECT * FROM jobreports; SELECT * FROM customers; SELECT * FROM workdone; SELEC
 -- display workers card --
 SELECT a.job_report_id, a.worker_id, b.worker_name FROM jobreports a LEFT JOIN workers b ON a.worker_id = b.worker_id;
 -- display job card --
--- job_report_id, time_date_stamp, customer_name, vehicle_model, vehicle_reg, vehicle_location, miles_on_vehicle, warranty, breakdown --
-SELECT a.job_report_id, a.time_date_stamp, b.customer_name, a.vehicle_model, a.vehicle_reg, a.vehicle_location, a.miles_on_vehicle, a.warranty, a.breakdown
-FROM jobreports a, customers b WHERE a.job_report_id = b.job_report_id;
+-- ALL JOBS job_report_id, time_date_stamp, customer_name, vehicle_model, vehicle_reg, vehicle_location, miles_on_vehicle, warranty, breakdown --
+SELECT a.job_report_id, a.time_date_stamp, b.customer_name, a.vehicle_model, a.vehicle_reg, a.vehicle_location, a.miles_on_vehicle, a.warranty, a.breakdown FROM jobreports a, customers b WHERE a.job_report_id = b.job_report_id;
 -- customer_complaint, cause, correction, parts --
 SELECT a.customer_complaint, b.cause, b.correction, b.parts FROM customers a, workdone b WHERE a.customer_id = b.work_id;
 -- worker_name + work hours --
 SELECT a.worker_name, b.work_hours FROM workers a, workdone b WHERE a.worker_id = b.work_id;
+
+-- ONE JOB --
+SELECT a.job_report_id, a.time_date_stamp, b.customer_name, a.vehicle_model, a.vehicle_reg, a.vehicle_location, a.miles_on_vehicle, a.warranty, a.breakdown FROM jobreports a, customers b WHERE a.job_report_id = 1 = b.job_report_id = 1;
+-- customer_complaint, cause, correction, parts --
+SELECT a.customer_complaint, b.cause, b.correction, b.parts FROM customers a, workdone b WHERE a.customer_id = 1 = b.work_id =1;
+-- worker_name + work hours --
+SELECT a.worker_name, b.work_hours FROM workers a, workdone b WHERE a.worker_id = 1 = b.work_id = 1;
