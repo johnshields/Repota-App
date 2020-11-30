@@ -28,18 +28,23 @@ COMMIT;
 CREATE TABLE IF NOT EXISTS workDone
 (
     work_id    int(6)       NOT NULL AUTO_INCREMENT,
+    worker_id  int(5)       NOT NULL,
     cause      varchar(500),
     correction varchar(500) NOT NULL,
-    work_hours int(10)      NOT NULL,
     parts      varchar(500) NOT NULL,
-    PRIMARY KEY (work_id)
+    work_hours int(10)      NOT NULL,
+    PRIMARY KEY (work_id),
+    FOREIGN KEY (worker_id) REFERENCES workers (worker_id) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 6;
 -- jobWork table --
-INSERT INTO workDone (work_id, cause, correction, work_hours, parts)
-VALUES (1, 'The lock on the passenger door was broken', 'A new lock has been fitted', '1', 'Door Lock'),
-       (2, 'The left back wheels bearing are worn', 'Fitted a new wheel bearing', '2', 'Wheel Bearing'),
-       (3, 'The radio connections were disconnected', 'The radio connections have been reconnected', '1', 'NONE');
+INSERT INTO workDone (work_id, worker_id, cause, correction, parts, work_hours)
+VALUES (1, 1, 'The lock on the passenger door was broken', 'A new lock has been fitted', 'Door Lock', '1'),
+       (2, 2, 'The left back wheels bearing are worn', 'Fitted a new wheel bearing', 'Wheel Bearing', '2'),
+       (3, 3, 'The radio connections were disconnected', 'The radio connections have been reconnected', 'NONE', '1'),
+       (4, 1, 'The vehicle is due a service', 'Serviced vehicle', 'Oil Filter', '2'),
+       (5, 1, 'Cables were eroded', 'Entire system has been replaced', 'New Cables & Brake Pads', '3'),
+       (6, 1, 'Worn out tires', 'New tires have been fitted', '4 new tires', '1');
 COMMIT;
 
 -- jobReports table --
@@ -65,8 +70,11 @@ INSERT INTO jobReports (job_report_id, worker_id, work_done_id, time_date_stamp,
                         vehicle_location,
                         miles_on_vehicle, warranty, breakdown)
 VALUES (1, 1, 1, '21/11/2020', 'Ford Focus', '151-DL-2308', 'Gort, Co. Galway', '508538', 'YES', 'NO'),
-       (2, 2, 2, '23/11/2020', 'Toyota Yaris', '08-KY-667', 'Laban , Co. Galway', '648598', 'YES', 'NO'),
-       (3, 3, 3, '27/11/2020', 'Hyundai i30', '163-TS-1459', 'Barefield, Co. Clare', '700891', 'YES', 'NO');
+       (2, 2, 2, '23/11/2020', 'Toyota Yaris', '08-KY-667', 'Laban, Co. Galway', '648598', 'YES', 'NO'),
+       (3, 3, 3, '27/11/2020', 'Hyundai i30', '163-TS-1459', 'Barefield, Co. Clare', '700891', 'YES', 'NO'),
+       (4, 1, 1, '21/11/2020', 'Volkswagen Passat', '07-DL-298', 'Westside, Co. Galway', '708538', 'YES', 'NO'),
+       (5, 1, 1, '28/11/2020', 'Honda Civic', '131-DL-298', 'Ballybane, Co. Galway', '708538', 'YES', 'YES'),
+       (6, 1, 1, '29/11/2020', 'Ford Mustang', '54-SF-135', 'Furbogh, Co. Galway', '1007538', 'YES', 'NO');
 COMMIT;
 
 -- customers table --
@@ -85,25 +93,37 @@ CREATE TABLE IF NOT EXISTS customers
 INSERT INTO customers (customer_id, job_report_id, customer_name, customer_complaint)
 VALUES (1, 1, 'Jack Brown', 'The passenger side door will not open'),
        (2, 2, 'Erica Watson', 'Left back wheel is shaking'),
-       (3, 3, 'Lucy ONeill', 'Radio not turning on');
+       (3, 3, 'Lucy ONeill', 'Radio not turning on'),
+       (4, 4, 'Taigh Hayes', 'Car is due a service'),
+       (5, 5, 'Mark Hill', 'The hand brake sticks'),
+       (6, 6, 'Humphrey Bogart', 'She needs new tires');
 COMMIT;
 
 -- useful queries --
 -- select all tables' data --
 SELECT * FROM jobreports; SELECT * FROM customers; SELECT * FROM workdone; SELECT * FROM workers;
+
 -- display workers card --
 SELECT a.job_report_id, a.worker_id, b.worker_name FROM jobreports a LEFT JOIN workers b ON a.worker_id = b.worker_id;
--- display job card --
--- ALL JOBS job_report_id, time_date_stamp, customer_name, vehicle_model, vehicle_reg, vehicle_location, miles_on_vehicle, warranty, breakdown --
-SELECT a.job_report_id, a.time_date_stamp, b.customer_name, a.vehicle_model, a.vehicle_reg, a.vehicle_location, a.miles_on_vehicle, a.warranty, a.breakdown FROM jobreports a, customers b WHERE a.job_report_id = b.job_report_id;
 -- customer_complaint, cause, correction, parts --
-SELECT a.customer_complaint, b.cause, b.correction, b.parts FROM customers a, workdone b WHERE a.customer_id = b.work_id;
+SELECT a.customer_complaint, b.cause, b.correction, b.parts
+FROM customers a,
+     workdone b
+WHERE a.customer_id = b.work_id;
 -- worker_name + work hours --
-SELECT a.worker_name, b.work_hours FROM workers a, workdone b WHERE a.worker_id = b.work_id;
+SELECT a.worker_name, b.work_hours
+FROM workers a,
+     workdone b
+WHERE a.worker_id = b.work_id;
 
--- ONE JOB --
-SELECT a.job_report_id, a.time_date_stamp, b.customer_name, a.vehicle_model, a.vehicle_reg, a.vehicle_location, a.miles_on_vehicle, a.warranty, a.breakdown FROM jobreports a, customers b WHERE a.job_report_id = 1 = b.job_report_id = 1;
+-- GET ONE REPORT --
+--  job_report_id, time_date_stamp, customer_name, vehicle_model, vehicle_reg, vehicle_location, miles_on_vehicle, warranty, breakdown --
+SELECT a.job_report_id, a.time_date_stamp, b.customer_name, a.vehicle_model, a.vehicle_reg, a.vehicle_location, a.miles_on_vehicle, a.warranty, a.breakdown
+FROM jobreports a, customers b WHERE a.job_report_id = 1 AND b.job_report_id = 1;
 -- customer_complaint, cause, correction, parts --
-SELECT a.customer_complaint, b.cause, b.correction, b.parts FROM customers a, workdone b WHERE a.customer_id = 1 = b.work_id =1;
+SELECT a.customer_complaint, b.cause, b.correction, b.parts
+FROM customers a,
+     workdone b
+WHERE a.customer_id = 1 = b.work_id = 1;
 -- worker_name + work hours --
 SELECT a.worker_name, b.work_hours FROM workers a, workdone b WHERE a.worker_id = 1 = b.work_id = 1;
