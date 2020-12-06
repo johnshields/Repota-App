@@ -13,7 +13,7 @@ import (
 	"log"
 )
 
-// Main fucntion to start server
+// Main function to start server
 // CORS are set up in ./go/routers.go
 func main() {
 	log.Printf("Server started")
