@@ -23,12 +23,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="482634a4-5787-4500-80ad-42f57017f05c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/display-report/display-report-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/display-report/display-report-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/display-report/display-report.page.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/display-report/display-report.page.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../database/repotadb.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../../database/repotadb.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/account/account.page.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/account/account.page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/create/create.page.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/create/create.page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/display-report/display-report.page.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/display-report/display-report.page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/home/home.page.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/home/home.page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/options/options.page.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/options/options.page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/report-history/report-history.page.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/report-history/report-history.page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/report-history/report-history.page.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/report-history/report-history.page.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../database/repotadb - Copy.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../database/repotadb.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../dissertation/images/repota_logo.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,6 +100,11 @@
       <workItem from="1606154326221" duration="5917000" />
       <workItem from="1606422648440" duration="2289000" />
       <workItem from="1606429709487" duration="1397000" />
+      <workItem from="1606815664038" duration="188000" />
+      <workItem from="1606815881970" duration="154000" />
+      <workItem from="1606816060116" duration="2364000" />
+      <workItem from="1607198067214" duration="1613000" />
+      <workItem from="1607199835014" duration="2593000" />
     </task>
     <servers />
   </component>
@@ -118,61 +128,5 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="334" y="360" key="#SQL_Dialects" timestamp="1606154504507">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state x="334" y="360" key="#SQL_Dialects/0.0.1920.1050/-1366.130.1366.738@0.0.1920.1050" timestamp="1606154504507" />
-    <state x="552" y="183" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606157507408">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state x="552" y="183" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1050/-1366.130.1366.738@0.0.1920.1050" timestamp="1606157507408" />
-    <state x="-953" y="245" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1606403217492">
-      <screen x="-1366" y="130" width="1366" height="738" />
-    </state>
-    <state x="-953" y="245" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1050/-1366.130.1366.738@-1366.130.1366.738" timestamp="1606403217492" />
-    <state x="-1016" y="276" key="EditFileWatcherDialog" timestamp="1606402210584">
-      <screen x="-1366" y="130" width="1366" height="738" />
-    </state>
-    <state x="-1016" y="276" key="EditFileWatcherDialog/0.0.1920.1050/-1366.130.1366.738@-1366.130.1366.738" timestamp="1606402210584" />
-    <state x="-840" y="326" key="FileChooserDialogImpl" timestamp="1606409323639">
-      <screen x="-1366" y="130" width="1366" height="738" />
-    </state>
-    <state x="-840" y="326" key="FileChooserDialogImpl/0.0.1920.1050/-1366.130.1366.738@-1366.130.1366.738" timestamp="1606409323639" />
-    <state x="739" y="279" key="FileChooserDialogImpl/0.0.1920.1050/-1366.130.1366.738@0.0.1920.1050" timestamp="1606154445699" />
-    <state x="740" y="279" key="FileChooserDialogImpl/0.0.1920.1050/-1366.312.1366.738@0.0.1920.1050" timestamp="1604074286145" />
-    <state width="1323" height="175" key="GridCell.Tab.0.bottom" timestamp="1606147623044">
-      <screen x="-1366" y="130" width="1366" height="738" />
-    </state>
-    <state width="1323" height="175" key="GridCell.Tab.0.bottom/0.0.1920.1050/-1366.130.1366.738@-1366.130.1366.738" timestamp="1606147623044" />
-    <state width="1323" height="175" key="GridCell.Tab.0.center" timestamp="1606147623044">
-      <screen x="-1366" y="130" width="1366" height="738" />
-    </state>
-    <state width="1323" height="175" key="GridCell.Tab.0.center/0.0.1920.1050/-1366.130.1366.738@-1366.130.1366.738" timestamp="1606147623044" />
-    <state width="1323" height="175" key="GridCell.Tab.0.left" timestamp="1606147623044">
-      <screen x="-1366" y="130" width="1366" height="738" />
-    </state>
-    <state width="1323" height="175" key="GridCell.Tab.0.left/0.0.1920.1050/-1366.130.1366.738@-1366.130.1366.738" timestamp="1606147623044" />
-    <state width="1323" height="175" key="GridCell.Tab.0.right" timestamp="1606147623044">
-      <screen x="-1366" y="130" width="1366" height="738" />
-    </state>
-    <state width="1323" height="175" key="GridCell.Tab.0.right/0.0.1920.1050/-1366.130.1366.738@-1366.130.1366.738" timestamp="1606147623044" />
-    <state x="-982" y="217" width="840" height="626" key="IDE.errors.dialog" timestamp="1606424822053">
-      <screen x="-1366" y="130" width="1366" height="738" />
-    </state>
-    <state x="-982" y="217" width="840" height="626" key="IDE.errors.dialog/0.0.1920.1050/-1366.130.1366.738@-1366.130.1366.738" timestamp="1606424822053" />
-    <state x="540" y="259" key="IDE.errors.dialog/0.0.1920.1050/-1366.130.1366.738@0.0.1920.1050" timestamp="1606154393220" />
-    <state x="540" y="259" key="IDE.errors.dialog/0.0.1920.1050/-1366.312.1366.738@0.0.1920.1050" timestamp="1604070358686" />
-    <state x="461" y="169" key="SettingsEditor" timestamp="1606429777122">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state x="-1038" y="157" key="SettingsEditor/0.0.1920.1050/-1366.130.1366.738@-1366.130.1366.738" timestamp="1606424783259" />
-    <state x="461" y="169" key="SettingsEditor/0.0.1920.1050/-1366.130.1366.738@0.0.1920.1050" timestamp="1606429777122" />
-    <state x="461" y="169" key="SettingsEditor/0.0.1920.1050/-1366.312.1366.738@0.0.1920.1050" timestamp="1605206262409" />
-    <state x="-1020" y="189" width="672" height="678" key="search.everywhere.popup" timestamp="1606415163793">
-      <screen x="-1366" y="130" width="1366" height="738" />
-    </state>
-    <state x="-1020" y="189" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050/-1366.130.1366.738@-1366.130.1366.738" timestamp="1606415163793" />
   </component>
 </project>

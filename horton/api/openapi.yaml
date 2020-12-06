@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  title: John Golang Server
+  title: Horton
   version: 1.0.0
 servers:
 - url: /api/v1
@@ -36,8 +36,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Unable to process request
-      security:
-      - {}
       summary: Log in
       tags:
       - Account
@@ -87,8 +85,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Unable to process request
-      security:
-      - {}
       summary: Registers User
       tags:
       - Account
@@ -282,6 +278,51 @@ paths:
       tags:
       - Job Report
     summary: Path used to manage a single report.
+  /jobReports/{customerName}:
+    get:
+      description: Gets all reports on a customer by customer name
+      operationId: get_customer_reports
+      parameters:
+      - description: A unique identifier for a report.
+        explode: false
+        in: path
+        name: customerName
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobReport'
+          description: Successful response - returns job reports.
+        "404":
+          content:
+            application/json:
+              examples:
+                ReportNotFound:
+                  value:
+                    code: 404
+                    messages: Report not found
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Could not locate Report
+        "500":
+          content:
+            application/json:
+              examples:
+                InternalServerError:
+                  value:
+                    code: 500
+                    messages: Unable to process request
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unable to process request
+      summary: Gets all reports on a customer by customer name
+      tags:
+      - Job Report
 components:
   requestBodies:
     inline_object:
@@ -336,24 +377,35 @@ components:
       type: object
     JobReport:
       example:
-        id: 1
-        timeDate: 09:00 10/10/2020
-        location: Galway City
-        vehicle: Dumper
-        description: Job complete
-        solution: Hello world
+        jobReportId: 1
+        workerId: 101
+        workDoneId: null
+        timeDate: null
+        vehicleModel: null
+        vehicleReg: null
+        vehicleLocation: null
+        milesOnVehicle: null
+        warranty: null
+        breakdown: null
       properties:
-        id:
+        jobReportId:
+          type: integer
+        workerId:
+          type: integer
+        workDoneId:
           type: integer
         timeDate:
-          format: date-time
           type: string
-        location:
+        vehicleModel:
           type: string
-        vehicle:
+        vehicleReg:
           type: string
-        description:
+        vehicleLocation:
           type: string
-        solution:
+        milesOnVehicle:
+          type: integer
+        warranty:
+          type: string
+        breakdown:
           type: string
       type: object

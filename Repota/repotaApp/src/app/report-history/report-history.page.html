@@ -1,18 +1,36 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title class="toolbar">Report History</ion-title>
+        <ion-title>Repota History</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
-        <ion-list>
-            <ion-item class="selectReport">
-                <ion-label>Select a Report</ion-label>
-                <ion-select okText="Okay" cancelText="Cancel">
-                    <ion-select-option value="report1">Report 1</ion-select-option>
-                    <ion-select-option value="report2">Report 2</ion-select-option>
-                    <ion-select-option value="report3">Report 3</ion-select-option>
-                </ion-select>
-            </ion-item>
-        </ion-list>
+    <ion-searchbar showCancelButton="always" placeholder="Report Number, Date, Customer Name"></ion-searchbar>
+    <div class="selectReport"><br>
+        <ion-button [routerLink]="['/tabs/display-report']" color="light">
+            <ion-text>
+                Report 121, 03/04/2020, Freddie Quell
+            </ion-text>
+        </ion-button><br>
+        <ion-button [routerLink]="['/tabs/display-report']" color="light">
+            <ion-text>
+                Report 251, 06/04/2020, Peggy Dod
+            </ion-text>
+        </ion-button><br>
+        <ion-button [routerLink]="['/tabs/display-report']" color="light">
+            <ion-text>
+                Report 456, 08/04/2020, Humphrey Bogart
+            </ion-text>
+        </ion-button><br>
+        <ion-button [routerLink]="['/tabs/display-report']" color="light">
+            <ion-text>
+                Report 543, 12/04/2020, Daniel Plainview
+            </ion-text>
+        </ion-button><br>
+        <ion-button [routerLink]="['/tabs/display-report']" color="light">
+            <ion-text>
+                Report 651, 14/04/2020, Mark Hill
+            </ion-text>
+        </ion-button>
+    </div>
 </ion-content>
