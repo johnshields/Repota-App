@@ -23,7 +23,7 @@ func dbConn() (db *sql.DB) {
 	//dbPass := ""
 	//dbName := "repotadb"
 	//db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@/"+dbName)
-	db, err := sql.Open("mysql", "john:local@tcp(127.0.0.1:3306)/repotadb")
+	db, err := sql.Open("mysql", "john:local@tcp(127.0.0.1:3306)/repotadb") // local
 
 	if err != nil {
 		panic(err.Error())
@@ -50,7 +50,8 @@ func GetReport(c *gin.Context) {
 func GetReports(c *gin.Context) {
 	db := dbConn()
 
-	selDB, err := db.Query("SELECT * FROM jobReports")
+	selDB, err :=
+		db.Query("SELECT * FROM jobReports")
 	if err != nil {
 		panic(err.Error())
 	}

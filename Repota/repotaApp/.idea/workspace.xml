@@ -22,29 +22,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="482634a4-5787-4500-80ad-42f57017f05c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/app/services/client_stubs/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/services/client_stubs/.openapi-generator-ignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/services/client_stubs/.openapi-generator/FILES" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/services/client_stubs/.openapi-generator/VERSION" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/services/client_stubs/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/services/client_stubs/api.module.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/services/client_stubs/api/account.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/services/client_stubs/api/api.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/services/client_stubs/api/jobReport.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/services/client_stubs/configuration.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/services/client_stubs/encoder.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/services/client_stubs/git_push.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/services/client_stubs/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/services/client_stubs/model/error.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/services/client_stubs/model/inlineObject.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/services/client_stubs/model/jobReport.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/services/client_stubs/model/models.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/services/client_stubs/variables.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/report-history/report-history.page.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/report-history/report-history.page.ts" afterDir="false" />
-    </list>
+    <list default="true" id="482634a4-5787-4500-80ad-42f57017f05c" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -114,7 +92,7 @@
       <workItem from="1606815881970" duration="154000" />
       <workItem from="1606816060116" duration="2364000" />
       <workItem from="1607198067214" duration="1613000" />
-      <workItem from="1607199835014" duration="4260000" />
+      <workItem from="1607199835014" duration="6326000" />
     </task>
     <servers />
   </component>
