@@ -1,12 +1,12 @@
 # Applied Project and Minor Dissertation
 John Shields - G00348436
 
-### Repota 
+### [Repota](https://github.com/johnshields/AP-MD-FYP/tree/main/Repota/repotaApp)
 Repota Application ...
-### Dissertation
+### [Dissertation](https://github.com/johnshields/AP-MD-FYP/tree/main/dissertation)
 The project's dissertation ...
-### Horton
+### [Horton](https://github.com/johnshields/AP-MD-FYP/tree/main/horton)
 Backend Server for Repota ...
-### Database
+### [Database](https://github.com/johnshields/AP-MD-FYP/tree/main/database)
 Database script for Repota ...
 
