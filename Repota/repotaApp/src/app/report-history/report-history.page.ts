@@ -19,9 +19,12 @@ export class ReportHistoryPage implements OnInit {
     }
 
     ngOnInit() {
+        console.log('DATA RECEIVED FROM HORTON')
+        console.log('LIST OF REPORTS')
         this.api.getReports().subscribe(data => {
             this.reports = data;
             console.log(data)
+            console.log(this.reports);
         });
     }
 }

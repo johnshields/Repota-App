@@ -18,8 +18,6 @@ const routes: Routes = [
         path: 'display-report',
         loadChildren: () => import('./display-report/display-report.module').then(m => m.DisplayReportPageModule)
     }
-
-
 ];
 
 @NgModule({

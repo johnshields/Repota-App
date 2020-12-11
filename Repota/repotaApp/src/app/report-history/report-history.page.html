@@ -6,31 +6,30 @@
 
 <ion-content>
     <ion-searchbar showCancelButton="always" placeholder="Report Number, Date, Customer Name"></ion-searchbar>
-    <div class="selectReport"><br>
-<!--        <ion-button [routerLink]="['/tabs/display-report']" color="light">-->
-<!--            <ion-text>-->
-<!--                Report 121, 03/04/2020, Freddie Quell-->
-<!--            </ion-text>-->
-<!--        </ion-button><br>-->
-<!--        <ion-button [routerLink]="['/tabs/display-report']" color="light">-->
-<!--            <ion-text>-->
-<!--                Report 251, 06/04/2020, Peggy Dod-->
-<!--            </ion-text>-->
-<!--        </ion-button><br>-->
-<!--        <ion-button [routerLink]="['/tabs/display-report']" color="light">-->
-<!--            <ion-text>-->
-<!--                Report 456, 08/04/2020, Humphrey Bogart-->
-<!--            </ion-text>-->
-<!--        </ion-button><br>-->
-<!--        <ion-button [routerLink]="['/tabs/display-report']" color="light">-->
-<!--            <ion-text>-->
-<!--                Report 543, 12/04/2020, Daniel Plainview-->
-<!--            </ion-text>-->
-<!--        </ion-button><br>-->
-<!--        <ion-button [routerLink]="['/tabs/display-report']" color="light">-->
-<!--            <ion-text>-->
-<!--                Report 651, 14/04/2020, Mark Hill-->
-<!--            </ion-text>-->
-<!--        </ion-button>-->
+    <div class="selectReport">
+        <!-- report card -->
+        <ion-card>
+            <ion-item *ngFor="let report of reports">
+                <h2 class="reportCard">
+                    <ion-title class="report_id">
+                        <ion-label class="date"> Date: {{report["timeDate"]}}&nbsp;</ion-label>
+                        <ion-label class="num"> Report Number: {{report["jobReportId"]}}&nbsp;
+                        </ion-label>
+                    </ion-title>
+                    <ion-title class="vehicle_id">
+                        <ion-label class="model"> Vehicle Model: {{report["vehicleModel"]}}&nbsp;</ion-label>
+                        <ion-label class="reg"> Vehicle Registration: {{report["vehicleReg"]}}&nbsp;</ion-label>
+                    </ion-title>
+                    <ion-title class="vehicle_stats">
+                        <ion-label class="location"> Vehicle Location: {{report["vehicleLocation"]}}&nbsp;</ion-label>
+                        <ion-label class="miles"> Vehicle Mileage: {{report["milesOnVehicle"]}}&nbsp;</ion-label>
+                    </ion-title>
+                    <ion-title class="vehicle_coverage">
+                        <ion-label class="warranty"> Warranty: {{report["warranty"]}}&nbsp;</ion-label>
+                        <ion-label class="breakdown"> Breakdown: {{report["breakdown"]}}&nbsp;</ion-label>
+                    </ion-title>
+                </h2>
+            </ion-item>
+        </ion-card>
     </div>
 </ion-content>
