@@ -1,7 +1,6 @@
 # Applied Project and Minor Dissertation
-
+##### John Shields - G00348436
 A repository for my Final Year Project...
-John Shields - G00348436
 
 ### [Repota](https://github.com/johnshields/AP-MD-FYP/tree/main/Repota/repotaApp)
 Repota Application ...
