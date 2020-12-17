@@ -3,7 +3,7 @@ module github.com/GIT_USER_ID/GIT_REPO_ID
 go 1.13
 
 require (
-	github.com/gin-contrib/cors v1.3.1
+	//github.com/gin-contrib/cors v1.3.1
 	github.com/gin-gonic/gin v1.6.3
 	github.com/go-playground/validator/v10 v10.4.1 // indirect
 	github.com/go-sql-driver/mysql v1.5.0

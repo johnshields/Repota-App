@@ -24,6 +24,7 @@ func dbConn() (db *sql.DB) {
 	//dbName := "repotadb"
 	//db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@/"+dbName)
 	db, err := sql.Open("mysql", "john:local@tcp(127.0.0.1:3306)/repotadb") // local
+	//db, err := sql.Open("mysql", "john:root@tcp(52.51.6.178:3306)/repotadb") // server
 
 	if err != nil {
 		panic(err.Error())
@@ -56,7 +57,7 @@ func GetReports(c *gin.Context) {
 		panic(err.Error())
 	}
 
-	res := []JobReport{}
+	var res []JobReport
 
 	for selDB.Next() {
 

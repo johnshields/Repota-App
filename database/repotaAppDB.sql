@@ -74,7 +74,6 @@ VALUES (121, 141, 113, '03/04/2020', 'Ford Focus', '151-DL-2308', 'Gort, Co. Gal
        (456, 141, 416, '08/04/2020', 'Ford Mustang', '54-SF-135', 'Furbogh, Co. Galway', '1007538', 'YES', 'NO'),
        (543, 141, 502, '12/04/2020', 'Volkswagen Passat', '07-DL-298', 'Westside, Co. Galway', '708538', 'YES', 'NO'),
        (651, 141, 606, '14/04/2020', 'Honda Civic', '131-DL-298', 'Ballybane, Co. Galway', '318639', 'YES', 'YES');
-
 COMMIT;
 
 -- customers table --
