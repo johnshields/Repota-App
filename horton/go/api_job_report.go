@@ -11,6 +11,7 @@ package openapi
 
 import (
 	"database/sql"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
 	"log"
@@ -18,13 +19,8 @@ import (
 )
 
 func dbConn() (db *sql.DB) {
-	//dbDriver := "mysql"
-	//dbUser := "root"
-	//dbPass := ""
-	//dbName := "repotadb"
-	//db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@/"+dbName)
+	//db, err := sql.Open("mysql", "john:root@tcp(127.0.0.1:3306)/repotadb") // server
 	db, err := sql.Open("mysql", "john:local@tcp(127.0.0.1:3306)/repotadb") // local
-	//db, err := sql.Open("mysql", "john:root@tcp(52.51.6.178:3306)/repotadb") // server
 
 	if err != nil {
 		panic(err.Error())
@@ -37,49 +33,115 @@ func CreateReport(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{})
 }
 
-// DeleteReport - Delete a Job Report
+// DeleteReport - Delete a Job Report == Working
 func DeleteReport(c *gin.Context) {
+	db := dbConn()
+	// Get id from request
+	jobReportId := c.Params.ByName("jobReportId")
+	//Create query
+	res, err := db.Exec("DELETE FROM jobReports WHERE job_report_id=?", jobReportId)
+
+	if err != nil {
+		// return user friendly message to client
+		c.JSON(http.StatusInternalServerError, nil)
+		panic("Report has been NOT deleted!")
+	}
+
+	affectedRows, err := res.RowsAffected()
+
+	if err != nil {
+		// return user friendly message to client
+		c.JSON(http.StatusInternalServerError, nil)
+		log.Fatal("Report has been deleted!")
+	}
+
+	fmt.Printf("The statement affected %d rows\n", affectedRows)
+
 	c.JSON(http.StatusOK, gin.H{})
 }
 
-// GetReport - Get a job report
+// GetReport - Get a job report = WORKING
 func GetReport(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{})
+	db := dbConn()
+	// Get id from request
+	jobReportId := c.Params.ByName("jobReportId")
+	// Testing Log message
+	log.Printf(string(jobReportId))
+	//Create query
+	selDB, err := db.Query("SELECT * FROM jobReports WHERE job_report_id=?", jobReportId)
+
+	if err != nil {
+		// return user friendly message to client
+		c.JSON(http.StatusInternalServerError, nil)
+		log.Fatal("Selected Report listed!")
+	}
+
+	var report JobReport
+
+	// Check each record for a match on jobReportId
+	if selDB.Next() {
+		err = selDB.Scan(&report.JobReportId, &report.WorkerId, &report.WorkDoneId, &report.TimeDate, &report.VehicleModel,
+			&report.VehicleReg, &report.VehicleLocation, &report.MilesOnVehicle, &report.Warranty, &report.Breakdown)
+
+		if err != nil {
+			// return user friendly message to client
+			c.JSON(http.StatusInternalServerError, nil)
+			log.Fatal("Reports checked for matching ID")
+		}
+		//Print report that was found
+		fmt.Printf("%v\n", report)
+		c.JSON(http.StatusOK, report)
+	} else {
+		fmt.Printf("No job matching the Id provided was found.")
+		c.JSON(404, nil) // No report found, report 404 error and no null object
+	}
+	defer db.Close()
+
 }
 
-// GetReports - List All report
+// GetReports - List All reports == Working
 func GetReports(c *gin.Context) {
 	db := dbConn()
+	//Create query
+	selDB, err := db.Query("SELECT * FROM jobReports")
 
-	selDB, err :=
-		db.Query("SELECT * FROM jobReports")
 	if err != nil {
-		panic(err.Error())
+		// return user friendly message to client
+		c.JSON(http.StatusInternalServerError, nil)
+		log.Fatal("All Reports Listed")
 	}
 
 	var res []JobReport
 
+	// Run through each record and read values:
 	for selDB.Next() {
-
 		var report JobReport
 
 		err = selDB.Scan(&report.JobReportId, &report.WorkerId, &report.WorkDoneId, &report.TimeDate, &report.VehicleModel,
 			&report.VehicleReg, &report.VehicleLocation, &report.MilesOnVehicle, &report.Warranty, &report.Breakdown)
 
 		if err != nil {
-			panic(err.Error())
+			// return user friendly message to client
+			c.JSON(http.StatusInternalServerError, err)
+			log.Fatal("Read values from Reports")
 		}
+		// Add each record to array
 		res = append(res, report)
+		// Return values, Status OK
+		c.JSON(http.StatusOK, res)
 		log.Printf(string(report.JobReportId))
+
 	}
 
 	defer db.Close()
-
-	c.JSON(http.StatusOK, res)
 }
 
 // UpdateReport - Update a job report
 func UpdateReport(c *gin.Context) {
+	// Read in values from client request and build object.
+	// Added object to db table
+	// Return 201 response for "Created"
+	// Handle error responses in each error if statement
 	c.JSON(http.StatusOK, gin.H{})
 }
 
