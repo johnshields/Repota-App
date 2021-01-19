@@ -1,10 +1,5 @@
 # Repota project
 
-# JetBrains IDEs
-/Repota/repotaApp/.idea
-/horton/.idea
-/database/.idea
-
 # Repta Dependency directories
 /Repota/repotaApp/node_modules/
 
@@ -20,3 +15,14 @@
 
 # dissertation
 /dissertation/dissertation.pdf
+
+# JetBrains IDEs
+/Repota/repotaApp/.idea
+/horton/.idea
+/database/.idea
+
+# Icons
+/Repota/desktop.ini
+/horton/desktop.ini
+/database/desktop.ini
+./desktop.ini
