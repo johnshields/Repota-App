@@ -1,6 +1,6 @@
-# Repota project
+# AP-MD-FYP - Repota project
 
-# Repta Dependency directories
+# Repota Dependency directories
 /repota/repotaApp/node_modules/
 
 # Horton Server
@@ -22,8 +22,4 @@
 /database/.idea
 
 # Icons
-/desktop.ini
-/repota/desktop.ini
-/horton/desktop.ini
-/database/desktop.ini
-/dissertation/desktop.ini
+desktop.ini

@@ -9,7 +9,7 @@ alt="GMIT Logo" width="500" height="200"/>
 ***
 
 ##### John Shields - G00348436
-A repository for my `Final Year Project`. <br>
+The Repository for my `Final Year Project`. <br>
 The Project is an `Application` titled `Repota`.
 
 <p align="center"><img src="https://i.ibb.co/wBQGdvT/repota-App-logo.png"
@@ -34,7 +34,7 @@ The Repota `Application`.
 The Application's `Backend Server`.
 
 #### [Database](https://github.com/johnshields/AP-MD-FYP/tree/main/database)
-The Application's `Database`.
+The script for the Application's `Database`.
 
 ***
 
@@ -45,26 +45,23 @@ The Application's `Database`.
 | **Module**              | Applied Project and Minor Dissertation |
 | **Institute**           | [Galway-Mayo Institute of Technology](https://www.gmit.ie/) |
 | **Student**             | [John Shields](https://github.com/johnshields) |
-| **Project Advisor** | Andrew Beatty |
+| **Project Advisor**     | Andrew Beatty |
 | **Module Supervisor**   | Dr. John Healy |
 
 ***
 
 # Run the Project
-
 ### Repota App
 ### Open the repository directory in Command-Line and enter:
 ```bash
 $ cd repota/repotaApp
 $ ionic serve
 ```
-
+***
 ### Horton Backend
-### Open the repository directory in Command-Line and enter:
-```bash
-$ cd horton
-$ go build && go run main.go
-```
+###### `Note` Horton should already be running on an AWS Server.
+###### Please contact me directly at `johndshields14@gmail.com` if there are any issues.
+
 ***
 #### View the Project's Wiki [here](https://github.com/johnshields/AP-MD-FYP/wiki) for more detail.
 ***
