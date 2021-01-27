@@ -1,7 +1,7 @@
 # Repota project
 
 # Repta Dependency directories
-/Repota/repotaApp/node_modules/
+/repota/repotaApp/node_modules/
 
 # Horton Server
 # Binaries for programs and plugins
@@ -17,12 +17,13 @@
 /dissertation/dissertation.pdf
 
 # JetBrains IDEs
-/Repota/repotaApp/.idea
+/repota/repotaApp/.idea
 /horton/.idea
 /database/.idea
 
 # Icons
-/Repota/desktop.ini
+/desktop.ini
+/repota/desktop.ini
 /horton/desktop.ini
 /database/desktop.ini
-./desktop.ini
+/dissertation/desktop.ini
