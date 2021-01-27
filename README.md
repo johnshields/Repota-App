@@ -49,4 +49,24 @@ The Application's `Database`.
 | **Module Supervisor**   | Dr. John Healy |
 
 ***
+
+# Run the Project
+
+### Repota App
+### Open the repository directory in Command-Line and enter:
+```bash
+$ cd repota/repotaApp
+$ ionic serve
+```
+
+### Horton Backend
+### Open the repository directory in Command-Line and enter:
+```bash
+$ cd horton
+$ go build && go run main.go
+```
+***
+#### View the Project's Wiki [here](https://github.com/johnshields/AP-MD-FYP/wiki) for more detail.
+***
+
 ###### END OF README
