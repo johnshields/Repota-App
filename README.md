@@ -1,9 +1,9 @@
 <h1 align="center">Applied Project and Minor Dissertation</h1>
 
 <br>
-<a href="https://www.gmit.ie/">
-<p align="center"><img src="http://password.gmit.ie/images/logo.png"
-alt="GMIT Logo" width="300" height="100"/>
+<a href="https://www.gmit.ie/" >
+<p align="center"><img src="https://i.ibb.co/f1ZQSkt/logo-gmit.png"
+alt="GMIT Logo" width="500" height="200"/>
 </p></a>
 
 ***
