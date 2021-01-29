@@ -13,7 +13,14 @@ paths:
         $ref: '#/components/requestBodies/inline_object'
       responses:
         "204":
-          description: Login sucessful
+          description: Login successful
+          headers:
+            Set-Cookie:
+              description: Returns a new session_id to be used for all future requests
+              explode: false
+              schema:
+                type: string
+              style: simple
         "403":
           content:
             application/json:
@@ -24,7 +31,7 @@ paths:
                     messages: Invalid Name and/or password
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Login Unsucessful
+          description: Login Unsuccessful
         "500":
           content:
             application/json:
@@ -36,6 +43,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Unable to process request
+      security:
+      - {}
       summary: Log in
       tags:
       - Account
@@ -85,14 +94,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Unable to process request
+      security:
+      - {}
       summary: Registers User
       tags:
       - Account
     summary: Path used to register a new User
   /jobReports:
-    description: Get all reports
+    description: Get all reports for logged in worker.
     get:
-      description: Get all reports
+      description: Get all reports for the worker logged in.
       operationId: get_reports
       responses:
         "200":
@@ -114,7 +125,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Unable to retrieve reports
-      summary: List All report
+      security:
+      - LoginRequired: []
+      summary: Get all reports for logged in worker
       tags:
       - Job Report
     post:
@@ -141,6 +154,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Unable to create a new job report
+      security:
+      - LoginRequired: []
       summary: Create a report
       tags:
       - Job Report
@@ -183,12 +198,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Unable to process request
+      security:
+      - LoginRequired: []
       summary: Delete a Job Report
       tags:
       - Job Report
     get:
       description: Gets the details of a single instance of a report.
-      operationId: get_report
+      operationId: get_report_by_id
       parameters:
       - description: A unique identifier for a report.
         explode: false
@@ -227,6 +244,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Unable to process request
+      security:
+      - LoginRequired: []
       summary: Get a job report
       tags:
       - Job Report
@@ -274,14 +293,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Unable to process request
+      security:
+      - LoginRequired: []
       summary: Update a job report
       tags:
       - Job Report
     summary: Path used to manage a single report.
   /jobReports/{customerName}:
     get:
-      description: Gets all reports on a customer by customer name
-      operationId: get_customer_reports
+      description: Gets all reports by customer name
+      operationId: get_reports_by_customer_name
       parameters:
       - description: A unique identifier for a report.
         explode: false
@@ -296,7 +317,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/JobReport'
+                $ref: '#/components/schemas/CustomerReport'
           description: Successful response - returns job reports.
         "404":
           content:
@@ -320,7 +341,56 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Unable to process request
-      summary: Gets all reports on a customer by customer name
+      security:
+      - LoginRequired: []
+      summary: Gets all reports by customer name
+      tags:
+      - Job Report
+  /jobReports/{date}:
+    get:
+      description: Gets all reports for a set date.
+      operationId: get_reports_by_date
+      parameters:
+      - description: A set date
+        explode: false
+        in: path
+        name: date
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerReport'
+          description: Successful response - returns job reports.
+        "404":
+          content:
+            application/json:
+              examples:
+                ReportNotFound:
+                  value:
+                    code: 404
+                    messages: Report not found
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Could not locate Report
+        "500":
+          content:
+            application/json:
+              examples:
+                InternalServerError:
+                  value:
+                    code: 500
+                    messages: Unable to process request
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unable to process request
+      security:
+      - LoginRequired: []
+      summary: Gets all reports by a set date
       tags:
       - Job Report
 components:
@@ -379,7 +449,7 @@ components:
       example:
         jobReportId: 1
         workerId: 101
-        workDoneId: null
+        workDoneId: 1
         timeDate: null
         vehicleModel: null
         vehicleReg: null
@@ -409,3 +479,57 @@ components:
         breakdown:
           type: string
       type: object
+    CustomerReport:
+      example:
+        jobReportId: 1
+        timeDate: 01/01/2022
+        vehicleModel: Audi
+        vehicleReg: 07-DL-299
+        milesOnVehicle: 1337
+        vehicleLocation: Gort
+        warranty: true
+        breakdown: true
+        customerName: Barry
+        customerComplaint: The car needs new wheels
+        cause: Crash into curb
+        correction: Nothing yet
+        parts: 4 Wheels
+        workHours: 1
+        workerName: Morgan
+      properties:
+        jobReportId:
+          type: integer
+        timeDate:
+          type: string
+        vehicleModel:
+          type: string
+        vehicleReg:
+          type: string
+        milesOnVehicle:
+          type: integer
+        vehicleLocation:
+          type: string
+        warranty:
+          type: string
+        breakdown:
+          type: string
+        customerName:
+          type: string
+        customerComplaint:
+          type: string
+        cause:
+          type: string
+        correction:
+          type: string
+        parts:
+          type: string
+        workHours:
+          type: integer
+        workerName:
+          type: string
+      type: object
+  securitySchemes:
+    LoginRequired:
+      in: cookie
+      name: session_id`
+      type: apiKey
