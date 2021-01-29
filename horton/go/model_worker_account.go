@@ -10,8 +10,8 @@
 package openapi
 
 type WorkerAccount struct {
-	Id int
-	Username string
+	Id         int
+	Username   string
 	WorkerName string
-	Password string
+	Password   string
 }

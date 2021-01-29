@@ -10,7 +10,6 @@
 package openapi
 
 type Error struct {
-
 	Code int32 `json:"code"`
 
 	Messages string `json:"messages"`

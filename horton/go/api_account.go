@@ -26,18 +26,73 @@ import (
 var wa WorkerAccount
 
 // Login - Log in
-// TODO - implement auth
 func Login(c *gin.Context) {
-	// // Comparing the password with the hash
-	//    err = bcrypt.CompareHashAndPassword(hashedPassword, password)
-	//    fmt.Println(err) // nil means it is a match
+	db := config.DbConn()
+
+	// have the user login in by username and password
+	var workerForm WorkerAccount
+
+	if err := c.BindJSON(&workerForm); err != nil {
+		fmt.Println(err.Error())
+	}
+
+	username := workerForm.Username
+	password := workerForm.Password
+
+	result, err := db.Query("SELECT * FROM workers WHERE username=? AND hash=?", username, password)
+	fmt.Println("\nEntered username\n", username, "\nEntered Password\n", password)
+
+	if err != nil {
+		log.Println("MySQL Error: Error finding user:\n", err)
+	}
+
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+
+	if err != nil {
+		log.Fatal("Hash Password failed: ", err)
+	}
+
+	// Comparing the password with the hash
+	err = bcrypt.CompareHashAndPassword(hashedPassword, []byte(password))
+	fmt.Println(err) // nil means it is a match
+
+	// check to see if the user details are correct
+	err = loginUser(username, password)
+
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+
+	log.Println(username)
+	log.Println(password)
+	log.Println(result)
+	defer db.Close()
 	c.JSON(http.StatusOK, gin.H{})
+}
+
+// Function that registers a new user to the database.
+func loginUser(username, password string) error {
+
+	if strings.TrimSpace(password) == "" {
+		log.Printf("password is null")
+		return errors.New("password is null")
+	} else if !isValidAccount(password) {
+		log.Printf("unknown password")
+		return errors.New("password is wrong")
+	}
+	if isValidAccount(username) {
+		log.Printf("unknown username")
+		return errors.New("username does not exist")
+	}
+	// Everything is good
+	log.Println("Print MySQL Results for logged in user:\n",username, password)
+	return nil
 }
 
 // Register - Registers User
 func Register(c *gin.Context) {
 	var user InlineObject
-	
+
 	// Blind data to object, else throw error
 	if err := c.BindJSON(&user); err != nil {
 		fmt.Println(err.Error())
@@ -51,7 +106,7 @@ func Register(c *gin.Context) {
 
 		// User has been created now set the following below
 		token := generateSessionId() // Create a new session ID
-		expiry := 3600
+		expiry := 3600 * 24 * 3      // 3600 * 24 * 3 = 3 days
 
 		// INSERT QUERY to create an Account
 		insert, err := db.Prepare("INSERT INTO session(id, user, expire_after) VALUES(?, ?, ?)")
@@ -60,20 +115,23 @@ func Register(c *gin.Context) {
 			fmt.Println(err.Error())
 		}
 
-		log.Println("Printing worker account details", wa)
-		log.Println("Printing worker account details", token, " ", wa.Id, " ", expiry )
+		fmt.Println("\n\nPrinting Worker Account details:", "\nSession Token:\n", token, "\nWorker ID:\n", wa.Id,
+			"\nExpiry time in seconds:\n", expiry)
 
 		// Check for worker account before committing session record
-		if isValidAccount(username); err != nil{
+		if isValidAccount(username); err != nil {
 			log.Println("Error doing worker account lookup in database")
 		}
 
-		if _, err = insert.Exec(token, wa.Id, expiry); err != nil{
+		if _, err = insert.Exec(token, wa.Id, expiry); err != nil {
 			log.Println("MYSQL Error: Error creating new session record\n", err)
 			defer db.Close()
 			c.JSON(400, Error{Code: 400, Messages: "Malformed Request"})
 		} else {
-			log.Println("Session has been generated. Records: " + token, " ", wa.Id, " ", expiry)
+			fmt.Println("\n\nSession has been generated! \nRecords:", "\nSession Token:\n", token, "\nWorker ID:\n", wa.Id,
+				"\nExpiry time in seconds:\n", expiry)
+			fmt.Println("\nWorker Username:\n", username)
+
 			defer db.Close()
 			c.JSON(http.StatusCreated, gin.H{})
 		}
@@ -117,11 +175,11 @@ func registerNewUser(username, name, password string) error {
 
 	result, err := insert.Exec(username, name, hashedPassword)
 
-	if err != nil{
+	if err != nil {
 		log.Println("MySQL Error: Error Creating new user account:\n", err)
 	}
 
-	log.Println("Print MySQL Results for user account:\n", result)
+	fmt.Println("Print MySQL Results for user account:\n", result)
 
 	defer db.Close()
 	// Everything is good

@@ -10,7 +10,6 @@
 package openapi
 
 type CustomerReport struct {
-
 	JobReportId int32 `json:"jobReportId,omitempty"`
 
 	TimeDate string `json:"timeDate,omitempty"`

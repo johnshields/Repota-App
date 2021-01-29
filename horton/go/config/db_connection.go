@@ -14,4 +14,3 @@ func DbConn() (db *sql.DB) {
 	}
 	return db
 }
-

@@ -12,7 +12,6 @@
 package openapi
 
 type InlineObject struct {
-
 	Username string `json:"username,omitempty"`
 
 	Name string `json:"name,omitempty"`

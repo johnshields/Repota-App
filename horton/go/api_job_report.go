@@ -110,7 +110,7 @@ func GetReports(c *gin.Context) {
 
 	var res []JobReport
 
-	// Run through each record and read values:
+	// Run through each record and read values
 	for selDB.Next() {
 		var report JobReport
 
