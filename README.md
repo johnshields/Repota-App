@@ -1,28 +1,38 @@
 <h1 align="center">Applied Project and Minor Dissertation</h1>
 
-<br>
 <a href="https://www.gmit.ie/" >
 <p align="center"><img src="https://i.ibb.co/f1ZQSkt/logo-gmit.png"
 alt="GMIT Logo" width="500" height="200"/>
 </p></a>
 
-***
-
 ##### John Shields - G00348436
+***
 The Repository for my `Final Year Project`. <br>
 The Project is an `Application` titled `Repota`.
+
+# Project Details
+| **Project Title** | Repota |
+| :------------- |:-------------|
+| **Course**              | BSc (Hons) in Software Development |
+| **Module**              | Applied Project and Minor Dissertation |
+| **Institute**           | [Galway-Mayo Institute of Technology](https://www.gmit.ie/) |
+| **Student**             | [John Shields](https://github.com/johnshields) |
+| **Project Advisor**     | Andrew Beatty |
+| **Module Supervisor**   | Dr. John Healy |
+
+***
+
 
 <p align="center"><img src="https://i.ibb.co/wBQGdvT/repota-App-logo.png"
 alt="Repota Logo" width="200" height="200"/>
 </p>
 
-<p align="center">
+# Repota
 Repota is designed for automobile technicians to fill out service reports for auto dealerships and rental companies.
-</p>
 
 ***
 
-## Repository Contents
+# Repository Contents
 
 #### [Dissertation](https://github.com/johnshields/AP-MD-FYP/tree/main/dissertation)
 The Project's `Dissertation`.
@@ -38,32 +48,24 @@ The script for the Application's `Database`.
 
 ***
 
-## Project Details
-| **Project Title** | Repota |
-| :------------- |:-------------|
-| **Course**              | BSc (Hons) in Software Development |
-| **Module**              | Applied Project and Minor Dissertation |
-| **Institute**           | [Galway-Mayo Institute of Technology](https://www.gmit.ie/) |
-| **Student**             | [John Shields](https://github.com/johnshields) |
-| **Project Advisor**     | Andrew Beatty |
-| **Module Supervisor**   | Dr. John Healy |
-
-***
-
 # Run the Project
-### Repota App
+<h3><u>Repota App</u></h3>
+
 ### Open the repository directory in Command-Line and enter:
 ```bash
 $ cd repota/repotaApp
 $ ionic serve
 ```
+* http://localhost:8100/tabs/home
 ***
-### Horton Backend
-###### `Note` Horton should already be running on an AWS Server.
+
+<h3><u>Horton Backend</u></h3>
+
+###### `Note` Horton should already be running on an `AWS Server`.
 ###### Please contact me directly at `johndshields14@gmail.com` if there are any issues.
 
 ***
-#### View the Project's Wiki [here](https://github.com/johnshields/AP-MD-FYP/wiki) for more detail.
+#### View the Project's Wiki [HERE](https://github.com/johnshields/AP-MD-FYP/wiki) for more detail.
 ***
 
 ###### END OF README

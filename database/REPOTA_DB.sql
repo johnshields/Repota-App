@@ -11,16 +11,17 @@ use repotadb;
 CREATE TABLE IF NOT EXISTS workers
 (
     worker_id   int(5)       unsigned NOT NULL AUTO_INCREMENT,
+    username    varchar(20)  NOT NULL UNIQUE,
     worker_name varchar(50)  NOT NULL,
     hash        varchar(255) NOT NULL,
     PRIMARY KEY (worker_id),
     UNIQUE KEY (worker_name)
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 6;
+AUTO_INCREMENT = 6;
 -- workers table --
-INSERT INTO workers (worker_id, worker_name, hash)
-VALUES (141, 'John Shields', '0012108F09466ED8B9CC712BC546D02A'),
-       (174, 'Steve Maloney', '8743b52063cd84097a65d1633f5c74f5');
+INSERT INTO workers (worker_id, username, worker_name, hash)
+VALUES (141, 'john_s' ,'John Shields', '0012108F09466ED8B9CC712BC546D02A'),
+       (174, 'steve_m', 'Steve Maloney', '8743b52063cd84097a65d1633f5c74f5');
 COMMIT;
 
 -- jobWork table --
@@ -97,6 +98,16 @@ VALUES (121, 'Freddie Quell', 'The passenger side door will not open.'),
        (543, 'Daniel Plainview', 'The car is due a service.'),
        (651, 'Mick Fanning', 'The hand brake is stuck.');
 COMMIT;
+
+CREATE TABLE session
+(
+    id VARCHAR(255) NOT NULL, -- UUID
+    user INTEGER(4) unsigned NOT NULL,
+    expire_after INT(8) NOT NULL, -- Unix epoch time store
+
+    PRIMARY KEY(id),
+    FOREIGN KEY(user) REFERENCES workers(worker_id)    ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = INNODB;
 
 -- SELECT ALL TABLES' DATA --
 SELECT * FROM jobreports; SELECT * FROM customers; SELECT * FROM workdone; SELECT * FROM workers;

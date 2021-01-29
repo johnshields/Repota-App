@@ -30,23 +30,21 @@ type Route struct {
 // Routes is the list of the generated Route.
 type Routes []Route
 
-
-
 // Cors - To handle cross origin issues while testing
 func CORS() gin.HandlerFunc {
-        return func(c *gin.Context) {
-                c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
-                c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
-                c.Writer.Header().Set("Access-Control-Allow-Headers", "*")
-                c.Writer.Header().Set("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE, OPTIONS, PATCH")
+	return func(c *gin.Context) {
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
+		c.Writer.Header().Set("Access-Control-Allow-Headers", "*")
+		c.Writer.Header().Set("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE, OPTIONS, PATCH")
 
-                if c.Request.Method == "OPTIONS" {
-                        c.AbortWithStatus(204)
-                        return
-                }
+		if c.Request.Method == "OPTIONS" {
+			c.AbortWithStatus(204)
+			return
+		}
 
-                c.Next()
-        }
+		c.Next()
+	}
 }
 
 // NewRouter returns a new router.
@@ -111,18 +109,11 @@ var routes = Routes{
 		DeleteReport,
 	},
 
-	//{
-	//	"GetCustomerReports",
-	//	http.MethodGet,
-	//	"/api/v1/jobReports/:customerName",
-	//	GetCustomerReports,
-	//},
-
 	{
-		"GetReport",
+		"GetReportById",
 		http.MethodGet,
 		"/api/v1/jobReports/:jobReportId",
-		GetReport,
+		GetReportById,
 	},
 
 	{
@@ -131,7 +122,6 @@ var routes = Routes{
 		"/api/v1/jobReports",
 		GetReports,
 	},
-
 	{
 		"UpdateReport",
 		http.MethodPut,

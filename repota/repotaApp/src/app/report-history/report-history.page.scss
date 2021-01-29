@@ -4,7 +4,18 @@
   height: auto;
   margin-left: 25%;
   margin-right: 25%;
+  padding-left: 25px;
   background-color: whitesmoke;
+}
+
+.report-details {
+  color: #0d0d0d;
+  font-weight: 500;
+  text-indent: 20px;
+  white-space: pre-line;
+  content: ".";
+  padding-top: 20px;
+  padding-bottom: 30px;
 }
 
 .num {
@@ -18,41 +29,63 @@
   text-align: right;
 }
 
-// Report Number & Date
-.report_id {
+.headers {
+  margin-top: 50px;
   color: #0d0d0d;
-  font-weight: 800;
-  text-indent: 10px;
+}
+
+.vehicle-details {
+  color: #0d0d0d;
+  font-weight: 500;
+  text-indent: 20px;
   white-space: pre-line;
   content: ".";
-  padding-top: 20px;
+  padding-top: 30px;
   padding-bottom: 30px;
+  border: 1px solid #0d0d0d;
+  border-radius: 1px;
+  height: 160px;
+  width: 650px;
 }
 
-// Model & Reg
-.vehicle_id {
+.customer-details {
   color: #0d0d0d;
-  font-weight: 800;
-  font-size: medium;
-  line-height: 200%;
-  text-indent: 200px;
+  font-weight: 500;
+  text-indent: 20px;
+  white-space: pre-line;
+  content: ".";
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border: 1px solid #0d0d0d;
+  border-radius: 1px;
+  height: 100px;
+  width: 650px;
 }
 
-// Location & Miles
-.vehicle_stats {
+.work-details {
   color: #0d0d0d;
-  font-weight: 800;
-  font-size: medium;
-  line-height: 200%;
-  text-indent: 200px;
+  font-weight: 500;
+  text-indent: 20px;
+  white-space: pre-line;
+  content: ".";
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border: 1px solid #0d0d0d;
+  border-radius: 1px;
+  height: 100px;
+  width: 650px;
 }
 
-// Warranty & Breakdown
-.vehicle_coverage {
+.worker {
   color: #0d0d0d;
-  font-weight: 800;
-  font-size: medium;
-  line-height: 200%;
-  text-indent: 200px;
-  padding-bottom: 20px;
+  font-weight: 500;
+  text-indent: 20px;
+  white-space: pre-line;
+  content: ".";
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border: 1px solid #0d0d0d;
+  border-radius: 1px;
+  height: 50px;
+  width: 650px;
 }

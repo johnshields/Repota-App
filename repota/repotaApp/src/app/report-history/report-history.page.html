@@ -5,28 +5,44 @@
 </ion-header>
 
 <ion-content>
-    <ion-searchbar showCancelButton="always" placeholder="Report Number, Date, Customer Name"></ion-searchbar>
+    <ion-searchbar showCancelButton="always" placeholder="Enter a Report Number, Date or Customer Name"></ion-searchbar>
     <div class="selectReport">
         <!-- report card -->
         <ion-card>
             <ion-item *ngFor="let report of reports">
                 <h2 class="reportCard">
-                    <ion-title class="report_id">
+                    <!-- report details -->
+                    <ion-title class="report-details">
                         <ion-label class="date"> Date: {{report["timeDate"]}}&nbsp;</ion-label>
                         <ion-label class="num"> Report Number: {{report["jobReportId"]}}&nbsp;
                         </ion-label>
                     </ion-title>
-                    <ion-title class="vehicle_id">
+                    <!-- vehicle details -->
+                    <ion-text class="headers"> Vehicle Details</ion-text>
+                    <ion-title class="vehicle-details">
                         <ion-label class="model"> Vehicle Model: {{report["vehicleModel"]}}&nbsp;</ion-label>
                         <ion-label class="reg"> Vehicle Registration: {{report["vehicleReg"]}}&nbsp;</ion-label>
-                    </ion-title>
-                    <ion-title class="vehicle_stats">
                         <ion-label class="location"> Vehicle Location: {{report["vehicleLocation"]}}&nbsp;</ion-label>
                         <ion-label class="miles"> Vehicle Mileage: {{report["milesOnVehicle"]}}&nbsp;</ion-label>
-                    </ion-title>
-                    <ion-title class="vehicle_coverage">
                         <ion-label class="warranty"> Warranty: {{report["warranty"]}}&nbsp;</ion-label>
                         <ion-label class="breakdown"> Breakdown: {{report["breakdown"]}}&nbsp;</ion-label>
+                    </ion-title>
+                    <!-- customer details -->
+                    <ion-title class="customer-details">
+                        <ion-label class="customer"> Customer: {{report["customerName"]}}&nbsp;</ion-label>
+                        <ion-label class="complaint"> Complaint: {{report["complaint"]}}&nbsp;</ion-label>
+                    </ion-title>
+                    <ion-text class="headers"> Work Details</ion-text>
+                    <!-- work details -->
+                    <ion-title class="work-details">
+                        <ion-label class="cause"> Cause: {{report["cause"]}}&nbsp;</ion-label>
+                        <ion-label class="correction"> Correction: {{report["correction"]}}&nbsp;</ion-label>
+                        <ion-label class="parts"> Parts Used: {{report["parts"]}}&nbsp;</ion-label>
+                        <ion-label class="work-hours"> Work Hours: {{report["workHours"]}}&nbsp;</ion-label>
+                    </ion-title>
+                    <!-- worker details -->
+                    <ion-title class="worker">
+                        <ion-label class="worker-name"> Technician: {{report["workerName"]}}&nbsp;</ion-label>
                     </ion-title>
                 </h2>
             </ion-item>

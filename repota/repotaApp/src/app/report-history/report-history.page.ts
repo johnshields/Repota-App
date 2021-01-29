@@ -10,9 +10,10 @@ export class ReportHistoryPage implements OnInit {
     reports: any = [];
 
     constructor(private api: JobReportService) {
+    // Function to get a report by either numb
     }
 
-    getCustomerReports(customerName: string) {
+    getCustomerReportsBy(customerName: string) {
         this.api.getCustomerReports(customerName).subscribe(data => {
             this.reports = data;
         })
