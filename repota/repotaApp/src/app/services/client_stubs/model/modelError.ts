@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-export interface InlineObject { 
-    username?: string;
-    password?: string;
+export interface ModelError { 
+    code: number;
+    messages: string;
 }

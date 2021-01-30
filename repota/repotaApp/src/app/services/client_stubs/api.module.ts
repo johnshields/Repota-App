@@ -6,10 +6,10 @@ import { AccountService } from './api/account.service';
 import { JobReportService } from './api/jobReport.service';
 
 @NgModule({
-  imports:      [],
-  declarations: [],
-  exports:      [],
-  providers: []
+    imports:      [],
+    declarations: [],
+    exports:      [],
+    providers: []
 })
 export class ApiModule {
     public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders<ApiModule> {
@@ -26,7 +26,7 @@ export class ApiModule {
         }
         if (!http) {
             throw new Error('You need to import the HttpClientModule in your AppModule! \n' +
-            'See also https://github.com/angular/angular/issues/20575');
+                'See also https://github.com/angular/angular/issues/20575');
         }
     }
 }

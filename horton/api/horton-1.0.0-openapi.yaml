@@ -298,54 +298,6 @@ paths:
       summary: Update a job report
       tags:
       - Job Report
-    summary: Path used to manage a single report.
-  /jobReports/{customerName}:
-    get:
-      description: Gets all reports by customer name
-      operationId: get_reports_by_customer_name
-      parameters:
-      - description: A unique identifier for a report.
-        explode: false
-        in: path
-        name: customerName
-        required: true
-        schema:
-          type: integer
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CustomerReport'
-          description: Successful response - returns job reports.
-        "404":
-          content:
-            application/json:
-              examples:
-                ReportNotFound:
-                  value:
-                    code: 404
-                    messages: Report not found
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Could not locate Report
-        "500":
-          content:
-            application/json:
-              examples:
-                InternalServerError:
-                  value:
-                    code: 500
-                    messages: Unable to process request
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unable to process request
-      security:
-      - LoginRequired: []
-      summary: Gets all reports by customer name
-      tags:
-      - Job Report
   /jobReports/{date}:
     get:
       description: Gets all reports for a set date.
@@ -364,7 +316,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomerReport'
+                $ref: '#/components/schemas/JobReport'
           description: Successful response - returns job reports.
         "404":
           content:
@@ -447,59 +399,26 @@ components:
       type: object
     JobReport:
       example:
-        jobReportId: 1
-        workerId: 101
-        workDoneId: 1
-        timeDate: null
-        vehicleModel: null
-        vehicleReg: null
-        vehicleLocation: null
-        milesOnVehicle: null
-        warranty: null
-        breakdown: null
-      properties:
-        jobReportId:
-          type: integer
-        workerId:
-          type: integer
-        workDoneId:
-          type: integer
-        timeDate:
-          type: string
-        vehicleModel:
-          type: string
-        vehicleReg:
-          type: string
-        vehicleLocation:
-          type: string
-        milesOnVehicle:
-          type: integer
-        warranty:
-          type: string
-        breakdown:
-          type: string
-      type: object
-    CustomerReport:
-      example:
-        jobReportId: 1
-        timeDate: 01/01/2022
-        vehicleModel: Audi
-        vehicleReg: 07-DL-299
+        jobReportId: 14
+        date: 06/01/2019
+        vehicleModel: Peugeot Spinner
+        vehicleReg: 191-LA-2049
         milesOnVehicle: 1337
-        vehicleLocation: Gort
+        vehicleLocation: Drogheda
         warranty: true
         breakdown: true
-        customerName: Barry
-        customerComplaint: The car needs new wheels
-        cause: Crash into curb
-        correction: Nothing yet
-        parts: 4 Wheels
+        customerName: Kyle
+        customerComplaint: Door hangle broken
+        cause: Door lock out of place
+        correction: Door lock has fixed
+        parts: 0
         workHours: 1
-        workerName: Morgan
+        workerName: Rick Deckard
+        jobComplete: true
       properties:
         jobReportId:
           type: integer
-        timeDate:
+        date:
           type: string
         vehicleModel:
           type: string
@@ -527,9 +446,11 @@ components:
           type: integer
         workerName:
           type: string
+        jobComplete:
+          type: string
       type: object
   securitySchemes:
     LoginRequired:
       in: cookie
-      name: session_id`
+      name: session_id
       type: apiKey

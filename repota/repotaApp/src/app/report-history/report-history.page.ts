@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+
 import {JobReportService} from "../services/client_stubs";
 
 @Component({
@@ -10,22 +11,21 @@ export class ReportHistoryPage implements OnInit {
     reports: any = [];
 
     constructor(private api: JobReportService) {
-    // Function to get a report by either numb
-    }
-
-    getCustomerReportsBy(customerName: string) {
-        this.api.getCustomerReports(customerName).subscribe(data => {
-            this.reports = data;
-        })
+    // Function to get a report
     }
 
     ngOnInit() {
-        console.log('DATA RECEIVED FROM HORTON')
-        console.log('LIST OF REPORTS')
+        console.log('[INFO] DATA RECEIVED FROM HORTON')
+        console.log('[INFO] LIST OF REPORTS')
         this.api.getReports().subscribe(data => {
-            this.reports = data;
+            const str = "true";
+            const dbBool = JSON.parse(str);
+            this.reports = data + dbBool;
             console.log(data)
             console.log(this.reports);
         });
+
     }
+
+
 }

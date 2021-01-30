@@ -53,12 +53,10 @@ func DeleteReport(c *gin.Context) {
 }
 
 // GetReportById - Get a job report
-// job_report_id
 // TODO - Do more then just ID, have it check by date, and customer name
 func GetReportById(c *gin.Context) {
 
-
-	checkForCookie(c)
+	//checkForCookie(c)
 
 	db := config.DbConn()
 	// Get id from request
@@ -71,7 +69,7 @@ func GetReportById(c *gin.Context) {
 		"cust.customer_name, cust.customer_complaint, jr.cause, jr.correction, jr.parts, jr.work_hours," +
 		"wkr.worker_name, jr.job_report_complete FROM jobreports jr INNER JOIN customers cust" +
 		"ON jr.job_report_id = cust.job_report_id" +
-		"INNER JOIN workers wkr ON jr.worker_id = wkr.worker_id WHERE job_report_id = ?", jobReportId) // job_report_id
+		"INNER JOIN workers wkr ON jr.worker_id = wkr.worker_id WHERE r.job_report_id = ?", jobReportId) // job_report_id
 
 	if err != nil {
 		// return user friendly message to client
@@ -105,26 +103,31 @@ func GetReportById(c *gin.Context) {
 // Make sure query is working right with auth
 func GetReports(c *gin.Context) {
 
-	if !checkForCookie(c){
-		c.Redirect(302, "/api/v1/logout")
-	} else {
+	//if !checkForCookie(c){
+	//	c.Redirect(302, "/api/v1/logout")
+	//} else {
 		db := config.DbConn()
 
 		// Create query
-		selDB, err := db.Query("SELECT DISTINCT jr.job_report_id, jr.date_stamp, jr.vehicle_model," +
+		selDB, err := db.Query("SELECT DISTINCT jr.job_report_id, jr.date_stamp, jr.vehicle_model, " +
 			"jr.vehicle_reg, jr.miles_on_vehicle, jr.vehicle_location, jr.warranty, jr.breakdown, " +
-			"cust.customer_name, cust.customer_complaint, jr.cause, jr.correction, jr.parts, jr.work_hours," +
-			"wkr.worker_name, jr.job_report_complete FROM jobreports jr INNER JOIN customers cust" +
-			"ON jr.job_report_id = cust.job_report_id" +
-			"INNER JOIN workers wkr ON jr.worker_id = wkr.worker_id WHERE worker_id = ?") // worker_id
+			"cust.customer_name, cust.customer_complaint, jr.cause, jr.correction, jr.parts, jr.work_hours, " +
+			"wkr.worker_name, jr.job_report_complete " +
+			"FROM jobreports jr INNER JOIN customers cust " +
+			"ON jr.job_report_id = cust.job_report_id " +
+			"INNER JOIN workers wkr ON jr.worker_id = wkr.worker_id") // worker_id
+
+			fmt.Println("\n[INFO] Processing Reports...")
 
 		if err != nil {
 			// return user friendly message to client
+			log.Println("\n[INFO] Failed to process reports!")
 			fmt.Printf("500 Internal Server Error.")
 			c.JSON(500, nil)
 		}
 
 		var res []models.JobReport
+		fmt.Println("[INFO] Loading model...")
 
 		// Run through each record and read values
 		for selDB.Next() {
@@ -132,11 +135,12 @@ func GetReports(c *gin.Context) {
 
 			err = selDB.Scan(&report.JobReportId, &report.Date, &report.VehicleModel, &report.VehicleReg, &report.MilesOnVehicle,
 				&report.VehicleLocation, &report.Warranty, &report.Breakdown, &report.CustomerName, &report.Complaint, &report.Cause,
-				&report.Correction, &report.Parts, &report.WorkHours, &report.WorkerName)
+				&report.Correction, &report.Parts, &report.WorkHours, &report.WorkerName, &report.JobComplete)
 
 			if err != nil {
 				// return user friendly message to client
-				fmt.Printf("500 Internal Server Error.")
+				log.Println("\n[INFO] Failed to load model!")
+				fmt.Printf("\n500 Internal Server Error.")
 				c.JSON(500, nil)
 			}
 			// Add each record to array
@@ -144,13 +148,11 @@ func GetReports(c *gin.Context) {
 			// Return values, Status OK
 			c.JSON(http.StatusOK, res)
 			log.Printf(string(report.JobReportId))
-
 		}
+		fmt.Println("\n[INFO] Reports Processed.")
 		defer db.Close()
 	}
-
-
-}
+//} // if else - cookie
 
 // UpdateReport - Update a job report
 func UpdateReport(c *gin.Context) {
@@ -158,30 +160,6 @@ func UpdateReport(c *gin.Context) {
 	// Added object to db table
 	// Return 201 response for "Created"
 	// Handle error responses in each error if statement
-	db := config.DbConn()
-	// Get id from request
-	jobReportId := c.Params.ByName("jobReportId")
-	//Create query
-	res, err := db.Exec("UPDATE jobreports jr SET jr.date_stamp = ?, jr.vehicle_model = ?, " +
-		"jr.vehicle_reg = ?, jr.miles_on_vehicle = ?, jr.vehicle_location = ?, " +
-		"jr.warranty = ?, jr.breakdown = ? WHERE jr.job_report_id = ?", jobReportId)
-
-	if err != nil {
-		// return user friendly message to client
-		fmt.Printf("500 Internal Server Error.")
-		c.JSON(500, nil)
-	}
-
-	affectedRows, err := res.RowsAffected()
-
-	if err != nil {
-		// return user friendly message to client
-		fmt.Printf("500 Internal Server Error.")
-		c.JSON(500, nil)
-	}
-
-	fmt.Printf("The statement affected %d rows\n", affectedRows)
-
 	c.JSON(http.StatusOK, gin.H{})
 }
 
