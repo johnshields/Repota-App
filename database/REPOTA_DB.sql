@@ -25,7 +25,7 @@ VALUES (141, 'john_s', 'John Shields', '0012108F09466ED8B9CC712BC546D02A'),
 COMMIT;
 
 -- jobReports table --
-CREATE TABLE IF NOT EXISTS jobReports
+CREATE TABLE IF NOT EXISTS jobreports
 (
     job_report_id       int(6) unsigned NOT NULL AUTO_INCREMENT,
     worker_id           int(5) unsigned NOT NULL,
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS jobReports
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 6;
 -- jobReports table --
-INSERT INTO jobReports (job_report_id, worker_id, date_stamp, vehicle_model, vehicle_reg,
+INSERT INTO jobreports (job_report_id, worker_id, date_stamp, vehicle_model, vehicle_reg,
                         vehicle_location,
                         miles_on_vehicle, warranty, breakdown, cause, correction, parts, work_hours,
                         job_report_complete)
@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS customers
     customer_name      varchar(50)     NOT NULL,
     customer_complaint varchar(500)    NOT NULL,
     PRIMARY KEY (customer_id),
-    FOREIGN KEY (job_report_id) REFERENCES jobReports (job_report_id) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (job_report_id) REFERENCES jobreports (job_report_id) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 6;
 

@@ -52,6 +52,7 @@ func DeleteReport(c *gin.Context) {
 }
 
 // GetReportById - Get a job report
+// job_report_id
 // TODO - Do more then just ID, have it check by date, and customer name
 func GetReportById(c *gin.Context) {
 	db := config.DbConn()
@@ -60,7 +61,11 @@ func GetReportById(c *gin.Context) {
 	// Testing Log message
 	log.Printf(string(jobReportId))
 	//Create query
-	selDB, err := db.Query("SELECT * FROM jobReports WHERE job_report_id=?", jobReportId)
+	selDB, err := db.Query("SELECT DISTINCT jr.job_report_id, jr.date_stamp, jr.vehicle_model, jr.vehicle_reg, " +
+		"jr.miles_on_vehicle, jr.vehicle_location, jr.warranty, jr.breakdown, cust.customer_name, " +
+		"cust.customer_complaint,jr.cause, jr.correction, jr.parts, jr.work_hours, wkr.worker_name, " +
+		"jr.job_report_complete FROM jobreports jr INNER JOIN customers custON jr.job_report_id = cust.job_report_id " +
+		"INNER JOIN workers wkr ON jr.worker_id = wkr.worker_id WHERE jr.job_report_id = ?", jobReportId)
 
 	if err != nil {
 		// return user friendly message to client
@@ -91,16 +96,17 @@ func GetReportById(c *gin.Context) {
 }
 
 // TODO - Fix return object, should be the customer one as it has more fields then job report
+// worker_id
 // Make sure query is working right with auth
 func GetReports(c *gin.Context) {
 	db := config.DbConn()
 
 	// Create query
-	selDB, err := db.Query("SELECT jr.job_report_id, jr.time_date_stamp, jr.vehicle_model, jr.vehicle_reg, " +
+	selDB, err := db.Query("SELECT DISTINCT jr.job_report_id, jr.date_stamp, jr.vehicle_model, jr.vehicle_reg, " +
 		"jr.miles_on_vehicle, jr.vehicle_location, jr.warranty, jr.breakdown, cust.customer_name, " +
-		"cust.customer_complaint, wd.cause, wd.correction, wd.parts, wd.work_hours, wkr.worker_name " +
-		"FROM jobReports jr INNER JOIN workdone wd ON jr.work_done_id = wd.work_id INNER JOIN customers cust " +
-		"ON jr.job_report_id = cust.job_report_id INNER JOIN workers wkr on jr.worker_id = wkr.worker_id")
+		"cust.customer_complaint,jr.cause, jr.correction, jr.parts, jr.work_hours, wkr.worker_name, " +
+		"jr.job_report_complete FROM jobreports jr INNER JOIN customers custON jr.job_report_id = cust.job_report_id " +
+		"INNER JOIN workers wkr ON jr.worker_id = wkr.worker_id WHERE wkr.worker_id = ?")
 
 	if err != nil {
 		// return user friendly message to client
