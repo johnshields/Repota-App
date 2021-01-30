@@ -10,80 +10,67 @@ use repotadb;
 -- workers table --
 CREATE TABLE IF NOT EXISTS workers
 (
-    worker_id   int(5)       unsigned NOT NULL AUTO_INCREMENT,
-    username    varchar(20)  NOT NULL UNIQUE,
-    worker_name varchar(50)  NOT NULL,
-    hash        varchar(255) NOT NULL,
+    worker_id   int(5) unsigned NOT NULL AUTO_INCREMENT,
+    username    varchar(20)     NOT NULL UNIQUE,
+    worker_name varchar(50)     NOT NULL,
+    hash        varchar(255)    NOT NULL,
     PRIMARY KEY (worker_id),
     UNIQUE KEY (worker_name)
 ) ENGINE = InnoDB
-AUTO_INCREMENT = 6;
+  AUTO_INCREMENT = 6;
 -- workers table --
 INSERT INTO workers (worker_id, username, worker_name, hash)
-VALUES (141, 'john_s' ,'John Shields', '0012108F09466ED8B9CC712BC546D02A'),
+VALUES (141, 'john_s', 'John Shields', '0012108F09466ED8B9CC712BC546D02A'),
        (174, 'steve_m', 'Steve Maloney', '8743b52063cd84097a65d1633f5c74f5');
-COMMIT;
-
--- jobWork table --
-CREATE TABLE IF NOT EXISTS workDone
-(
-    work_id    int(6)       unsigned NOT NULL AUTO_INCREMENT,
-    worker_id  int(5)       unsigned NOT NULL,
-    cause      varchar(500) NOT NULL,
-    correction varchar(500) NOT NULL,
-    parts      varchar(500) NOT NULL,
-    work_hours int(10)      NOT NULL,
-    PRIMARY KEY (work_id),
-    FOREIGN KEY (worker_id) REFERENCES workers (worker_id) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB
-  AUTO_INCREMENT = 6;
--- jobWork table --
-INSERT INTO workDone (work_id, worker_id, cause, correction, parts, work_hours)
-VALUES (113, 141, 'The lock on the passenger door was broken.', 'A new lock has been fitted.', '1 DOOR LOCK', '1'),
-       (245, 141, 'The left back wheel bearing was worn.', 'Fitted a new wheel bearing.', '1 WHEEL BEARING', '2'),
-       (321, 174, 'The radio connections were disconnected.', 'The radio connections have been reconnected.', 'NONE', '1'),
-       (416, 141, 'Worn out tires.', 'New tires have been fitted.', '4 TIRES', '1'),
-       (502, 141, 'Service on vehicle was due.', 'Serviced vehicle.', '1 OIL FILTER', '2'),
-       (606, 141, 'Cables were eroded.', 'Entire system has been replaced.', '2 CABLES, 2 BRAKE PADS', '3');
 COMMIT;
 
 -- jobReports table --
 CREATE TABLE IF NOT EXISTS jobReports
 (
-    job_report_id    int(6)       unsigned NOT NULL AUTO_INCREMENT,
-    worker_id        int(5)       unsigned NOT NULL,
-    work_done_id     int(6)       unsigned NOT NULL,
-    time_date_stamp  varchar(20)  NOT NULL,
-    vehicle_model    varchar(60)  NOT NULL,
-    vehicle_reg      varchar(60)  NOT NULL,
-    vehicle_location varchar(500) NOT NULL,
-    miles_on_vehicle int(20)      NOT NULL,
-    warranty         varchar(5)   NOT NULL,
-    breakdown        varchar(5)   NOT NULL,
+    job_report_id       int(6) unsigned NOT NULL AUTO_INCREMENT,
+    worker_id           int(5) unsigned NOT NULL,
+    date_stamp     varchar(20)     NOT NULL,
+    vehicle_model       varchar(60)     NOT NULL,
+    vehicle_reg         varchar(60)     NOT NULL,
+    vehicle_location    varchar(500)    NOT NULL,
+    miles_on_vehicle    int(20)         NOT NULL,
+    warranty            boolean         NOT NULL DEFAULT 1,
+    breakdown           boolean         NOT NULL DEFAULT 0,
+    cause               varchar(500),
+    correction          varchar(500),
+    parts               varchar(500),
+    work_hours          int(10),
+    job_report_complete boolean         NOT NULL DEFAULT 0,
     PRIMARY KEY (job_report_id),
-    FOREIGN KEY (worker_id) REFERENCES workers (worker_id) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (work_done_id) REFERENCES workDone (work_id) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (worker_id) REFERENCES workers (worker_id) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 6;
 -- jobReports table --
-INSERT INTO jobReports (job_report_id, worker_id, work_done_id, time_date_stamp, vehicle_model, vehicle_reg,
+INSERT INTO jobReports (job_report_id, worker_id, date_stamp, vehicle_model, vehicle_reg,
                         vehicle_location,
-                        miles_on_vehicle, warranty, breakdown)
-VALUES (121, 141, 113, '03/04/2020', 'Ford Focus', '151-DL-2308', 'Gort, Co. Galway', '508538', 'YES', 'NO'),
-       (251, 141, 245, '06/04/2020', 'Toyota Yaris', '08-KY-667', 'Laban, Co. Galway', '648598', 'YES', 'NO'),
-       (342, 174, 321, '07/04/2020', 'Hyundai i30', '163-TS-1459', 'Barefield, Co. Clare', '700891', 'YES', 'NO'),
-       (456, 141, 416, '08/04/2020', 'Ford Mustang', '54-SF-135', 'Furbogh, Co. Galway', '1007538', 'YES', 'NO'),
-       (543, 141, 502, '12/04/2020', 'Volkswagen Passat', '07-DL-298', 'Westside, Co. Galway', '708538', 'YES', 'NO'),
-       (651, 141, 606, '14/04/2020', 'Honda Civic', '131-DL-298', 'Ballybane, Co. Galway', '318639', 'YES', 'YES');
+                        miles_on_vehicle, warranty, breakdown, cause, correction, parts, work_hours,
+                        job_report_complete)
+VALUES (121, 141, '03/04/2020', 'Ford Focus', '151-DL-2308', 'Gort, Co. Galway', '508538', TRUE, FALSE,
+        'The lock on the passenger door was broken.', 'A new lock has been fitted.', '1 DOOR LOCK', '1', TRUE),
+       (251, 141, '06/04/2020', 'Toyota Yaris', '08-KY-667', 'Laban, Co. Galway', '648598', TRUE, FALSE,
+        'The left back wheel bearing was worn.', 'Fitted a new wheel bearing.', '1 WHEEL BEARING', '2', TRUE),
+       (342, 174, '07/04/2020', 'Hyundai i30', '163-TS-1459', 'Barefield, Co. Clare', '700891', TRUE, FALSE,
+        'The radio connections were disconnected.', 'The radio connections have been reconnected.', 'NONE', '1', TRUE),
+       (456, 141, '08/04/2020', 'Ford Mustang', '54-SF-135', 'Furbogh, Co. Galway', '1007538', TRUE, FALSE,
+        'Worn out tires.', 'New tires have been fitted.', '4 TIRES', '1', TRUE),
+       (543, 141, '12/04/2020', 'Volkswagen Passat', '07-DL-298', 'Westside, Co. Galway', '708538', TRUE, FALSE,
+        'Service on vehicle was due.', 'Serviced vehicle.', '1 OIL FILTER', '2', TRUE),
+       (651, 141, '14/04/2020', 'Honda Civic', '131-DL-298', 'Ballybane, Co. Galway', '318639', TRUE, TRUE,
+        'Cables were eroded.', 'Entire system has been replaced.', '2 CABLES, 2 BRAKE PADS', '3', TRUE);
 COMMIT;
 
 -- customers table --
 CREATE TABLE IF NOT EXISTS customers
 (
-    customer_id        int(6)       unsigned NOT NULL AUTO_INCREMENT,
-    job_report_id      int(6)       unsigned NOT NULL,
-    customer_name      varchar(50)  NOT NULL,
-    customer_complaint varchar(500) NOT NULL,
+    customer_id        int(6) unsigned NOT NULL AUTO_INCREMENT,
+    job_report_id      int(6) unsigned NOT NULL,
+    customer_name      varchar(50)     NOT NULL,
+    customer_complaint varchar(500)    NOT NULL,
     PRIMARY KEY (customer_id),
     FOREIGN KEY (job_report_id) REFERENCES jobReports (job_report_id) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB
@@ -102,13 +89,18 @@ COMMIT;
 -- session table for cookie sessions --
 CREATE TABLE session
 (
-    id VARCHAR(255) NOT NULL, -- UUID
-    user INTEGER(4) unsigned NOT NULL,
-    expire_after INT(8) NOT NULL, -- Unix epoch time store
+    id           VARCHAR(255)        NOT NULL, -- UUID
+    user         INTEGER(4) unsigned NOT NULL,
+    expire_after INT(8)              NOT NULL, -- Unix epoch time store
 
-    PRIMARY KEY(id),
-    FOREIGN KEY(user) REFERENCES workers(worker_id)    ON DELETE CASCADE ON UPDATE CASCADE
+    PRIMARY KEY (id),
+    FOREIGN KEY (user) REFERENCES workers (worker_id) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = INNODB;
 
 -- SELECT ALL TABLES' DATA --
-SELECT * FROM jobreports; SELECT * FROM customers; SELECT * FROM workdone; SELECT * FROM workers;
+SELECT *
+FROM jobreports;
+SELECT *
+FROM customers;
+SELECT *
+FROM workers;
