@@ -11,7 +11,8 @@ SELECT DISTINCT jr.job_report_id, jr.date_stamp, jr.vehicle_model, jr.vehicle_re
 START TRANSACTION;
 INSERT INTO jobreports
     (job_report_id, worker_id, date_stamp, vehicle_model, vehicle_reg, vehicle_location, miles_on_vehicle,
-     warranty, breakdown, cause, correction, parts, work_hours, job_report_complete) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+     warranty, breakdown, cause, correction, parts, work_hours, job_report_complete)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 INSERT INTO customers (customer_id, job_report_id, customer_name, customer_complaint) VALUES (?, ?, ?, ?);
 INSERT INTO workers (worker_id, username, worker_name, hash) VALUES (?, ?, ?, ?);
 COMMIT;
@@ -21,6 +22,6 @@ DELETE FROM jobreports WHERE job_report_id = 121;
 
 -- UPDATE A REPORT --
 UPDATE jobreports jr
-    SET jr.date_stamp = ?, jr.vehicle_model = ?, jr.vehicle_reg = ?, jr.miles_on_vehicle = ?,
+SET jr.date_stamp = ?, jr.vehicle_model = ?, jr.vehicle_reg = ?, jr.miles_on_vehicle = ?,
    jr.vehicle_location = ?, jr.warranty = ?, jr.breakdown = ?
 WHERE jr.job_report_id = ?;

@@ -89,6 +89,13 @@ var routes = Routes{
 	},
 
 	{
+		"Logout",
+		http.MethodGet,
+		"/api/v1/logout",
+		Logout,
+	},
+
+	{
 		"Register",
 		http.MethodPost,
 		"/api/v1/register",
