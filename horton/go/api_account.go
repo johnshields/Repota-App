@@ -19,7 +19,6 @@ import (
 	"github.com/google/uuid"
 	"golang.org/x/crypto/bcrypt"
 	"log"
-	"net/http"
 	"strings"
 )
 
@@ -29,7 +28,7 @@ var wa WorkerAccount
 func Login(c *gin.Context) {
 	db := config.DbConn()
 
-	// have the user login in by username and password
+	// Object to bind data too
 	var workerForm WorkerAccount
 
 	if err := c.BindJSON(&workerForm); err != nil {
@@ -39,54 +38,56 @@ func Login(c *gin.Context) {
 	username := workerForm.Username
 	password := workerForm.Password
 
-	result, err := db.Query("SELECT * FROM workers WHERE username=? AND hash=?", username, password)
-	fmt.Println("\nEntered username\n", username, "\nEntered Password\n", password)
-
-	if err != nil {
-		log.Println("MySQL Error: Error finding user:\n", err)
+	// Check if user exist in the database and check password is not null
+	if err := verifyDetails(username, password); err != nil {
+		fmt.Println("[INFO] Credentials Error:", err)
+		c.JSON(400, Error{Code: 400, Messages: "Malformed Request"})
+		return // Return as there is issues with the credentials
 	}
 
-	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	// Compare the hash in the db with the user password provided in the request
+	if err := bcrypt.CompareHashAndPassword([]byte(wa.Password), []byte(password)); err == nil {
+		fmt.Println("[INFO] User logged in.")
 
-	if err != nil {
-		log.Fatal("Hash Password failed: ", err)
+		// Check for current session id on the user trying to login
+		// if exists remove
+		// create new one, add to db and set-header on client in response
+		err, token := createSessionId(username)
+
+		if err != nil {
+			fmt.Print(err)
+			c.JSON(500, Error{Code: 500, Messages: "Internal Server Error"})
+		} else {
+			c.JSON(200, token)
+		}
+	} else {
+		fmt.Print(err)
+		log.Println("\n[INFO] User not logged in!")
+		// Change message
+		c.JSON(400, Error{Code: 400, Messages: "Malformed Request"})
 	}
 
-	// Comparing the password with the hash
-	err = bcrypt.CompareHashAndPassword(hashedPassword, []byte(password))
-	fmt.Println(err) // nil means it is a match
-
-	// check to see if the user details are correct
-	err = loginUser(username, password)
-
-	if err != nil {
-		fmt.Println(err.Error())
-	}
-
-	log.Println(username)
-	log.Println(password)
-	log.Println(result)
 	defer db.Close()
-	c.JSON(http.StatusOK, gin.H{})
+
 }
 
 // Function that registers a new user to the database.
-func loginUser(username, password string) error {
+// Check password for null
+// Check if user exists
+func verifyDetails(username, password string) error {
+
+	fmt.Println("\n[INFO] Processing User Details...",
+		"\nEntered username:", username, "\nEntered Password:", password)
 
 	if strings.TrimSpace(password) == "" {
 		log.Printf("password is null")
 		return errors.New("password is null")
-	} else if !isValidAccount(password) {
-		log.Printf("unknown password")
-		return errors.New("password is wrong")
-	}
-	if isValidAccount(username) {
+	} else if isValidAccount(username) {
 		log.Printf("unknown username")
 		return errors.New("username does not exist")
+	} else {
+		return nil
 	}
-	// Everything is good
-	log.Println("Print MySQL Results for logged in user:\n",username, password)
-	return nil
 }
 
 // Register - Registers User
@@ -102,42 +103,55 @@ func Register(c *gin.Context) {
 	password := user.Password
 
 	if err := registerNewUser(username, user.Name, password); err == nil {
-		db := config.DbConn()
 
-		// User has been created now set the following below
-		token := generateSessionId() // Create a new session ID
-		expiry := 3600 * 24 * 3      // 3600 * 24 * 3 = 3 days
-
-		// INSERT QUERY to create an Account
-		insert, err := db.Prepare("INSERT INTO session(id, user, expire_after) VALUES(?, ?, ?)")
+		err, token := createSessionId(username)
 
 		if err != nil {
-			fmt.Println(err.Error())
-		}
-
-		fmt.Println("\n\nPrinting Worker Account details:", "\nSession Token:\n", token, "\nWorker ID:\n", wa.Id,
-			"\nExpiry time in seconds:\n", expiry)
-
-		// Check for worker account before committing session record
-		if isValidAccount(username); err != nil {
-			log.Println("Error doing worker account lookup in database")
-		}
-
-		if _, err = insert.Exec(token, wa.Id, expiry); err != nil {
-			log.Println("MYSQL Error: Error creating new session record\n", err)
-			defer db.Close()
-			c.JSON(400, Error{Code: 400, Messages: "Malformed Request"})
+			fmt.Print(err)
+			c.JSON(500, Error{Code: 500, Messages: "Internal Server Error"})
 		} else {
-			fmt.Println("\n\nSession has been generated! \nRecords:", "\nSession Token:\n", token, "\nWorker ID:\n", wa.Id,
-				"\nExpiry time in seconds:\n", expiry)
-			fmt.Println("\nWorker Username:\n", username)
-
-			defer db.Close()
-			c.JSON(http.StatusCreated, gin.H{})
+			c.JSON(200, token)
 		}
-		defer db.Close()
 	} else {
-		log.Printf("Not completing request")
+		log.Printf("\n[INFO] Not completing request")
+	}
+}
+
+// Function to create a session id for a user
+func createSessionId(username string) (error, string) {
+	db := config.DbConn()
+
+	// User has been created now set the following below
+	token := generateSessionId() // Create a new session ID
+	expiry := 3600 * 24 * 3      // 3600 * 24 * 3 = 3 days
+
+	// INSERT QUERY to create an Account
+	insert, err := db.Prepare("INSERT INTO session(id, user, expire_after) VALUES(?, ?, ?)")
+
+	if err != nil {
+		fmt.Println(err.Error())
+		return errors.New(err.Error()), ""
+	}
+
+	fmt.Println("\n[INFO] Printing Worker Account details:", "\nSession Token:", token, "\nWorker ID:", wa.Id,
+		"\nExpiry time in seconds:", expiry)
+
+	// Check for worker account before committing session record
+	if isValidAccount(username); err != nil {
+		log.Println("\n[INFO] Error doing worker account lookup in database")
+	}
+
+	if _, err = insert.Exec(token, wa.Id, expiry); err != nil {
+		log.Println("MYSQL Error: Error creating new session record\n", err)
+		defer db.Close()
+		return errors.New("MYSQL Error: Error creating new session record"), ""
+	} else {
+		fmt.Println("\n[INFO] Session has been generated. Records:", "\nSession Token:", token, "\nWorker ID:", wa.Id,
+			"\nExpiry time in seconds:", expiry)
+		fmt.Println("\n[INFO] Worker Username:", username)
+		defer db.Close()
+
+		return nil, token // Return token, no errors
 	}
 
 }
@@ -151,6 +165,9 @@ func generateSessionId() string {
 // Function that registers a new user to the database.
 func registerNewUser(username, name, password string) error {
 	db := config.DbConn()
+
+	fmt.Println("\n[INFO] Processing User Details...",
+		"\nEntered username:", username, "\nEntered Password:", password)
 
 	if strings.TrimSpace(password) == "" {
 		log.Printf("password is null")
@@ -199,8 +216,6 @@ func isValidAccount(username string) bool {
 	if selDB.Next() {
 		err = selDB.Scan(&wa.Id, &wa.Username, &wa.WorkerName, &wa.Password)
 
-		log.Println(wa)
-
 		if err != nil {
 			// return false // No user matching username provided
 			log.Println("MySQL Error:\n", err)
@@ -209,7 +224,7 @@ func isValidAccount(username string) bool {
 		// Username matches return false as its not valid
 		return false
 	} else {
-		// Return false, username is valid as no user exist by it in the database.
+		// Return true, username is valid as no user exist by it in the database.
 		defer db.Close()
 		return true
 	}
