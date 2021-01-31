@@ -20,8 +20,49 @@ import (
 
 // CreateReport - Create a report
 func CreateReport(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{})
+	var report models.JobReport
+
+	// Blind data to object, else throw error
+	if err := c.BindJSON(&report); err != nil {
+		fmt.Println(err.Error())
+	}
+
+	if err := InsertWork(report); err == nil {
+	} else {
+		log.Printf("\n[INFO] Not completing request")
+	}
 }
+
+func InsertWork (report models.JobReport) error {
+	db := config.DbConn()
+
+	fmt.Println("\n[INFO] Processing Report Details...",
+		"\nReport Number:", "\nReport Date:", report.Date)
+
+	insert, err := db.Prepare("INSERT INTO jobreports(worker_id, date_stamp, vehicle_model, vehicle_reg, vehicle_location, " +
+		"miles_on_vehicle, warranty, breakdown, cause, correction, parts, work_hours, job_report_complete) " +
+		"VALUES (141, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
+
+	if err != nil {
+		log.Println("\n[INFO] MySQL Error: Error Creating new Report:\n", err)
+	}
+
+	result, err := insert.Exec(report.Date, report.VehicleModel, report.VehicleReg, report.VehicleLocation,
+		report.MilesOnVehicle, report.Warranty, report.Breakdown, report.Cause, report.Parts, report.Correction,
+		report.WorkHours, report.JobComplete)
+
+	if err != nil {
+		log.Println("\n[INFO] MySQL Error: Creating new Report:\n", err)
+	}
+
+	fmt.Println("\n[INFO] Print MySQL Results for Report:\n", result)
+
+	defer db.Close()
+	// Everything is good
+	return nil
+}
+
+
 
 // DeleteReport - Delete a Job Report == Working
 func DeleteReport(c *gin.Context) {
