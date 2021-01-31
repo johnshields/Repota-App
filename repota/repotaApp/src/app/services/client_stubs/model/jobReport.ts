@@ -17,8 +17,8 @@ export interface JobReport {
     vehicleReg?: string;
     milesOnVehicle?: number;
     vehicleLocation?: string;
-    warranty?: string;
-    breakdown?: string;
+    warranty?: number;
+    breakdown?: number;
     customerName?: string;
     customerComplaint?: string;
     cause?: string;
@@ -26,5 +26,5 @@ export interface JobReport {
     parts?: string;
     workHours?: number;
     workerName?: string;
-    jobComplete?: string;
+    jobComplete?: number;
 }

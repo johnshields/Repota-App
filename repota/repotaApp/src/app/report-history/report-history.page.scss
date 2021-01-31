@@ -30,8 +30,12 @@
 }
 
 .headers {
-  margin-top: 50px;
+  margin-top: 20px;
   color: #0d0d0d;
+  margin-left: 80px;
+  border: 1px solid #0d0d0d;
+  padding: 5px 5px 1px 5px;
+  border-radius: 1px;
 }
 
 .vehicle-details {
@@ -40,12 +44,11 @@
   text-indent: 20px;
   white-space: pre-line;
   content: ".";
-  padding-top: 30px;
-  padding-bottom: 30px;
-  border: 1px solid #0d0d0d;
-  border-radius: 1px;
+  padding-top: 80px;
+  padding-bottom: 100px;
   height: 160px;
   width: 650px;
+  margin-left: 100px;
 }
 
 .customer-details {
@@ -54,12 +57,11 @@
   text-indent: 20px;
   white-space: pre-line;
   content: ".";
-  padding-top: 30px;
-  padding-bottom: 30px;
-  border: 1px solid #0d0d0d;
-  border-radius: 1px;
-  height: 100px;
+  padding-top: 25px;
+  padding-bottom: 50px;
+  height: 80px;
   width: 650px;
+  margin-left: 100px;
 }
 
 .work-details {
@@ -70,10 +72,9 @@
   content: ".";
   padding-top: 30px;
   padding-bottom: 30px;
-  border: 1px solid #0d0d0d;
-  border-radius: 1px;
-  height: 100px;
+  height: 110px;
   width: 650px;
+  margin-left: 100px;
 }
 
 .worker {
@@ -84,8 +85,16 @@
   content: ".";
   padding-top: 30px;
   padding-bottom: 30px;
-  border: 1px solid #0d0d0d;
-  border-radius: 1px;
   height: 50px;
   width: 650px;
+  margin-left: 100px;
+}
+
+.job-comp {
+  color: #0d0d0d;
+  font-weight: 500;
+  text-indent: 20px;
+  white-space: pre-line;
+  text-align: right;
+  padding-bottom: 20px;
 }
