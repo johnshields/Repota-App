@@ -27,17 +27,24 @@ func CreateReport(c *gin.Context) {
 		fmt.Println(err.Error())
 	}
 
-	if err := InsertWork(report); err == nil {
+	// Report details
+	if err := InsertJobReport(report); err == nil {
+	} else {
+		log.Printf("\n[INFO] Not completing request")
+	}
+	// Customer Details
+	if err := InsertCustomer(report); err == nil {
 	} else {
 		log.Printf("\n[INFO] Not completing request")
 	}
 }
 
-func InsertWork (report models.JobReport) error {
+// TODO - Connect to logged in worker ID
+func InsertJobReport(report models.JobReport) error {
 	db := config.DbConn()
 
-	fmt.Println("\n[INFO] Processing Report Details...",
-		"\nReport Number:", "\nReport Date:", report.Date)
+	fmt.Println("\n[INFO] Processing Job Report Details...",
+		"\nReport Number:", report.JobReportId, "\nReport Date:", report.Date)
 
 	insert, err := db.Prepare("INSERT INTO jobreports(worker_id, date_stamp, vehicle_model, vehicle_reg, vehicle_location, " +
 		"miles_on_vehicle, warranty, breakdown, cause, correction, parts, work_hours, job_report_complete) " +
@@ -48,7 +55,7 @@ func InsertWork (report models.JobReport) error {
 	}
 
 	result, err := insert.Exec(report.Date, report.VehicleModel, report.VehicleReg, report.VehicleLocation,
-		report.MilesOnVehicle, report.Warranty, report.Breakdown, report.Cause, report.Parts, report.Correction,
+		report.MilesOnVehicle, report.Warranty, report.Breakdown, report.Cause, report.Correction, report.Parts,
 		report.WorkHours, report.JobComplete)
 
 	if err != nil {
@@ -62,7 +69,31 @@ func InsertWork (report models.JobReport) error {
 	return nil
 }
 
+// TODO - Get job_report_id from
+func InsertCustomer(report models.JobReport) error {
+	db := config.DbConn()
 
+	fmt.Println("\n[INFO] Processing Customer Details...",
+		"\nCustomer Name:", report.CustomerName)
+
+	insert, err := db.Prepare("INSERT INTO customers (job_report_id, customer_name, customer_complaint) VALUES (667, ?, ?)")
+
+	if err != nil {
+		log.Println("\n[INFO] MySQL Error: Error Creating new Report:\n", err)
+	}
+
+	result, err := insert.Exec(report.CustomerName, report.Complaint)
+
+	if err != nil {
+		log.Println("\n[INFO] MySQL Error: Creating new Report:\n", err)
+	}
+
+	fmt.Println("\n[INFO] Print MySQL Results for Report:\n", result)
+
+	defer db.Close()
+	// Everything is good
+	return nil
+}
 
 // DeleteReport - Delete a Job Report == Working
 func DeleteReport(c *gin.Context) {

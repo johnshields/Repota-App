@@ -17,7 +17,7 @@ func DbConn() (db *sql.DB) {
 	cfg, err := ini.Load("go/config/config.ini")
 
 	if err != nil{
-		log.Println(" [INFO] Failed to load config file for databases.", cfg)
+		log.Println(" [INFO] Failed to load config file for database.", cfg)
 		os.Exit(1) // Failed to start service
 	}
 
