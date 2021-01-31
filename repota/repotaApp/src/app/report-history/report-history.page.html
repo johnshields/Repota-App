@@ -19,15 +19,23 @@
                     <!-- vehicle details -->
                     <ion-text class="headers"> Vehicle Details: </ion-text>
                     <ion-title class="vehicle-details">
+                        <ion-grid class="">
                         <ion-label class="model"> Vehicle Model: {{report["vehicleModel"]}}&nbsp;</ion-label>
                         <ion-label class="reg"> Vehicle Registration: {{report["vehicleReg"]}}&nbsp;</ion-label>
                         <ion-label class="location"> Vehicle Location: {{report["vehicleLocation"]}}&nbsp;</ion-label>
                         <ion-label class="miles"> Vehicle Mileage: {{report["milesOnVehicle"]}}&nbsp;</ion-label>
-                        <ion-label class="warranty"> Warranty: {{report["warranty"]}}&nbsp;</ion-label>
-                        <ion-label class="breakdown"> Breakdown: {{report["breakdown"]}}&nbsp;</ion-label>
+                        </ion-grid>
                     </ion-title>
+                    <ion-label class="coverage"> Warranty &nbsp;</ion-label>
+                    <ion-title class="coverage-boxes">
+                        <ion-checkbox disabled="true" [(ngModel)]="report.warranty"></ion-checkbox>
+                    </ion-title>
+                    <ion-label class="coverage"> Breakdown &nbsp;</ion-label>
+                    <ion-title class="coverage-boxes">
+                        <ion-checkbox disabled="true" [(ngModel)]="report.breakdown"></ion-checkbox>
+                    </ion-title><br>
                     <!-- customer details -->
-                    <ion-text class="headers"> Customer Details: </ion-text>
+                    <ion-text class="headers"> Customer Details:  &nbsp; </ion-text>
                     <ion-title class="customer-details">
                         <ion-label class="customer"> Customer: {{report["customerName"]}}&nbsp;</ion-label>
                         <ion-label class="complaint"> Complaint: {{report["complaint"]}}&nbsp;</ion-label>
@@ -43,8 +51,11 @@
                     <!-- worker details -->
                     <ion-title class="worker">
                         <ion-label class="worker-name"> Technician: {{report["workerName"]}}&nbsp;</ion-label>
-                        <ion-label class="job-comp"> Job Complete: {{report["jobComplete"]}}&nbsp;</ion-label>
                     </ion-title>
+                    <ion-label class="job-comp"> Job Complete</ion-label>
+                    <ion-title class="comp-boxes">
+                    <ion-checkbox disabled="true" [(ngModel)]="report.jobComplete">&nbsp;</ion-checkbox>
+                    </ion-title><br>
                 </h2>
             </ion-item>
         </ion-card>
