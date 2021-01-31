@@ -23,9 +23,9 @@ type JobReport struct {
 
 	MilesOnVehicle int32 `json:"milesOnVehicle,omitempty"`
 
-	Warranty bool `json:"warranty,omitempty"`
+	Warranty int32 `json:"warranty"`
 
-	Breakdown bool `json:"breakdown,omitempty"`
+	Breakdown int32 `json:"breakdown"`
 
 	CustomerName string `json:"customerName,omitempty"`
 
@@ -41,6 +41,6 @@ type JobReport struct {
 
 	WorkerName string `json:"workerName,omitempty"`
 
-	JobComplete bool `json:"jobComplete,omitempty"`
+	JobComplete int32 `json:"jobComplete"`
 
 }

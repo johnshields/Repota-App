@@ -64,12 +64,14 @@ func GetReportById(c *gin.Context) {
 	// Testing Log message
 	log.Printf(string(jobReportId))
 	//Create query
-	selDB, err := db.Query("SELECT DISTINCT jr.job_report_id, jr.date_stamp, jr.vehicle_model," +
-		"jr.vehicle_reg, jr.miles_on_vehicle, jr.vehicle_location, jr.warranty, jr.breakdown, " +
-		"cust.customer_name, cust.customer_complaint, jr.cause, jr.correction, jr.parts, jr.work_hours," +
-		"wkr.worker_name, jr.job_report_complete FROM jobreports jr INNER JOIN customers cust" +
-		"ON jr.job_report_id = cust.job_report_id" +
+	selDB, err := db.Query("SELECT DISTINCT jr.job_report_id, jr.date_stamp, jr.vehicle_model,"+
+		"jr.vehicle_reg, jr.miles_on_vehicle, jr.vehicle_location, jr.warranty, jr.breakdown, "+
+		"cust.customer_name, cust.customer_complaint, jr.cause, jr.correction, jr.parts, jr.work_hours,"+
+		"wkr.worker_name, jr.job_report_complete FROM jobreports jr INNER JOIN customers cust"+
+		"ON jr.job_report_id = cust.job_report_id"+
 		"INNER JOIN workers wkr ON jr.worker_id = wkr.worker_id WHERE r.job_report_id = ?", jobReportId) // job_report_id
+
+	fmt.Println("\n[INFO] Processing Reports...")
 
 	if err != nil {
 		// return user friendly message to client
@@ -93,7 +95,7 @@ func GetReportById(c *gin.Context) {
 		fmt.Printf("%v\n", report)
 		c.JSON(http.StatusOK, report)
 	} else {
-		fmt.Printf("No job matching the Id provided was found.")
+		fmt.Printf("[INFO] No job matching the Id provided was found.")
 		c.JSON(404, nil) // No report found, report 404 error and no null object
 	}
 	defer db.Close()
@@ -103,7 +105,7 @@ func GetReportById(c *gin.Context) {
 // Make sure query is working right with auth
 func GetReports(c *gin.Context) {
 
-	//if !checkForCookie(c){
+	//if !checkForCookie(c) {
 	//	c.Redirect(302, "/api/v1/logout")
 	//} else {
 		db := config.DbConn()
@@ -117,7 +119,7 @@ func GetReports(c *gin.Context) {
 			"ON jr.job_report_id = cust.job_report_id " +
 			"INNER JOIN workers wkr ON jr.worker_id = wkr.worker_id") // worker_id
 
-			fmt.Println("\n[INFO] Processing Reports...")
+		fmt.Println("\n[INFO] Processing Reports...")
 
 		if err != nil {
 			// return user friendly message to client
@@ -145,13 +147,15 @@ func GetReports(c *gin.Context) {
 			}
 			// Add each record to array
 			res = append(res, report)
-			// Return values, Status OK
-			c.JSON(http.StatusOK, res)
 			log.Printf(string(report.JobReportId))
 		}
-		fmt.Println("\n[INFO] Reports Processed.")
+		// Return values, Status OK
+		c.JSON(http.StatusOK, res)
+
+		fmt.Println("\n[INFO] Reports Processed.", res)
 		defer db.Close()
 	}
+
 //} // if else - cookie
 
 // UpdateReport - Update a job report
@@ -162,4 +166,3 @@ func UpdateReport(c *gin.Context) {
 	// Handle error responses in each error if statement
 	c.JSON(http.StatusOK, gin.H{})
 }
-
