@@ -39,9 +39,11 @@ func CreateReport(c *gin.Context) {
 	}
 }
 
-// TODO - Connect to logged in worker ID
+// TODO - Connect to logged in worker
 func InsertJobReport(report models.JobReport) error {
 	db := config.DbConn()
+
+	//checkForCookie(c)
 
 	fmt.Println("\n[INFO] Processing Job Report Details...",
 		"\nReport Number:", report.JobReportId, "\nReport Date:", report.Date)
@@ -58,6 +60,34 @@ func InsertJobReport(report models.JobReport) error {
 		report.MilesOnVehicle, report.Warranty, report.Breakdown, report.Cause, report.Correction, report.Parts,
 		report.WorkHours, report.JobComplete)
 
+	log.Println(report.JobReportId)
+
+	if err != nil {
+		log.Println("\n[INFO] MySQL Error: Creating new Report:\n", err)
+	}
+	fmt.Println("\n[INFO] Print MySQL Results for Report:\n", result)
+
+	defer db.Close()
+	// Everything is good
+	return nil
+}
+
+// TODO - Get job_report_id from InsertJobReport
+func InsertCustomer(report models.JobReport) error {
+	db := config.DbConn()
+
+	fmt.Println("\n[INFO] Processing Customer Details...",
+		"\nCustomer Name:", report.CustomerName)
+
+	insert, err := db.Prepare("INSERT INTO customers (job_report_id, customer_name, customer_complaint)" +
+		" VALUES (661, ?, ?)")
+
+	if err != nil {
+		log.Println("\n[INFO] MySQL Error: Error Creating new Report:\n", err)
+	}
+
+	result, err := insert.Exec(report.JobReportId, report.CustomerName, report.Complaint)
+
 	if err != nil {
 		log.Println("\n[INFO] MySQL Error: Creating new Report:\n", err)
 	}
@@ -69,30 +99,31 @@ func InsertJobReport(report models.JobReport) error {
 	return nil
 }
 
-// TODO - Get job_report_id from
-func InsertCustomer(report models.JobReport) error {
+func GetJobReportId (jobId int) bool {
 	db := config.DbConn()
 
-	fmt.Println("\n[INFO] Processing Customer Details...",
-		"\nCustomer Name:", report.CustomerName)
+	var report models.JobReport
 
-	insert, err := db.Prepare("INSERT INTO customers (job_report_id, customer_name, customer_complaint) VALUES (667, ?, ?)")
-
-	if err != nil {
-		log.Println("\n[INFO] MySQL Error: Error Creating new Report:\n", err)
-	}
-
-	result, err := insert.Exec(report.CustomerName, report.Complaint)
+	selDB, err := db.Query("SELECT * FROM jobreports WHERE job_report_id=?", jobId)
 
 	if err != nil {
-		log.Println("\n[INFO] MySQL Error: Creating new Report:\n", err)
+		log.Fatal(err)
 	}
 
-	fmt.Println("\n[INFO] Print MySQL Results for Report:\n", result)
+	log.Println(jobId)
 
-	defer db.Close()
-	// Everything is good
-	return nil
+	if selDB.Next() {
+		err = selDB.Scan(&report.JobReportId)
+
+		if err != nil {
+			log.Println("\n[INFO] MySQL Error:\n", err)
+		}
+		defer db.Close()
+		return true
+	} else {
+		defer db.Close()
+		return false
+	}
 }
 
 // DeleteReport - Delete a Job Report == Working
@@ -178,53 +209,53 @@ func GetReports(c *gin.Context) {
 	//if !checkForCookie(c) {
 	//	c.Redirect(302, "/api/v1/logout")
 	//} else {
-		db := config.DbConn()
+	db := config.DbConn()
 
-		// Create query
-		selDB, err := db.Query("SELECT DISTINCT jr.job_report_id, jr.date_stamp, jr.vehicle_model, " +
-			"jr.vehicle_reg, jr.miles_on_vehicle, jr.vehicle_location, jr.warranty, jr.breakdown, " +
-			"cust.customer_name, cust.customer_complaint, jr.cause, jr.correction, jr.parts, jr.work_hours, " +
-			"wkr.worker_name, jr.job_report_complete " +
-			"FROM jobreports jr INNER JOIN customers cust " +
-			"ON jr.job_report_id = cust.job_report_id " +
-			"INNER JOIN workers wkr ON jr.worker_id = wkr.worker_id WHERE wkr.worker_id = 174") // worker_id
+	// Create query
+	selDB, err := db.Query("SELECT DISTINCT jr.job_report_id, jr.date_stamp, jr.vehicle_model, " +
+		"jr.vehicle_reg, jr.miles_on_vehicle, jr.vehicle_location, jr.warranty, jr.breakdown, " +
+		"cust.customer_name, cust.customer_complaint, jr.cause, jr.correction, jr.parts, jr.work_hours, " +
+		"wkr.worker_name, jr.job_report_complete " +
+		"FROM jobreports jr INNER JOIN customers cust " +
+		"ON jr.job_report_id = cust.job_report_id " +
+		"INNER JOIN workers wkr ON jr.worker_id = wkr.worker_id WHERE wkr.worker_id = 174") // worker_id
 
-		fmt.Println("\n[INFO] Processing Reports...")
+	fmt.Println("\n[INFO] Processing Reports...")
+
+	if err != nil {
+		// return user friendly message to client
+		log.Println("\n[INFO] Failed to process reports!")
+		fmt.Printf("500 Internal Server Error.")
+		c.JSON(500, nil)
+	}
+
+	var res []models.JobReport
+	fmt.Println("[INFO] Loading model...")
+
+	// Run through each record and read values
+	for selDB.Next() {
+		var report models.JobReport
+
+		err = selDB.Scan(&report.JobReportId, &report.Date, &report.VehicleModel, &report.VehicleReg, &report.MilesOnVehicle,
+			&report.VehicleLocation, &report.Warranty, &report.Breakdown, &report.CustomerName, &report.Complaint, &report.Cause,
+			&report.Correction, &report.Parts, &report.WorkHours, &report.WorkerName, &report.JobComplete)
 
 		if err != nil {
 			// return user friendly message to client
-			log.Println("\n[INFO] Failed to process reports!")
-			fmt.Printf("500 Internal Server Error.")
+			log.Println("\n[INFO] Failed to load model!")
+			fmt.Printf("\n500 Internal Server Error.")
 			c.JSON(500, nil)
 		}
-
-		var res []models.JobReport
-		fmt.Println("[INFO] Loading model...")
-
-		// Run through each record and read values
-		for selDB.Next() {
-			var report models.JobReport
-
-			err = selDB.Scan(&report.JobReportId, &report.Date, &report.VehicleModel, &report.VehicleReg, &report.MilesOnVehicle,
-				&report.VehicleLocation, &report.Warranty, &report.Breakdown, &report.CustomerName, &report.Complaint, &report.Cause,
-				&report.Correction, &report.Parts, &report.WorkHours, &report.WorkerName, &report.JobComplete)
-
-			if err != nil {
-				// return user friendly message to client
-				log.Println("\n[INFO] Failed to load model!")
-				fmt.Printf("\n500 Internal Server Error.")
-				c.JSON(500, nil)
-			}
-			// Add each record to array
-			res = append(res, report)
-			log.Printf(string(report.JobReportId))
-		}
-		// Return values, Status OK
-		c.JSON(http.StatusOK, res)
-
-		fmt.Println("\n[INFO] Reports Processed.", res)
-		defer db.Close()
+		// Add each record to array
+		res = append(res, report)
+		log.Printf(string(report.JobReportId))
 	}
+	// Return values, Status OK
+	c.JSON(http.StatusOK, res)
+
+	fmt.Println("\n[INFO] Reports Processed.", res)
+	defer db.Close()
+}
 
 //} // if else - cookie
 

@@ -17,7 +17,11 @@ const routes: Routes = [
     {
         path: 'display-report',
         loadChildren: () => import('./display-report/display-report.module').then(m => m.DisplayReportPageModule)
-    }
+    },
+    {
+        path: 'account',
+        loadChildren: () => import('./account/account.module').then(m => m.AccountPageModule)
+    },
 ];
 
 @NgModule({

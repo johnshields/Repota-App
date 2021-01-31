@@ -21,7 +21,7 @@ export class ReportHistoryPage implements OnInit {
             console.log('[INFO] Reports have been processed.')
             console.log(data)
             console.log(this.reports);
-        });
+        })
 
     }
 
