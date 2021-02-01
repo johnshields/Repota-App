@@ -18,7 +18,8 @@ import (
 	"net/http"
 )
 
-// CreateReport - Create a report
+// CreateReport - Create a Report
+// http://localhost:8080/api/v1/jobReports
 func CreateReport(c *gin.Context) {
 	var report models.JobReport
 
@@ -30,22 +31,21 @@ func CreateReport(c *gin.Context) {
 	// Report details
 	if err := InsertJobReport(report); err == nil {
 	} else {
-		log.Printf("\n[INFO] Not completing request")
+		log.Printf("\n[INFO] Not completing request.")
 	}
 	// Customer Details
 	if err := InsertCustomer(report); err == nil {
 	} else {
-		log.Printf("\n[INFO] Not completing request")
+		log.Printf("\n[INFO] Not completing request.")
 	}
 }
 
+// InsertJobReport - Insert a new Report into the Database
 // TODO - Connect to logged in worker
 func InsertJobReport(report models.JobReport) error {
+
 	db := config.DbConn()
-
-	//checkForCookie(c)
-
-	fmt.Println("\n[INFO] Processing Job Report Details...",
+	fmt.Println("\n[INFO] Processing Report Details...",
 		"\nReport Number:", report.JobReportId, "\nReport Date:", report.Date)
 
 	insert, err := db.Prepare("INSERT INTO jobreports(worker_id, date_stamp, vehicle_model, vehicle_reg, vehicle_location, " +
@@ -63,7 +63,7 @@ func InsertJobReport(report models.JobReport) error {
 	log.Println(report.JobReportId)
 
 	if err != nil {
-		log.Println("\n[INFO] MySQL Error: Creating new Report:\n", err)
+		log.Println("\n[INFO] MySQL Error: Error Inserting Report Details.\n", err)
 	}
 	fmt.Println("\n[INFO] Print MySQL Results for Report:\n", result)
 
@@ -72,6 +72,7 @@ func InsertJobReport(report models.JobReport) error {
 	return nil
 }
 
+// InsertCustomer - Insert a new Customer into the Database belonging to the Report
 // TODO - Get job_report_id from InsertJobReport
 func InsertCustomer(report models.JobReport) error {
 	db := config.DbConn()
@@ -79,17 +80,18 @@ func InsertCustomer(report models.JobReport) error {
 	fmt.Println("\n[INFO] Processing Customer Details...",
 		"\nCustomer Name:", report.CustomerName)
 
+
 	insert, err := db.Prepare("INSERT INTO customers (job_report_id, customer_name, customer_complaint)" +
-		" VALUES (661, ?, ?)")
+		" VALUES (656, ?, ?)")
 
 	if err != nil {
 		log.Println("\n[INFO] MySQL Error: Error Creating new Report:\n", err)
 	}
 
-	result, err := insert.Exec(report.JobReportId, report.CustomerName, report.Complaint)
+	result, err := insert.Exec(report.CustomerName, report.Complaint)
 
 	if err != nil {
-		log.Println("\n[INFO] MySQL Error: Creating new Report:\n", err)
+		log.Println("\n[INFO] MySQL Error: Error Inserting Customer Details.\n", err)
 	}
 
 	fmt.Println("\n[INFO] Print MySQL Results for Report:\n", result)
@@ -99,38 +101,9 @@ func InsertCustomer(report models.JobReport) error {
 	return nil
 }
 
-// DeleteReport - Delete a Job Report == Working
-func DeleteReport(c *gin.Context) {
-	db := config.DbConn()
-	// Get id from request
-	jobReportId := c.Params.ByName("jobReportId")
-	//Create query
-	res, err := db.Exec("DELETE FROM jobreports WHERE job_report_id=?", jobReportId)
-
-	if err != nil {
-		// return user friendly message to client
-		fmt.Printf("500 Internal Server Error.")
-		c.JSON(500, nil)
-	}
-
-	affectedRows, err := res.RowsAffected()
-
-	if err != nil {
-		// return user friendly message to client
-		fmt.Printf("500 Internal Server Error.")
-		c.JSON(500, nil)
-	}
-
-	fmt.Printf("The statement affected %d rows\n", affectedRows)
-
-	c.JSON(http.StatusOK, gin.H{})
-}
-
-// GetReportById - Get a job report
+// GetReportById - Get a Report
 // TODO - Do more then just ID, have it check by date, and customer name
 func GetReportById(c *gin.Context) {
-
-	//checkForCookie(c)
 
 	db := config.DbConn()
 	// Get id from request
@@ -169,14 +142,16 @@ func GetReportById(c *gin.Context) {
 		fmt.Printf("%v\n", report)
 		c.JSON(http.StatusOK, report)
 	} else {
-		fmt.Printf("[INFO] No job matching the Id provided was found.")
+		fmt.Printf("\n[INFO] No job matching the Id provided was found.")
 		c.JSON(404, nil) // No report found, report 404 error and no null object
 	}
 	defer db.Close()
 }
 
+// GetReports - Get a report by the logged in worker's ID
+// http://localhost:8080/api/v1/jobReports
 // TODO - Fix return object, should be the customer one as it has more fields then job report
-// Make sure query is working right with auth
+// TODO - Make sure query is working right with auth
 func GetReports(c *gin.Context) {
 
 	//if !checkForCookie(c) {
@@ -188,8 +163,7 @@ func GetReports(c *gin.Context) {
 	selDB, err := db.Query("SELECT DISTINCT jr.job_report_id, jr.date_stamp, jr.vehicle_model, " +
 		"jr.vehicle_reg, jr.miles_on_vehicle, jr.vehicle_location, jr.warranty, jr.breakdown, " +
 		"cust.customer_name, cust.customer_complaint, jr.cause, jr.correction, jr.parts, jr.work_hours, " +
-		"wkr.worker_name, jr.job_report_complete " +
-		"FROM jobreports jr INNER JOIN customers cust " +
+		"wkr.worker_name, jr.job_report_complete FROM jobreports jr INNER JOIN customers cust " +
 		"ON jr.job_report_id = cust.job_report_id " +
 		"INNER JOIN workers wkr ON jr.worker_id = wkr.worker_id WHERE wkr.worker_id = 141") // worker_id
 
@@ -203,7 +177,7 @@ func GetReports(c *gin.Context) {
 	}
 
 	var res []models.JobReport
-	fmt.Println("[INFO] Loading model...")
+	fmt.Println("\n[INFO] Loading model...")
 
 	// Run through each record and read values
 	for selDB.Next() {
@@ -229,14 +203,71 @@ func GetReports(c *gin.Context) {
 	fmt.Println("\n[INFO] Reports Processed.", res)
 	defer db.Close()
 }
-
 //} // if else - cookie
 
 // UpdateReport - Update a job report
 func UpdateReport(c *gin.Context) {
+	db := config.DbConn()
+	var report models.JobReport
+
+	// Blind data to object, else throw error
+	if err := c.BindJSON(&report); err != nil {
+		fmt.Println(err.Error())
+	}
+
 	// Read in values from client request and build object.
-	// Added object to db table
-	// Return 201 response for "Created"
-	// Handle error responses in each error if statement
+	fmt.Println("\n[INFO] Processing Job Report Details...",
+		"\nReport Number:", report.JobReportId, "\nReport Date:", report.Date)
+
+	update, err := db.Prepare("UPDATE jobreports jr SET jr.date_stamp = ?, jr.vehicle_model = ?, " +
+		"jr.vehicle_reg = ?, jr.vehicle_location = ?, jr.miles_on_vehicle = ?, jr.warranty = ?, " +
+		"jr.breakdown = ?, jr.cause = ?, jr.correction = ?, jr.parts = ?, jr.work_hours = ?, " +
+		"jr.job_report_complete = ? WHERE jr.job_report_id = 121 AND worker_id = 141")
+
+	if err != nil {
+		log.Println("\n[INFO] MySQL Error: Error Updating Report:\n", err)
+	}
+
+	result, err := update.Exec(report.Date, report.VehicleModel, report.VehicleReg, report.VehicleLocation,
+		report.MilesOnVehicle, report.Warranty, report.Breakdown, report.Cause, report.Correction, report.Parts,
+		report.WorkHours, report.JobComplete)
+
+	log.Println(report.JobReportId)
+
+	if err != nil {
+		log.Println("\n[INFO] MySQL Error: Error Updating Report:\n", err)
+	}
+	// Return 201 response for "Updated"
+	c.JSON(201, "\n[INFO] Report Updated.")
+	fmt.Println("\n[INFO] Print MySQL Results for Report:\n", result)
+
+	defer db.Close()
+	c.JSON(http.StatusOK, gin.H{})
+}
+
+// DeleteReport - Delete a Job Report == Working
+func DeleteReport(c *gin.Context) {
+	db := config.DbConn()
+	// Get id from request
+	jobReportId := c.Params.ByName("jobReportId")
+	//Create query
+	res, err := db.Exec("DELETE FROM jobreports WHERE job_report_id=?", jobReportId)
+
+	if err != nil {
+		// return user friendly message to client
+		fmt.Printf("500 Internal Server Error.")
+		c.JSON(500, nil)
+	}
+
+	affectedRows, err := res.RowsAffected()
+
+	if err != nil {
+		// return user friendly message to client
+		fmt.Printf("500 Internal Server Error.")
+		c.JSON(500, nil)
+	}
+
+	fmt.Printf("The statement affected %d rows\n", affectedRows)
+
 	c.JSON(http.StatusOK, gin.H{})
 }

@@ -22,6 +22,7 @@ DELETE FROM jobreports WHERE job_report_id = 121;
 
 -- UPDATE A REPORT --
 UPDATE jobreports jr
-SET jr.date_stamp = ?, jr.vehicle_model = ?, jr.vehicle_reg = ?, jr.miles_on_vehicle = ?,
-   jr.vehicle_location = ?, jr.warranty = ?, jr.breakdown = ?
+    SET jr.date_stamp = ?, jr.vehicle_model = ?, jr.vehicle_reg = ?, jr.miles_on_vehicle = ?,
+   jr.vehicle_location = ?, jr.warranty = ?, jr.breakdown = ?, jr.cause = ?, jr.correction = ?,
+    jr.parts = ?, jr.work_hours = ?, jr.job_report_complete = ?
 WHERE jr.job_report_id = ?;
