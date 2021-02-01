@@ -10,7 +10,8 @@
  * Do not edit the class manually.
  */
 
-export interface InlineObject { 
+export interface InlineObject {
     username?: string;
+    name?: string;
     password?: string;
 }

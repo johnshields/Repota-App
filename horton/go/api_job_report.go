@@ -99,33 +99,6 @@ func InsertCustomer(report models.JobReport) error {
 	return nil
 }
 
-func GetJobReportId (jobId int) bool {
-	db := config.DbConn()
-
-	var report models.JobReport
-
-	selDB, err := db.Query("SELECT * FROM jobreports WHERE job_report_id=?", jobId)
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	log.Println(jobId)
-
-	if selDB.Next() {
-		err = selDB.Scan(&report.JobReportId)
-
-		if err != nil {
-			log.Println("\n[INFO] MySQL Error:\n", err)
-		}
-		defer db.Close()
-		return true
-	} else {
-		defer db.Close()
-		return false
-	}
-}
-
 // DeleteReport - Delete a Job Report == Working
 func DeleteReport(c *gin.Context) {
 	db := config.DbConn()
@@ -170,7 +143,7 @@ func GetReportById(c *gin.Context) {
 		"cust.customer_name, cust.customer_complaint, jr.cause, jr.correction, jr.parts, jr.work_hours,"+
 		"wkr.worker_name, jr.job_report_complete FROM jobreports jr INNER JOIN customers cust"+
 		"ON jr.job_report_id = cust.job_report_id"+
-		"INNER JOIN workers wkr ON jr.worker_id = wkr.worker_id WHERE r.job_report_id = 121", jobReportId) // job_report_id
+		"INNER JOIN workers wkr ON jr.worker_id = wkr.worker_id", jobReportId) // job_report_id
 
 	fmt.Println("\n[INFO] Processing Reports...")
 
@@ -218,7 +191,7 @@ func GetReports(c *gin.Context) {
 		"wkr.worker_name, jr.job_report_complete " +
 		"FROM jobreports jr INNER JOIN customers cust " +
 		"ON jr.job_report_id = cust.job_report_id " +
-		"INNER JOIN workers wkr ON jr.worker_id = wkr.worker_id WHERE wkr.worker_id = 174") // worker_id
+		"INNER JOIN workers wkr ON jr.worker_id = wkr.worker_id WHERE wkr.worker_id = 141") // worker_id
 
 	fmt.Println("\n[INFO] Processing Reports...")
 
