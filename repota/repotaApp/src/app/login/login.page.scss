@@ -1,10 +1,62 @@
 .toolbar {
   text-align: center;
 }
-ion-item{
-  --color: #fff;
+
+ion-content {
+  --background: none;
+  background-image: url('../../assets/images/app_logo_box.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 500px 500px;
 }
 
-ion-button{
-  --background: #ff0021;
+.user {
+  background-color: #2a2a2a;
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
+  height: 45px;
+}
+
+.password {
+  background-color: #2a2a2a;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  font-size: 20px;
+  border: none;
+  border-radius: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
+  height: 45px;
+}
+
+.login-btn {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: #ff0021;
+  color: black;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
+  height: 50px;
 }

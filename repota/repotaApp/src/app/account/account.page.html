@@ -1,10 +1,12 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>account</ion-title>
+    <ion-title>Repota Account</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-button size="large" type="submit" [routerLink]="['/tabs/login']" expand="block">Login</ion-button>
-  <ion-button size="large" type="submit" [routerLink]="['/tabs/register']" expand="block">Register</ion-button>
+  <div class="item" align="center">
+    <ion-button [routerLink]="['/tabs/login']" class="login"  color="NONE">Login</ion-button>
+    <ion-button [routerLink]="['/tabs/register']" class="register"  color="NONE">Register</ion-button>
+  </div>
 </ion-content>

@@ -38,6 +38,7 @@ func CreateReport(c *gin.Context) {
 	} else {
 		log.Printf("\n[INFO] Not completing request.")
 	}
+	c.JSON(201, "[INFO] Report Created!")
 }
 
 // InsertJobReport - Insert a new Report into the Database
@@ -82,7 +83,7 @@ func InsertCustomer(report models.JobReport) error {
 
 
 	insert, err := db.Prepare("INSERT INTO customers (job_report_id, customer_name, customer_complaint)" +
-		" VALUES (656, ?, ?)")
+		" VALUES (652, ?, ?)")
 
 	if err != nil {
 		log.Println("\n[INFO] MySQL Error: Error Creating new Report:\n", err)
@@ -206,6 +207,7 @@ func GetReports(c *gin.Context) {
 //} // if else - cookie
 
 // UpdateReport - Update a job report
+// http://localhost:8080/api/v1/jobReports/jobReportId
 func UpdateReport(c *gin.Context) {
 	db := config.DbConn()
 	var report models.JobReport
@@ -238,7 +240,7 @@ func UpdateReport(c *gin.Context) {
 		log.Println("\n[INFO] MySQL Error: Error Updating Report:\n", err)
 	}
 	// Return 201 response for "Updated"
-	c.JSON(201, "\n[INFO] Report Updated.")
+	c.JSON(201, "[INFO] Report Updated!")
 	fmt.Println("\n[INFO] Print MySQL Results for Report:\n", result)
 
 	defer db.Close()

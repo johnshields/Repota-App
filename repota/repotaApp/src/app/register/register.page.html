@@ -1,33 +1,24 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>Repota Account</ion-title>
+    <ion-title>Repota Register</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col size-md="6" size-lg="5" size-xs="12">
-        <div text-center>
-          <h3>Register</h3>
-        </div>
-        <form (submit)="registerWorker(workerForm)" #workerForm="ngForm">
-          <ion-item>
-            <ion-input type="text" name="username" ngModel required="true"
-                       placeholder="Enter Username" #username="ngModel"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input type="text" name="name" ngModel required="true"
-                       placeholder="Enter Full Name" #name="ngModel"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input type="password" name="password" ngModel required="true"
-                       placeholder="Enter Password" #password="ngModel"></ion-input>
-          </ion-item>
-          <ion-button size="large" type="submit" [routerLink]="['/tabs/home']"
-                      [disabled]="!workerForm.form.valid" expand="block">Register</ion-button>
-        </form>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <div class="item" align="center">
+    <form (submit)="registerWorker(workerForm)" #workerForm="ngForm">
+      <ion-input class="user" type="text" name="username" ngModel required="true"
+                 placeholder="Enter Username" #username="ngModel">
+      </ion-input>
+      <ion-input class="name" type="text" name="name" ngModel required="true"
+                 placeholder="Enter Full Name" #name="ngModel"  color="NONE">
+      </ion-input>
+      <ion-input class="password" type="password" name="password" ngModel required="true"
+                 placeholder="Enter Password" #password="ngModel">
+      </ion-input>
+      <ion-button class="register-btn" size="large" type="submit" [routerLink]="['/tabs/home']"
+                  [disabled]="!workerForm.form.valid" expand="block" color="NONE">Register
+      </ion-button>
+    </form>
+  </div>
 </ion-content>
