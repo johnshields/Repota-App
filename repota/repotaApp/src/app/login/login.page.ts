@@ -10,6 +10,7 @@ import {NgForm} from "@angular/forms";
 })
 export class LoginPage {
     errorMsg: string;
+
     constructor(private api: AccountService) {
     }
 
@@ -18,15 +19,15 @@ export class LoginPage {
             username: form.value.username,
             password: form.value.password
         }
+
         this.api.login(object).subscribe(data => {
+            console.log(data);
             if (data.success) {
                 this.api.login(data)
-                console.log('Worker is Logged in.');
+                console.log('Success');
             } else {
-                this.errorMsg = 'Worker does not exist!';
+                this.errorMsg = 'Details are not correct.';
             }
         });
-    }
-    ngOnInit(): void {
     }
 }

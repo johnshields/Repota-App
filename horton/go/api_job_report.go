@@ -38,7 +38,6 @@ func CreateReport(c *gin.Context) {
 	} else {
 		log.Printf("\n[INFO] Not completing request.")
 	}
-	c.JSON(201, "[INFO] Report Created!")
 }
 
 // InsertJobReport - Insert a new Report into the Database

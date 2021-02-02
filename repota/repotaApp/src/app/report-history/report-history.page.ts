@@ -11,7 +11,7 @@ export class ReportHistoryPage implements OnInit {
     reports: any = [];
 
     constructor(private api: JobReportService) {
-    // Function to get a report
+        // Function to get a report
     }
 
     ngOnInit() {

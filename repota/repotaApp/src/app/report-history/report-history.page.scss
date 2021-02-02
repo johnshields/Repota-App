@@ -3,9 +3,13 @@
   width: 100%;
   margin-left: 25%;
   margin-right: 25%;
+  margin-bottom: 25px;
   padding-left: 25px;
+  padding-top: 25px;
+  padding-bottom: 25px;
   background-color: whitesmoke;
   size: A4;
+  color: #0d0d0d;
 }
 
 .report-details {
@@ -56,6 +60,7 @@
   padding-left: 500px;
   display: inline;
 }
+
 .coverage-boxes {
   display: inline-block;
   margin-right: 3px;

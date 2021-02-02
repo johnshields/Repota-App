@@ -7,12 +7,12 @@
 <ion-content>
     <div class="item" align="center">
         <form (submit)="loginWorker(workerForm)" #workerForm="ngForm">
-                <ion-input class="user" type="text" name="username" ngModel required="true"
-                           placeholder="Enter Username" #username="ngModel">
-                </ion-input>
-                <ion-input class="password" type="password" name="password" ngModel required="true"
-                           placeholder="Enter Password" #password="ngModel">
-                </ion-input>
+            <ion-input class="user" type="text" name="username" ngModel required="true"
+                       placeholder="Enter Username" #username="ngModel">
+            </ion-input>
+            <ion-input class="password" type="password" name="password" ngModel required="true"
+                       placeholder="Enter Password" #password="ngModel">
+            </ion-input>
             <ion-button class="login-btn" size="large" type="submit" [routerLink]="['/tabs/home']"
                         [disabled]="!workerForm.form.valid" expand="block" color="NONE">Login
             </ion-button>

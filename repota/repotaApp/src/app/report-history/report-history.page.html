@@ -6,24 +6,25 @@
 
 <ion-content>
     <div class="selectReport"><br>
-        <ion-title style="text-align: center"> Report Cards </ion-title>
         <ion-card>
             <ion-item *ngFor="let report of reports">
-                <h2 class="reportCard">
+                <div class="reportCard">
                     <!-- report details -->
+                    <ion-title style="text-align: center">Repota Reports</ion-title>
                     <ion-title class="report-details">
                         <ion-label class="date"> Date: {{report["date"]}}&nbsp;</ion-label>
                         <ion-label class="num"> Report Number: {{report["jobReportId"]}}&nbsp;
                         </ion-label>
                     </ion-title>
                     <!-- vehicle details -->
-                    <ion-text class="headers"> Vehicle Details: </ion-text>
+                    <ion-text class="headers"> Vehicle Details:</ion-text>
                     <ion-title class="vehicle-details">
                         <ion-grid class="">
-                        <ion-label class="model"> Vehicle Model: {{report["vehicleModel"]}}&nbsp;</ion-label>
-                        <ion-label class="reg"> Vehicle Registration: {{report["vehicleReg"]}}&nbsp;</ion-label>
-                        <ion-label class="location"> Vehicle Location: {{report["vehicleLocation"]}}&nbsp;</ion-label>
-                        <ion-label class="miles"> Vehicle Mileage: {{report["milesOnVehicle"]}}&nbsp;</ion-label>
+                            <ion-label class="model"> Vehicle Model: {{report["vehicleModel"]}}&nbsp;</ion-label>
+                            <ion-label class="reg"> Vehicle Registration: {{report["vehicleReg"]}}&nbsp;</ion-label>
+                            <ion-label class="location"> Vehicle Location: {{report["vehicleLocation"]}}&nbsp;
+                            </ion-label>
+                            <ion-label class="miles"> Vehicle Mileage: {{report["milesOnVehicle"]}}&nbsp;</ion-label>
                         </ion-grid>
                     </ion-title>
                     <ion-label class="coverage"> Warranty &nbsp;</ion-label>
@@ -33,14 +34,15 @@
                     <ion-label class="coverage"> Breakdown &nbsp;</ion-label>
                     <ion-title class="coverage-boxes">
                         <ion-checkbox disabled="true" [(ngModel)]="report.breakdown"></ion-checkbox>
-                    </ion-title><br>
+                    </ion-title>
+                    <br>
                     <!-- customer details -->
-                    <ion-text class="headers"> Customer Details:  &nbsp; </ion-text>
+                    <ion-text class="headers"> Customer Details: &nbsp;</ion-text>
                     <ion-title class="customer-details">
                         <ion-label class="customer"> Customer: {{report["customerName"]}}&nbsp;</ion-label>
                         <ion-label class="complaint"> Complaint: {{report["complaint"]}}&nbsp;</ion-label>
                     </ion-title>
-                    <ion-text class="headers"> Work Details: </ion-text>
+                    <ion-text class="headers"> Work Details:</ion-text>
                     <!-- work details -->
                     <ion-title class="work-details">
                         <ion-label class="cause"> Cause: {{report["cause"]}}&nbsp;</ion-label>
@@ -54,9 +56,10 @@
                     </ion-title>
                     <ion-label class="job-comp"> Job Complete</ion-label>
                     <ion-title class="comp-boxes">
-                    <ion-checkbox disabled="true" [(ngModel)]="report.jobComplete">&nbsp;</ion-checkbox>
-                    </ion-title><br>
-                </h2>
+                        <ion-checkbox disabled="true" [(ngModel)]="report.jobComplete">&nbsp;</ion-checkbox>
+                    </ion-title>
+                    <br>
+                </div>
             </ion-item>
         </ion-card>
     </div>

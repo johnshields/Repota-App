@@ -1,24 +1,24 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Repota Register</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>Repota Register</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="item" align="center">
-    <form (submit)="registerWorker(workerForm)" #workerForm="ngForm">
-      <ion-input class="user" type="text" name="username" ngModel required="true"
-                 placeholder="Enter Username" #username="ngModel">
-      </ion-input>
-      <ion-input class="name" type="text" name="name" ngModel required="true"
-                 placeholder="Enter Full Name" #name="ngModel"  color="NONE">
-      </ion-input>
-      <ion-input class="password" type="password" name="password" ngModel required="true"
-                 placeholder="Enter Password" #password="ngModel">
-      </ion-input>
-      <ion-button class="register-btn" size="large" type="submit" [routerLink]="['/tabs/home']"
-                  [disabled]="!workerForm.form.valid" expand="block" color="NONE">Register
-      </ion-button>
-    </form>
-  </div>
+    <div class="item" align="center">
+        <form (submit)="registerWorker(workerForm)" #workerForm="ngForm">
+            <ion-input class="user" type="text" name="username" ngModel required="true"
+                       placeholder="Enter Username" #username="ngModel">
+            </ion-input>
+            <ion-input class="name" type="text" name="name" ngModel required="true"
+                       placeholder="Enter Full Name" #name="ngModel" color="NONE">
+            </ion-input>
+            <ion-input class="password" type="password" name="password" ngModel required="true"
+                       placeholder="Enter Password" #password="ngModel">
+            </ion-input>
+            <ion-button class="register-btn" size="large" type="submit" [routerLink]="['/tabs/home']"
+                        [disabled]="!workerForm.form.valid" expand="block" color="NONE">Register
+            </ion-button>
+        </form>
+    </div>
 </ion-content>

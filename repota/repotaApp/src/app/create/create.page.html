@@ -4,26 +4,86 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content class="list1">
-        <ion-text>Report Number</ion-text>
-        <ion-input type="job_report_id" value="1" class="input"></ion-input>
-        <br>
-        <ion-text>Date</ion-text>
-        <ion-input type="date" value="333" class="input"></ion-input>
-        <br>
-        <ion-text>Customer Name</ion-text>
-        <ion-input type="customer_name" value="Humphrey Bogart" class="input"></ion-input>
-        <br>
-        <ion-text>Vehicle Model</ion-text>
-        <ion-input type="vehicle_model" value="Ford Focus" class="input"></ion-input>
-        <br>
-        <ion-text>Miles on Vehicle</ion-text>
-        <ion-input type="miles_on_vehicle" value="508538" class="input"></ion-input>
-        <br>
-        <ion-text>Warranty</ion-text>
-        <ion-input type="warranty" value="Y" class="input"></ion-input>
-        <br>
-        <ion-text>Breakdown</ion-text><br>
-        <ion-input type="breakdown" value="N" class="input"></ion-input>
-        <br>
+<ion-content>
+    <form (submit)="createReport(reportForm)" #reportForm="ngForm">
+        <ion-item>
+            <div class="reportCard">
+                <ion-title class="title">Repota Reports</ion-title>
+                <div class="wrap" style="width: 98%">
+                    <!-- start of report -->
+                    <div class="left">
+                        <!-- date -->
+                        <ion-title class="headers">Date of Job:</ion-title>
+                        <ion-input name="date" ngModel required="true" #date="ngModel"
+                                   type="date" class="input"></ion-input>
+                        <!-- vehicle details -->
+                        <ion-title class="headers">Vehicle Model:</ion-title>
+                        <ion-input name="vehicleModel" ngModel required="true" #vehicleModel="ngModel"
+                                   type="text" placeholder="Ford Focus" class="input"></ion-input>
+                        <ion-title class="headers">Vehicle Registration:</ion-title>
+                        <ion-input name="vehicleReg" ngModel required="true" #vehicleReg="ngModel"
+                                   type="text" placeholder="191-G-2049" class="input"></ion-input>
+                        <ion-title class="headers">Miles on Vehicle:</ion-title>
+                        <ion-input name="milesOnVehicle" ngModel required="true" #milesOnVehicle="ngModel"
+                                   type="number" placeholder="5000" class="input">
+                        </ion-input>
+                        <ion-title class="headers">Vehicle Location:</ion-title>
+                        <ion-input name="vehicleLocation" ngModel required="true" #vehicleLocation="ngModel"
+                                   type="text" placeholder="Gort, Co. Galway" class="input">
+                        </ion-input>
+                        <ion-title>
+                            <ion-title class="headers">Warranty:</ion-title>
+                            <ion-checkbox name="warranty" ngModel #warranty="ngModel"
+                                          class="check-boxes">
+                            </ion-checkbox>
+                        </ion-title>
+                        <ion-title>
+                            <ion-title class="headers">Breakdown:</ion-title>
+                            <ion-checkbox name="breakdown" ngModel #breakdown="ngModel"
+                                          class="check-boxes">
+                            </ion-checkbox>
+                        </ion-title>
+                    </div>
+                    <!-- customer details -->
+                    <div class="right"></div>
+                    <ion-title class="headers">Customer:</ion-title>
+                    <ion-input name="customerName" ngModel required="true" #customerName="ngModel"
+                               type="text" placeholder="John Doe" class="input">
+                    </ion-input>
+                    <ion-title class="headers">Complaint:</ion-title>
+                    <ion-input name="customerComplaint" ngModel required="true" #customerComplaint="ngModel"
+                               type="text" placeholder="Door handle broken." class="input">
+                    </ion-input>
+                    <!-- work details -->
+                    <ion-title class="headers">Problem:</ion-title>
+                    <ion-input name="cause" ngModel required="true" #cause="ngModel"
+                               type="text" placeholder="Lock broken." class="input">
+                    </ion-input>
+                    <ion-title class="headers">Correction:</ion-title>
+                    <ion-input name="correction" ngModel required="true" #correction="ngModel"
+                               type="text" placeholder="Lock fixed." class="input">
+                    </ion-input>
+                    <ion-title class="headers">Parts Used:</ion-title>
+                    <ion-input name="parts" ngModel required="true" #parts="ngModel"
+                               type="text" placeholder="1 DOOR LOCK" class="input">
+                    </ion-input>
+                    <ion-title class="headers">Work Hours:</ion-title>
+                    <ion-input name="workHours" ngModel required="true" #workHours="ngModel"
+                               type="number" placeholder="1" class="input">
+                    </ion-input>
+                    <ion-title>
+                        <ion-title class="headers">Job Complete:</ion-title>
+                        <ion-checkbox name="jobComplete" ngModel #jobComplete="ngModel"
+                                      class="check-boxes">
+                        </ion-checkbox>
+                    </ion-title>
+                </div>
+                <!-- end of report -->
+            </div>
+        </ion-item>
+        <ion-button class="create-btn" size="large" type="submit"
+                    [disabled]="!reportForm.form.valid" expand="block" color="NONE">Create
+        </ion-button>
+    </form>
 </ion-content>
+
