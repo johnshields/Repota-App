@@ -82,7 +82,7 @@ func InsertCustomer(report models.JobReport) error {
 
 
 	insert, err := db.Prepare("INSERT INTO customers (job_report_id, customer_name, customer_complaint)" +
-		" VALUES (652, ?, ?)")
+		" VALUES (617, ?, ?)")
 
 	if err != nil {
 		log.Println("\n[INFO] MySQL Error: Error Creating new Report:\n", err)

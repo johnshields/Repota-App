@@ -78,8 +78,8 @@ export class JobReportService {
         let headers = this.defaultHeaders;
 
         // authentication (LoginRequired) required
-        if (this.configuration.apiKeys && this.configuration.apiKeys["session_id"]) {
-            queryParameters = queryParameters.set('session_id', this.configuration.apiKeys["session_id"]);
+        if (this.configuration.apiKeys && this.configuration.apiKeys['session_id']) {
+            queryParameters = queryParameters.set('session_id', this.configuration.apiKeys['session_id']);
         }
 
         // to determine the Accept header
@@ -133,8 +133,8 @@ export class JobReportService {
         let headers = this.defaultHeaders;
 
         // authentication (LoginRequired) required
-        if (this.configuration.apiKeys && this.configuration.apiKeys["session_id"]) {
-            queryParameters = queryParameters.set('session_id', this.configuration.apiKeys["session_id"]);
+        if (this.configuration.apiKeys && this.configuration.apiKeys['session_id']) {
+            queryParameters = queryParameters.set('session_id', this.configuration.apiKeys['session_id']);
         }
 
         // to determine the Accept header
@@ -181,8 +181,8 @@ export class JobReportService {
         let headers = this.defaultHeaders;
 
         // authentication (LoginRequired) required
-        if (this.configuration.apiKeys && this.configuration.apiKeys["session_id"]) {
-            queryParameters = queryParameters.set('session_id', this.configuration.apiKeys["session_id"]);
+        if (this.configuration.apiKeys && this.configuration.apiKeys['session_id']) {
+            queryParameters = queryParameters.set('session_id', this.configuration.apiKeys['session_id']);
         }
 
         // to determine the Accept header
@@ -224,8 +224,8 @@ export class JobReportService {
         let headers = this.defaultHeaders;
 
         // authentication (LoginRequired) required
-        if (this.configuration.apiKeys && this.configuration.apiKeys["session_id"]) {
-            queryParameters = queryParameters.set('session_id', this.configuration.apiKeys["session_id"]);
+        if (this.configuration.apiKeys && this.configuration.apiKeys['session_id']) {
+            queryParameters = queryParameters.set('session_id', this.configuration.apiKeys['session_id']);
         }
 
         // to determine the Accept header
@@ -272,8 +272,8 @@ export class JobReportService {
         let headers = this.defaultHeaders;
 
         // authentication (LoginRequired) required
-        if (this.configuration.apiKeys && this.configuration.apiKeys["session_id"]) {
-            queryParameters = queryParameters.set('session_id', this.configuration.apiKeys["session_id"]);
+        if (this.configuration.apiKeys && this.configuration.apiKeys['session_id']) {
+            queryParameters = queryParameters.set('session_id', this.configuration.apiKeys['session_id']);
         }
 
         // to determine the Accept header
@@ -325,8 +325,8 @@ export class JobReportService {
         let headers = this.defaultHeaders;
 
         // authentication (LoginRequired) required
-        if (this.configuration.apiKeys && this.configuration.apiKeys["session_id"]) {
-            queryParameters = queryParameters.set('session_id', this.configuration.apiKeys["session_id"]);
+        if (this.configuration.apiKeys && this.configuration.apiKeys['session_id']) {
+            queryParameters = queryParameters.set('session_id', this.configuration.apiKeys['session_id']);
         }
 
         // to determine the Accept header

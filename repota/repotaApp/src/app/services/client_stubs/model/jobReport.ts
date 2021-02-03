@@ -20,7 +20,7 @@ export interface JobReport {
     warranty?: number;
     breakdown?: number;
     customerName?: string;
-    customerComplaint?: string;
+    complaint?: string;
     cause?: string;
     correction?: string;
     parts?: string;

@@ -8,8 +8,8 @@ import {StatusBar} from '@ionic-native/status-bar/ngx';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {ApiModule, JobReportService, AccountService} from "./services/client_stubs";
-import {HttpClientModule} from "@angular/common/http";
+import {ApiModule, JobReportService, AccountService} from './services/client_stubs';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
     declarations: [AppComponent],

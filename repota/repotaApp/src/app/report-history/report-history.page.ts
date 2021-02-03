@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
-import {JobReportService} from "../services/client_stubs";
+import {JobReportService} from '../services/client_stubs';
 
 @Component({
     selector: 'app-report-history',
@@ -15,13 +15,13 @@ export class ReportHistoryPage implements OnInit {
     }
 
     ngOnInit() {
-        console.log('[INFO] Reports received from Horton.')
+        console.log('[INFO] Reports received from Horton.');
         this.api.getReports().subscribe(data => {
             this.reports = data;
-            console.log('[INFO] Reports have been processed.')
-            console.log(data)
+            console.log('[INFO] Reports have been processed.');
+            console.log(data);
             console.log(this.reports);
-        })
+        });
 
     }
 

@@ -15,7 +15,7 @@
 }
 
 .title {
-  padding-left: 250px;
+  padding-left: 230px;
 }
 
 .input {
@@ -58,23 +58,26 @@ ion-checkbox {
   height: 50px;
 }
 
-.wrap
-{
+.wrap {
   width: 100%;
-  overflow:auto;
-  padding:2px;
+  overflow: auto;
+  padding: 2px;
   margin: 0 auto;
 }
-.left
-{
-  float:left;
+
+.left {
+  float: left;
   width: 50%;
 }
-.right
-{
+
+.right {
   float: right;
   width: 50%;
 
+}
+
+.check-boxes {
+  background-color: whitesmoke;
 }
 
 

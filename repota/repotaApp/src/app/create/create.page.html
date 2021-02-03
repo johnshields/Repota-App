@@ -33,15 +33,17 @@
                         </ion-input>
                         <ion-title>
                             <ion-title class="headers">Warranty:</ion-title>
-                            <ion-checkbox name="warranty" ngModel #warranty="ngModel"
-                                          class="check-boxes">
-                            </ion-checkbox>
+                            <ion-list class="check-boxes" *ngFor="let i of list1">
+                                <ion-checkbox [(ngModel)]="i.checked"
+                                              ngModel="warranty" name="warranty">{{i.title}}</ion-checkbox>
+                            </ion-list>
                         </ion-title>
                         <ion-title>
                             <ion-title class="headers">Breakdown:</ion-title>
-                            <ion-checkbox name="breakdown" ngModel #breakdown="ngModel"
-                                          class="check-boxes">
-                            </ion-checkbox>
+                            <ion-list class="check-boxes" *ngFor="let i of list2">
+                                <ion-checkbox [(ngModel)]="i.checked"
+                                              ngModel="breakdown" name="breakdown">{{i.title}}</ion-checkbox>
+                            </ion-list>
                         </ion-title>
                     </div>
                     <!-- customer details -->
@@ -51,7 +53,7 @@
                                type="text" placeholder="John Doe" class="input">
                     </ion-input>
                     <ion-title class="headers">Complaint:</ion-title>
-                    <ion-input name="customerComplaint" ngModel required="true" #customerComplaint="ngModel"
+                    <ion-input name="complaint" ngModel required="true" #complaint="ngModel"
                                type="text" placeholder="Door handle broken." class="input">
                     </ion-input>
                     <!-- work details -->
@@ -71,12 +73,11 @@
                     <ion-input name="workHours" ngModel required="true" #workHours="ngModel"
                                type="number" placeholder="1" class="input">
                     </ion-input>
-                    <ion-title>
-                        <ion-title class="headers">Job Complete:</ion-title>
-                        <ion-checkbox name="jobComplete" ngModel #jobComplete="ngModel"
-                                      class="check-boxes">
-                        </ion-checkbox>
-                    </ion-title>
+                    <ion-title class="headers">Job Complete</ion-title>
+                    <ion-list class="check-boxes" *ngFor="let i of list3">
+                        <ion-checkbox [(ngModel)]="i.checked" ngModel="jobComplete"
+                                      name="jobComplete">{{i.title}}</ion-checkbox>
+                    </ion-list>
                 </div>
                 <!-- end of report -->
             </div>

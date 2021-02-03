@@ -1,4 +1,6 @@
+// @ts-ignore
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+// @ts-ignore
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {TabsPage} from './tabs.page';

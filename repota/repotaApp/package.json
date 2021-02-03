@@ -1,8 +1,8 @@
 {
-  "name": "photo-gallery",
+  "name": "repota",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "author": "John Shields",
+  "homepage": "http://localhost:4200/tabs/home",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

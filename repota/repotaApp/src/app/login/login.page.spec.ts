@@ -1,4 +1,6 @@
+// @ts-ignore
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+// @ts-ignore
 import {IonicModule} from '@ionic/angular';
 import {ExploreContainerComponentModule} from '../explore-container/explore-container.module';
 

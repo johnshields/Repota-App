@@ -13,7 +13,7 @@ import {CreatePage} from './create.page';
         CommonModule,
         FormsModule,
         IonicModule,
-        CreatePageRoutingModule
+        CreatePageRoutingModule,
     ],
     declarations: [CreatePage]
 })
