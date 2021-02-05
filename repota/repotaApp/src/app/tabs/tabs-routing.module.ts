@@ -36,19 +36,23 @@ const routes: Routes = [
                 loadChildren: () => import('../report-history/report-history.module').then(m => m.ReportHistoryPageModule)
             },
             {
-                path: 'display-report',
+                path: 'report-display',
                 loadChildren: () => import('../display-report/display-report.module').then(m => m.DisplayReportPageModule)
             },
             {
+                path: 'edit',
+                loadChildren: () => import('../edit/edit.module').then(m => m.EditPageModule)
+            },
+            {
                 path: '',
-                redirectTo: '/tabs/home',
+                redirectTo: '/tabs/account',
                 pathMatch: 'full'
             }
         ]
     },
     {
         path: '',
-        redirectTo: '/tabs/home',
+        redirectTo: '/tabs/account',
         pathMatch: 'full'
     }
 ];

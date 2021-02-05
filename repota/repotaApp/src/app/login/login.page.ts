@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import {AccountService, InlineObject} from '../services/client_stubs';
 import {NgForm} from '@angular/forms';
 
-
 @Component({
     selector: 'app-account',
     templateUrl: 'login.page.html',

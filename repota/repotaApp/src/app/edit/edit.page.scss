@@ -1,0 +1,84 @@
+.toolbar {
+  text-align: center;
+}
+
+.reportCard {
+  width: 100%;
+  margin-left: 25%;
+  margin-right: 25%;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  padding-left: 110px;
+  background-color: whitesmoke;
+  size: A4;
+  color: #0d0d0d;
+}
+
+.title {
+  padding-left: 230px;
+}
+
+.input {
+  background-color: #b3b3b3;
+  font-size: 20px;
+  border: none;
+  border-radius: 5px;
+  width: 200px;
+  height: 45px;
+  padding-left: 15px;
+}
+
+ion-input {
+  margin-left: 20px;
+  text-align: center;
+}
+
+ion-checkbox {
+  border: none;
+  border-radius: 5px;
+  width: 35px;
+  height: 35px;
+  margin-left: 50px;
+}
+
+.headers {
+  margin-top: 25px;
+}
+
+.update-btn {
+  background-color: #ff0021;
+  color: black;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
+  height: 50px;
+}
+
+.wrap {
+  width: 100%;
+  overflow: auto;
+  padding: 2px;
+  margin: 0 auto;
+}
+
+.left {
+  float: left;
+  width: 50%;
+}
+
+.right {
+  float: right;
+  width: 50%;
+
+}
+
+.check-boxes {
+  background-color: whitesmoke;
+}
+
+
+
