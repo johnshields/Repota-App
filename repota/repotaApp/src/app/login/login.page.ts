@@ -14,7 +14,6 @@ export class LoginPage {
     constructor(private api: AccountService) {
     }
 
-    //
     loginWorker(form: NgForm) {
         const object: InlineObject = {
             username: form.value.username,
