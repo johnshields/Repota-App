@@ -69,7 +69,7 @@ func NewRouter() *gin.Engine {
 
 // Index is the index handler.
 func Index(c *gin.Context) {
-	c.String(http.StatusOK, "Horton is online...")
+	c.String(http.StatusOK, "[INFO] Horton is online...")
 }
 
 var routes = Routes{

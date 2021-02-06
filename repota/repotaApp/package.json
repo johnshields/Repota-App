@@ -30,6 +30,7 @@
     "firebase-admin": "^9.3.0",
     "mongoose": "^5.10.11",
     "mysql": "github:mysqljs/mysql",
+    "pdfmake": "^0.1.70",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"

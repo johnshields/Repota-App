@@ -1,120 +1,105 @@
-// Service Report Card
-.reportCard {
-  width: 100%;
+.logo {
+  width: 50px;
+  height: 50px;
+}
+
+ion-card-title {
+  color: #363636;
+  text-align: center;
+}
+
+ion-card-content {
   margin-left: 25%;
   margin-right: 25%;
-  margin-bottom: 25px;
-  padding-left: 25px;
-  padding-top: 25px;
-  padding-bottom: 25px;
-  background-color: whitesmoke;
-  size: A4;
+  margin-top: 50px;
+  width: 100%;
+  padding-top: 10px;
+  background-color: white;
   color: #0d0d0d;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
-.report-details {
-  color: #0d0d0d;
-  font-weight: 500;
-  text-indent: 20px;
-  white-space: pre-line;
-  content: ".";
-  padding-top: 20px;
-  padding-bottom: 30px;
-}
-
-.num {
-  font-size: large;
-  color: #0d0d0d;
-}
-
-.date {
-  font-size: small;
-  color: #0d0d0d;
-  text-align: right;
+.wrap {
+  width: 100%;
+  overflow: auto;
+  padding: 2px;
+  margin: 0 auto;
+  align-content: center;
 }
 
 .headers {
-  margin-top: 100px;
-  color: #0d0d0d;
-  margin-left: 80px;
+  font-size: large;
+  font-weight: bold;
+  margin-bottom: 5px;
+  margin-top: 10px;
+  text-decoration: underline;
+  padding-left: 50px;
 }
 
-.vehicle-details {
-  color: #0d0d0d;
-  font-weight: 500;
-  text-indent: 20px;
-  white-space: pre-line;
-  content: ".";
-  padding-top: 80px;
-  padding-bottom: 50px;
-  height: 30px;
-  width: 650px;
-  margin-left: 100px;
+.check-boxes {
+  font-size: medium;
+  padding-left: 175px;
+  margin-top: 4px;
+}
+
+.info {
+  width: 350px;
+  font-size: medium;
+  padding-left: 25px;
+  border: 1px solid #22222e;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-left: 50px;
+}
+
+.desc-name {
+  text-decoration: underline;
+  font-size: medium;
+  margin-top: 10px;
+  margin-left: 50px;
+}
+
+.desc-info {
+  width: 500px;
+  height: 50px;
+  font-size: medium;
+  padding-left: 25px;
+  border: 1px solid #22222e;
+  border-radius: 5px;
+  margin-left: 50px;
 }
 
 .coverage {
-  list-style: none;
-  color: #0d0d0d;
-  font-size: 20px;
-  text-indent: 20px;
-  padding-left: 500px;
-  display: inline;
-}
-
-.coverage-boxes {
-  display: inline-block;
-  margin-right: 3px;
-}
-
-.customer-details {
-  list-style: none;
-  color: #0d0d0d;
-  font-weight: 500;
-  text-indent: 20px;
-  white-space: pre-line;
-  content: ".";
-  padding-top: 20px;
-  padding-bottom: 50px;
-  height: 80px;
-  width: 650px;
-  margin-left: 100px;
-}
-
-.work-details {
-  color: #0d0d0d;
-  font-weight: 500;
-  text-indent: 20px;
-  white-space: pre-line;
-  content: ".";
-  padding-top: 30px;
-  padding-bottom: 30px;
-  height: 110px;
-  width: 650px;
-  margin-left: 100px;
-}
-
-.worker {
-  color: #0d0d0d;
-  font-weight: 500;
-  text-indent: 20px;
-  white-space: pre-line;
-  content: ".";
-  padding-top: 30px;
-  padding-bottom: 30px;
-  height: 50px;
-  width: 650px;
-  margin-left: 100px;
+  margin-top: 50px;
+  margin-left: 150px;
+  margin-right: 50px;
 }
 
 .job-comp {
-  color: #0d0d0d;
-  font-weight: 500;
-  text-indent: 20px;
-  padding-left: 500px;
-  font-size: 20px;
-  display: inline;
+  margin-top: 380px;
+  margin-left: 130px;
+  margin-right: 50px;
 }
 
-.comp-boxes {
-  display: inline-block;
+.left {
+  float: left;
+  width: 50%;
 }
+
+.right {
+  float: right;
+  width: 50%;
+}
+
+ion-list {
+  background-color: white;
+}
+
+.pdf {
+  background-color: darkseagreen;
+}
+
+
+
+

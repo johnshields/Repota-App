@@ -9,20 +9,26 @@ import {JobReportService} from '../services/client_stubs';
 })
 export class ReportHistoryPage implements OnInit {
     reports: any = [];
+    public errorMsg: string;
+    public successMsg: string;
 
-    constructor(private api: JobReportService) {
-        // Function to get a report
-    }
+    constructor(private api: JobReportService) {}
 
     ngOnInit() {
         console.log('[INFO] Reports received from Horton.');
         this.api.getReports().subscribe(data => {
             this.reports = data;
             console.log('[INFO] Reports have been processed.');
-            console.log(data);
             console.log(this.reports);
         });
 
+    }
+
+    deleteReport(id: number){
+        this.api.deleteReport(id).subscribe(() => {
+            this.successMsg = 'Report deleted.';
+            this.ngOnInit();
+        })
     }
 
 
