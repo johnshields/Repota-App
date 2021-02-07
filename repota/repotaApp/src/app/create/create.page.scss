@@ -1,48 +1,76 @@
-.toolbar {
+.tool-bar-logo {
+  width: 75px;
+  height: 75px;
+  margin-left: 25px;
+  display: inline;
+}
+
+.page-title {
+  display: inline-block;
   text-align: center;
+  font-size: xxx-large;
+}
+
+ion-content {
+  --background: none;
 }
 
 .reportCard {
   width: 100%;
   margin-left: 25%;
   margin-right: 25%;
-  padding-top: 25px;
+  margin-top: 25px;
   padding-bottom: 25px;
-  padding-left: 110px;
-  background-color: whitesmoke;
+  background-color: white;
   size: A4;
   color: #0d0d0d;
+  padding-left: 50px;
+  padding-right: 50px;
+  border: 1px solid #22222e;
+  border-radius: 5px;
+}
+
+.logo {
+  width: 75px;
+  height: 75px;
 }
 
 .title {
-  padding-left: 230px;
+  text-align: center;
 }
 
 .input {
-  background-color: #b3b3b3;
   font-size: 20px;
-  border: none;
+  border: 1px solid #22222e;
   border-radius: 5px;
   width: 200px;
-  height: 45px;
+  height: 35px;
   padding-left: 15px;
+  margin-top: 10px;
+}
+
+.large-input {
+  font-size: 20px;
+  border: 1px solid #22222e;
+  border-radius: 5px;
+  width: 375px;
+  height: 35px;
+  padding-left: 15px;
+  margin-top: 10px;
 }
 
 ion-input {
+  background-color: #dedad9;
   margin-left: 20px;
   text-align: center;
 }
 
-ion-checkbox {
-  border: none;
-  border-radius: 5px;
-  width: 35px;
-  height: 35px;
-  margin-left: 50px;
-}
-
 .headers {
-  margin-top: 25px;
+  font-size: large;
+  font-weight: bold;
+  margin-bottom: 5px;
+  margin-top: 10px;
+  text-decoration: underline;
 }
 
 .create-btn {
@@ -59,9 +87,10 @@ ion-checkbox {
 }
 
 .wrap {
+  padding-right: 50px;
+  padding-left: 50px;
   width: 100%;
   overflow: auto;
-  padding: 2px;
   margin: 0 auto;
 }
 
@@ -75,10 +104,42 @@ ion-checkbox {
   width: 50%;
 }
 
-.check-boxes {
-  background-color: whitesmoke;
+ion-checkbox {
+  margin-left: 65px;
+  width: 20px;
+  height: 20px;
 }
 
+.warranty-box {
+  text-align: center;
+  text-decoration: underline;
+  border: 1px solid #22222e;
+  border-radius: 5px;
+  margin: 40px 50px 10px 75px;
+  padding-top: 5px;
+}
 
+.breakdown-box {
+  text-align: center;
+  text-decoration: underline;
+  border: 1px solid #22222e;
+  border-radius: 5px;
+  margin-left: 75px;
+  margin-right: 50px;
+  padding-top: 5px;
+}
 
+.job-comp-box {
+  text-align: center;
+  text-decoration: underline;
+  border: 1px solid #22222e;
+  border-radius: 5px;
+  margin-top: 125px;
+  margin-left: 450px;
+  margin-right: 75px;
+  padding-top: 5px;
+}
 
+.check-boxes {
+  background-color: white;
+}

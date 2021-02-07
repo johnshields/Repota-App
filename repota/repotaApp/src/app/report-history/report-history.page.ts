@@ -30,6 +30,4 @@ export class ReportHistoryPage implements OnInit {
             this.ngOnInit();
         })
     }
-
-
 }

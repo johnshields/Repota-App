@@ -1,11 +1,14 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title align="center">Welcome to Repota!</ion-title>
+        <a href="http://localhost:4200/tabs/home">
+        <img class="tool-bar-logo" src="./assets/images/repotaApp_logo.png" alt="logo"/></a>
+        <ion-title class="page-title">Welcome</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <div class="item" align="center">
+    <div align="center">
+        <img class="background-img" src="./assets/images/app_logo_box.png" alt="background" style="height:600px;margin-top:100px"/>
         <ion-button [routerLink]="['/tabs/login']" class="login" color="NONE">Login</ion-button>
         <ion-button [routerLink]="['/tabs/register']" class="register" color="NONE">Register</ion-button>
     </div>

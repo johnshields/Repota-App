@@ -1,11 +1,12 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>Repota History</ion-title>
+        <a href="http://localhost:4200/tabs/home">
+            <img class="tool-bar-logo" src="./assets/images/repotaApp_logo.png" alt="logo"/></a>
+        <ion-title class="page-title">History</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <div class="selectReport">
         <!-- report -->
         <ion-card>
             <ion-item *ngFor="let report of reports">
@@ -42,21 +43,21 @@
                         </div>
                         <div class="right">
                             <!-- Check Boxes -->
-                            <ion-list class="coverage" >
+                            <ion-list class="coverage">
                                 <ion-item>
-                                    <ion-label> Warranty</ion-label>
+                                    <ion-label> Warranty </ion-label>
                                     <ion-checkbox disabled="true" [(ngModel)]="report.warranty">
                                     </ion-checkbox>
                                 </ion-item>
                                 <ion-item>
-                                    <ion-label> Breakdown</ion-label>
+                                    <ion-label> Breakdown </ion-label>
                                     <ion-checkbox disabled="true" [(ngModel)]="report.breakdown">
                                     </ion-checkbox>
                                 </ion-item>
                             </ion-list>
                             <ion-list class="job-comp">
                                 <ion-item>
-                                    <ion-label> Job Complete</ion-label>
+                                    <ion-label> Job Complete </ion-label>
                                     <ion-checkbox disabled="true" [(ngModel)]="report.jobComplete">
                                     </ion-checkbox>
                                 </ion-item>
@@ -71,5 +72,4 @@
                 <!-- end of report -->
             </ion-item>
         </ion-card>
-    </div>
 </ion-content>

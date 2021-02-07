@@ -1,8 +1,27 @@
-<ion-header [translucent]="true">
+<ion-header>
     <ion-toolbar>
-        <ion-title>Repota Options</ion-title>
+        <a href="http://localhost:4200/tabs/home">
+            <img class="tool-bar-logo" src="./assets/images/repotaApp_logo.png" alt="logo"/></a>
+        <ion-title class="page-title">Options</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+    <div class="about">
+        <ion-title class="headers">About</ion-title>
+        <ion-text>Repota is designed for automobile technicians to fill out<br>
+            service reports for auto dealerships and rental companies.
+        </ion-text>
+        <ion-title>
+        <ion-label class="headers">Toggle Theme:</ion-label>
+        <ion-toggle (ionChange)="onToggleTheme($event)"></ion-toggle></ion-title>
+        <ion-title class="headers">Repota's Guide</ion-title>
+        <a href="https://github.com/johnshields/Repota-App/wiki" target="_blank" rel="noopener noreferrer">
+            <p>View Repota's Guide!</p>
+        </a>
+        <ion-title class="headers">Project Repota's Repository</ion-title>
+        <a href="https://github.com/johnshields/Repota-App" target="_blank" rel="noopener noreferrer">
+           <p>View the GitHub Repository!</p>
+        </a>
+    </div>
 </ion-content>

@@ -1,13 +1,14 @@
-.toolbar {
-  text-align: center;
+.tool-bar-logo {
+  width: 75px;
+  height: 75px;
+  margin-left: 25px;
+  display: inline;
 }
 
-ion-content {
-  --background: none;
-  background-image: url('../../assets/images/app_logo_box.png');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 500px 500px;
+.page-title {
+  display: inline-block;
+  text-align: center;
+  font-size: xxx-large;
 }
 
 .user {

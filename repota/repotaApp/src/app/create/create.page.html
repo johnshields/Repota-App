@@ -1,84 +1,84 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>Repota Create</ion-title>
+        <a href="http://localhost:4200/tabs/home">
+            <img class="tool-bar-logo" src="./assets/images/repotaApp_logo.png" alt="logo"/></a>
+        <ion-title class="page-title">Create</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
+    <ion-card>
     <form (submit)="createReport(reportForm)" #reportForm="ngForm">
         <ion-item>
             <div class="reportCard">
-                <ion-title class="title">Repota Reports</ion-title>
+                <p align="center">
+                    <img class="logo" src="./assets/images/repotaApp_logo.png" alt="logo"/></p>
+                <ion-title class="title">Create Report</ion-title>
+                <hr style="height:2px;border-width:0;color:gray;background-color:black">
+                <p align="center"><ion-label class="headers">Date of Job</ion-label>
+                <ion-input name="date" ngModel required="true" #date="ngModel"
+                           type="date" class="input"></ion-input></p>
                 <div class="wrap" style="width: 98%">
                     <!-- start of report -->
                     <div class="left">
                         <!-- date -->
-                        <ion-title class="headers">Date of Job:</ion-title>
-                        <ion-input name="date" ngModel required="true" #date="ngModel"
-                                   type="date" class="input"></ion-input>
                         <!-- vehicle details -->
-                        <ion-title class="headers">Vehicle Model:</ion-title>
+                        <ion-label class="headers"> Vehicle Details:</ion-label>
                         <ion-input name="vehicleModel" ngModel required="true" #vehicleModel="ngModel"
-                                   type="text" placeholder="Ford Focus" class="input"></ion-input>
-                        <ion-title class="headers">Vehicle Registration:</ion-title>
+                                   type="text" placeholder="Vehicle Model" class="input"></ion-input>
                         <ion-input name="vehicleReg" ngModel required="true" #vehicleReg="ngModel"
-                                   type="text" placeholder="191-G-2049" class="input"></ion-input>
-                        <ion-title class="headers">Miles on Vehicle:</ion-title>
+                                   type="text" placeholder="Vehicle Registration" class="input"></ion-input>
                         <ion-input name="milesOnVehicle" ngModel required="true" #milesOnVehicle="ngModel"
-                                   type="number" placeholder="5000" class="input">
+                                   type="number" placeholder="Miles on Vehicle" class="input">
                         </ion-input>
-                        <ion-title class="headers">Vehicle Location:</ion-title>
                         <ion-input name="vehicleLocation" ngModel required="true" #vehicleLocation="ngModel"
-                                   type="text" placeholder="Gort, Co. Galway" class="input">
+                                   type="text" placeholder="Vehicle Location" class="input">
                         </ion-input>
-                        <ion-title>
-                            <ion-title class="headers">Warranty:</ion-title>
-                            <ion-list class="check-boxes" *ngFor="let i of list1">
-                                <ion-checkbox [(ngModel)]="i.checked"
-                                              ngModel="warranty" name="warranty">{{i.title}}</ion-checkbox>
-                            </ion-list>
-                        </ion-title>
-                        <ion-title>
-                            <ion-title class="headers">Breakdown:</ion-title>
-                            <ion-list class="check-boxes" *ngFor="let i of list2">
-                                <ion-checkbox [(ngModel)]="i.checked" ngModel="breakdown"
-                                              name="breakdown">{{i.title}}</ion-checkbox>
-                            </ion-list>
-                        </ion-title>
+                        <!-- customer details -->
+                        <ion-label class="headers"> Customer Details:</ion-label>
+                        <ion-input name="customerName" ngModel required="true" #customerName="ngModel"
+                                   type="text" placeholder="Customer Name" class="input">
+                        </ion-input>
+                        <ion-input name="complaint" ngModel required="true" #complaint="ngModel"
+                                   type="text" placeholder="Customer complaint..." class="large-input">
+                        </ion-input>
+                        <!-- work details -->
+                        <ion-label class="headers"> Work Details:</ion-label>
+                        <ion-input name="cause" ngModel required="true" #cause="ngModel"
+                                   type="text" placeholder="Cause of problem..." class="large-input">
+                        </ion-input>
+                        <ion-input name="correction" ngModel required="true" #correction="ngModel"
+                                   type="text" placeholder="Correction of problem..." class="large-input">
+                        </ion-input>
+                        <ion-input name="parts" ngModel required="true" #parts="ngModel"
+                                   type="text" placeholder="Parts used in job..." class="large-input">
+                        </ion-input>
+                        <ion-input name="workHours" ngModel required="true" #workHours="ngModel"
+                                   type="number" placeholder="Work Hours" class="input">
+                        </ion-input>
                     </div>
-                    <!-- customer details -->
                     <div class="right"></div>
-                    <ion-title class="headers">Customer:</ion-title>
-                    <ion-input name="customerName" ngModel required="true" #customerName="ngModel"
-                               type="text" placeholder="John Doe" class="input">
-                    </ion-input>
-                    <ion-title class="headers">Complaint:</ion-title>
-                    <ion-input name="complaint" ngModel required="true" #complaint="ngModel"
-                               type="text" placeholder="Door handle broken." class="input">
-                    </ion-input>
-                    <!-- work details -->
-                    <ion-title class="headers">Problem:</ion-title>
-                    <ion-input name="cause" ngModel required="true" #cause="ngModel"
-                               type="text" placeholder="Lock broken." class="input">
-                    </ion-input>
-                    <ion-title class="headers">Correction:</ion-title>
-                    <ion-input name="correction" ngModel required="true" #correction="ngModel"
-                               type="text" placeholder="Lock fixed." class="input">
-                    </ion-input>
-                    <ion-title class="headers">Parts Used:</ion-title>
-                    <ion-input name="parts" ngModel required="true" #parts="ngModel"
-                               type="text" placeholder="1 DOOR LOCK" class="input">
-                    </ion-input>
-                    <ion-title class="headers">Work Hours:</ion-title>
-                    <ion-input name="workHours" ngModel required="true" #workHours="ngModel"
-                               type="number" placeholder="1" class="input">
-                    </ion-input>
-                    <ion-title class="headers">Job Complete</ion-title>
+                    <ion-title>
+                        <ion-title class="warranty-box">Warranty
+                        <ion-list class="check-boxes" *ngFor="let i of list1">
+                            <ion-checkbox [(ngModel)]="i.checked"
+                                          ngModel="warranty" name="warranty">{{i.title}}</ion-checkbox>
+                        </ion-list></ion-title>
+                    </ion-title>
+                    <ion-title>
+                        <ion-title class="breakdown-box">Breakdown
+                        <ion-list class="check-boxes" *ngFor="let i of list2">
+                            <ion-checkbox [(ngModel)]="i.checked" ngModel="breakdown"
+                                          name="breakdown">{{i.title}}</ion-checkbox>
+                        </ion-list></ion-title>
+                    </ion-title>
+                    <ion-title class="job-comp-box">Job Complete
                     <ion-list class="check-boxes" *ngFor="let i of list3">
                         <ion-checkbox [(ngModel)]="i.checked" ngModel="jobComplete"
                                       name="jobComplete">{{i.title}}</ion-checkbox>
-                    </ion-list>
+                    </ion-list></ion-title>
                 </div>
+                <hr style="height:2px;border-width:0;color:gray;background-color:black">
                 <!-- end of report -->
             </div>
         </ion-item>
@@ -86,5 +86,5 @@
                     [disabled]="!reportForm.form.valid" expand="block" color="NONE">Create
         </ion-button>
     </form>
+    </ion-card>
 </ion-content>
-

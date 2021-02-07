@@ -1,11 +1,14 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>Repota Login</ion-title>
+        <a href="http://localhost:4200/tabs/home">
+            <img class="tool-bar-logo" src="./assets/images/repotaApp_logo.png" alt="logo"/></a>
+        <ion-title class="page-title">Login</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
     <div class="item" align="center">
+        <img class="background-img" src="./assets/images/app_logo_box.png" alt="background" style="height:600px;margin-top:100px"/>
         <form (submit)="loginWorker(workerForm)" #workerForm="ngForm">
             <ion-input class="user" type="text" name="username" ngModel required="true"
                        placeholder="Enter Username" #username="ngModel">
