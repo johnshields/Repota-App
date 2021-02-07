@@ -40,12 +40,6 @@ func CreateReport(c *gin.Context) {
 	} else {
 		log.Printf("\n[INFO] Not completing request.")
 	}
-	// Customer Details
-	if err := InsertCustomer(report); err == nil {
-	} else {
-		log.Printf("\n[INFO] Not completing request.")
-	}
-
 }
 
 // InsertJobReport - Insert a new Report into the Database
@@ -55,9 +49,13 @@ func InsertJobReport(report models.JobReport, username string) error {
 	fmt.Println("\n[INFO] Processing Report Details...",
 		"\nReport Number:", report.JobReportId, "\nReport Date:", report.Date)
 
-	insert, err := db.Prepare("INSERT INTO jobreports(worker_id, date_stamp, vehicle_model, vehicle_reg, vehicle_location, " +
+	// insertReport into the table jobreports
+	insertReport, err := db.Prepare("INSERT INTO jobreports(worker_id, date_stamp, vehicle_model, vehicle_reg, vehicle_location, " +
 		"miles_on_vehicle, warranty, breakdown, cause, correction, parts, work_hours, job_report_complete) " +
 		"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
+	// insertReport into the table customers
+	insertCustomer, err := db.Prepare("INSERT INTO customers (job_report_id, customer_name, customer_complaint)" +
+		" VALUES (LAST_INSERT_ID(), ?, ?)")
 
 	if err != nil {
 		log.Println("\n[INFO] MySQL Error: Error Creating new Report:\n", err)
@@ -68,44 +66,21 @@ func InsertJobReport(report models.JobReport, username string) error {
 		log.Println("\n[INFO] Error doing worker account lookup in database", err)
 	}
 
-	result, err := insert.Exec(wa.Id, report.Date, report.VehicleModel, report.VehicleReg, report.VehicleLocation,
+	db.Query("BEGIN")
+	// execute insertReport into the table jobreports
+	reportResult, err := insertReport.Exec(wa.Id, report.Date, report.VehicleModel, report.VehicleReg, report.VehicleLocation,
 		report.MilesOnVehicle, report.Warranty, report.Breakdown, report.Cause, report.Correction, report.Parts,
 		report.WorkHours, report.JobComplete)
+	// execute insertReport into the table customers
+	customerResult, err := insertCustomer.Exec(report.CustomerName, report.Complaint)
+	db.Query("COMMIT")
 
 	log.Println(report.JobReportId)
 
 	if err != nil {
 		log.Println("\n[INFO] MySQL Error: Error Inserting Report Details.\n", err)
 	}
-	fmt.Println("\n[INFO] Print MySQL Results for Report:\n", result)
-
-	defer db.Close()
-	// Everything is good
-	return nil
-}
-
-// InsertCustomer - Insert a new Customer into the Database belonging to the Report
-// TODO - Get job_report_id from InsertJobReport
-func InsertCustomer(report models.JobReport) error {
-	db := config.DbConn()
-
-	fmt.Println("\n[INFO] Processing Customer Details...",
-		"\nCustomer Name:", report.CustomerName)
-
-	insert, err := db.Prepare("INSERT INTO customers (job_report_id, customer_name, customer_complaint)" +
-		" VALUES (?, ?, ?)")
-
-	if err != nil {
-		log.Println("\n[INFO] MySQL Error: Error Creating new Report:\n", err)
-	}
-
-	result, err := insert.Exec(jr.JobReportId, report.CustomerName, report.Complaint)
-
-	if err != nil {
-		log.Println("\n[INFO] MySQL Error: Error Inserting Customer Details.\n", err)
-	}
-
-	fmt.Println("\n[INFO] Print MySQL Results for Report:\n", result)
+	fmt.Println("\n[INFO] Print MySQL Results for Report:\n", reportResult, customerResult)
 
 	defer db.Close()
 	// Everything is good
