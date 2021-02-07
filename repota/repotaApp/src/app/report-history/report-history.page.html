@@ -7,69 +7,70 @@
 </ion-header>
 
 <ion-content>
-        <!-- report -->
-        <ion-card>
-            <ion-item *ngFor="let report of reports">
-                <ion-card-content>
-                    <ion-card-header>
-                        <p align="center">
-                            <img class="logo" src="./assets/images/repotaApp_logo.png" alt="logo"/></p>
-                        <ion-card-title class="num">Report Number: {{report["jobReportId"]}}</ion-card-title>
-                        <ion-card-title class="date">Date: {{report["date"]}}</ion-card-title>
-                    </ion-card-header>
-                    <hr style="height:2px;border-width:0;color:gray;background-color:black">
-                    <div class="wrap">
-                        <div class="left">
-                            <!-- Vehicle Details -->
-                            <ion-label class="headers"> Vehicle Details:</ion-label>
-                            <ion-label class="info"> Vehicle Model: {{report["vehicleModel"]}}</ion-label>
-                            <ion-label class="info"> Vehicle Registration: {{report["vehicleReg"]}}</ion-label>
-                            <ion-label class="info"> Vehicle Location: {{report["vehicleLocation"]}}</ion-label>
-                            <ion-label class="info"> Vehicle Mileage: {{report["milesOnVehicle"]}}</ion-label>
-                            <!-- Customer Details -->
-                            <ion-label class="headers"> Customer Details:</ion-label>
-                            <ion-label class="info"> Customer: {{report["customerName"]}}</ion-label>
-                            <ion-label class="desc-name"> Complaint:</ion-label>
-                            <ion-label class="desc-info">{{report["complaint"]}}</ion-label>
-                            <!-- Work Details -->
-                            <ion-label class="headers"> Work Details:</ion-label>
-                            <ion-label class="desc-name"> Cause:</ion-label>
-                            <ion-label class="desc-info"> {{report["cause"]}}</ion-label>
-                            <ion-label class="desc-name"> Correction:</ion-label>
-                            <ion-label class="desc-info">{{report["correction"]}}</ion-label>
-                            <ion-label class="info"> Parts Used: {{report["parts"]}}</ion-label>
-                            <ion-label class="info"> Work Hours: {{report["workHours"]}}</ion-label>
-                            <ion-label class="info"> Technician: {{report["workerName"]}}</ion-label>
-                        </div>
-                        <div class="right">
-                            <!-- Check Boxes -->
-                            <ion-list class="coverage">
-                                <ion-item>
-                                    <ion-label> Warranty </ion-label>
-                                    <ion-checkbox disabled="true" [(ngModel)]="report.warranty">
-                                    </ion-checkbox>
-                                </ion-item>
-                                <ion-item>
-                                    <ion-label> Breakdown </ion-label>
-                                    <ion-checkbox disabled="true" [(ngModel)]="report.breakdown">
-                                    </ion-checkbox>
-                                </ion-item>
-                            </ion-list>
-                            <ion-list class="job-comp">
-                                <ion-item>
-                                    <ion-label> Job Complete </ion-label>
-                                    <ion-checkbox disabled="true" [(ngModel)]="report.jobComplete">
-                                    </ion-checkbox>
-                                </ion-item>
-                            </ion-list>
-                        </div>
+    <ion-card>
+        <ion-item *ngFor="let report of reports">
+            <ion-card-content id="job-report">
+                <!-- report -->
+                <ion-card-header>
+                    <p align="center">
+                        <img class="logo" src="./assets/images/repotaApp_logo.png" alt="logo"/></p>
+                    <ion-card-title class="num">Report Number: {{report["jobReportId"]}}</ion-card-title>
+                    <ion-card-title class="date">Date: {{report["date"]}}</ion-card-title>
+                </ion-card-header>
+                <hr style="height:2px;border-width:0;color:gray;background-color:black">
+                <div class="wrap">
+                    <div class="left">
+                        <!-- Vehicle Details -->
+                        <ion-label class="headers"> Vehicle Details:</ion-label>
+                        <ion-label class="info"> Vehicle Model: {{report["vehicleModel"]}}</ion-label>
+                        <ion-label class="info"> Vehicle Registration: {{report["vehicleReg"]}}</ion-label>
+                        <ion-label class="info"> Vehicle Location: {{report["vehicleLocation"]}}</ion-label>
+                        <ion-label class="info"> Vehicle Mileage: {{report["milesOnVehicle"]}}</ion-label>
+                        <!-- Customer Details -->
+                        <ion-label class="headers"> Customer Details:</ion-label>
+                        <ion-label class="info"> Customer: {{report["customerName"]}}</ion-label>
+                        <ion-label class="desc-name"> Complaint:</ion-label>
+                        <ion-label class="desc-info">{{report["complaint"]}}</ion-label>
+                        <!-- Work Details -->
+                        <ion-label class="headers"> Work Details:</ion-label>
+                        <ion-label class="desc-name"> Cause:</ion-label>
+                        <ion-label class="desc-info"> {{report["cause"]}}</ion-label>
+                        <ion-label class="desc-name"> Correction:</ion-label>
+                        <ion-label class="desc-info">{{report["correction"]}}</ion-label>
+                        <ion-label class="info"> Parts Used: {{report["parts"]}}</ion-label>
+                        <ion-label class="info"> Work Hours: {{report["workHours"]}}</ion-label>
+                        <ion-label class="info"> Technician: {{report["workerName"]}}</ion-label>
                     </div>
-                    <hr style="height:2px;border-width:0;color:gray;background-color:black">
-                    <ion-button [routerLink]="['/tabs/edit']">EDIT</ion-button>
-                    <ion-button class="pdf" color="NONE">EXPORT TO PDF</ion-button>
-                    <ion-button (click)="deleteReport(report.jobReportId)" color="danger">DELETE</ion-button>
-                </ion-card-content>
-                <!-- end of report -->
-            </ion-item>
-        </ion-card>
+                    <div class="right">
+                        <!-- Check Boxes -->
+                        <ion-list class="coverage">
+                            <ion-item>
+                                <ion-label> Warranty</ion-label>
+                                <ion-checkbox disabled="true" [(ngModel)]="report.warranty">
+                                </ion-checkbox>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label> Breakdown</ion-label>
+                                <ion-checkbox disabled="true" [(ngModel)]="report.breakdown">
+                                </ion-checkbox>
+                            </ion-item>
+                        </ion-list>
+                        <ion-list class="job-comp">
+                            <ion-item>
+                                <ion-label> Job Complete</ion-label>
+                                <ion-checkbox disabled="true" [(ngModel)]="report.jobComplete">
+                                </ion-checkbox>
+                            </ion-item>
+                        </ion-list>
+                    </div>
+                </div>
+                <hr style="height:2px;border-width:0;color:gray;background-color:black">
+                <ion-button [routerLink]="['/tabs/edit']">EDIT</ion-button>
+                <ion-button class="pdf" color="NONE" (click)="onExportPDF()">EXPORT TO PDF</ion-button>
+                <ion-button (click)="deleteReport(report.jobReportId)" color="danger">DELETE</ion-button>
+            </ion-card-content>
+            <!-- end of report -->
+        </ion-item>
+    </ion-card>
 </ion-content>
+

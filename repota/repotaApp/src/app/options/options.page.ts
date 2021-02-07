@@ -12,8 +12,7 @@ export class OptionsPage {
 
     // switch between light and dark theme
     onToggleTheme(event) {
-        if (event.detail.checked)
-        {
+        if (event.detail.checked) {
             document.body.setAttribute('color-theme', 'dark');
         } else {
             document.body.setAttribute('color-theme', 'light');

@@ -13,8 +13,7 @@ INSERT INTO jobreports
     (job_report_id, worker_id, date_stamp, vehicle_model, vehicle_reg, vehicle_location, miles_on_vehicle,
      warranty, breakdown, cause, correction, parts, work_hours, job_report_complete)
      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
-INSERT INTO customers (customer_id, job_report_id, customer_name, customer_complaint) VALUES (?, ?, ?, ?);
-INSERT INTO workers (worker_id, username, worker_name, hash) VALUES (?, ?, ?, ?);
+INSERT INTO customers (job_report_id, customer_name, customer_complaint) VALUES (?, ?, ?);
 COMMIT;
 
 -- DELETE A REPORT --
