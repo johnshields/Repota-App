@@ -21,7 +21,7 @@ export class CreatePage implements OnInit {
     constructor(private api: JobReportService, private router: Router) {
     }
 
-    setErrorMessage (error: String){
+    setErrorMessage(error: String) {
         this.errorMessage = error;
     }
 
@@ -67,14 +67,14 @@ export class CreatePage implements OnInit {
 
         // create the report using the model
         this.api.createReport(object).subscribe(data => {
-            console.log(data)
+            console.log(data);
             if (form != null) {
                 this.router.navigate(['tabs/report-history']);
                 this.api.createReport(data);
                 console.log('Success');
-            } else if(data.errorCode === 'ER_DUP_ENTRY'){
+            } else if (data.errorCode === 'ER_DUP_ENTRY') {
                 this.errorMsg = 'Failed to create Report.';
-            } else{
+            } else {
                 this.setErrorMessage(data.message);
             }
         });

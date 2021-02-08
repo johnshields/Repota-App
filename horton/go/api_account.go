@@ -75,7 +75,7 @@ func Login(c *gin.Context) {
 	} else {
 		fmt.Print(err)
 		log.Println("\n[ALERT] User has not logged in!")
-		c.JSON(400, models.Error{Code: 400, Messages: "[ALERT] User has not logged in!"})
+		c.JSON(401, models.Error{Code: 401, Messages: "[ALERT] User has not logged in!"})
 	}
 
 	defer db.Close()

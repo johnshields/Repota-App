@@ -17,8 +17,8 @@ import (
 
 // CORS are set up in ./go/routers.go
 func main() {
-	// log.Println("Server started on: http://52.51.6.178:8080/api/v1/") // server
-	log.Println("Server started on: http://localhost:8080/api/v1/") // local
 	router := sw.NewRouter()
+	// log.Println("Horton started on: http://52.51.6.178:8080/api/v1/") // server
+	log.Println("Horton started on: http://localhost:8080/api/v1/") // local
 	router.Run()
 }

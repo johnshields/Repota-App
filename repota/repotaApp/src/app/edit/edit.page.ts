@@ -19,9 +19,10 @@ export class EditPage implements OnInit {
     private report: any;
     private errorMessage;
 
-    constructor(private api: JobReportService, private router: Router, private route: ActivatedRoute) {}
+    constructor(private api: JobReportService, private router: Router, private route: ActivatedRoute) {
+    }
 
-    setErrorMessage (error: String){
+    setErrorMessage(error: String) {
         this.errorMessage = error;
     }
 
@@ -63,23 +64,23 @@ export class EditPage implements OnInit {
         };
 
         this.api.updateReport(object, this.report[0].jobReportId).subscribe(data => {
-            console.log(data)
+            console.log(data);
             if (form != null) {
                 this.router.navigate(['tabs/report-history']);
                 console.log('Success');
-            } else if(data.errorCode === 'ER_DUP_ENTRY'){
+            } else if (data.errorCode === 'ER_DUP_ENTRY') {
                 this.errorMsg = 'Failed to update Report..';
-            } else{
+            } else {
                 this.setErrorMessage(data.message);
             }
         });
     }
 
     ngOnInit() {
-        console.log(this.route.snapshot.params['jobReportId']);
         this.api.getReportById(this.route.snapshot.params['jobReportId']).subscribe(data => {
+            console.log(this.route.snapshot.params['jobReportId']);
             this.report = data;
-            console.log(data)
+            console.log(data);
         });
 
         // Lists for check box values

@@ -12,9 +12,10 @@ export class RegisterPage {
     errorMsg: string;
     private errorMessage;
 
-    constructor(private api: AccountService, private router: Router) {}
+    constructor(private api: AccountService, private router: Router) {
+    }
 
-    setErrorMessage (error: String){
+    setErrorMessage(error: String) {
         this.errorMessage = error;
     }
 
@@ -28,9 +29,9 @@ export class RegisterPage {
             if (form != null) {
                 this.router.navigate(['tabs/login']);
                 this.api.register(data);
-            } else if(data.errorCode === 'ER_DUP_ENTRY'){
+            } else if (data.errorCode === 'ER_DUP_ENTRY') {
                 this.errorMsg = 'Username already exists.';
-            } else{
+            } else {
                 this.setErrorMessage(data.message);
             }
         });

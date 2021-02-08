@@ -44,15 +44,19 @@ const routes: Routes = [
                 loadChildren: () => import('../edit/edit.module').then(m => m.EditPageModule)
             },
             {
+                path: 'edit/:jobReportId',
+                loadChildren: './edit/edit.module#EditPageModule'
+            },
+            {
                 path: '',
-                redirectTo: '/tabs/account',
+                redirectTo: 'tabs/account',
                 pathMatch: 'full'
             }
         ]
     },
     {
         path: '',
-        redirectTo: '/tabs/account',
+        redirectTo: 'tabs/account',
         pathMatch: 'full'
     }
 ];

@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
+import {EditPageModule} from './edit/edit.module';
 
 const routes: Routes = [
     {
@@ -33,6 +34,10 @@ const routes: Routes = [
     {
         path: 'edit',
         loadChildren: () => import('./edit/edit.module').then(m => m.EditPageModule)
+    },
+    {
+        path: 'edit/:jobReportId',
+        loadChildren: './edit/edit.module#EditPageModule'
     },
     {
         path: '',

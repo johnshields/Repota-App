@@ -88,50 +88,58 @@ func InsertJobReport(report models.JobReport, username string) error {
 }
 
 // GetReportById - Get a Report
-// TODO - Do more then just ID, have it check by date, and customer name
+// TODO - Do more then just ID, have it check by date too
 func GetReportById(c *gin.Context) {
 
 	db := config.DbConn()
+
 	// Get id from request
 	reportId := c.Params.ByName("jobReportId")
 	// Testing Log message
-	log.Printf(reportId)
+	fmt.Printf("Get Report with ID: " + reportId)
 
-	// select join query
-	selDB, err := db.Query("SELECT DISTINCT jr.job_report_id, jr.date_stamp, jr.vehicle_model,"+
-		"jr.vehicle_reg, jr.miles_on_vehicle, jr.vehicle_location, jr.warranty, jr.breakdown, "+
-		"cust.customer_name, cust.customer_complaint, jr.cause, jr.correction, jr.parts, jr.work_hours,"+
-		"wkr.worker_name, jr.job_report_complete FROM jobreports jr INNER JOIN customers cust"+
-		"ON jr.job_report_id = cust.job_report_id"+
+	// Query to get report by id
+	selDB, err := db.Query("SELECT DISTINCT jr.job_report_id, jr.date_stamp, jr.vehicle_model, " +
+		"jr.vehicle_reg, jr.miles_on_vehicle, jr.vehicle_location, jr.warranty, jr.breakdown, " +
+		"cust.customer_name, cust.customer_complaint, jr.cause, jr.correction, jr.parts, jr.work_hours, " +
+		"wkr.worker_name, jr.job_report_complete FROM jobreports jr INNER JOIN customers cust " +
+		"ON jr.job_report_id = cust.job_report_id " +
 		"INNER JOIN workers wkr ON jr.worker_id = wkr.worker_id WHERE jr.job_report_id = ?", reportId)
 
-	fmt.Println("\n[INFO] Processing Reports...")
+	fmt.Println("\n[INFO] Processing Report...")
 
 	if err != nil {
 		// return user friendly message to client
+		log.Println("\n[ALERT] Failed to process reports!")
 		fmt.Printf("500 Internal Server Error.")
 		c.JSON(500, nil)
 	}
 
-	var report models.JobReport
+	var res []models.JobReport
+	fmt.Println("\n[INFO] Loading model...")
 
-	// Check each record for a match on jobReportId
-	if selDB.Next() {
-		err = selDB.Scan(&report.JobReportId, &report.Date, &report.VehicleModel,
-			&report.VehicleReg, &report.VehicleLocation, &report.MilesOnVehicle, &report.Warranty, &report.Breakdown)
+	// Run through each record and read values
+	for selDB.Next() {
+		var report models.JobReport
+
+		err = selDB.Scan(&report.JobReportId, &report.Date, &report.VehicleModel, &report.VehicleReg, &report.MilesOnVehicle,
+			&report.VehicleLocation, &report.Warranty, &report.Breakdown, &report.CustomerName, &report.Complaint, &report.Cause,
+			&report.Correction, &report.Parts, &report.WorkHours, &report.WorkerName, &report.JobComplete)
 
 		if err != nil {
 			// return user friendly message to client
-			fmt.Printf("500 Internal Server Error.")
+			log.Println("\n[ALERT] Failed to load model!")
+			fmt.Printf("\n500 Internal Server Error.")
 			c.JSON(500, nil)
 		}
-		//Print report that was found
-		fmt.Printf("%v\n", report)
-		c.JSON(http.StatusOK, report)
-	} else {
-		fmt.Printf("\n[INFO] No job matching the Id provided was found.")
-		c.JSON(404, nil) // No report found, report 404 error and no null object
+		// Add each record to array
+		res = append(res, report)
+		log.Printf(string(report.JobReportId))
 	}
+	// Return values, Status OK
+	c.JSON(http.StatusOK, res)
+
+	fmt.Println("\n[INFO] Report Processed.", res)
 	defer db.Close()
 }
 
@@ -146,10 +154,10 @@ func GetReports(c *gin.Context) {
 	// Check logged in worker
 	if !isValidAccount(worker) {
 		log.Println("\n[ALERT] User has not logged in!")
-		c.JSON(400, models.Error{Code: 400, Messages: "[ALERT] User has not logged in!"})
+		c.JSON(401, models.Error{Code: 401, Messages: "[ALERT] User has not logged in!"})
 	}
 
-	// Create query
+	// Query to get worker's job reports
 	selDB, err := db.Query("SELECT DISTINCT jr.job_report_id, jr.date_stamp, jr.vehicle_model, " +
 		"jr.vehicle_reg, jr.miles_on_vehicle, jr.vehicle_location, jr.warranty, jr.breakdown, " +
 		"cust.customer_name, cust.customer_complaint, jr.cause, jr.correction, jr.parts, jr.work_hours, " +
@@ -200,11 +208,10 @@ func UpdateReport(c *gin.Context) {
 	db := config.DbConn()
 	var report models.JobReport
 
-
 	// Get id from request
 	reportId := c.Params.ByName("jobReportId")
 	// Testing Log message
-	log.Println(reportId)
+	fmt.Printf("Get Report with ID: " + reportId)
 
 	// Blind data to object, else throw error
 	if err := c.BindJSON(&report); err != nil {
@@ -238,10 +245,14 @@ func UpdateReport(c *gin.Context) {
 // DeleteReport - Delete a Job Report == Working
 func DeleteReport(c *gin.Context) {
 	db := config.DbConn()
+
 	// Get id from request
-	jobReportId := c.Params.ByName("jobReportId")
+	reportId := c.Params.ByName("jobReportId")
+	// Testing Log message
+	fmt.Printf("Get Report with ID: " + reportId)
+
 	//Create query
-	res, err := db.Exec("DELETE FROM jobreports WHERE job_report_id=?", jobReportId)
+	res, err := db.Exec("DELETE FROM jobreports WHERE job_report_id=?", reportId)
 
 	if err != nil {
 		// return user friendly message to client
