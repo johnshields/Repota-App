@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {AccountService, InlineObject} from '../services/client_stubs';
 import {NgForm} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-register',
@@ -9,9 +10,12 @@ import {NgForm} from '@angular/forms';
 })
 export class RegisterPage {
     errorMsg: string;
+    private errorMessage;
 
-    constructor(private api: AccountService) {
+    constructor(private api: AccountService, private router: Router) {}
 
+    setErrorMessage (error: String){
+        this.errorMessage = error;
     }
 
     registerWorker(form: NgForm) {
@@ -21,11 +25,13 @@ export class RegisterPage {
             password: form.value.password
         };
         this.api.register(object).subscribe(data => {
-            if (data.success) {
+            if (form != null) {
+                this.router.navigate(['tabs/login']);
                 this.api.register(data);
-                console.log('Worker is Registered.');
-            } else {
-                this.errorMsg = 'This username already exists in the database, please try another one.';
+            } else if(data.errorCode === 'ER_DUP_ENTRY'){
+                this.errorMsg = 'Username already exists.';
+            } else{
+                this.setErrorMessage(data.message);
             }
         });
         console.log(form.value);

@@ -1,7 +1,6 @@
 <ion-header>
     <ion-toolbar>
-        <a href="http://localhost:4200/tabs/home">
-            <img class="tool-bar-logo" src="./assets/images/repotaApp_logo.png" alt="logo"/></a>
+        <img class="tool-bar-logo" src="./assets/images/repotaApp_logo.png" alt="logo"/>
         <ion-title class="page-title">History</ion-title>
     </ion-toolbar>
 </ion-header>
@@ -65,8 +64,8 @@
                     </div>
                 </div>
                 <hr style="height:2px;border-width:0;color:gray;background-color:black">
-                <ion-button [routerLink]="['/tabs/edit']">EDIT</ion-button>
-                <ion-button class="pdf" color="NONE" (click)="onExportPDF()">EXPORT TO PDF</ion-button>
+                <ion-button [routerLink]="['/tabs/edit/', report.jobReportId]">EDIT</ion-button>
+                <ion-button class="pdf" color="NONE" (click)="onExportPDF()">EXPORT PDF</ion-button>
                 <ion-button (click)="deleteReport(report.jobReportId)" color="danger">DELETE</ion-button>
             </ion-card-content>
             <!-- end of report -->

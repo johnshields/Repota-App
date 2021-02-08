@@ -23,8 +23,6 @@ import (
 	"net/http"
 )
 
-var jr models.JobReport
-
 // CreateReport - Create a Report
 // http://localhost:8080/api/v1/jobReports
 func CreateReport(c *gin.Context) {
@@ -35,10 +33,10 @@ func CreateReport(c *gin.Context) {
 		fmt.Println(err.Error())
 	}
 
-	// Report details
+	// Insert Job Report details
 	if err := InsertJobReport(report, wa.Username); err == nil {
 	} else {
-		log.Printf("\n[INFO] Not completing request.")
+		log.Printf("\n[ALERT] Not completing request.")
 	}
 }
 
@@ -49,36 +47,38 @@ func InsertJobReport(report models.JobReport, username string) error {
 	fmt.Println("\n[INFO] Processing Report Details...",
 		"\nReport Number:", report.JobReportId, "\nReport Date:", report.Date)
 
-	// insertReport into the table jobreports
-	insertReport, err := db.Prepare("INSERT INTO jobreports(worker_id, date_stamp, vehicle_model, vehicle_reg, vehicle_location, " +
+	// insert into the table jobreports
+	insertReport, err := db.Prepare(
+		"INSERT INTO jobreports(worker_id, date_stamp, vehicle_model, vehicle_reg, vehicle_location, " +
 		"miles_on_vehicle, warranty, breakdown, cause, correction, parts, work_hours, job_report_complete) " +
 		"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
-	// insertReport into the table customers
+
+	// insert into the table customers
 	insertCustomer, err := db.Prepare("INSERT INTO customers (job_report_id, customer_name, customer_complaint)" +
 		" VALUES (LAST_INSERT_ID(), ?, ?)")
 
 	if err != nil {
-		log.Println("\n[INFO] MySQL Error: Error Creating new Report:\n", err)
+		log.Println("\n[ALERT] MySQL Error: Error Creating new Report:\n", err)
 	}
 
-	// Check if user account exists
+	// Check logged in worker
 	if !isValidAccount(username) {
-		log.Println("\n[INFO] Error doing worker account lookup in database", err)
+		log.Println("\n[ALERT] User has not logged in!")
 	}
 
 	db.Query("BEGIN")
-	// execute insertReport into the table jobreports
+	// execute insert into the table jobreports
 	reportResult, err := insertReport.Exec(wa.Id, report.Date, report.VehicleModel, report.VehicleReg, report.VehicleLocation,
 		report.MilesOnVehicle, report.Warranty, report.Breakdown, report.Cause, report.Correction, report.Parts,
 		report.WorkHours, report.JobComplete)
-	// execute insertReport into the table customers
+	// execute insert into the table customers
 	customerResult, err := insertCustomer.Exec(report.CustomerName, report.Complaint)
 	db.Query("COMMIT")
 
 	log.Println(report.JobReportId)
 
 	if err != nil {
-		log.Println("\n[INFO] MySQL Error: Error Inserting Report Details.\n", err)
+		log.Println("\n[ALERT] MySQL Error: Error Inserting Report Details.\n", err)
 	}
 	fmt.Println("\n[INFO] Print MySQL Results for Report:\n", reportResult, customerResult)
 
@@ -93,16 +93,17 @@ func GetReportById(c *gin.Context) {
 
 	db := config.DbConn()
 	// Get id from request
-	jobReportId := c.Params.ByName("jobReportId")
+	reportId := c.Params.ByName("jobReportId")
 	// Testing Log message
-	log.Printf(string(jobReportId))
-	//Create query
+	log.Printf(reportId)
+
+	// select join query
 	selDB, err := db.Query("SELECT DISTINCT jr.job_report_id, jr.date_stamp, jr.vehicle_model,"+
 		"jr.vehicle_reg, jr.miles_on_vehicle, jr.vehicle_location, jr.warranty, jr.breakdown, "+
 		"cust.customer_name, cust.customer_complaint, jr.cause, jr.correction, jr.parts, jr.work_hours,"+
 		"wkr.worker_name, jr.job_report_complete FROM jobreports jr INNER JOIN customers cust"+
 		"ON jr.job_report_id = cust.job_report_id"+
-		"INNER JOIN workers wkr ON jr.worker_id = wkr.worker_id", jobReportId) // job_report_id
+		"INNER JOIN workers wkr ON jr.worker_id = wkr.worker_id WHERE jr.job_report_id = ?", reportId)
 
 	fmt.Println("\n[INFO] Processing Reports...")
 
@@ -134,16 +135,19 @@ func GetReportById(c *gin.Context) {
 	defer db.Close()
 }
 
-// GetReports - Get a report by the logged in worker's ID
+// GetReports - Get a report by the logged in worker's username
 // http://localhost:8080/api/v1/jobReports
-// TODO - Fix return object, should be the customer one as it has more fields then job report
-// TODO - Make sure query is working right with auth
 func GetReports(c *gin.Context) {
 
-	//if !checkForCookie(c) {
-	//	c.Redirect(302, "/api/v1/logout")
-	//} else {
 	db := config.DbConn()
+
+	worker := wa.Username
+
+	// Check logged in worker
+	if !isValidAccount(worker) {
+		log.Println("\n[ALERT] User has not logged in!")
+		c.JSON(400, models.Error{Code: 400, Messages: "[ALERT] User has not logged in!"})
+	}
 
 	// Create query
 	selDB, err := db.Query("SELECT DISTINCT jr.job_report_id, jr.date_stamp, jr.vehicle_model, " +
@@ -151,13 +155,13 @@ func GetReports(c *gin.Context) {
 		"cust.customer_name, cust.customer_complaint, jr.cause, jr.correction, jr.parts, jr.work_hours, " +
 		"wkr.worker_name, jr.job_report_complete FROM jobreports jr INNER JOIN customers cust " +
 		"ON jr.job_report_id = cust.job_report_id " +
-		"INNER JOIN workers wkr ON jr.worker_id = wkr.worker_id WHERE wkr.worker_id = 141") // worker_id
+		"INNER JOIN workers wkr ON jr.worker_id = wkr.worker_id WHERE wkr.username = ?", worker)
 
 	fmt.Println("\n[INFO] Processing Reports...")
 
 	if err != nil {
 		// return user friendly message to client
-		log.Println("\n[INFO] Failed to process reports!")
+		log.Println("\n[ALERT] Failed to process reports!")
 		fmt.Printf("500 Internal Server Error.")
 		c.JSON(500, nil)
 	}
@@ -175,7 +179,7 @@ func GetReports(c *gin.Context) {
 
 		if err != nil {
 			// return user friendly message to client
-			log.Println("\n[INFO] Failed to load model!")
+			log.Println("\n[ALERT] Failed to load model!")
 			fmt.Printf("\n500 Internal Server Error.")
 			c.JSON(500, nil)
 		}
@@ -189,7 +193,6 @@ func GetReports(c *gin.Context) {
 	fmt.Println("\n[INFO] Reports Processed.", res)
 	defer db.Close()
 }
-//} // if else - cookie
 
 // UpdateReport - Update a job report
 // http://localhost:8080/api/v1/jobReports/jobReportId
@@ -197,36 +200,36 @@ func UpdateReport(c *gin.Context) {
 	db := config.DbConn()
 	var report models.JobReport
 
+
+	// Get id from request
+	reportId := c.Params.ByName("jobReportId")
+	// Testing Log message
+	log.Println(reportId)
+
 	// Blind data to object, else throw error
 	if err := c.BindJSON(&report); err != nil {
 		fmt.Println(err.Error())
 	}
 
-	// Read in values from client request and build object.
-	fmt.Println("\n[INFO] Processing Job Report Details...",
-		"\nReport Number:", report.JobReportId, "\nReport Date:", report.Date)
-
-	update, err := db.Prepare("UPDATE jobreports jr SET jr.date_stamp = ?, jr.vehicle_model = ?, " +
+	// Read in values from client request and build object
+	update, err := db.Exec("UPDATE jobreports jr SET jr.date_stamp = ?, jr.vehicle_model = ?, " +
 		"jr.vehicle_reg = ?, jr.vehicle_location = ?, jr.miles_on_vehicle = ?, jr.warranty = ?, " +
 		"jr.breakdown = ?, jr.cause = ?, jr.correction = ?, jr.parts = ?, jr.work_hours = ?, " +
-		"jr.job_report_complete = ? WHERE jr.job_report_id = 121 AND worker_id = 141")
-
-	if err != nil {
-		log.Println("\n[INFO] MySQL Error: Error Updating Report:\n", err)
-	}
-
-	result, err := update.Exec(report.Date, report.VehicleModel, report.VehicleReg, report.VehicleLocation,
+		"jr.job_report_complete = ? WHERE jr.job_report_id = ?", report.Date, report.VehicleModel, report.VehicleReg, report.VehicleLocation,
 		report.MilesOnVehicle, report.Warranty, report.Breakdown, report.Cause, report.Correction, report.Parts,
-		report.WorkHours, report.JobComplete)
-
-	log.Println(report.JobReportId)
+		report.WorkHours, report.JobComplete, reportId)
 
 	if err != nil {
-		log.Println("\n[INFO] MySQL Error: Error Updating Report:\n", err)
+		log.Println("\n[ALERT] MySQL Error: Error Updating Report:\n", err)
+		c.JSON(503, "[ALERT] Report not updated.")
+	} else {
+		fmt.Println("\n[INFO] Processing Job Report Details...",
+			"\nReport Number:", report.JobReportId, "\nReport Date:", report.Date)
+
+		// Return 201 response for "Updated"
+		c.JSON(201, "[INFO] Report Updated!")
+		fmt.Println("\n[INFO] Print MySQL Results for Report:\n", update)
 	}
-	// Return 201 response for "Updated"
-	c.JSON(201, "[INFO] Report Updated!")
-	fmt.Println("\n[INFO] Print MySQL Results for Report:\n", result)
 
 	defer db.Close()
 	c.JSON(http.StatusOK, gin.H{})

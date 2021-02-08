@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {JobReport, JobReportService} from '../services/client_stubs';
 import {NgForm} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-create',
@@ -12,34 +13,38 @@ export class CreatePage implements OnInit {
     list1: any[];
     list2: any[];
     list3: any[];
-    checkBoxValue: number;
+    checkBoxValue1: number;
+    checkBoxValue2: number;
+    checkBoxValue3: number;
+    private errorMessage;
 
-    constructor(private api: JobReportService) {
+    constructor(private api: JobReportService, private router: Router) {
+    }
+
+    setErrorMessage (error: String){
+        this.errorMessage = error;
     }
 
     createReport(form: NgForm) {
-        console.log(form.value.warranty);
-        console.log(form.value.breakdown);
-        console.log(form.value.jobComplete);
 
         // make the true/false values to 1s and 0s
         // warranty
         if (form.value.warranty === true) {
-            this.checkBoxValue = 1;
+            this.checkBoxValue1 = 1;
         } else {
-            this.checkBoxValue = 0;
+            this.checkBoxValue1 = 0;
         }
         // breakdown
         if (form.value.breakdown === true) {
-            this.checkBoxValue = 1;
+            this.checkBoxValue2 = 1;
         } else {
-            this.checkBoxValue = 0;
+            this.checkBoxValue2 = 0;
         }
         // job complete
         if (form.value.jobComplete === true) {
-            this.checkBoxValue = 1;
+            this.checkBoxValue3 = 1;
         } else {
-            this.checkBoxValue = 0;
+            this.checkBoxValue3 = 0;
         }
 
         // use JobReports Model
@@ -49,24 +54,28 @@ export class CreatePage implements OnInit {
             vehicleReg: form.value.vehicleReg,
             milesOnVehicle: form.value.milesOnVehicle,
             vehicleLocation: form.value.vehicleLocation,
-            warranty: this.checkBoxValue,
-            breakdown: this.checkBoxValue,
+            warranty: this.checkBoxValue1,
+            breakdown: this.checkBoxValue2,
             customerName: form.value.customerName,
             complaint: form.value.complaint,
             cause: form.value.cause,
             correction: form.value.correction,
             parts: form.value.parts,
             workHours: form.value.workHours,
-            jobComplete: this.checkBoxValue
+            jobComplete: this.checkBoxValue3
         };
 
         // create the report using the model
         this.api.createReport(object).subscribe(data => {
-            if (data != null) {
+            console.log(data)
+            if (form != null) {
+                this.router.navigate(['tabs/report-history']);
                 this.api.createReport(data);
                 console.log('Success');
-            } else {
-                this.errorMsg = 'Report not created.';
+            } else if(data.errorCode === 'ER_DUP_ENTRY'){
+                this.errorMsg = 'Failed to create Report.';
+            } else{
+                this.setErrorMessage(data.message);
             }
         });
     }

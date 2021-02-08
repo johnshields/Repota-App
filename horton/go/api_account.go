@@ -47,7 +47,7 @@ func Login(c *gin.Context) {
 
 	// Check if user exist in the database and check password is not null
 	if err := verifyDetails(username, password); err != nil {
-		fmt.Println("[INFO] Credentials Error:", err)
+		fmt.Println("[ALERT] Credentials Error:", err)
 		c.JSON(400, models.Error{Code: 400, Messages: "Malformed Request"})
 		return // Return as there is issues with the credentials
 	}
@@ -69,14 +69,13 @@ func Login(c *gin.Context) {
 				c.JSON(200, session)
 			}
 		} else {
-			fmt.Println("\n[INFO] Could not remove old session ")
+			fmt.Println("\n[ALERT] Could not remove old session ")
 			c.JSON(500, models.Error{Code: 500, Messages: "Internal Service Error"})
 		}
 	} else {
 		fmt.Print(err)
-		log.Println("\n[INFO] User not logged in!")
-		// Change message
-		c.JSON(400, models.Error{Code: 400, Messages: "Malformed Request"})
+		log.Println("\n[ALERT] User has not logged in!")
+		c.JSON(400, models.Error{Code: 400, Messages: "[ALERT] User has not logged in!"})
 	}
 
 	defer db.Close()
@@ -107,7 +106,7 @@ func Register(c *gin.Context) {
 			c.JSON(200, session)
 		}
 	} else {
-		log.Printf("\n[INFO] Not completing request")
+		log.Printf("\n[ALERT] Not completing request")
 	}
 }
 
@@ -135,14 +134,14 @@ func createSessionId(username string) (error, models.Session) {
 
 	// Check if user account exists
 	if !isValidAccount(username) {
-		log.Println("\n[INFO] Error doing worker account lookup in database", err)
+		log.Println("\n[ALERT] User has not logged in!", err)
 	}
 
 	// Execute query to db, handle errors if any
 	if _, err = insert.Exec(token, wa.Id, expiry); err != nil {
-		log.Println("[INFO] MYSQL Error: Error creating new session record\n", err)
+		log.Println("[ALERT] MYSQL Error: Error creating new session record\n", err)
 		defer db.Close()
-		return errors.New("[INFO] MYSQL Error: Error creating new session record"), models.Session{}
+		return errors.New("[ALERT] MYSQL Error: Error creating new session record"), models.Session{}
 	} else {
 		fmt.Println("\n[INFO] Session has been generated. Records:", "\nSession Token:", token, "\nWorker ID:", wa.Id,
 			"\nExpiry time in seconds:", expiry)
@@ -168,10 +167,10 @@ func registerNewUser(username, name, password string) error {
 		"\nEntered username:", username, "\nEntered Password:", password)
 
 	if strings.TrimSpace(password) == "" {
-		log.Printf("\n[INFO] password is null")
+		log.Printf("\n[ALERT] password is null")
 		return errors.New("password is null")
 	} else if isValidAccount(username) {
-		log.Printf("\n[INFO] username taken")
+		log.Printf("\n[ALERT] username taken")
 		return errors.New("username is already taken")
 	}
 
@@ -179,19 +178,19 @@ func registerNewUser(username, name, password string) error {
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 
 	if err != nil {
-		log.Fatal("\n[INFO] Hash Password failed: ", err)
+		log.Fatal("\n[ALERT] Hash Password failed: ", err)
 	}
 
 	insert, err := db.Prepare("INSERT INTO workers(username, worker_name, hash) VALUES (?, ?, ?)")
 
 	if err != nil {
-		log.Println("\n[INFO] MySQL Error: Error Creating new user account:\n", err)
+		log.Println("\n[ALERT] MySQL Error: Error Creating new user account:\n", err)
 	}
 
 	result, err := insert.Exec(username, name, hashedPassword)
 
 	if err != nil {
-		log.Println("\n[INFO] MySQL Error: Error Creating new user account:\n", err)
+		log.Println("\n[ALERT] MySQL Error: Error Creating new user account:\n", err)
 	}
 
 	fmt.Println("\n[INFO] Print MySQL Results for user account:\n", result)
@@ -217,7 +216,7 @@ func isValidAccount(username string) bool {
 
 		if err != nil {
 			// return false // No user matching username provided
-			log.Println("\n[INFO] MySQL Error:\n", err)
+			log.Println("\n[ALERT] MySQL Error - no matching username:\n", err)
 			//return false
 		}
 		defer db.Close()
@@ -237,7 +236,6 @@ func removeSession(userId int) bool {
 	res, err := db.Exec("DELETE FROM session WHERE user=?", userId)
 
 	if err != nil {
-		// return user friendly message to client
 		fmt.Printf("Query error")
 		return false
 	}
@@ -245,8 +243,8 @@ func removeSession(userId int) bool {
 	affectedRows, err := res.RowsAffected()
 
 	if err != nil {
-		// return user friendly message to client
-		fmt.Printf("Error updating record for deleting session")
+		// return false
+		fmt.Printf("\n[ALERT] Error updating record for deleting session")
 		return false
 	}
 
@@ -263,10 +261,10 @@ func verifyDetails(username, password string) error {
 		"\nEntered username:", username, "\nEntered Password:", password)
 
 	if strings.TrimSpace(password) == "" {
-		log.Printf("\n[INFO] password is null")
+		log.Printf("\n[ALERT] password is null")
 		return errors.New("password is null")
 	} else if !isValidAccount(username) {
-		log.Printf("\n[INFO] unknown username")
+		log.Printf("\n[ALERT] unknown username")
 		return errors.New("username does not exist")
 	} else {
 		return nil

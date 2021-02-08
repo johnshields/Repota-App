@@ -13,38 +13,37 @@ export class EditPage implements OnInit {
     list1: any[];
     list2: any[];
     list3: any[];
-    checkBoxValue: number;
-    jobReportId: any [];
-    private router: Router;
-    private route: ActivatedRoute;
+    checkBoxValue1: number;
+    checkBoxValue2: number;
+    checkBoxValue3: number;
     private report: any;
+    private errorMessage;
 
-    constructor(private api: JobReportService) {
+    constructor(private api: JobReportService, private router: Router, private route: ActivatedRoute) {}
+
+    setErrorMessage (error: String){
+        this.errorMessage = error;
     }
 
     editReport(form: NgForm) {
-        console.log(form.value.warranty);
-        console.log(form.value.breakdown);
-        console.log(form.value.jobComplete);
-        console.log(form.value.jobReportId);
         // make the true/false values to 1s and 0s
         // warranty
         if (form.value.warranty === true) {
-            this.checkBoxValue = 1;
+            this.checkBoxValue1 = 1;
         } else {
-            this.checkBoxValue = 0;
+            this.checkBoxValue1 = 0;
         }
         // breakdown
         if (form.value.breakdown === true) {
-            this.checkBoxValue = 1;
+            this.checkBoxValue2 = 1;
         } else {
-            this.checkBoxValue = 0;
+            this.checkBoxValue2 = 0;
         }
         // job complete
         if (form.value.jobComplete === true) {
-            this.checkBoxValue = 1;
+            this.checkBoxValue3 = 1;
         } else {
-            this.checkBoxValue = 0;
+            this.checkBoxValue3 = 0;
         }
 
         // use JobReports Model
@@ -54,28 +53,36 @@ export class EditPage implements OnInit {
             vehicleReg: form.value.vehicleReg,
             milesOnVehicle: form.value.milesOnVehicle,
             vehicleLocation: form.value.vehicleLocation,
-            warranty: this.checkBoxValue,
-            breakdown: this.checkBoxValue,
+            warranty: this.checkBoxValue1,
+            breakdown: this.checkBoxValue2,
             cause: form.value.cause,
             correction: form.value.correction,
             parts: form.value.parts,
             workHours: form.value.workHours,
-            jobComplete: this.checkBoxValue
+            jobComplete: this.checkBoxValue3
         };
 
         this.api.updateReport(object, this.report[0].jobReportId).subscribe(data => {
-            if (data.status) {
-                this.router.navigate(['tabs/home']);
-                this.api.updateReport(data, this.report[0].jobReportId);
+            console.log(data)
+            if (form != null) {
+                this.router.navigate(['tabs/report-history']);
                 console.log('Success');
-            } else {
-                this.errorMsg = 'Report not created.';
+            } else if(data.errorCode === 'ER_DUP_ENTRY'){
+                this.errorMsg = 'Failed to update Report..';
+            } else{
+                this.setErrorMessage(data.message);
             }
         });
     }
 
-    // Lists for check box values
     ngOnInit() {
+        console.log(this.route.snapshot.params['jobReportId']);
+        this.api.getReportById(this.route.snapshot.params['jobReportId']).subscribe(data => {
+            this.report = data;
+            console.log(data)
+        });
+
+        // Lists for check box values
         this.list1 = [{
             id: 1,
             title: 'Warranty',

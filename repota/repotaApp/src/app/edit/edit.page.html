@@ -1,7 +1,6 @@
 <ion-header>
     <ion-toolbar>
-        <a href="http://localhost:4200/tabs/home">
-            <img class="tool-bar-logo" src="./assets/images/repotaApp_logo.png" alt="logo"/></a>
+        <img class="tool-bar-logo" src="./assets/images/repotaApp_logo.png" alt="logo"/>
         <ion-title class="page-title">Edit</ion-title>
     </ion-toolbar>
 </ion-header>
@@ -15,16 +14,16 @@
                         <img class="logo" src="./assets/images/repotaApp_logo.png" alt="logo"/></p>
                     <ion-title class="title">Edit Report</ion-title>
                     <hr style="height:2px;border-width:0;color:gray;background-color:black">
+                    <!-- start of report -->
                     <p align="center">
+                        <!-- date -->
                         <ion-label class="headers">Date of Job</ion-label>
                         <ion-input name="date" ngModel required="true" #date="ngModel"
                                    type="date" class="input">
                         </ion-input>
                     </p>
                     <div class="wrap" style="width: 98%">
-                        <!-- start of report -->
                         <div class="left">
-                            <!-- date -->
                             <!-- vehicle details -->
                             <ion-label class="headers"> Vehicle Details:</ion-label>
                             <ion-input name="vehicleModel" ngModel required="true" #vehicleModel="ngModel"

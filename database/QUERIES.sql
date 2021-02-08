@@ -5,19 +5,19 @@ SELECT DISTINCT jr.job_report_id, jr.date_stamp, jr.vehicle_model, jr.vehicle_re
     FROM jobreports jr
     INNER JOIN customers cust
         ON jr.job_report_id = cust.job_report_id
-    INNER JOIN workers wkr ON jr.worker_id = wkr.worker_id WHERE wkr.worker_id = 141;
+    INNER JOIN workers wkr ON jr.worker_id = wkr.worker_id WHERE wkr.worker_id = ?;
 
 -- CREATE A REPORT --
 START TRANSACTION;
 INSERT INTO jobreports
-    (job_report_id, worker_id, date_stamp, vehicle_model, vehicle_reg, vehicle_location, miles_on_vehicle,
-     warranty, breakdown, cause, correction, parts, work_hours, job_report_complete)
+    (job_report_id, worker_id, date_stamp, vehicle_model, vehicle_reg, vehicle_location, miles_on_vehicle, warranty,
+     breakdown, cause, correction, parts, work_hours, job_report_complete)
      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
-
+INSERT INTO customers (job_report_id, customer_name, customer_complaint) VALUES (LAST_INSERT_ID(), ?, ?);
 COMMIT;
 
 -- DELETE A REPORT --
-DELETE FROM jobreports WHERE job_report_id = 121;
+DELETE FROM jobreports WHERE job_report_id = ?;
 
 -- UPDATE A REPORT --
 UPDATE jobreports jr
