@@ -17,12 +17,10 @@ ion-content {
 
 .reportCard {
   width: 100%;
-  margin-left: 25%;
-  margin-right: 25%;
-  margin-top: 25px;
+  size: A4;
+  margin: 1% 25% 1% 25%;
   padding-bottom: 25px;
   background-color: white;
-  size: A4;
   color: #0d0d0d;
   padding-left: 50px;
   padding-right: 50px;
@@ -50,7 +48,7 @@ ion-content {
 }
 
 .large-input {
-  font-size: 20px;
+  font-size: 18px;
   border: 1px solid #22222e;
   border-radius: 5px;
   width: 375px;
@@ -105,9 +103,9 @@ ion-input {
 }
 
 ion-checkbox {
-  margin-left: 65px;
-  width: 20px;
-  height: 20px;
+  margin-left: 60px;
+  width: 30px;
+  height: 30px;
 }
 
 .warranty-box {
@@ -134,7 +132,7 @@ ion-checkbox {
   text-decoration: underline;
   border: 1px solid #22222e;
   border-radius: 5px;
-  margin-top: 50px;
+  margin-top: 30px;
   margin-left: 450px;
   margin-right: 75px;
   padding-top: 5px;

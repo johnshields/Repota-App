@@ -8,7 +8,7 @@
 <ion-content>
     <ion-card>
         <form (submit)="editReport(reportForm)" #reportForm="ngForm">
-            <ion-item>
+            <ion-item *ngFor="let report of report">
                 <div class="reportCard">
                     <p align="center">
                         <img class="logo" src="./assets/images/repotaApp_logo.png" alt="logo"/></p>
@@ -27,28 +27,28 @@
                             <!-- vehicle details -->
                             <ion-label class="headers"> Vehicle Details:</ion-label>
                             <ion-input name="vehicleModel" ngModel required="true" #vehicleModel="ngModel"
-                                       type="text" placeholder="Vehicle Model" class="input"></ion-input>
+                                       type="text" placeholder='{{report["vehicleModel"]}}' class="input"></ion-input>
                             <ion-input name="vehicleReg" ngModel required="true" #vehicleReg="ngModel"
-                                       type="text" placeholder="Vehicle Registration" class="input"></ion-input>
+                                       type="text" placeholder='{{report["vehicleReg"]}}' class="input"></ion-input>
                             <ion-input name="milesOnVehicle" ngModel required="true" #milesOnVehicle="ngModel"
-                                       type="number" placeholder="Miles on Vehicle" class="input">
+                                       type="number" placeholder="Vehicle Mileage" class="input" min="0">
                             </ion-input>
                             <ion-input name="vehicleLocation" ngModel required="true" #vehicleLocation="ngModel"
-                                       type="text" placeholder="Vehicle Location" class="input">
+                                       type="text" placeholder='{{report["vehicleLocation"]}}' class="input">
                             </ion-input>
                             <!-- work details -->
                             <ion-label class="headers"> Work Details:</ion-label>
                             <ion-input name="cause" ngModel required="true" #cause="ngModel"
-                                       type="text" placeholder="Cause of problem..." class="large-input">
+                                       type="text" placeholder='{{report["cause"]}}' class="large-input">
                             </ion-input>
                             <ion-input name="correction" ngModel required="true" #correction="ngModel"
-                                       type="text" placeholder="Correction of problem..." class="large-input">
+                                       type="text" placeholder='{{report["correction"]}}' class="large-input">
                             </ion-input>
                             <ion-input name="parts" ngModel required="true" #parts="ngModel"
-                                       type="text" placeholder="Parts used in job..." class="large-input">
+                                       type="text" placeholder='{{report["parts"]}}' class="large-input">
                             </ion-input>
                             <ion-input name="workHours" ngModel required="true" #workHours="ngModel"
-                                       type="number" placeholder="Work Hours" class="input">
+                                       type="number" placeholder="Work Hours" class="input" min="0">
                             </ion-input>
                         </div>
                         <div class="right"></div>

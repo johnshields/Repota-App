@@ -1,14 +1,14 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import {DisplayReportPage} from './display-report.page';
+import {ExportPage} from './export.page';
 import {HttpHeaders, HttpParameterCodec} from '@angular/common/http';
 import {Configuration} from 'jasmine-spec-reporter/built/configuration';
 
 const routes: Routes = [
     {
         path: '',
-        component: DisplayReportPage
+        component: ExportPage
     }
 ];
 
@@ -16,7 +16,7 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
 })
-export class DisplayReportPageRoutingModule {
+export class ExportPageRoutingModule {
 
     protected basePath = 'http://localhost/api/v1';
     public defaultHeaders = new HttpHeaders();

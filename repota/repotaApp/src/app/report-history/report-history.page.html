@@ -8,7 +8,7 @@
 <ion-content>
     <ion-card>
         <ion-item *ngFor="let report of reports">
-            <ion-card-content id="job-report">
+            <ion-card-content>
                 <!-- report -->
                 <ion-card-header>
                     <p align="center">
@@ -42,34 +42,24 @@
                     </div>
                     <div class="right">
                         <!-- Check Boxes -->
-                        <ion-list class="coverage">
-                            <ion-item>
-                                <ion-label> Warranty</ion-label>
-                                <ion-checkbox disabled="true" [(ngModel)]="report.warranty">
-                                </ion-checkbox>
-                            </ion-item>
-                            <ion-item>
-                                <ion-label> Breakdown</ion-label>
-                                <ion-checkbox disabled="true" [(ngModel)]="report.breakdown">
-                                </ion-checkbox>
-                            </ion-item>
-                        </ion-list>
-                        <ion-list class="job-comp">
-                            <ion-item>
-                                <ion-label> Job Complete</ion-label>
-                                <ion-checkbox disabled="true" [(ngModel)]="report.jobComplete">
-                                </ion-checkbox>
-                            </ion-item>
-                        </ion-list>
+                        <ion-label class="warranty-box"> Warranty
+                            <ion-checkbox disabled="true" [(ngModel)]="report.warranty"></ion-checkbox>
+                        </ion-label>
+                        <ion-label class="breakdown-box"> Breakdown
+                            <ion-checkbox disabled="true" [(ngModel)]="report.breakdown"></ion-checkbox>
+                        </ion-label>
+                        <ion-label class="job-comp"> Job Complete
+                            <ion-checkbox disabled="true" [(ngModel)]="report.jobComplete"></ion-checkbox>
+                        </ion-label>
                     </div>
                 </div>
                 <hr style="height:2px;border-width:0;color:gray;background-color:black">
                 <ion-button [routerLink]="['/tabs/edit/' + report.jobReportId]">EDIT</ion-button>
-                <ion-button class="pdf" color="NONE" (click)="onExportPDF()">EXPORT PDF</ion-button>
+                <ion-button class="pdf" color="NONE" [routerLink]="['/tabs/export/' +  report.jobReportId]">EXPORT PDF
+                </ion-button>
                 <ion-button (click)="deleteReport(report.jobReportId)" color="danger">DELETE</ion-button>
             </ion-card-content>
             <!-- end of report -->
         </ion-item>
     </ion-card>
 </ion-content>
-

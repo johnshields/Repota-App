@@ -4,18 +4,18 @@ import {FormsModule} from '@angular/forms';
 
 import {IonicModule} from '@ionic/angular';
 
-import {DisplayReportPageRoutingModule} from './display-report-routing.module';
+import {ExportPageRoutingModule} from './export-routing.module';
 
-import {DisplayReportPage} from './display-report.page';
+import {ExportPage} from './export.page';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         IonicModule,
-        DisplayReportPageRoutingModule
+        ExportPageRoutingModule
     ],
-    declarations: [DisplayReportPage]
+    declarations: [ExportPage]
 })
 export class DisplayReportPageModule {
 }

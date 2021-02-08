@@ -36,8 +36,12 @@ const routes: Routes = [
                 loadChildren: () => import('../report-history/report-history.module').then(m => m.ReportHistoryPageModule)
             },
             {
-                path: 'report-display',
-                loadChildren: () => import('../display-report/display-report.module').then(m => m.DisplayReportPageModule)
+                path: 'export',
+                loadChildren: () => import('../export/export.module').then(m => m.DisplayReportPageModule)
+            },
+            {
+                path: 'export/:jobReportId',
+                loadChildren: './export/export.module#DisplayReportPageModule'
             },
             {
                 path: 'edit',

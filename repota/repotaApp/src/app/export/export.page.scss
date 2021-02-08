@@ -1,0 +1,83 @@
+.tool-bar-logo {
+  width: 75px;
+  height: 75px;
+  margin-left: 25px;
+  display: inline;
+}
+
+.page-title {
+  display: inline-block;
+  text-align: center;
+  font-size: xxx-large;
+}
+
+.titles {
+  text-align: center;
+}
+
+.logo {
+  width: 75px;
+  height: 75px;
+}
+
+ion-content {
+  --background: none;
+}
+
+.card-content {
+  width: 100%;
+  padding-top: 10px;
+  background-color: white;
+  color: #0d0d0d;
+  padding-left: 50px;
+  padding-right: 50px;
+  size: A4;
+}
+
+.headers {
+  font-size: large;
+  font-weight: bold;
+  margin-bottom: 5px;
+  margin-top: 10px;
+  text-decoration: underline;
+  padding-left: 50px;
+}
+
+.info {
+  width: 350px;
+  font-size: medium;
+  padding-left: 25px;
+  border: 1px solid #22222e;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-left: 50px;
+}
+
+.desc-name {
+  text-decoration: underline;
+  font-size: medium;
+  margin-left: 50px;
+}
+
+.desc-info {
+  width: 350px;
+  height: 50px;
+  font-size: medium;
+  padding-left: 15px;
+  border: 1px solid #22222e;
+  border-radius: 5px;
+  margin-left: 50px;
+}
+
+.box-labels {
+  margin-top: 10px;
+  margin-left: 50px;
+  border: 1px solid #22222e;
+  border-radius: 5px;
+  width: 180px;
+  padding-left: 15px;
+}
+
+.pdf {
+  background-color: #29c467;
+}

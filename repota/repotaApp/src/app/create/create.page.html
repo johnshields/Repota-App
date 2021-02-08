@@ -30,7 +30,7 @@
                             <ion-input name="vehicleReg" ngModel required="true" #vehicleReg="ngModel"
                                        type="text" placeholder="Vehicle Registration" class="input"></ion-input>
                             <ion-input name="milesOnVehicle" ngModel required="true" #milesOnVehicle="ngModel"
-                                       type="number" placeholder="Miles on Vehicle" class="input">
+                                       type="number" placeholder="Miles on Vehicle" class="input" min="0">
                             </ion-input>
                             <ion-input name="vehicleLocation" ngModel required="true" #vehicleLocation="ngModel"
                                        type="text" placeholder="Vehicle Location" class="input">
@@ -55,7 +55,7 @@
                                        type="text" placeholder="Parts used in job..." class="large-input">
                             </ion-input>
                             <ion-input name="workHours" ngModel required="true" #workHours="ngModel"
-                                       type="number" placeholder="Work Hours" class="input">
+                                       type="number" placeholder="Work Hours" class="input" min="0">
                             </ion-input>
                         </div>
                         <div class="right"></div>

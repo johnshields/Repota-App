@@ -1,19 +1,19 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {IonicModule} from '@ionic/angular';
 
-import {DisplayReportPage} from './display-report.page';
+import {ExportPage} from './export.page';
 
 describe('DisplayReportPage', () => {
-    let component: DisplayReportPage;
-    let fixture: ComponentFixture<DisplayReportPage>;
+    let component: ExportPage;
+    let fixture: ComponentFixture<ExportPage>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [DisplayReportPage],
+            declarations: [ExportPage],
             imports: [IonicModule.forRoot()]
         }).compileComponents();
 
-        fixture = TestBed.createComponent(DisplayReportPage);
+        fixture = TestBed.createComponent(ExportPage);
         component = fixture.componentInstance;
         fixture.detectChanges();
     }));

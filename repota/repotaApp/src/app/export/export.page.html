@@ -1,0 +1,67 @@
+<ion-header>
+    <ion-toolbar>
+        <img class="tool-bar-logo" src="./assets/images/repotaApp_logo.png" alt="logo"/>
+        <ion-title class="page-title">Export</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="card">
+        <ion-item *ngFor="let report of report">
+            <div class="card-content" id="job-report">
+                <!-- report - has to be mostly HTML for html2pdf to work right-->
+                <header>
+                    <p align="center">
+                        <img class="logo" src="./assets/images/repotaApp_logo.png" alt="logo"/></p>
+                    <h3 class="titles">Report Number: {{report["jobReportId"]}}</h3>
+                    <h3 class="titles">Date: {{report["date"]}}</h3>
+                </header>
+                <hr style="height:2px;border-width:0;color:gray;background-color:black">
+                <div>
+                    <!-- Vehicle Details -->
+                    <h1 class="headers"> Vehicle Details:</h1>
+                    <h1 class="info"> Vehicle Model: {{report["vehicleModel"]}}</h1>
+                    <h1 class="info"> Vehicle Registration: {{report["vehicleReg"]}}</h1>
+                    <h1 class="info"> Vehicle Location: {{report["vehicleLocation"]}}</h1>
+                    <h1 class="info"> Vehicle Mileage: {{report["milesOnVehicle"]}}</h1>
+                    <h4 class="box-labels"> Warranty:
+                        <label>
+                            <input type="checkbox" class="check-boxes" disabled [(ngModel)]="report.warranty">
+                        </label>
+                    </h4>
+                    <h4 class="box-labels"> Breakdown:
+                        <label>
+                            <input type="checkbox" class="check-boxes" disabled [(ngModel)]="report.breakdown">
+                        </label>
+                    </h4>
+                    <!-- Customer Details -->
+                    <h1 class="headers"> Customer Details:</h1>
+                    <h1 class="info"> Customer: {{report["customerName"]}}</h1>
+                    <h1 class="desc-name"> Complaint:</h1>
+                    <h1 class="desc-info">{{report["complaint"]}}</h1>
+                    <!-- Work Details -->
+                    <h1 class="headers"> Work Details:</h1>
+                    <h1 class="desc-name"> Cause:</h1>
+                    <h1 class="desc-info"> {{report["cause"]}}</h1>
+                    <h1 class="desc-name"> Correction:</h1>
+                    <h1 class="desc-info">{{report["correction"]}}</h1>
+                    <h1 class="info"> Parts Used: {{report["parts"]}}</h1>
+                    <h1 class="info"> Work Hours: {{report["workHours"]}}</h1>
+                    <h1 class="info"> Technician: {{report["workerName"]}}</h1>
+                    <h4 class="box-labels"> Job Complete:
+                        <label>
+                            <input type="checkbox" class="check-boxes" disabled [(ngModel)]="report.jobComplete">
+                        </label>
+                    </h4>
+
+                    <hr style="height:2px;border-width:0;color:gray;background-color:black">
+                </div>
+            </div>
+            <!-- end of report -->
+        </ion-item>
+        <p align="center">
+            <ion-button class="pdf" color="NONE" (click)="onExportPDF()">EXPORT PDF</ion-button>
+        </p>
+    </div>
+</ion-content>
+
