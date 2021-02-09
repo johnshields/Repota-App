@@ -1,18 +1,18 @@
-import {Component} from '@angular/core';
-import {NavController} from '@ionic/angular';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
     selector: 'app-home',
     templateUrl: 'home.page.html',
     styleUrls: ['home.page.scss']
 })
-export class HomePage {
-    private router: any;
+export class HomePage implements OnInit {
 
-    constructor(public navCtrl: NavController) {
+    constructor() {
     }
 
-    createPage() {
-        this.router.navigate(['/tabs/create']);
+    ngOnInit() {
+        // set dark theme to default theme
+        document.body.setAttribute('color-theme', 'dark');
     }
+
 }

@@ -11,6 +11,14 @@
   font-size: xxx-large;
 }
 
+ion-content {
+  --background: none;
+  background-image: url('../../assets/images/app_logo_box.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 800px 800px;
+}
+
 .user {
   background-color: #2a2a2a;
   position: absolute;
@@ -25,7 +33,7 @@
   margin-left: auto;
   margin-right: auto;
   width: 200px;
-  height: 35px;
+  height: 40px;
 }
 
 .name {
@@ -41,7 +49,7 @@
   margin-left: auto;
   margin-right: auto;
   width: 200px;
-  height: 35px;
+  height: 40px;
 }
 
 .password {
@@ -57,7 +65,7 @@
   margin-left: auto;
   margin-right: auto;
   width: 200px;
-  height: 35px;
+  height: 40px;
 }
 
 .register-btn {
@@ -75,5 +83,5 @@
   margin-left: auto;
   margin-right: auto;
   width: 200px;
-  height: 40px;
+  height: 45px;
 }

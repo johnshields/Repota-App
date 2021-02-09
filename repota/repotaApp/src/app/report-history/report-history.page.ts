@@ -14,15 +14,17 @@ export class ReportHistoryPage implements OnInit {
     constructor(private api: JobReportService) {
     }
 
-    // get all worker's reports
     ngOnInit() {
+        // set dark theme to default theme
+        document.body.setAttribute('color-theme', 'dark');
+
+        // get all worker's reports
         console.log('[INFO] Reports received from Horton.');
         this.api.getReports().subscribe(data => {
             this.reports = data;
             console.log('[INFO] Reports have been processed.');
             console.log(this.reports);
         });
-
     }
 
     // delete report

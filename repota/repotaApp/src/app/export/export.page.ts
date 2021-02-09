@@ -16,6 +16,10 @@ export class ExportPage implements OnInit {
     }
 
     ngOnInit() {
+        // set dark theme to default theme
+        document.body.setAttribute('color-theme', 'dark');
+
+        // Get requested report by it's ID
         this.api.getReportById(this.route.snapshot.params['jobReportId']).subscribe(data => {
             console.log(this.route.snapshot.params['jobReportId']);
             this.report = data;

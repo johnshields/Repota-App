@@ -24,7 +24,7 @@ VALUES (141, 'john_shields', 'John Shields', '$2a$10$ttINUB.yZkZUKiKSBqRMf.jzRYI
        (174, 'steve_mon', 'Steve Maloney', '$2a$10$56hLopYTrwAvJs/4Q84vTOcC.T5KCUmR1.m92gcqkKBnQg7qnW8pW');
 COMMIT;
 
--- jobReports table --
+-- jobreports table --
 CREATE TABLE IF NOT EXISTS jobreports
 (
     job_report_id       int(6) unsigned NOT NULL AUTO_INCREMENT,
@@ -100,3 +100,4 @@ CREATE TABLE session
 SELECT * FROM jobreports;
 SELECT * FROM customers;
 SELECT * FROM workers;
+SELECT * FROM session;

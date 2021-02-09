@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AccountService, InlineObject} from '../services/client_stubs';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
@@ -8,7 +8,7 @@ import {Router} from '@angular/router';
     templateUrl: 'login.page.html',
     styleUrls: ['login.page.scss']
 })
-export class LoginPage {
+export class LoginPage implements OnInit {
     errorMsg: string;
     private errorMessage;
 
@@ -36,5 +36,10 @@ export class LoginPage {
                 this.setErrorMessage(data.message);
             }
         });
+    }
+
+    ngOnInit() {
+        // set dark theme to default theme
+        document.body.setAttribute('color-theme', 'dark');
     }
 }

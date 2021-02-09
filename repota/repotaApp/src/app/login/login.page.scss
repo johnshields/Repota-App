@@ -11,8 +11,12 @@
   font-size: xxx-large;
 }
 
-.toolbar {
-  text-align: center;
+ion-content {
+  --background: none;
+  background-image: url('../../assets/images/app_logo_box.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 800px 800px;
 }
 
 .user {

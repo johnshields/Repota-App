@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {AccountService} from '../services/client_stubs';
 
 @Component({
     selector: 'app-account',
@@ -7,10 +8,12 @@ import {Component, OnInit} from '@angular/core';
 })
 export class AccountPage implements OnInit {
 
-    constructor() {
+    constructor(private api: AccountService) {
     }
 
     ngOnInit() {
+        // set dark theme to default theme
+        document.body.setAttribute('color-theme', 'dark');
     }
 
 }

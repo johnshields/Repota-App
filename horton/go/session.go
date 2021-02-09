@@ -26,5 +26,5 @@ func checkForCookie(c *gin.Context) bool {
 }
 
 func Logout(c *gin.Context) {
-	c.JSON(200, models.Error{Code: 200, Messages: "Logout out"})
+	c.JSON(200, models.Error{Code: 200, Messages: "[INFO] Worker logged out."})
 }

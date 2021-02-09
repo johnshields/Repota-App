@@ -80,8 +80,11 @@ export class CreatePage implements OnInit {
         });
     }
 
-    // Lists for check box values
     ngOnInit() {
+        // set dark theme to default theme
+        document.body.setAttribute('color-theme', 'dark');
+
+        // Lists for check box values
         this.list1 = [{
             id: 1,
             title: 'Warranty',

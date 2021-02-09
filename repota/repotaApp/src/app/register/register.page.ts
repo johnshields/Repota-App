@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AccountService, InlineObject} from '../services/client_stubs';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
@@ -8,7 +8,7 @@ import {Router} from '@angular/router';
     templateUrl: './register.page.html',
     styleUrls: ['./register.page.scss'],
 })
-export class RegisterPage {
+export class RegisterPage implements OnInit {
     errorMsg: string;
     private errorMessage;
 
@@ -37,5 +37,10 @@ export class RegisterPage {
         });
         console.log(form.value);
         form.resetForm();
+    }
+
+    ngOnInit() {
+        // set dark theme to default theme
+        document.body.setAttribute('color-theme', 'dark');
     }
 }

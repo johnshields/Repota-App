@@ -63,6 +63,7 @@ export class EditPage implements OnInit {
             jobComplete: this.checkBoxValue3
         };
 
+        // Update report with object
         this.api.updateReport(object, this.report[0].jobReportId).subscribe(data => {
             console.log(data);
             if (form.submitted) {
@@ -77,6 +78,10 @@ export class EditPage implements OnInit {
     }
 
     ngOnInit() {
+        // set dark theme to default theme
+        document.body.setAttribute('color-theme', 'dark');
+
+        // Get the request report by it's ID
         this.api.getReportById(this.route.snapshot.params['jobReportId']).subscribe(data => {
             console.log(this.route.snapshot.params['jobReportId']);
             this.report = data;

@@ -63,7 +63,8 @@
                             <ion-title class="warranty-box">Warranty
                                 <ion-list class="check-boxes" *ngFor="let i of list1">
                                     <ion-checkbox [(ngModel)]="i.checked"
-                                                  ngModel="warranty" name="warranty">{{i.title}}</ion-checkbox>
+                                                  ngModel="warranty" name="warranty">{{i.title}}
+                                    </ion-checkbox>
                                 </ion-list>
                             </ion-title>
                         </ion-title>
@@ -71,14 +72,16 @@
                             <ion-title class="breakdown-box">Breakdown
                                 <ion-list class="check-boxes" *ngFor="let i of list2">
                                     <ion-checkbox [(ngModel)]="i.checked" ngModel="breakdown"
-                                                  name="breakdown">{{i.title}}</ion-checkbox>
+                                                  name="breakdown">{{i.title}}
+                                    </ion-checkbox>
                                 </ion-list>
                             </ion-title>
                         </ion-title>
                         <ion-title class="job-comp-box">Job Complete
                             <ion-list class="check-boxes" *ngFor="let i of list3">
                                 <ion-checkbox [(ngModel)]="i.checked" ngModel="jobComplete"
-                                              name="jobComplete">{{i.title}}</ion-checkbox>
+                                              name="jobComplete">{{i.title}}
+                                </ion-checkbox>
                             </ion-list>
                         </ion-title>
                     </div>
@@ -86,9 +89,6 @@
                     <!-- end of report -->
                 </div>
             </ion-item>
-            <ion-button class="create-btn" size="large" type="submit"
-                        [disabled]="!reportForm.form.valid" expand="block" color="NONE">Create
-            </ion-button>
         </form>
     </ion-card>
 </ion-content>
