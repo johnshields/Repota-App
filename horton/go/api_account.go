@@ -65,7 +65,9 @@ func Login(c *gin.Context) {
 				fmt.Print(err)
 				c.JSON(500, models.Error{Code: 500, Messages: "Internal Server Error"})
 			} else {
-				c.SetCookie("session_id", session.Token, session.Expiry, "/", "localhost", true, false)
+				c.SetCookie("session_id", session.Token, session.Expiry, "/",
+					"localhost", false, false)
+				CheckForCookie(c)
 				c.JSON(200, session)
 			}
 		} else {

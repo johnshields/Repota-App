@@ -17,5 +17,5 @@ import {ExportPage} from './export.page';
     ],
     declarations: [ExportPage]
 })
-export class DisplayReportPageModule {
+export class ExportPageModule {
 }

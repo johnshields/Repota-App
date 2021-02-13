@@ -20,12 +20,20 @@ const routes: Routes = [
         loadChildren: () => import('./report-history/report-history.module').then(m => m.ReportHistoryPageModule)
     },
     {
+        path: 'display',
+        loadChildren: () => import('./display/display.module').then(m => m.DisplayPageModule)
+    },
+    {
+        path: 'display/:jobReportId',
+        loadChildren: './display/display.module#DisplayPageModule'
+    },
+    {
         path: 'export',
-        loadChildren: () => import('./export/export.module').then(m => m.DisplayReportPageModule)
+        loadChildren: () => import('./export/export.module').then(m => m.ExportPageModule)
     },
     {
         path: 'export/:jobReportId',
-        loadChildren: './export/export.module#DisplayReportPageModule'
+        loadChildren: './export/export.module#ExportPageModule'
     },
     {
         path: 'login',
@@ -46,7 +54,8 @@ const routes: Routes = [
     {
         path: '',
         loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
-    }
+    },
+
 ];
 
 @NgModule({

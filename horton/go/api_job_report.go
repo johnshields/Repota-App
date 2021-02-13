@@ -92,7 +92,6 @@ func InsertJobReport(report models.JobReport, username string) error {
 
 // GetReportById - Get a Report by ID
 // http://localhost:8080/api/v1/jobReports/'enter ID'
-// TODO - Do more then just ID, have it check by date too
 func GetReportById(c *gin.Context) {
 
 	db := config.DbConn()
@@ -123,7 +122,7 @@ func GetReportById(c *gin.Context) {
 	if err != nil {
 		// return user friendly message to client
 		log.Println("\n[ALERT] Failed to process reports!")
-		fmt.Printf("500 Internal Server Error.")
+		log.Printf("500 Internal Server Error.")
 		c.JSON(500, nil)
 	}
 
@@ -141,7 +140,7 @@ func GetReportById(c *gin.Context) {
 		if err != nil {
 			// return user friendly message to client
 			log.Println("\n[ALERT] Failed to load model!")
-			fmt.Printf("\n500 Internal Server Error.")
+			log.Printf("\n500 Internal Server Error.")
 			c.JSON(500, nil)
 		}
 		// Add each record to array
@@ -182,7 +181,7 @@ func GetReports(c *gin.Context) {
 	if err != nil {
 		// return user friendly message to client
 		log.Println("\n[ALERT] Failed to process reports!")
-		fmt.Printf("500 Internal Server Error.")
+		log.Printf("500 Internal Server Error.")
 		c.JSON(500, nil)
 	}
 
@@ -200,7 +199,7 @@ func GetReports(c *gin.Context) {
 		if err != nil {
 			// return user friendly message to client
 			log.Println("\n[ALERT] Failed to load model!")
-			fmt.Printf("\n500 Internal Server Error.")
+			log.Printf("\n500 Internal Server Error.")
 			c.JSON(500, nil)
 		}
 		// Add each record to array

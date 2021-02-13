@@ -10,9 +10,9 @@
 package openapi
 
 import (
-	"net/http"
-
+	_ "fmt"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 // Route is the information for every URI.
@@ -48,6 +48,7 @@ func CORS() gin.HandlerFunc {
 
 // NewRouter returns a new router.
 func NewRouter() *gin.Engine {
+
 	router := gin.Default()
 	// CORS must be called before any routes are called
 	router.Use(CORS())

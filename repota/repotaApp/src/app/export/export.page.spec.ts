@@ -3,7 +3,7 @@ import {IonicModule} from '@ionic/angular';
 
 import {ExportPage} from './export.page';
 
-describe('DisplayReportPage', () => {
+describe('ExportPage', () => {
     let component: ExportPage;
     let fixture: ComponentFixture<ExportPage>;
 

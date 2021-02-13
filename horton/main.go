@@ -12,6 +12,7 @@ package main
 
 import (
 	sw "github.com/GIT_USER_ID/GIT_REPO_ID/go"
+	_ "github.com/gin-gonic/gin"
 	"log"
 )
 

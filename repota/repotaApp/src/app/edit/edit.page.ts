@@ -16,7 +16,7 @@ export class EditPage implements OnInit {
     checkBoxValue1: number;
     checkBoxValue2: number;
     checkBoxValue3: number;
-    private report: any;
+    report: any;
     private errorMessage;
 
     constructor(private api: JobReportService, private router: Router, private route: ActivatedRoute) {

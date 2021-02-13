@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {JobReportService} from '../services/client_stubs';
+import {AccountService, JobReportService} from '../services/client_stubs';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
     selector: 'app-report-history',
@@ -11,7 +12,7 @@ export class ReportHistoryPage implements OnInit {
     public errorMsg: string;
     public successMsg: string;
 
-    constructor(private api: JobReportService) {
+    constructor(private api: JobReportService, private router: Router) {
     }
 
     ngOnInit() {
@@ -19,7 +20,6 @@ export class ReportHistoryPage implements OnInit {
         document.body.setAttribute('color-theme', 'dark');
 
         // get all worker's reports
-        console.log('[INFO] Reports received from Horton.');
         this.api.getReports().subscribe(data => {
             this.reports = data;
             console.log('[INFO] Reports have been processed.');
@@ -27,11 +27,8 @@ export class ReportHistoryPage implements OnInit {
         });
     }
 
-    // delete report
-    deleteReport(id: number) {
-        this.api.deleteReport(id).subscribe(() => {
-            this.successMsg = 'Report deleted.';
-            this.ngOnInit();
-        });
+    // refresh page to see new reports
+    refreshPage() {
+        window.location.reload();
     }
 }

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {JobReportService} from '../services/client_stubs';
-import * as html2pdf from 'html2pdf.js';
 import {ActivatedRoute} from '@angular/router';
+import * as html2pdf from 'html2pdf.js';
 
 @Component({
     selector: 'app-display-report',
@@ -32,8 +32,8 @@ export class ExportPage implements OnInit {
         const options = {
             filename: 'job_report.pdf',
             image: {type: 'jpeg', quality: 0.98},
-            html2canvas: {scale: 2},
-            jsPDF: {unit: 'cm', format: 'a4', orientation: 'portrait'}
+            html2canvas: {scale: 2, logging: true, dpi: 192, letterRendering: true},
+            jsPDF: {unit: 'mm', format: 'a4', orientation: 'portrait'}
         };
         const content: Element = document.getElementById('job-report');
 
