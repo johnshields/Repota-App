@@ -57,9 +57,11 @@ All workings for the project.
 ### Open the repository directory in Command-Line and enter:
 ```bash
 $ cd repota/repotaApp
-$ ionic serve
+$ npm start
+
 ```
-* http://localhost:8100/tabs/home
+* This command opens a window for the App.
+* In the window press `CTRL+SHIFT+R` to load the App.
 ***
 
 <h3><u>Horton Backend</u></h3>

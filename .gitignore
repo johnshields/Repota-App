@@ -3,6 +3,9 @@
 # Repota Dependency directories
 /repota/repotaApp/node_modules/
 /repota/repotaApp/www/
+/repota/repotaApp/platforms/
+/repota/repotaApp/plugins/
+
 
 # Horton Server
 # Binaries for programs and plugins

@@ -67,13 +67,10 @@ export class CreatePage implements OnInit {
 
         // create the report using the model
         this.api.createReport(object).subscribe(data => {
-            console.log(data);
             if (form != null) {
                 this.router.navigate(['tabs/report-history']);
                 this.api.createReport(data);
                 console.log('Success');
-            } else if (data.errorCode === 'ER_DUP_ENTRY') {
-                this.errorMsg = 'Failed to create Report.';
             } else {
                 this.setErrorMessage(data.message);
             }

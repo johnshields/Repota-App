@@ -29,8 +29,6 @@ export class RegisterPage implements OnInit {
             if (form != null) {
                 this.router.navigate(['tabs/login']);
                 this.api.register(data);
-            } else if (data.errorCode === 'ER_DUP_ENTRY') {
-                this.errorMsg = 'Username already exists.';
             } else {
                 this.setErrorMessage(data.message);
             }

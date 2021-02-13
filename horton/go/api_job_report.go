@@ -16,6 +16,7 @@
 package openapi
 
 import (
+	"errors"
 	"fmt"
 	"github.com/GIT_USER_ID/GIT_REPO_ID/go/config"
 	"github.com/GIT_USER_ID/GIT_REPO_ID/go/models"
@@ -37,7 +38,9 @@ func CreateReport(c *gin.Context) {
 
 	// Insert Job Report details
 	if err := InsertJobReport(report, wa.Username); err == nil {
+		c.JSON(201, "")
 	} else {
+		c.JSON(401, models.Error{Code: 401, Messages: "Not able to create Report"})
 		log.Printf("\n[ALERT] Not completing request.")
 	}
 }
@@ -61,11 +64,14 @@ func InsertJobReport(report models.JobReport, username string) error {
 
 	if err != nil {
 		log.Println("\n[ALERT] MySQL Error: Error Creating new Report:\n", err)
+		return errors.New("error creating Report")
 	}
+
 
 	// Check logged in worker
 	if !isValidAccount(username) {
 		log.Println("\n[ALERT] User has not logged in!")
+		return errors.New("error creating Report")
 	}
 
 	// begin MySQL transition
@@ -82,6 +88,7 @@ func InsertJobReport(report models.JobReport, username string) error {
 
 	if err != nil {
 		log.Println("\n[ALERT] MySQL Error: Error Inserting Report Details.\n", err)
+		return errors.New("error creating Report")
 	}
 	fmt.Println("\n[INFO] Print MySQL Results for Report:\n", reportResult, customerResult)
 
@@ -95,17 +102,17 @@ func InsertJobReport(report models.JobReport, username string) error {
 func GetReportById(c *gin.Context) {
 
 	db := config.DbConn()
+	var res []models.JobReport
+	worker := wa.Username
 
 	// Get id from request
 	reportId := c.Params.ByName("jobReportId")
 	// Testing Log message
 	fmt.Printf("Get Report with ID: " + reportId)
 
-	worker := wa.Username
-
 	if !isValidAccount(worker) {
 		log.Println("\n[ALERT] User has not logged in!")
-		c.JSON(401, models.Error{Code: 401, Messages: "[ALERT] User has not logged in!"})
+		c.JSON(401, models.Error{Code: 401, Messages: "User has not logged in!"})
 	}
 
 	// JOIN Query to get report by id
@@ -121,12 +128,10 @@ func GetReportById(c *gin.Context) {
 
 	if err != nil {
 		// return user friendly message to client
-		log.Println("\n[ALERT] Failed to process reports!")
-		log.Printf("500 Internal Server Error.")
+		log.Println("\n[ALERT] Failed to process reports! \n500 Internal Server Error.")
 		c.JSON(500, nil)
 	}
 
-	var res []models.JobReport
 	fmt.Println("\n[INFO] Loading model...")
 
 	// Run through each record and read values
@@ -139,8 +144,7 @@ func GetReportById(c *gin.Context) {
 
 		if err != nil {
 			// return user friendly message to client
-			log.Println("\n[ALERT] Failed to load model!")
-			log.Printf("\n500 Internal Server Error.")
+			log.Println("\n[ALERT] Failed to load model! \n500 Internal Server Error.")
 			c.JSON(500, nil)
 		}
 		// Add each record to array
@@ -161,11 +165,13 @@ func GetReports(c *gin.Context) {
 	db := config.DbConn()
 
 	worker := wa.Username
+	var res []models.JobReport
+	var report models.JobReport
 
 	// Check logged in worker
 	if !isValidAccount(worker) {
-		log.Println("\n[ALERT] User has not logged in!")
-		c.JSON(401, models.Error{Code: 401, Messages: "[ALERT] User has not logged in!"})
+		log.Println("\n[ALERT] User is not logged in!")
+		c.JSON(401, models.Error{Code: 401, Messages: "User is not logged in!"})
 	}
 
 	// JOIN Query to get worker's job reports
@@ -180,17 +186,14 @@ func GetReports(c *gin.Context) {
 
 	if err != nil {
 		// return user friendly message to client
-		log.Println("\n[ALERT] Failed to process reports!")
-		log.Printf("500 Internal Server Error.")
+		log.Println("\n[ALERT] Failed to process reports! \n500 Internal Server Error.")
 		c.JSON(500, nil)
 	}
 
-	var res []models.JobReport
 	fmt.Println("\n[INFO] Loading model...")
 
 	// Run through each record and read values
 	for selDB.Next() {
-		var report models.JobReport
 
 		err = selDB.Scan(&report.JobReportId, &report.Date, &report.VehicleModel, &report.VehicleReg, &report.MilesOnVehicle,
 			&report.VehicleLocation, &report.Warranty, &report.Breakdown, &report.CustomerName, &report.Complaint, &report.Cause,
@@ -198,8 +201,7 @@ func GetReports(c *gin.Context) {
 
 		if err != nil {
 			// return user friendly message to client
-			log.Println("\n[ALERT] Failed to load model!")
-			log.Printf("\n500 Internal Server Error.")
+			log.Println("\n[ALERT] Failed to load model! \n500 Internal Server Error.")
 			c.JSON(500, nil)
 		}
 		// Add each record to array
@@ -239,18 +241,16 @@ func UpdateReport(c *gin.Context) {
 
 	if err != nil {
 		log.Println("\n[ALERT] MySQL Error: Error Updating Report:\n", err)
-		c.JSON(503, "[ALERT] Report not updated.")
+		c.JSON(503, models.Error{Code: 503, Messages: "Error Updating Report"})
 	} else {
 		fmt.Println("\n[INFO] Processing Job Report Details...",
 			"\nReport Number:", report.JobReportId, "\nReport Date:", report.Date)
 
-		// Return 201 response for "Updated"
-		c.JSON(201, "[INFO] Report Updated!")
+		// Return 202 response for "Updated"
+		c.JSON(202, gin.H{})
 		fmt.Println("\n[INFO] Print MySQL Results for Report:\n", update)
+		defer db.Close()
 	}
-
-	defer db.Close()
-	c.JSON(http.StatusOK, gin.H{})
 }
 
 // DeleteReport - Delete a Job Report
@@ -266,20 +266,20 @@ func DeleteReport(c *gin.Context) {
 	res, err := db.Exec("DELETE FROM jobreports WHERE job_report_id=?", reportId)
 
 	if err != nil {
-		// return user friendly message to client
 		fmt.Printf("500 Internal Server Error.")
+		// return user friendly message to client
 		c.JSON(500, nil)
 	}
 
 	affectedRows, err := res.RowsAffected()
 
 	if err != nil {
+		fmt.Printf("[ALERT] Report not deleted.")
 		// return user friendly message to client
-		fmt.Printf("500 Internal Server Error.")
-		c.JSON(500, nil)
+		c.JSON(500, models.Error{Code: 500, Messages: "Report not deleted"})
 	}
 
 	fmt.Printf("The statement affected %d rows\n", affectedRows)
 
-	c.JSON(201, "[INFO] Report deleted.")
+	c.JSON(204, nil)
 }

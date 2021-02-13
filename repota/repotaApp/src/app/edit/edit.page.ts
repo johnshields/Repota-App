@@ -65,12 +65,9 @@ export class EditPage implements OnInit {
 
         // Update report with object
         this.api.updateReport(object, this.report[0].jobReportId).subscribe(data => {
-            console.log(data);
             if (form.submitted) {
                 this.router.navigate(['tabs/report-history']);
                 console.log('Success');
-            } else if (data.errorCode === 'ER_DUP_ENTRY') {
-                this.errorMsg = 'Failed to update Report..';
             } else {
                 this.setErrorMessage(data.message);
             }

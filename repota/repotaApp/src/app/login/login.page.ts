@@ -32,8 +32,6 @@ export class LoginPage implements OnInit {
                 this.router.navigate(['tabs/home']);
                 this.api.login(data);
                 console.log('Success');
-            } else if (data.errorCode === 'ER_DUP_ENTRY') {
-                this.errorMsg = 'Details are incorrect.';
             } else {
                 this.setErrorMessage(data.message);
             }

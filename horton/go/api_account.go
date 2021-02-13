@@ -67,8 +67,9 @@ func Login(c *gin.Context) {
 			} else {
 				c.SetCookie("session_id", session.Token, session.Expiry, "/",
 					"localhost", false, false)
-				CheckForCookie(c)
+
 				c.JSON(200, session)
+				CheckForCookie(c)
 			}
 		} else {
 			fmt.Println("\n[ALERT] Could not remove old session ")
@@ -77,7 +78,7 @@ func Login(c *gin.Context) {
 	} else {
 		fmt.Print(err)
 		log.Println("\n[ALERT] User has not logged in!")
-		c.JSON(401, models.Error{Code: 401, Messages: "[ALERT] User has not logged in!"})
+		c.JSON(401, models.Error{Code: 401, Messages: "User has not logged in!"})
 	}
 
 	defer db.Close()
@@ -179,6 +180,7 @@ func registerNewUser(username, name, password string) error {
 	// Hash the password here
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 
+	// TODO - return responses for each if
 	if err != nil {
 		log.Fatal("\n[ALERT] Hash Password failed: ", err)
 	}

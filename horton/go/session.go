@@ -11,6 +11,7 @@ import (
 // Function is used to allow for checking if a session id exists when a request is made from the client
 // If a cookie exists the request continues, otherwise the un-auth user is logged out
 
+
 func CheckForCookie(c *gin.Context) bool {
 	val, err := c.Cookie("session_id")
 	fmt.Println("Cookie:", val)
