@@ -48,7 +48,7 @@ func Login(c *gin.Context) {
 	// Check if user exist in the database and check password is not null
 	if err := verifyDetails(username, password); err != nil {
 		fmt.Println("[ALERT] Credentials Error:", err)
-		c.JSON(400, models.Error{Code: 400, Messages: "Malformed Request"})
+		c.JSON(400, models.Error{Code: 400, Messages: "Credentials are incorrect"})
 		return // Return as there is issues with the credentials
 	}
 
@@ -63,26 +63,24 @@ func Login(c *gin.Context) {
 
 			if err != nil {
 				fmt.Print(err)
-				c.JSON(500, models.Error{Code: 500, Messages: "Internal Server Error"})
+				c.JSON(500, models.Error{Code: 500, Messages: "Could not create new session_id"})
 			} else {
+				// set a cookie for logged in user
 				c.SetCookie("session_id", session.Token, session.Expiry, "/",
-					"localhost", false, false)
-
-				c.JSON(200, session)
+					"127.0.0.1", false, true)
+				c.JSON(200, nil)
 				CheckForCookie(c)
 			}
 		} else {
-			fmt.Println("\n[ALERT] Could not remove old session ")
-			c.JSON(500, models.Error{Code: 500, Messages: "Internal Service Error"})
+			fmt.Println("\n[ALERT] Could not remove old session")
+			c.JSON(500, models.Error{Code: 500, Messages: "Could not remove old session"})
 		}
 	} else {
 		fmt.Print(err)
 		log.Println("\n[ALERT] User has not logged in!")
 		c.JSON(401, models.Error{Code: 401, Messages: "User has not logged in!"})
 	}
-
 	defer db.Close()
-
 }
 
 // Register - Registers User
@@ -98,8 +96,10 @@ func Register(c *gin.Context) {
 	username := user.Username
 	password := user.Password
 
+	// register new user and hash the password
 	if err := registerNewUser(username, user.Name, password); err == nil {
 
+		// create a session for the user
 		err, session := createSessionId(username)
 
 		if err != nil {
@@ -122,7 +122,7 @@ func createSessionId(username string) (error, models.Session) {
 
 	// User has been created now set the following below
 	token := generateSessionId() // Create a new session ID
-	expiry := 3600 * 24 * 3 // 3600 * 24 * 3 = 3 days
+	expiry := 3600 * 24 * 3      // 3600 * 24 * 3 = 3 days
 
 	// INSERT QUERY to create an Account
 	insert, err := db.Prepare("INSERT INTO session(id, user, expire_after) VALUES(?, ?, ?)")

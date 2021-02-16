@@ -38,7 +38,7 @@ func CreateReport(c *gin.Context) {
 
 	// Insert Job Report details
 	if err := InsertJobReport(report, wa.Username); err == nil {
-		c.JSON(201, "")
+		c.JSON(201, "Report created successfully")
 	} else {
 		c.JSON(401, models.Error{Code: 401, Messages: "Not able to create Report"})
 		log.Printf("\n[ALERT] Not completing request.")
@@ -55,8 +55,8 @@ func InsertJobReport(report models.JobReport, username string) error {
 	// insert into the table jobreports
 	insertReport, err := db.Prepare(
 		"INSERT INTO jobreports(worker_id, date_stamp, vehicle_model, vehicle_reg, vehicle_location, " +
-		"miles_on_vehicle, warranty, breakdown, cause, correction, parts, work_hours, job_report_complete) " +
-		"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
+			"miles_on_vehicle, warranty, breakdown, cause, correction, parts, work_hours, job_report_complete) " +
+			"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
 
 	// insert into the table customers
 	insertCustomer, err := db.Prepare("INSERT INTO customers (job_report_id, customer_name, customer_complaint)" +
@@ -66,7 +66,6 @@ func InsertJobReport(report models.JobReport, username string) error {
 		log.Println("\n[ALERT] MySQL Error: Error Creating new Report:\n", err)
 		return errors.New("error creating Report")
 	}
-
 
 	// Check logged in worker
 	if !isValidAccount(username) {
@@ -116,18 +115,17 @@ func GetReportById(c *gin.Context) {
 	}
 
 	// JOIN Query to get report by id
-	selDB, err := db.Query("SELECT DISTINCT jr.job_report_id, jr.date_stamp, jr.vehicle_model, " +
-		"jr.vehicle_reg, jr.miles_on_vehicle, jr.vehicle_location, jr.warranty, jr.breakdown, " +
-		"cust.customer_name, cust.customer_complaint, jr.cause, jr.correction, jr.parts, jr.work_hours, " +
-		"wkr.worker_name, jr.job_report_complete FROM jobreports jr INNER JOIN customers cust " +
-		"ON jr.job_report_id = cust.job_report_id " +
-		"INNER JOIN workers wkr ON jr.worker_id = wkr.worker_id " +
+	selDB, err := db.Query("SELECT DISTINCT jr.job_report_id, jr.date_stamp, jr.vehicle_model, "+
+		"jr.vehicle_reg, jr.miles_on_vehicle, jr.vehicle_location, jr.warranty, jr.breakdown, "+
+		"cust.customer_name, cust.customer_complaint, jr.cause, jr.correction, jr.parts, jr.work_hours, "+
+		"wkr.worker_name, jr.job_report_complete FROM jobreports jr INNER JOIN customers cust "+
+		"ON jr.job_report_id = cust.job_report_id "+
+		"INNER JOIN workers wkr ON jr.worker_id = wkr.worker_id "+
 		"WHERE jr.job_report_id = ? AND wkr.username = ?", reportId, worker)
 
 	fmt.Println("\n[INFO] Processing Report...")
 
 	if err != nil {
-		// return user friendly message to client
 		log.Println("\n[ALERT] Failed to process reports! \n500 Internal Server Error.")
 		c.JSON(500, nil)
 	}
@@ -175,17 +173,16 @@ func GetReports(c *gin.Context) {
 	}
 
 	// JOIN Query to get worker's job reports
-	selDB, err := db.Query("SELECT DISTINCT jr.job_report_id, jr.date_stamp, jr.vehicle_model, " +
-		"jr.vehicle_reg, jr.miles_on_vehicle, jr.vehicle_location, jr.warranty, jr.breakdown, " +
-		"cust.customer_name, cust.customer_complaint, jr.cause, jr.correction, jr.parts, jr.work_hours, " +
-		"wkr.worker_name, jr.job_report_complete FROM jobreports jr INNER JOIN customers cust " +
-		"ON jr.job_report_id = cust.job_report_id " +
+	selDB, err := db.Query("SELECT DISTINCT jr.job_report_id, jr.date_stamp, jr.vehicle_model, "+
+		"jr.vehicle_reg, jr.miles_on_vehicle, jr.vehicle_location, jr.warranty, jr.breakdown, "+
+		"cust.customer_name, cust.customer_complaint, jr.cause, jr.correction, jr.parts, jr.work_hours, "+
+		"wkr.worker_name, jr.job_report_complete FROM jobreports jr INNER JOIN customers cust "+
+		"ON jr.job_report_id = cust.job_report_id "+
 		"INNER JOIN workers wkr ON jr.worker_id = wkr.worker_id WHERE wkr.username = ?", worker)
 
 	fmt.Println("\n[INFO] Processing Reports...")
 
 	if err != nil {
-		// return user friendly message to client
 		log.Println("\n[ALERT] Failed to process reports! \n500 Internal Server Error.")
 		c.JSON(500, nil)
 	}
@@ -200,7 +197,6 @@ func GetReports(c *gin.Context) {
 			&report.Correction, &report.Parts, &report.WorkHours, &report.WorkerName, &report.JobComplete)
 
 		if err != nil {
-			// return user friendly message to client
 			log.Println("\n[ALERT] Failed to load model! \n500 Internal Server Error.")
 			c.JSON(500, nil)
 		}
@@ -232,9 +228,9 @@ func UpdateReport(c *gin.Context) {
 	}
 
 	// Read in values from client request and build object
-	update, err := db.Exec("UPDATE jobreports jr SET jr.date_stamp = ?, jr.vehicle_model = ?, " +
-		"jr.vehicle_reg = ?, jr.vehicle_location = ?, jr.miles_on_vehicle = ?, jr.warranty = ?, " +
-		"jr.breakdown = ?, jr.cause = ?, jr.correction = ?, jr.parts = ?, jr.work_hours = ?, " +
+	update, err := db.Exec("UPDATE jobreports jr SET jr.date_stamp = ?, jr.vehicle_model = ?, "+
+		"jr.vehicle_reg = ?, jr.vehicle_location = ?, jr.miles_on_vehicle = ?, jr.warranty = ?, "+
+		"jr.breakdown = ?, jr.cause = ?, jr.correction = ?, jr.parts = ?, jr.work_hours = ?, "+
 		"jr.job_report_complete = ? WHERE jr.job_report_id = ?", report.Date, report.VehicleModel, report.VehicleReg, report.VehicleLocation,
 		report.MilesOnVehicle, report.Warranty, report.Breakdown, report.Cause, report.Correction, report.Parts,
 		report.WorkHours, report.JobComplete, reportId)

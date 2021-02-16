@@ -42,5 +42,4 @@ type JobReport struct {
 	WorkerName string `json:"workerName,omitempty"`
 
 	JobComplete int32 `json:"jobComplete"`
-
 }

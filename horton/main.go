@@ -20,6 +20,6 @@ import (
 func main() {
 	router := sw.NewRouter()
 	// log.Println("Horton started on: http://52.51.6.178:8080/api/v1/") // server
-	log.Println("Horton started on: http://localhost:8080/api/v1/") // local
+	log.Println("Horton started on: http://127.0.0.1:8080/api/v1/") // local
 	router.Run()
 }

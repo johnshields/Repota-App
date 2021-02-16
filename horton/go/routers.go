@@ -33,9 +33,9 @@ type Routes []Route
 // Cors - To handle cross origin issues while testing
 func CORS() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+		c.Writer.Header().Set("Access-Control-Allow-Origin", c.Request.Header.Get("Origin"))
 		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
-		c.Writer.Header().Set("Access-Control-Allow-Headers", "*")
+		c.Writer.Header().Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization")
 		c.Writer.Header().Set("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE, OPTIONS, PATCH")
 
 		if c.Request.Method == "OPTIONS" {
@@ -50,6 +50,8 @@ func CORS() gin.HandlerFunc {
 func NewRouter() *gin.Engine {
 
 	router := gin.Default()
+	router.StaticFile("/favicon.ico", "./favicon.ico")
+
 	// CORS must be called before any routes are called
 	router.Use(CORS())
 	for _, route := range routes {

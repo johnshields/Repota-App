@@ -28,7 +28,7 @@ import {Configuration} from '../configuration';
 @Injectable()
 export class AccountService {
 
-    protected basePath = 'http://localhost:8080/api/v1';
+    protected basePath = 'http://52.51.6.178:8080/api/v1';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 
@@ -92,7 +92,7 @@ export class AccountService {
         if (httpContentTypeSelected != undefined) {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
-
+        console.log(headers);
         return this.httpClient.request<any>('post', `${this.basePath}/login`,
             {
                 body: body,

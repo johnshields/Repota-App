@@ -20,7 +20,7 @@ const createWindow = () => {
 
         // and load the app
         win.loadURL(url.format({
-            pathname: 'localhost:4200',
+            pathname: '127.0.0.1:4200',
             protocol: 'http:',
             slashes: true
         }));

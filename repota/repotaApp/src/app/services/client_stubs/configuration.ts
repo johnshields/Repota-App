@@ -15,7 +15,9 @@ export class Configuration {
     basePath?: string;
     withCredentials?: boolean;
 
-    constructor(configurationParameters: ConfigurationParameters = {}) {
+    constructor(configurationParameters: ConfigurationParameters = {
+        withCredentials: true
+    }) {
         this.apiKeys = configurationParameters.apiKeys;
         this.username = configurationParameters.username;
         this.password = configurationParameters.password;

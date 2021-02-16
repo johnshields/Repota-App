@@ -27,6 +27,7 @@ export class ExportPage implements OnInit {
         });
     }
 
+
     // export report to a pdf
     onExportPDF() {
         const options = {

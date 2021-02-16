@@ -1,20 +1,21 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 
-import { IonicModule } from '@ionic/angular';
+import {IonicModule} from '@ionic/angular';
 
-import { DisplayPageRoutingModule } from './display-routing.module';
+import {DisplayPageRoutingModule} from './display-routing.module';
 
-import { DisplayPage } from './display.page';
+import {DisplayPage} from './display.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    DisplayPageRoutingModule
-  ],
-  declarations: [DisplayPage]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        DisplayPageRoutingModule
+    ],
+    declarations: [DisplayPage]
 })
-export class DisplayPageModule {}
+export class DisplayPageModule {
+}

@@ -1,4 +1,4 @@
-# AP-MD-FYP - Repota project
+# git ignore file for repo
 
 # Repota Dependency directories
 /repota/repotaApp/node_modules/
@@ -8,14 +8,15 @@
 
 
 # Horton Server
-# Binaries for programs and plugins
 /horton/*.exe
 /horton/*.exe~
-/horton/*.dll
-/horton/*.so
-/horton/*.dylib
-
 /horton/GIT_REPO_ID
+
+# Elastic Beanstalk Files
+/horton/.elasticbeanstalk/*
+/horton/!.elasticbeanstalk/*.cfg.yml
+/horton/!.elasticbeanstalk/*.global.yml
+/horton/.ebignore
 
 # dissertation
 /dissertation/dissertation.pdf
@@ -24,6 +25,3 @@
 /repota/repotaApp/.idea
 /horton/.idea
 /database/.idea
-
-# Icons
-desktop.ini

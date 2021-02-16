@@ -16,7 +16,7 @@ func DbConn() (db *sql.DB) {
 	// Load config
 	cfg, err := ini.Load("go/config/config.ini")
 
-	if err != nil{
+	if err != nil {
 		log.Println(" [INFO] Failed to load config file for database.", cfg)
 		os.Exit(1) // Failed to start service
 	}
@@ -25,7 +25,7 @@ func DbConn() (db *sql.DB) {
 	username := cfg.Section("database").Key("username")
 	password := cfg.Section("database").Key("password")
 
-	db, err = sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(127.0.0.1:3306)/%s", username, password, dbName)) // local
+	db, err = sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(52.51.6.178:3306)/%s", username, password, dbName))
 
 	if err != nil {
 		panic(err.Error())

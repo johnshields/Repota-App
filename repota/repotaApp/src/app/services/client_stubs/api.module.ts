@@ -2,9 +2,6 @@ import {NgModule, ModuleWithProviders, SkipSelf, Optional} from '@angular/core';
 import {Configuration} from './configuration';
 import {HttpClient} from '@angular/common/http';
 
-import {AccountService} from './api/account.service';
-import {JobReportService} from './api/jobReport.service';
-
 @NgModule({
     imports: [],
     declarations: [],
