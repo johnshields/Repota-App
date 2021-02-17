@@ -75,10 +75,7 @@ export class EditPage implements OnInit {
     }
 
     ngOnInit() {
-        // set dark theme to default theme
-        document.body.setAttribute('color-theme', 'dark');
-
-        // Get the request report by it's ID
+        // Get the request report by its ID
         this.api.getReportById(this.route.snapshot.params['jobReportId']).subscribe(data => {
             console.log(this.route.snapshot.params['jobReportId']);
             this.report = data;

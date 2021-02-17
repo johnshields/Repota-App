@@ -16,9 +16,6 @@ export class ReportHistoryPage implements OnInit {
     }
 
     ngOnInit() {
-        // set dark theme to default theme
-        document.body.setAttribute('color-theme', 'dark');
-
         // get all worker's reports
         this.api.getReports().subscribe(data => {
             this.reports = data;

@@ -28,7 +28,7 @@ import {Configuration} from '../configuration';
 @Injectable()
 export class AccountService {
 
-    protected basePath = 'http://52.51.6.178:8080/api/v1';
+    protected basePath = 'http://horton.eu-west-1.elasticbeanstalk.com/api/v1';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 

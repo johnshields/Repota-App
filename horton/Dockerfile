@@ -1,3 +1,6 @@
+# Dockerfile for AWS Elastic Beanstalk
+
+# golang version
 FROM golang:1.15.3
 
 # base name
@@ -18,7 +21,7 @@ RUN go mod download
 # copy source files
 COPY . .
 
-# http port
+# ports
 EXPOSE 8080
 EXPOSE 3306
 

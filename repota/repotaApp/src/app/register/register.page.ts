@@ -38,7 +38,5 @@ export class RegisterPage implements OnInit {
     }
 
     ngOnInit() {
-        // set dark theme to default theme
-        document.body.setAttribute('color-theme', 'dark');
     }
 }

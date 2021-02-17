@@ -1,27 +1,22 @@
 # git ignore file for repo
 
 # Repota Dependency directories
-/repota/repotaApp/node_modules/
-/repota/repotaApp/www/
-/repota/repotaApp/platforms/
-/repota/repotaApp/plugins/
-
+node_modules/
+www/
+platforms/
+plugins/
 
 # Horton Server
-/horton/*.exe
-/horton/*.exe~
-/horton/GIT_REPO_ID
+*.exe
+*.exe~
+GIT_REPO_ID
 
 # Elastic Beanstalk Files
-/horton/.elasticbeanstalk/*
-/horton/!.elasticbeanstalk/*.cfg.yml
-/horton/!.elasticbeanstalk/*.global.yml
-/horton/.ebignore
+.elasticbeanstalk/
+.ebignore
 
 # dissertation
-/dissertation/dissertation.pdf
+dissertation.pdf
 
 # JetBrains IDEs
-/repota/repotaApp/.idea
-/horton/.idea
-/database/.idea
+.idea

@@ -51,6 +51,7 @@ func NewRouter() *gin.Engine {
 
 	router := gin.Default()
 	router.StaticFile("/favicon.ico", "./favicon.ico")
+	router.StaticFile("/", "./favicon.ico")
 
 	// CORS must be called before any routes are called
 	router.Use(CORS())

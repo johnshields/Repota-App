@@ -51,26 +51,12 @@ All workings for the project.
 
 ***
 
-# Run the Project
-<h3><u>Repota App</u></h3>
+# View the App
 
-### Open the repository directory in Command-Line and enter:
-```bash
-$ cd repota/repotaApp
-$ npm start
-
-```
-* This command opens a window for the App.
-* In the window press `CTRL+SHIFT+R` to load the App.
-***
-
-<h3><u>Horton Backend</u></h3>
-
-###### `Note` Horton should already be running on an `AWS Server`.
-###### Please contact me directly at `johndshields14@gmail.com` if there are any issues.
+#### View and use Repota [HERE]().
 
 ***
-#### View the Project's Wiki [HERE](https://github.com/johnshields/AP-MD-FYP/wiki) for more detail.
+#### View the Project's Wiki [HERE](https://github.com/johnshields/AP-MD-FYP/wiki) for more detail on the project.
 ***
 
 ###### END OF README

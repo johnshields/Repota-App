@@ -31,7 +31,7 @@ import (
 var wa models.WorkerAccount
 
 // Login - Log in
-// http://localhost:8080/api/v1/login
+// Endpoint - http://horton.eu-west-1.elasticbeanstalk.com/api/v1/login
 func Login(c *gin.Context) {
 	db := config.DbConn()
 
@@ -84,7 +84,7 @@ func Login(c *gin.Context) {
 }
 
 // Register - Registers User
-// http://localhost:8080/api/v1/register
+// Endpoint - http://horton.eu-west-1.elasticbeanstalk.com/api/v1/register
 func Register(c *gin.Context) {
 	var user models.InlineObject
 

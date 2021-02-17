@@ -19,7 +19,7 @@ export class LoginPage implements OnInit {
         this.errorMessage = error;
     }
 
-    loginWorker(form: NgForm) {
+    login(form: NgForm) {
         // Worker account model
         const object: InlineObject = {
             username: form.value.username,
@@ -29,8 +29,8 @@ export class LoginPage implements OnInit {
         // login worker
         this.api.login(object).subscribe(data => {
             if (form.valid) {
-                this.router.navigate(['tabs/home']);
                 this.api.login(data);
+                this.router.navigate(['tabs/home']);
                 console.log('Success');
             } else {
                 this.setErrorMessage(data.message);
@@ -39,7 +39,5 @@ export class LoginPage implements OnInit {
     }
 
     ngOnInit() {
-        // set dark theme to default theme
-        document.body.setAttribute('color-theme', 'dark');
     }
 }

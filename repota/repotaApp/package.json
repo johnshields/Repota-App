@@ -9,8 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "start": "concurrently \"ng serve\" \"npm run electron\"",
-    "electron": "electron ./src/electron.dev"
+    "start": "ng serve --open"
   },
   "private": true,
   "dependencies": {

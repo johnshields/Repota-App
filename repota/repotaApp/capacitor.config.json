@@ -1,6 +1,6 @@
 {
   "appId": "io.ionic.starter",
-  "appName": "photo-gallery",
+  "appName": "repota",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

@@ -27,7 +27,7 @@ import (
 )
 
 // CreateReport - Create a Report
-// http://localhost:8080/api/v1/jobReports
+// http://horton.eu-west-1.elasticbeanstalk.com/api/v1/jobReports
 func CreateReport(c *gin.Context) {
 	var report models.JobReport
 
@@ -97,7 +97,7 @@ func InsertJobReport(report models.JobReport, username string) error {
 }
 
 // GetReportById - Get a Report by ID
-// http://localhost:8080/api/v1/jobReports/'enter ID'
+// Endpoint - http://horton.eu-west-1.elasticbeanstalk.com/api/v1/jobReports/'enter ID'
 func GetReportById(c *gin.Context) {
 
 	db := config.DbConn()
@@ -157,7 +157,7 @@ func GetReportById(c *gin.Context) {
 }
 
 // GetReports - Get all reports by the logged in worker's username
-// http://localhost:8080/api/v1/jobReports
+// Endpoint - http://horton.eu-west-1.elasticbeanstalk.com/api/v1/jobReports
 func GetReports(c *gin.Context) {
 
 	db := config.DbConn()
@@ -212,7 +212,7 @@ func GetReports(c *gin.Context) {
 }
 
 // UpdateReport - Update a job report
-// http://localhost:8080/api/v1/jobReports/jobReportId
+// Endpoint - http://horton.eu-west-1.elasticbeanstalk.com/api/v1/jobReports/jobReportId
 func UpdateReport(c *gin.Context) {
 	db := config.DbConn()
 	var report models.JobReport
@@ -250,6 +250,7 @@ func UpdateReport(c *gin.Context) {
 }
 
 // DeleteReport - Delete a Job Report
+// Endpoint - http://horton.eu-west-1.elasticbeanstalk.com/api/v1/jobReports/'enter ID'
 func DeleteReport(c *gin.Context) {
 	db := config.DbConn()
 
