@@ -53,7 +53,7 @@ All workings for the project.
 
 # View the App
 
-#### View and use Repota [HERE]().
+#### View and use Repota [HERE](http://www.repota-service.com/).
 
 ***
 #### View the Project's Wiki [HERE](https://github.com/johnshields/AP-MD-FYP/wiki) for more detail on the project.
