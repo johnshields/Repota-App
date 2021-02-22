@@ -1,3 +1,15 @@
+/*
+ * John Shields
+ * Horton
+ * API version: 1.0.0
+ *
+ * DB Connection
+ * Logs into MySQL with the details in config.ini and uses the Repota Database.
+ *
+ * Reference
+ * https://ini.unknwon.io/docs/intro/getting_started
+ */
+
 package config
 
 import (
@@ -9,9 +21,7 @@ import (
 	"os"
 )
 
-// Reference
-// https://ini.unknwon.io/docs/intro/getting_started
-
+// Function to use the config.ini file to log into MySQL for database access.
 func DbConn() (db *sql.DB) {
 	// Load config
 	cfg, err := ini.Load("go/config/config.ini")

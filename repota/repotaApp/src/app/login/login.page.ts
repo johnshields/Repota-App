@@ -29,7 +29,6 @@ export class LoginPage implements OnInit {
         // login worker
         this.api.login(object).subscribe(data => {
             if (form.valid) {
-                this.api.login(data);
                 this.router.navigate(['tabs/home']);
                 console.log('Success');
             } else {
