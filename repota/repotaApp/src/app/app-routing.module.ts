@@ -19,8 +19,8 @@ const routes: Routes = [
         loadChildren: () => import('./create/create.module').then(m => m.CreatePageModule)
     },
     {
-        path: 'report-history',
-        loadChildren: () => import('./report-history/report-history.module').then(m => m.ReportHistoryPageModule)
+        path: 'history',
+        loadChildren: () => import('./history/history.module').then(m => m.HistoryPageModule)
     },
     {
         path: 'display',

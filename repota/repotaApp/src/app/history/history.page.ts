@@ -4,10 +4,10 @@ import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
     selector: 'app-report-history',
-    templateUrl: './report-history.page.html',
-    styleUrls: ['./report-history.page.scss'],
+    templateUrl: './history.page.html',
+    styleUrls: ['./history.page.scss'],
 })
-export class ReportHistoryPage implements OnInit {
+export class HistoryPage implements OnInit {
     reports: any = [];
     public errorMsg: string;
     public successMsg: string;
