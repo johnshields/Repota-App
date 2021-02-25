@@ -27,7 +27,7 @@ export class RegisterPage implements OnInit {
         };
         this.api.register(object).subscribe(data => {
             if (form != null) {
-                this.router.navigate(['tabs/login']);
+                this.router.navigate(['/login']);
                 this.api.register(data);
             } else {
                 this.setErrorMessage(data.message);

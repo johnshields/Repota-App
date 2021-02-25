@@ -3,8 +3,12 @@ import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 
 const routes: Routes = [
     {
-        path: 'account',
+        path: '',
         loadChildren: () => import('./account/account.module').then(m => m.AccountPageModule)
+    },
+    {
+        path: 'options',
+        loadChildren: () => import('./options/options.module').then(m => m.OptionsPageModule)
     },
     {
         path: 'home',
@@ -49,12 +53,7 @@ const routes: Routes = [
     {
         path: 'edit/:jobReportId',
         loadChildren: './edit/edit.module#EditPageModule'
-    },
-    {
-        path: '',
-        loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
-    },
-
+    }
 ];
 
 @NgModule({
