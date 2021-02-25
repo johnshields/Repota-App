@@ -1,8 +1,5 @@
-// @ts-ignore
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-// @ts-ignore
 import {IonicModule} from '@ionic/angular';
-import {ExploreContainerComponentModule} from '../explore-container/explore-container.module';
 
 import {LoginPage} from './login.page';
 
@@ -13,7 +10,7 @@ describe('AccountPage', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [LoginPage],
-            imports: [IonicModule.forRoot(), ExploreContainerComponentModule]
+            imports: [IonicModule.forRoot()]
         }).compileComponents();
 
         fixture = TestBed.createComponent(LoginPage);

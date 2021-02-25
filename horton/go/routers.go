@@ -55,6 +55,7 @@ func CORS() gin.HandlerFunc {
 func NewRouter() *gin.Engine {
 
 	router := gin.Default()
+	// set logo for tab & "/" endpoint
 	router.StaticFile("/favicon.ico", "./favicon.ico")
 	router.StaticFile("/", "./favicon.ico")
 

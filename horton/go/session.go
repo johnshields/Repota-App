@@ -4,7 +4,7 @@
  * API version: 1.0.0
  *
  * Session
- * Handles creating, generating, removing sessions.
+ * Handles creating, generating, removing sessions and cookie checking.
  */
 
 package openapi
@@ -19,8 +19,8 @@ import (
 	"log"
 )
 
-// Function is used to allow for checking if a session id exists when a request is made from the client
-// If a cookie exists the request continues, otherwise the un-auth user is logged out
+// Function is used to allow for checking if a session id exists when a request is made from the client.
+// If a cookie exists the request continues, otherwise the un-auth user is logged out.
 func CheckForCookie(c *gin.Context) bool {
 	val, err := c.Cookie("session_id")
 	fmt.Println("Cookie:", val)
@@ -28,7 +28,7 @@ func CheckForCookie(c *gin.Context) bool {
 	// Logout if no session_id is found
 	if err != nil {
 		log.Println("[ALERT] no cookie found", err)
-		//Logout(c)
+		Logout(c)
 		return false
 	}
 	// Else return true as one exists

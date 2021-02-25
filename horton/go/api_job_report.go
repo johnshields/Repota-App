@@ -103,6 +103,8 @@ func GetReportById(c *gin.Context) {
 	var res []models.JobReport
 	worker := wa.Username
 
+	CheckForCookie(c)
+
 	// Get id from request
 	reportId := c.Params.ByName("jobReportId")
 	// Testing Log message

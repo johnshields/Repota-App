@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
-import {EditPageModule} from './edit/edit.module';
 
 const routes: Routes = [
     {

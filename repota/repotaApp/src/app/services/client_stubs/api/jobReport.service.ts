@@ -1,4 +1,5 @@
 /**
+ * John Shields
  * Repota
  * OpenAPI spec version: 1.0.0
  *
@@ -25,7 +26,7 @@ import {Configuration} from '../configuration';
 @Injectable()
 export class JobReportService {
 
-    protected basePath = 'http://horton.eu-west-1.elasticbeanstalk.com/api/v1';
+    protected basePath = 'https://horton-service.com/api/v1';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 

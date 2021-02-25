@@ -1,5 +1,5 @@
 /*
- * Horton Golang Server
+ * Horton
  * John Shields
  * API version: 1.0.0
  *
@@ -17,6 +17,6 @@ import (
 // CORS are set up in ./go/routers.go
 func main() {
 	router := sw.NewRouter()
-	log.Println("Horton started on: http://horton.eu-west-1.elasticbeanstalk.com") // AWS Elastic Beanstalk
+	log.Println("Horton is online...")
 	router.Run()
 }
