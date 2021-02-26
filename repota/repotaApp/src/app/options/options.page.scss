@@ -1,31 +1,18 @@
-.tool-bar-logo {
-  width: 75px;
-  height: 75px;
-  margin-left: 25px;
-  display: inline;
-}
-
-.page-title {
-  display: inline-block;
-  text-align: center;
-  font-size: xxx-large;
-}
-
 ion-content {
   --background: none;
   background-image: url('../../assets/images/app_logo_box.png');
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 750px 750px;
+  background-size: 400px 400px;
 }
 
 .about {
-  margin-top: 350px;
+  margin-top: 265px;
   margin-left: 50%;
   margin-right: auto;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
-  width: 450px;
+  width: 200px;
   color: #f5f6f9;
   text-align: center;
 }
@@ -38,10 +25,24 @@ ion-content {
   text-decoration: underline;
 }
 
-ion-toggle {
-  background-color: #2a2a2a;
-  margin-left: 20px;
-  margin-top: 15px;
-  width: 20px;
-  height: 15px;
+.links {
+  color: #2850d2;
+  margin-top: 5px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+@media screen and (min-width: 600px) {
+  ion-content {
+    background-size: 750px 750px;
+  }
+
+  .about {
+    margin-top: 375px;
+    width: 350px;
+  }
+
+  .links {
+    margin-top: 30px;
+  }
 }

@@ -4,24 +4,23 @@
         <ion-buttons slot="start">
             <ion-menu-button menu="hamburger-menu"></ion-menu-button>
         </ion-buttons>
-        <img class="tool-bar-logo" src="./assets/images/repotaApp_logo.png" alt="logo"/>
-        <ion-title class="page-title">Options</ion-title>
+        <ion-avatar>
+            <img src="./assets/images/repotaApp_logo.png" alt="logo"/>
+        </ion-avatar>
     </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
     <div class="about">
         <ion-title class="headers">About</ion-title>
-        <ion-text>Repota is designed for automobile technicians to fill out<br>
+        <ion-text>Repota is designed for automobile technicians to fill out
             service reports for auto dealerships and rental companies.
         </ion-text>
-        <ion-title class="headers">Repota's Guide</ion-title>
         <a href="https://github.com/johnshields/Repota-App/wiki" target="_blank" rel="noopener noreferrer">
-            <p>View Repota's Guide!</p>
+            <p class="links">View Guide</p>
         </a>
-        <ion-title class="headers">Project Repota's Repository</ion-title>
         <a href="https://github.com/johnshields/Repota-App" target="_blank" rel="noopener noreferrer">
-            <p>View the GitHub Repository!</p>
+            <p class="links">View Repository</p>
         </a>
     </div>
 </ion-content>

@@ -1,28 +1,15 @@
-.tool-bar-logo {
-  width: 75px;
-  height: 75px;
-  margin-left: 25px;
-  display: inline;
-}
-
-.page-title {
-  display: inline-block;
-  text-align: center;
-  font-size: xxx-large;
-}
-
 ion-content {
   --background: none;
   background-image: url('../../assets/images/app_logo_box.png');
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 750px 750px;
+  background-size: 400px 400px;
 }
 
 .user {
   background-color: #2a2a2a;
   position: absolute;
-  top: 35%;
+  top: 36%;
   left: 50%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -39,7 +26,7 @@ ion-content {
 .name {
   background-color: #2a2a2a;
   position: absolute;
-  top: 42%;
+  top: 46%;
   left: 50%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -55,7 +42,7 @@ ion-content {
 .password {
   background-color: #2a2a2a;
   position: absolute;
-  top: 49%;
+  top: 56%;
   left: 50%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -70,7 +57,7 @@ ion-content {
 
 .register-btn {
   position: absolute;
-  top: 56%;
+  top: 90%;
   left: 50%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -85,3 +72,27 @@ ion-content {
   width: 200px;
   height: 45px;
 }
+
+@media screen and (min-width: 600px) {
+  ion-content {
+    background-size: 750px 750px;
+  }
+
+  .user {
+    top: 35%;
+  }
+
+  .name {
+    position: absolute;
+    top: 42%;
+  }
+
+  .password {
+    top: 49%;
+  }
+
+  .register-btn{
+    top: 56%;
+  }
+}
+

@@ -1,68 +1,10 @@
-.tool-bar-logo {
-  width: 75px;
-  height: 75px;
-  margin-left: 25px;
-  display: inline;
-}
-
-.page-title {
-  display: inline-block;
-  text-align: center;
-  font-size: xxx-large;
-}
-
-ion-content {
-  --background: none;
-}
-
-.reportCard {
-  width: 100%;
-  margin-left: 25%;
-  margin-right: 25%;
-  margin-top: 25px;
-  padding-bottom: 25px;
+ion-card-content {
+  width: auto;
+  padding-top: 10px;
   background-color: white;
-  size: A4;
   color: #0d0d0d;
-  padding-left: 50px;
-  padding-right: 50px;
-  border: 1px solid #22222e;
+  border: 2px solid #22222e;
   border-radius: 5px;
-}
-
-.logo {
-  width: 75px;
-  height: 75px;
-}
-
-.title {
-  text-align: center;
-}
-
-.input {
-  font-size: 20px;
-  border: 1px solid #22222e;
-  border-radius: 5px;
-  width: 200px;
-  height: 35px;
-  padding-left: 15px;
-  margin-top: 10px;
-}
-
-.large-input {
-  font-size: 20px;
-  border: 1px solid #22222e;
-  border-radius: 5px;
-  width: 375px;
-  height: 35px;
-  padding-left: 15px;
-  margin-top: 10px;
-}
-
-ion-input {
-  background-color: #dedad9;
-  margin-left: 20px;
-  text-align: center;
 }
 
 .headers {
@@ -73,41 +15,92 @@ ion-input {
   text-decoration: underline;
 }
 
-.create-btn {
-  background-color: royalblue;
-  color: black;
-  font-size: 20px;
-  border: none;
-  cursor: pointer;
+.title {
+  text-align: center;
+  color: #0d0d0d;
+}
+
+ion-input {
+  background-color: #dedad9;
+  margin-left: 20px;
+  text-align: center;
+}
+
+ion-textarea {
+  background-color: #dedad9;
+  margin-left: 20px;
+  text-align: center;
+}
+
+.input {
+  font-size: small;
+  border: 1px solid #22222e;
   border-radius: 5px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 200px;
-  height: 50px;
+  width: 150px;
+  height: 35px;
+  padding-left: 15px;
+  margin-top: 10px;
 }
 
-.wrap {
-  padding-right: 50px;
-  padding-left: 50px;
-  width: 100%;
-  overflow: auto;
-  margin: 0 auto;
+.large-input {
+  font-size: small;
+  border: 1px solid #22222e;
+  border-radius: 5px;
+  width: 150px;
+  height: 80px;
+  margin-top: 10px;
 }
 
-.left {
-  float: left;
-  width: 50%;
+.worker {
+  width: 175px;
+  font-size: small;
+  padding-left: 5px;
+  padding-right: 5px;
+  border: 1px solid #22222e;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 5px;
+  background-color: #d0d0d0;
 }
 
-.right {
-  float: right;
-  width: 50%;
+.warranty-box {
+  text-align: center;
+  text-decoration: underline;
+  margin-top: 20px;
+  margin-left: 45px;
+  border: 1px solid #22222e;
+  border-radius: 5px;
+  width: 100px;
+  height: 80px;
+}
+
+.breakdown-box {
+  text-align: center;
+  text-decoration: underline;
+  margin-top: 20px;
+  margin-left: 45px;
+  border: 1px solid #22222e;
+  border-radius: 5px;
+  width: 100px;
+  height: 80px;
+}
+
+.job-comp {
+  text-align: center;
+  text-decoration: underline;
+  margin-top: 20px;
+  margin-left: 45px;
+  border: 1px solid #22222e;
+  border-radius: 5px;
+  width: 100px;
+  height: 80px;
 }
 
 ion-checkbox {
-  margin-left: 60px;
-  width: 30px;
-  height: 30px;
+  margin-left: 45px;
+  height: 25px;
+  width: 25px;
 }
 
 .warranty-box {
@@ -115,8 +108,10 @@ ion-checkbox {
   text-decoration: underline;
   border: 1px solid #22222e;
   border-radius: 5px;
-  margin: 40px 50px 10px 75px;
   padding-top: 5px;
+  width: 150px;
+  height: 115px;
+  margin-left: 28px;
 }
 
 .breakdown-box {
@@ -124,9 +119,10 @@ ion-checkbox {
   text-decoration: underline;
   border: 1px solid #22222e;
   border-radius: 5px;
-  margin-left: 75px;
-  margin-right: 50px;
   padding-top: 5px;
+  width: 150px;
+  height: 115px;
+  margin-left: 28px;
 }
 
 .job-comp-box {
@@ -134,12 +130,38 @@ ion-checkbox {
   text-decoration: underline;
   border: 1px solid #22222e;
   border-radius: 5px;
-  margin-top: 125px;
-  margin-left: 450px;
-  margin-right: 75px;
   padding-top: 5px;
+  width: 150px;
+  margin-top: 20px;
+  margin-left: 25px;
 }
 
 .check-boxes {
   background-color: white;
+}
+
+.create-btn {
+  background-color: royalblue;
+  color: black;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 200px;
+  height: 50px;
+}
+
+@media screen and (min-width: 600px) {
+  ion-card {
+    padding-left: 32%;
+  }
+
+  ion-card-content {
+    width: 50%;
+  }
+
+  .date {
+    position: center;
+  }
+
 }

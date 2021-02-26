@@ -65,9 +65,9 @@ func Login(c *gin.Context) {
 				c.JSON(500, models.Error{Code: 500, Messages: "Could not create new session_id"})
 			} else {
 				// set a cookie for logged in user
-				//c.SetCookie("session_id", session.Token, session.Expiry, "/", "", true, false)
-				http.SetCookie(c.Writer, &http.Cookie{Name: "session_id", Value: session.Token, Path: "/", Domain: "",
-					MaxAge: session.Expiry, Secure: true, HttpOnly: false, SameSite: http.SameSiteNoneMode})
+				//c.SetCookie("session_id", session.Token, session.Expiry, "/", "", false, false)
+				http.SetCookie(c.Writer, &http.Cookie{Name: "session_id", Value: session.Token, Path: "/",
+					Domain: "", MaxAge: session.Expiry, Secure: true, HttpOnly: false, SameSite: http.SameSiteNoneMode})
 				c.JSON(204, nil)
 			}
 		} else {

@@ -68,7 +68,7 @@ export class CreatePage implements OnInit {
         // create the report using the model
         this.api.createReport(object).subscribe(data => {
             if (form != null) {
-                this.router.navigate(['tabs/history']);
+                this.router.navigate(['/history']);
                 this.api.createReport(data);
                 console.log('Success');
             } else {

@@ -15,7 +15,7 @@ ion-content {
   background-image: url('../../assets/images/app_logo_box.png');
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 750px 750px;
+  background-size: 400px 400px;
 }
 
 .login {
@@ -52,4 +52,10 @@ ion-content {
   margin-right: auto;
   width: 200px;
   height: 50px;
+}
+
+@media screen and (min-width: 600px) {
+  ion-content {
+    background-size: 750px 750px;
+  }
 }
