@@ -4,8 +4,9 @@
         <ion-buttons slot="start">
             <ion-menu-button menu="hamburger-menu"></ion-menu-button>
         </ion-buttons>
-        <img class="tool-bar-logo" src="./assets/images/repotaApp_logo.png" alt="logo"/>
-        <ion-title class="page-title">History</ion-title>
+        <ion-avatar>
+            <img class="tool-bar-logo" src="./assets/images/repotaApp_logo.png" alt="logo"/>
+        </ion-avatar>
     </ion-toolbar>
 </ion-header>
 <p align="center">
@@ -15,26 +16,26 @@
     <ion-card>
         <ion-item *ngFor="let report of reports">
             <ion-card-content>
-                <!-- Report -->
+                <!-- report -->
                 <hr style="height:2px;border-width:0;color:gray;background-color:black">
-                <div class="wrap">
-                    <div class="left">
-                        <!-- Report Details -->
-                        <ion-label class="info">Report Number: {{report["jobReportId"]}}</ion-label>
-                        <ion-label class="info">Date: {{report["date"]}}</ion-label>
-                        <ion-label class="info"> Customer: {{report["customerName"]}}</ion-label>
-                    </div>
-                    <div class="right">
+                <div>
+                    <!-- Report Details -->
+                    <ion-row>
+                        <ion-col>
+                            <ion-label class="info">Report Number: {{report["jobReportId"]}}</ion-label>
+                            <ion-label class="info">Date: {{report["date"]}}</ion-label>
+                            <ion-label class="info">{{report["customerName"]}}</ion-label>
+                        </ion-col>
                         <!-- Check Box -->
                         <ion-label class="job-comp">Complete
                             <ion-checkbox disabled="true" [(ngModel)]="report.jobComplete"></ion-checkbox>
                         </ion-label>
-                    </div>
+                    </ion-row>
                 </div>
                 <hr style="height:2px;border-width:0;color:gray;background-color:black">
                 <p align="center">
                     <ion-button class="open-btn" color="NONE" [routerLink]="['/display/' + report.jobReportId]">
-                        Open
+                        OPEN
                     </ion-button>
                 </p>
             </ion-card-content>

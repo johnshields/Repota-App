@@ -8,7 +8,7 @@ import {ActivatedRoute} from '@angular/router';
     styleUrls: ['./display.page.scss'],
 })
 export class DisplayPage implements OnInit {
-    jobReport: any = [];
+    report: any = [];
     public errorMsg: string;
     public successMsg: string;
 
@@ -19,7 +19,7 @@ export class DisplayPage implements OnInit {
         // Get requested report by its ID
         this.api.getReportById(this.route.snapshot.params['jobReportId']).subscribe(data => {
             console.log(this.route.snapshot.params['jobReportId']);
-            this.jobReport = data;
+            this.report = data;
             console.log(data);
         });
     }

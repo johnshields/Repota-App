@@ -1,79 +1,38 @@
 .tool-bar-logo {
-  width: 75px;
-  height: 75px;
-  margin-left: 25px;
-  display: inline;
-}
-
-.page-title {
-  display: inline-block;
-  text-align: center;
-  font-size: xxx-large;
-}
-
-.logo {
-  width: 75px;
-  height: 75px;
-}
-
-ion-content {
-  --background: none;
-}
-
-ion-card-title {
-  color: #363636;
-  text-align: center;
+  float: right;
 }
 
 ion-card-content {
-  margin: 5px 25%;
-  width: 50%;
+  width: auto;
   padding-top: 10px;
   background-color: white;
   color: #0d0d0d;
-  padding-left: 50px;
-  padding-right: 50px;
   border: 2px solid #22222e;
   border-radius: 5px;
 }
 
-.wrap {
-  width: 100%;
-  overflow: auto;
-  padding: 2px;
-  margin: 0 auto;
-  align-content: center;
-}
-
-.headers {
-  font-size: large;
-  font-weight: bold;
-  margin-bottom: 5px;
-  margin-top: 10px;
-  text-decoration: underline;
-  padding-left: 50px;
-}
-
 .info {
-  width: 250px;
+  width: auto;
   font-size: medium;
-  padding-left: 25px;
+  padding-left: 5px;
+  padding-right: 5px;
   border: 1px solid #22222e;
   border-radius: 5px;
   margin-top: 10px;
   margin-bottom: 10px;
-  margin-left: 50px;
+  margin-left: 5px;
   background-color: #d0d0d0;
 }
 
 .job-comp {
   text-align: center;
   text-decoration: underline;
-  margin-top: 15px;
-  float: right;
+  margin-top: 20px;
+  margin-left: 50px;
   border: 1px solid #22222e;
   border-radius: 5px;
   width: 100px;
+  height: 80px;
 }
 
 ion-checkbox {
@@ -93,12 +52,16 @@ ion-checkbox {
   border-radius: 5px;
 }
 
-.left {
-  float: left;
-  width: 50%;
-}
+@media screen and (min-width: 600px) {
+  ion-card {
+    padding-left: 32%;
+  }
 
-.right {
-  float: right;
-  width: 50%;
+  ion-card-content {
+    width: 50%;
+  }
+
+  .info {
+    width: 250px;
+  }
 }

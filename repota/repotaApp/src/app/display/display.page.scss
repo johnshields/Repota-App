@@ -1,14 +1,5 @@
 .tool-bar-logo {
-  width: 75px;
-  height: 75px;
-  margin-left: 25px;
-  display: inline;
-}
-
-.page-title {
-  display: inline-block;
-  text-align: center;
-  font-size: xxx-large;
+  float: right;
 }
 
 .logo {
@@ -16,35 +7,23 @@
   height: 75px;
 }
 
-ion-content {
-  --background: none;
+ion-card {
+  padding-right: 25px;
 }
 
 ion-card-title {
+  font-size: medium;
   color: #363636;
   text-align: center;
 }
 
 ion-card-content {
-  margin-left: 25%;
-  margin-right: 25%;
-  margin-top: 50px;
-  width: 100%;
+  width: auto;
   padding-top: 10px;
   background-color: white;
   color: #0d0d0d;
-  padding-left: 50px;
-  padding-right: 50px;
   border: 2px solid #22222e;
   border-radius: 5px;
-}
-
-.wrap {
-  width: 100%;
-  overflow: auto;
-  padding: 2px;
-  margin: 0 auto;
-  align-content: center;
 }
 
 .headers {
@@ -53,83 +32,91 @@ ion-card-content {
   margin-bottom: 5px;
   margin-top: 10px;
   text-decoration: underline;
-  padding-left: 50px;
 }
 
 .info {
-  width: 350px;
-  font-size: medium;
-  padding-left: 25px;
+  width: 150px;
+  font-size: small;
+  padding-left: 5px;
+  padding-right: 5px;
   border: 1px solid #22222e;
   border-radius: 5px;
   margin-top: 10px;
-  margin-left: 50px;
+  margin-bottom: 10px;
+  margin-left: 5px;
+  background-color: #d0d0d0;
 }
 
 .desc-name {
   text-decoration: underline;
   font-size: medium;
   margin-top: 10px;
-  margin-left: 50px;
 }
 
 .desc-info {
-  width: 450px;
-  height: 50px;
+  width: auto;
+  height: 80px;
   font-size: medium;
-  padding-left: 25px;
+  padding-left: 5px;
+  padding-right: 5px;
   border: 1px solid #22222e;
   border-radius: 5px;
-  margin-left: 50px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 5px;
+  background-color: #d0d0d0;
+}
+
+.worker {
+  width: 175px;
+  font-size: small;
+  padding-left: 5px;
+  padding-right: 5px;
+  border: 1px solid #22222e;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 5px;
+  background-color: #d0d0d0;
 }
 
 .warranty-box {
   text-align: center;
   text-decoration: underline;
-  margin-top: 50px;
-  margin-left: 150px;
-  margin-right: 50px;
+  margin-top: 20px;
+  margin-left: 45px;
   border: 1px solid #22222e;
   border-radius: 5px;
   width: 100px;
+  height: 80px;
 }
 
 .breakdown-box {
   text-align: center;
   text-decoration: underline;
-  margin-top: 10px;
-  margin-left: 150px;
-  margin-right: 50px;
+  margin-top: 20px;
+  margin-left: 45px;
   border: 1px solid #22222e;
   border-radius: 5px;
   width: 100px;
+  height: 80px;
 }
 
 .job-comp {
   text-align: center;
   text-decoration: underline;
-  margin-top: 330px;
-  margin-left: 150px;
-  margin-right: 50px;
+  margin-top: 20px;
+  margin-left: 45px;
   border: 1px solid #22222e;
   border-radius: 5px;
   width: 100px;
+  height: 80px;
 }
 
 ion-checkbox {
-  margin-left: 35px;
+  margin-left: 38px;
   height: 25px;
   width: 25px;
-}
-
-.left {
-  float: left;
-  width: 50%;
-}
-
-.right {
-  float: right;
-  width: 50%;
 }
 
 .edit {
@@ -144,5 +131,24 @@ ion-checkbox {
 
 .delete {
   border-radius: 5px;
-  background-color: #ff0021;
+  background-color: #b02839;
+}
+
+@media screen and (min-width: 600px) {
+  ion-card {
+    padding-left: 32%;
+  }
+
+  ion-card-content {
+    width: 50%;
+  }
+
+  .info {
+    width: 250px;
+    font-size: medium;
+  }
+
+  .warranty-box {
+    margin-top: 80px
+  }
 }

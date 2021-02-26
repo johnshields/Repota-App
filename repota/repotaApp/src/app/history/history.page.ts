@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AccountService, JobReportService} from '../services/client_stubs';
-import {ActivatedRoute, Router} from '@angular/router';
+import {JobReportService} from '../services/client_stubs';
 
 @Component({
     selector: 'app-report-history',
@@ -12,7 +11,7 @@ export class HistoryPage implements OnInit {
     public errorMsg: string;
     public successMsg: string;
 
-    constructor(private api: JobReportService, private router: Router) {
+    constructor(private api: JobReportService) {
     }
 
     ngOnInit() {
