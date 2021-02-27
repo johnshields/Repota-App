@@ -7,7 +7,7 @@ ion-content {
 }
 
 .about {
-  margin-top: 265px;
+  margin-top: 270px;
   margin-left: 50%;
   margin-right: auto;
   transform: translate(-50%, -50%);
@@ -20,7 +20,7 @@ ion-content {
 .headers {
   color: #f5f6f9;
   margin-top: 20px;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
   text-decoration: underline;
 }
@@ -28,11 +28,11 @@ ion-content {
 .links {
   color: #2850d2;
   margin-top: 5px;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 800px) {
   ion-content {
     background-size: 750px 750px;
   }

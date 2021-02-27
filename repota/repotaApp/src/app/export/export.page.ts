@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {JobReportService} from '../services/client_stubs';
-import {ActivatedRoute} from '@angular/router';
-import * as html2pdf from 'html2pdf.js';
+import {ActivatedRoute, Router} from '@angular/router';
+import * as jspdf from 'jspdf';
+import domtoimage from 'dom-to-image';
 
 @Component({
     selector: 'app-display-report',
@@ -12,7 +13,7 @@ export class ExportPage implements OnInit {
     report: any = [];
     public errorMsg: string;
 
-    constructor(private api: JobReportService, private route: ActivatedRoute) {
+    constructor(private api: JobReportService, private route: ActivatedRoute, private router: Router) {
     }
 
     ngOnInit() {
@@ -26,17 +27,15 @@ export class ExportPage implements OnInit {
 
     // export report to a pdf
     onExportPDF() {
-        const options = {
-            filename: 'job_report.pdf',
-            image: {type: 'jpeg', quality: 0.98},
-            html2canvas: {scale: 2, logging: true, dpi: 192, letterRendering: true},
-            jsPDF: {unit: 'mm', format: 'a4', orientation: 'portrait'}
-        };
-        const content: Element = document.getElementById('job-report');
-
-        html2pdf()
-            .from(content)
-            .set(options)
-            .save();
+        const div = document.getElementById('job-report');
+        const options = { background: 'white', height: 1000, width: 800};
+        domtoimage.toPng(div, options).then(
+            (dataUrl) =>
+            {
+                const doc = new jspdf.jsPDF('portrait', 'mm', 'a4');
+                doc.addImage(dataUrl, 'PNG', 0, 0, 210, 297);
+                doc.save('job_report.pdf');
+            })
     }
 }
+

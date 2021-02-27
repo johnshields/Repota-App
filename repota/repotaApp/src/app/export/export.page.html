@@ -14,12 +14,11 @@
     <div class="card">
         <ion-item *ngFor="let report of report">
             <div class="card-content" id="job-report">
-                <!-- report - has to be mostly HTML for html2pdf to work right -->
+                <!-- report -->
                 <header>
-                    <p align="center">
-                        <img class="logo" src="./assets/images/repotaApp_logo.png" alt="logo"/></p>
-                    <h3 class="titles">Report Number: {{report["jobReportId"]}}</h3>
-                    <h3 class="titles">Date: {{report["date"]}}</h3>
+                    <img class="logo" src="./assets/images/repotaApp_logo.png" alt="logo"/>
+                    <h3 class="num">Report Number: {{report["jobReportId"]}}</h3>
+                    <h3 class="date">Date: {{report["date"]}}</h3>
                 </header>
                 <hr style="height:2px;border-width:0;color:gray;background-color:black">
                 <div>
@@ -53,7 +52,7 @@
                     <h1 class="info"> Parts Used: {{report["parts"]}}</h1>
                     <h1 class="info"> Work Hours: {{report["workHours"]}}</h1>
                     <h1 class="info"> Technician: {{report["workerName"]}}</h1>
-                    <h4 class="box-labels"> Job Complete:
+                    <h4 class="box-labels"> Complete:
                         <label>
                             <input type="checkbox" class="check-boxes" disabled [(ngModel)]="report.jobComplete">
                         </label>
