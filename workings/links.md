@@ -36,12 +36,8 @@ https://www.c-sharpcorner.com/article/how-to-export-pdf-in-angular/
 
 ###### How To Generate PDF In Angular
 https://stackoverflow.com/questions/55019343/how-to-generate-a-pdf-using-angular-7
+https://tinyurl.com/ydc6yqvr
 
-###### Theming Angular - Light & Dark Mode
-https://www.youtube.com/watch?v=r6Ygw9L55zg&ab_channel=ShaheerShukur
-
-###### Deploying a Desktop App - Ionic Documentation
-https://ionicframework.com/docs/deployment/desktop-app
 
 # MySQL - Database
 ###### Using MySQL Joins

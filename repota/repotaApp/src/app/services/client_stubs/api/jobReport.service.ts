@@ -26,7 +26,7 @@ import {Configuration} from '../configuration';
 @Injectable()
 export class JobReportService {
 
-    protected basePath = 'https://horton-service.com/api/v1'; // eb
+    protected basePath = 'https://api.repota-service.com/api/v1'; // eb
     //protected basePath =  'http://localhost:8080/api/v1'; // local
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();

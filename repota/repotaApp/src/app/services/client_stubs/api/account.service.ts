@@ -10,10 +10,9 @@
 
 import {Inject, Injectable, Optional} from '@angular/core';
 import {
-    HttpClient, HttpHeaders, HttpParams,
+    HttpClient, HttpHeaders,
     HttpResponse, HttpEvent
 } from '@angular/common/http';
-import {CustomHttpUrlEncodingCodec} from '../encoder';
 
 import {Observable} from 'rxjs';
 
@@ -25,7 +24,7 @@ import {Configuration} from '../configuration';
 @Injectable()
 export class AccountService {
 
-    protected basePath = 'https://horton-service.com/api/v1'; // eb
+    protected basePath = 'https://api.repota-service.com/api/v1'; // eb
     //protected basePath =  'http://localhost:8080/api/v1'; // local
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();

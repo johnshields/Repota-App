@@ -33,6 +33,7 @@ export class LoginPage implements OnInit {
                 console.log('Success');
             } else {
                 this.setErrorMessage(data.message);
+                console.log('Credentials are incorrect');
             }
         });
     }
