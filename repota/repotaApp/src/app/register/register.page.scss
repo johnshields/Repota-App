@@ -73,6 +73,7 @@ ion-content {
   height: 45px;
 }
 
+// computer monitors
 @media screen and (min-width: 800px) {
   ion-content {
     background-size: 750px 750px;
@@ -81,21 +82,21 @@ ion-content {
   .user {
     top: 30%;
     font-size: 20px;
-    width: 350px;
+    width: 300px;
     height: 60px;
   }
 
   .name {
     top: 40%;
     font-size: 20px;
-    width: 350px;
+    width: 300px;
     height: 60px;
   }
 
   .password {
     top: 50%;
     font-size: 20px;
-    width: 350px;
+    width: 300px;
     height: 60px;
   }
 

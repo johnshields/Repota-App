@@ -1,29 +1,29 @@
-.num {
-  margin-left: 15%;
-}
-
-.date {
-  margin-left: 16%;
-}
-
 .logo {
   width: 75px;
   height: 75px;
-  margin-left: 19%;
 }
 
-hr {
-  margin-right: 60%;
+.num {
+  padding-left: 36%;
 }
 
-.card-content {
-  width: 100%;
+.date {
+  padding-left: 38%;
+}
+
+ion-title {
+  font-size: medium;
+  color: #363636;
+  font-weight: bold;
+}
+
+.report-content {
+  width: 35%;
   padding-top: 10px;
   background-color: white;
   color: #0d0d0d;
-  padding-left: 50px;
-  padding-right: 50px;
-  size: A4;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .headers {
@@ -32,45 +32,79 @@ hr {
   margin-bottom: 5px;
   margin-top: 10px;
   text-decoration: underline;
-  padding-left: 50px;
 }
 
 .info {
-  width: 350px;
+  width: 250px;
   font-size: medium;
-  padding-left: 25px;
+  padding-left: 5px;
+  padding-right: 5px;
   border: 1px solid #22222e;
   border-radius: 5px;
   margin-top: 10px;
-  margin-left: 50px;
+  margin-left: 5px;
 }
 
 .desc-name {
   text-decoration: underline;
   font-size: medium;
-  margin-left: 50px;
+  margin-top: 10px;
 }
 
 .desc-info {
-  width: 350px;
-  height: 50px;
+  width: 300px;
+  height: 80px;
   font-size: medium;
-  padding-left: 15px;
+  padding-left: 5px;
+  padding-right: 5px;
   border: 1px solid #22222e;
   border-radius: 5px;
-  margin-left: 50px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 5px;
 }
 
-.box-labels {
+.warranty-box {
+  text-align: center;
   margin-top: 10px;
-  margin-left: 50px;
+  margin-left: 5px;
   border: 1px solid #22222e;
   border-radius: 5px;
-  width: 175px;
-  padding-left: 15px;
+  width: 120px;
+}
+
+.breakdown-box {
+  text-align: center;
+  margin-top: 10px;
+  margin-left: 5px;
+  border: 1px solid #22222e;
+  border-radius: 5px;
+  width: 120px;
+}
+
+.worker {
+  width: 250px;
+  font-size: medium;
+  padding-left: 5px;
+  padding-right: 5px;
+  border: 1px solid #22222e;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 5px;
+}
+
+.job-comp {
+  text-align: center;
+  margin-top: 5px;
+  margin-left: 5px;
+  border: 1px solid #22222e;
+  border-radius: 5px;
+  width: 120px;
 }
 
 .pdf {
-  background-color: #29c467;
   border-radius: 5px;
+  background-color: #29c467;
+  margin-top: 20px;
 }

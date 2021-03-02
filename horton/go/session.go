@@ -25,7 +25,7 @@ func CheckForCookie(c *gin.Context) bool {
 	val, err := c.Cookie("session_id")
 	fmt.Println("Cookie:", val)
 
-	// Logout if no session_id is found
+	// Logout if no session_id (cookie) is found
 	if err != nil {
 		log.Println("[ALERT] no cookie found", err)
 		Logout(c)

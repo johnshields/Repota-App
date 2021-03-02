@@ -27,13 +27,13 @@ export class ExportPage implements OnInit {
 
     // export report to a pdf
     onExportPDF() {
-        const div = document.getElementById('job-report');
-        const options = { background: 'white', height: 1000, width: 800};
-        domtoimage.toPng(div, options).then(
+        const content = document.getElementById('job-report');
+        const options = { background: 'white', width: 650, quality: 2};
+        domtoimage.toPng(content, options).then(
             (dataUrl) =>
             {
                 const doc = new jspdf.jsPDF('portrait', 'mm', 'a4');
-                doc.addImage(dataUrl, 'PNG', 0, 0, 210, 297);
+                doc.addImage(dataUrl, 'jpeg', 0, 0, 210, 297);
                 doc.save('job_report.pdf');
             })
     }

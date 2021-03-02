@@ -30,6 +30,9 @@ import (
 func CreateReport(c *gin.Context) {
 	var report models.JobReport
 
+	// check for logged in user's cookie
+	CheckForCookie(c)
+
 	// Blind data to object, else throw error
 	if err := c.BindJSON(&report); err != nil {
 		fmt.Println(err.Error())
@@ -172,6 +175,8 @@ func GetReports(c *gin.Context) {
 		c.JSON(401, models.Error{Code: 401, Messages: "User is not logged in!"})
 	}
 
+	CheckForCookie(c)
+
 	// JOIN Query to get worker's job reports
 	selDB, err := db.Query("SELECT DISTINCT jr.job_report_id, jr.date_stamp, jr.vehicle_model, "+
 		"jr.vehicle_reg, jr.miles_on_vehicle, jr.vehicle_location, jr.warranty, jr.breakdown, "+
@@ -221,6 +226,8 @@ func UpdateReport(c *gin.Context) {
 	// Testing Log message
 	fmt.Printf("Get Report with ID: " + reportId)
 
+	CheckForCookie(c)
+
 	// Blind data to object, else throw error
 	if err := c.BindJSON(&report); err != nil {
 		fmt.Println(err.Error())
@@ -256,6 +263,8 @@ func DeleteReport(c *gin.Context) {
 	reportId := c.Params.ByName("jobReportId")
 	// Testing Log message
 	fmt.Printf("Get Report with ID: " + reportId)
+
+	CheckForCookie(c)
 
 	//Create query
 	res, err := db.Exec("DELETE FROM jobreports WHERE job_report_id=?", reportId)

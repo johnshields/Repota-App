@@ -32,14 +32,14 @@
                             <ion-col>
                                 <ion-label class="headers"> Vehicle Details:</ion-label>
                                 <ion-input name="vehicleModel" ngModel required="true" #vehicleModel="ngModel"
-                                           type="text" placeholder="Vehicle Model" class="input"></ion-input>
+                                           type="text" placeholder="Model" class="input"></ion-input>
                                 <ion-input name="vehicleReg" ngModel required="true" #vehicleReg="ngModel"
-                                           type="text" placeholder="Vehicle Registration" class="input"></ion-input>
+                                           type="text" placeholder="Registration" class="input"></ion-input>
                                 <ion-input name="milesOnVehicle" ngModel required="true" #milesOnVehicle="ngModel"
-                                           type="number" placeholder="Miles on Vehicle" class="input" min="0">
+                                           type="number" placeholder="Mileage" class="input" min="0">
                                 </ion-input>
                                 <ion-input name="vehicleLocation" ngModel required="true" #vehicleLocation="ngModel"
-                                           type="text" placeholder="Vehicle Location" class="input">
+                                           type="text" placeholder="Location" class="input">
                                 </ion-input>
                             </ion-col>
                             <!-- Customer Details -->
@@ -61,9 +61,9 @@
                                 <ion-textarea name="correction" ngModel required="true" #correction="ngModel"
                                               type="text" placeholder="Correction of problem..." class="large-input">
                                 </ion-textarea>
-                                <ion-input name="parts" ngModel required="true" #parts="ngModel"
-                                           type="text" placeholder="Parts used in job..." class="input">
-                                </ion-input>
+                                <ion-textarea name="parts" ngModel required="true" #parts="ngModel"
+                                           type="text" placeholder="Parts used in job..." class="large-input">
+                                </ion-textarea>
                                 <ion-input name="workHours" ngModel required="true" #workHours="ngModel"
                                            type="number" placeholder="Work Hours" class="input" min="0">
                                 </ion-input>

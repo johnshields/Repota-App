@@ -14,6 +14,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -34,6 +35,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
         MatCardModule,
         MatDialogModule,
         MatButtonModule,
+        MatCheckboxModule,
         BrowserAnimationsModule,
         ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})],
     providers: [{provide: LocationStrategy, useClass: HashLocationStrategy},

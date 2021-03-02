@@ -18,6 +18,7 @@ ion-card-content {
   font-weight: bold;
   margin-bottom: 5px;
   margin-top: 10px;
+  padding-left: 20px;
   text-decoration: underline;
 }
 
@@ -41,7 +42,7 @@ ion-textarea {
   font-size: small;
   border: 1px solid #22222e;
   border-radius: 5px;
-  width: 150px;
+  width: 190px;
   height: 35px;
   padding-left: 15px;
   margin-top: 10px;
@@ -51,7 +52,7 @@ ion-textarea {
   font-size: small;
   border: 1px solid #22222e;
   border-radius: 5px;
-  width: 190px;
+  width: auto;
   height: 80px;
   margin-top: 10px;
 }
@@ -169,8 +170,14 @@ ion-checkbox {
     position: center;
   }
 
+  .input {
+    font-size: medium;
+    width: 250px;
+  }
+
+
   .large-input {
-    width: 280px;
+    font-size: medium;
   }
 
 
