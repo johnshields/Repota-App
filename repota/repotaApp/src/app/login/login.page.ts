@@ -3,13 +3,13 @@ import {AccountService, InlineObject} from '../services/client_stubs';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 
+
 @Component({
     selector: 'app-account',
     templateUrl: 'login.page.html',
     styleUrls: ['login.page.scss']
 })
 export class LoginPage implements OnInit {
-    errorMsg: string;
     private errorMessage;
 
     constructor(private api: AccountService, private router: Router) {
@@ -17,6 +17,10 @@ export class LoginPage implements OnInit {
 
     setErrorMessage(error: String) {
         this.errorMessage = error;
+    }
+
+    getErrorMessage() {
+        return this.errorMessage;
     }
 
     login(form: NgForm) {
@@ -29,15 +33,13 @@ export class LoginPage implements OnInit {
         // login worker
         this.api.login(object).subscribe(data => {
             if (form.valid) {
-                this.router.navigate(['/home']);
                 console.log('Success');
+                this.router.navigate(['/home']);
             } else {
                 this.setErrorMessage(data.message);
-                console.log('Credentials are incorrect');
             }
         });
     }
 
-    ngOnInit() {
-    }
+    ngOnInit() {}
 }

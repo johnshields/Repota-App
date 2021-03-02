@@ -13,6 +13,7 @@
 <ion-content>
     <div class="item" align="center">
         <form (submit)="registerWorker(workerForm)" #workerForm="ngForm">
+            <mat-error *ngIf="username.invalid">{{getErrorMessage()}}</mat-error>
             <ion-input class="user" type="text" name="username" ngModel required="true"
                        placeholder="Enter Username" #username="ngModel">
             </ion-input>

@@ -110,5 +110,5 @@ func removeSession(userId int) bool {
 
 // Function to logout a user.
 func Logout(c *gin.Context) {
-	c.JSON(200, models.Error{Code: 200, Messages: "Worker logged out."})
+	c.JSON(200, models.Error{Code: 200, Messages: "User logged out."})
 }

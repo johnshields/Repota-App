@@ -85,7 +85,7 @@ VALUES (121, 'Freddie Quell', 'The passenger side door will not open.'),
        (651, 'Mick Fanning', 'The hand brake is stuck.');
 COMMIT;
 
--- session table for session cookies --
+-- session table for login sessions --
 CREATE TABLE session
 (
     id           VARCHAR(255)        NOT NULL, -- UUID

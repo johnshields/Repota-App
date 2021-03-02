@@ -7,36 +7,20 @@ ion-content {
 }
 
 .user {
-  background-color: #2a2a2a;
   position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  font-size: 20px;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
+  background-color: #2a2a2a;
+  margin-top: 70%;
   margin-left: auto;
   margin-right: auto;
-  width: 200px;
-  height: 45px;
+  padding-left: 10px;
 }
 
 .password {
   background-color: #2a2a2a;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  font-size: 20px;
-  border: none;
-  border-radius: 5px;
+  margin-top: 90%;
   margin-left: auto;
   margin-right: auto;
-  width: 200px;
-  height: 45px;
+  padding-left: 10px;
 }
 
 .login-btn {
@@ -57,20 +41,25 @@ ion-content {
   height: 50px;
 }
 
+button {
+  background-color: #ff0021;
+}
+
+// computer monitors
 @media screen and (min-width: 800px) {
   ion-content {
     background-size: 750px 750px;
   }
 
   .user {
-    top: 35%;
+    margin-top: 15%;
   }
 
   .password {
-    top: 45%;
+    margin-top: 20%;
   }
 
   .login-btn {
-    top: 55%;
+    top: 58%;
   }
 }

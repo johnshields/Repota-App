@@ -19,6 +19,10 @@ export class RegisterPage implements OnInit {
         this.errorMessage = error;
     }
 
+    getErrorMessage() {
+        return this.errorMessage;
+    }
+
     registerWorker(form: NgForm) {
         const object: InlineObject = {
             username: form.value.username,
