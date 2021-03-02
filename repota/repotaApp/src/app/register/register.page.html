@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="register.page.scss">
 <ion-header>
     <ion-toolbar>
         <!-- hamburger menu -->
@@ -13,16 +14,26 @@
 <ion-content>
     <div class="item" align="center">
         <form (submit)="registerWorker(workerForm)" #workerForm="ngForm">
-            <mat-error *ngIf="username.invalid">{{getErrorMessage()}}</mat-error>
-            <ion-input class="user" type="text" name="username" ngModel required="true"
-                       placeholder="Enter Username" #username="ngModel">
-            </ion-input>
-            <ion-input class="name" type="text" name="name" ngModel required="true"
-                       placeholder="Enter Full Name" #name="ngModel" color="NONE">
-            </ion-input>
-            <ion-input class="password" type="password" name="password" ngModel required="true"
-                       placeholder="Enter Password" #password="ngModel">
-            </ion-input>
+            <mat-error *ngIf="workerForm.invalid">{{getErrorMessage()}}</mat-error>
+            <!-- username input -->
+            <mat-form-field class="user">
+                <input matInput type="text" name="username" ngModel required placeholder="Enter Username"
+                       #username="ngModel"/>
+                <mat-error *ngIf="username.invalid">Please enter a username.</mat-error>
+            </mat-form-field>
+            <!-- name input -->
+            <mat-form-field class="name">
+                <input matInput type="text" name="name" ngModel required placeholder="Enter Full Name"
+                       #name="ngModel"/>
+                <mat-error *ngIf="username.invalid">Please enter your name.</mat-error>
+            </mat-form-field>
+            <!-- password input -->
+            <mat-form-field class="password">
+                <input matInput type="password" name="password" ngModel required placeholder="Enter Password"
+                       #password="ngModel"/>
+                <mat-error *ngIf="username.invalid">Please enter a password.</mat-error>
+            </mat-form-field>
+            <!-- register user -->
             <ion-button class="register-btn" size="large" type="submit" [routerLink]="['/tabs/home']"
                         [disabled]="!workerForm.form.valid" expand="block" color="NONE">Register
             </ion-button>

@@ -7,19 +7,35 @@ ion-content {
 }
 
 .user {
-  position: absolute;
   background-color: #2a2a2a;
-  margin-top: 70%;
+  position: absolute;
+  top: 38%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
   margin-left: auto;
   margin-right: auto;
+  width: 200px;
+  height: 45px;
   padding-left: 10px;
 }
 
 .password {
   background-color: #2a2a2a;
-  margin-top: 90%;
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  border: none;
+  border-radius: 5px;
   margin-left: auto;
   margin-right: auto;
+  width: 200px;
+  height: 45px;
   padding-left: 10px;
 }
 
@@ -52,14 +68,20 @@ button {
   }
 
   .user {
-    margin-top: 15%;
+    top: 33%;
+    font-size: 20px;
+    width: 350px;
+    height: 60px;
   }
 
   .password {
-    margin-top: 20%;
+    top: 45%;
+    font-size: 20px;
+    width: 350px;
+    height: 60px;
   }
 
   .login-btn {
-    top: 58%;
+    top: 56%;
   }
 }

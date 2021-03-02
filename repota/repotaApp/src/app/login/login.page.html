@@ -13,19 +13,21 @@
 <ion-content>
     <div class="item" align="center">
         <form (submit)="login(workerForm)" #workerForm="ngForm">
-            <!-- Error message -->
-            <mat-error>{{getErrorMessage()}}</mat-error>
-
+            <!-- error message -->
+            <mat-error *ngIf="workerForm.invalid">{{getErrorMessage()}}</mat-error>
+            <!-- username input -->
             <mat-form-field class="user">
-                    <input matInput type="text" name="username" ngModel required placeholder="Enter Username"
-                           #username="ngModel"/>
+                <input matInput type="text" name="username" ngModel required placeholder="Enter Username"
+                       #username="ngModel"/>
                 <mat-error *ngIf="username.invalid">Please enter your username.</mat-error>
             </mat-form-field>
+            <!-- password input -->
             <mat-form-field class="password">
                 <input matInput type="password" name="password" ngModel required placeholder="Enter Password"
                        #password="ngModel"/>
                 <mat-error *ngIf="username.invalid">Please enter your password.</mat-error>
             </mat-form-field>
+            <!-- login user -->
             <ion-button class="login-btn" size="large" type="submit"
                         [disabled]="!workerForm.form.valid" expand="block" color="NONE">Login
             </ion-button>

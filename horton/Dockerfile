@@ -23,7 +23,6 @@ COPY . .
 
 # ports
 EXPOSE 8080
-EXPOSE 3306
 
 # build horton
 RUN go build
