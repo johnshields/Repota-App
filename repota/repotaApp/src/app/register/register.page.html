@@ -34,7 +34,7 @@
                 <mat-error *ngIf="username.invalid">Please enter a password.</mat-error>
             </mat-form-field>
             <!-- register user -->
-            <ion-button class="register-btn" size="large" type="submit" [routerLink]="['/tabs/home']"
+            <ion-button class="register-btn" size="large" type="submit"
                         [disabled]="!workerForm.form.valid" expand="block" color="NONE">Register
             </ion-button>
         </form>

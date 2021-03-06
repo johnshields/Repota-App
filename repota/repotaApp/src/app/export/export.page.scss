@@ -3,14 +3,6 @@
   height: 75px;
 }
 
-.num {
-  padding-left: 36%;
-}
-
-.date {
-  padding-left: 38%;
-}
-
 ion-title {
   font-size: medium;
   color: #363636;
@@ -18,7 +10,7 @@ ion-title {
 }
 
 .report-content {
-  width: 35%;
+  width: auto;
   padding-top: 10px;
   background-color: white;
   color: #0d0d0d;
@@ -107,4 +99,19 @@ ion-title {
   border-radius: 5px;
   background-color: #29c467;
   margin-top: 20px;
+}
+
+// computer monitors
+@media screen and (min-width: 1224px) {
+  .report-content {
+    width: 35%;
+  }
+
+  .num {
+    padding-left: 37%;
+  }
+
+  .date {
+    padding-left: 39%;
+  }
 }

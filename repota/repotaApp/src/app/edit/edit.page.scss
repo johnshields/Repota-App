@@ -157,7 +157,8 @@ ion-checkbox {
   height: 50px;
 }
 
-@media screen and (min-width: 600px) {
+// computer monitors
+@media screen and (min-width: 1224px) {
   ion-card {
     padding-left: 28%;
   }

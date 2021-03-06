@@ -34,19 +34,19 @@ Repota is designed for automobile technicians to fill out service reports for au
 
 # Repository Contents
 
-#### [Dissertation](https://github.com/johnshields/AP-MD-FYP/tree/main/dissertation)
+#### [Dissertation](https://github.com/johnshields/Repota-App/tree/main/dissertation)
 The Project's `Dissertation`.
 
-#### [Repota](https://github.com/johnshields/AP-MD-FYP/tree/main/Repota/repotaApp)
+#### [Repota](https://github.com/johnshields/Repota-App/tree/main/repota/repotaApp/src/app)
 The Repota `Application`.
 
-#### [Horton](https://github.com/johnshields/AP-MD-FYP/tree/main/horton)
+#### [Horton](https://github.com/johnshields/Repota-App/tree/main/horton)
 The Application's `Backend Server`.
 
-#### [Database](https://github.com/johnshields/AP-MD-FYP/tree/main/database)
+#### [Database](https://github.com/johnshields/Repota-App/tree/main/database)
 The script for the Application's `Database`.
 
-#### [Workings](https://github.com/johnshields/AP-MD-FYP/tree/main/workings)
+#### [Workings](https://github.com/johnshields/Repota-App/tree/main/workings)
 All workings for the project.
 
 ***

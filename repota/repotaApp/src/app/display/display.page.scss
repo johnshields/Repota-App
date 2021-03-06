@@ -75,7 +75,7 @@ ion-card-content {
 .warranty-box {
   text-align: center;
   text-decoration: underline;
-  margin-top: 20px;
+  margin-top: 10px;
   margin-left: 100px;
   border: 1px solid #22222e;
   border-radius: 5px;
@@ -126,7 +126,8 @@ ion-checkbox {
   background-color: #b02839;
 }
 
-@media screen and (min-width: 600px) {
+// computer monitors
+@media screen and (min-width: 1224px) {
   ion-card {
     padding-left: 32%;
   }

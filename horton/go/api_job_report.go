@@ -26,12 +26,9 @@ import (
 	"net/http"
 )
 
-// Function that takes tin the input data and calls the function InsertJobReport to create a new report.
+// Function that takes tin the input data and calls the function insertJobReport to create a new report.
 func CreateReport(c *gin.Context) {
 	var report models.JobReport
-
-	// check for logged in user's cookie
-	CheckForCookie(c)
 
 	// Blind data to object, else throw error
 	if err := c.BindJSON(&report); err != nil {
@@ -39,7 +36,7 @@ func CreateReport(c *gin.Context) {
 	}
 
 	// Insert Job Report details
-	if err := InsertJobReport(report, wa.Username); err == nil {
+	if err := insertJobReport(report, wa.Username); err == nil {
 		c.JSON(201, "Report created successfully")
 	} else {
 		c.JSON(401, models.Error{Code: 401, Messages: "Not able to create Report"})
@@ -49,7 +46,7 @@ func CreateReport(c *gin.Context) {
 
 // Function that creates a new report by starting and committing a MySQL transaction
 // to insert into the tables, jobreports and customers.
-func InsertJobReport(report models.JobReport, username string) error {
+func insertJobReport(report models.JobReport, username string) error {
 
 	db := config.DbConn()
 	fmt.Println("\n[INFO] Processing Report Details...",
@@ -70,7 +67,7 @@ func InsertJobReport(report models.JobReport, username string) error {
 		return errors.New("error creating Report")
 	}
 
-	// Check logged in worker
+	// Check logged in user
 	if !isValidAccount(username) {
 		log.Println("\n[ALERT] User has not logged in!")
 		return errors.New("error creating Report")
@@ -85,8 +82,6 @@ func InsertJobReport(report models.JobReport, username string) error {
 	// execute insert into the table customers
 	customerResult, err := insertCustomer.Exec(report.CustomerName, report.Complaint)
 	db.Query("COMMIT") // commit MySQL transition
-
-	log.Println(report.JobReportId)
 
 	if err != nil {
 		log.Println("\n[ALERT] MySQL Error: Error Inserting Report Details.\n", err)
@@ -106,11 +101,11 @@ func GetReportById(c *gin.Context) {
 	var res []models.JobReport
 	worker := wa.Username
 
+	// check for logged in user's cookie
 	CheckForCookie(c)
 
 	// Get id from request
 	reportId := c.Params.ByName("jobReportId")
-	// Testing Log message
 	fmt.Printf("Get Report with ID: " + reportId)
 
 	if !isValidAccount(worker) {
@@ -169,7 +164,6 @@ func GetReports(c *gin.Context) {
 	var res []models.JobReport
 	var report models.JobReport
 
-	// Check logged in worker
 	if !isValidAccount(worker) {
 		log.Println("\n[ALERT] User is not logged in!")
 		c.JSON(401, models.Error{Code: 401, Messages: "User is not logged in!"})
@@ -191,8 +185,6 @@ func GetReports(c *gin.Context) {
 		log.Println("\n[ALERT] Failed to process reports! \n500 Internal Server Error.")
 		c.JSON(500, nil)
 	}
-
-	fmt.Println("\n[INFO] Loading model...")
 
 	// Run through each record and read values
 	for selDB.Next() {
@@ -223,7 +215,6 @@ func UpdateReport(c *gin.Context) {
 
 	// Get id from request
 	reportId := c.Params.ByName("jobReportId")
-	// Testing Log message
 	fmt.Printf("Get Report with ID: " + reportId)
 
 	CheckForCookie(c)
@@ -261,17 +252,15 @@ func DeleteReport(c *gin.Context) {
 
 	// Get id from request
 	reportId := c.Params.ByName("jobReportId")
-	// Testing Log message
 	fmt.Printf("Get Report with ID: " + reportId)
 
 	CheckForCookie(c)
 
-	//Create query
+	// Create query
 	res, err := db.Exec("DELETE FROM jobreports WHERE job_report_id=?", reportId)
 
 	if err != nil {
 		fmt.Printf("500 Internal Server Error.")
-		// return user friendly message to client
 		c.JSON(500, nil)
 	}
 

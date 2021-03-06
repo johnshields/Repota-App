@@ -28,6 +28,7 @@ func CheckForCookie(c *gin.Context) bool {
 	// Logout if no session_id (cookie) is found
 	if err != nil {
 		log.Println("[ALERT] no cookie found", err)
+		c.JSON(403, models.Error{Code: 403, Messages: "User has no cookie."})
 		Logout(c)
 		return false
 	}

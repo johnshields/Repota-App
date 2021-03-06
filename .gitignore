@@ -10,13 +10,11 @@ plugins/
 *.exe
 *.exe~
 GIT_REPO_ID
+*.save
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/
 .ebignore
-
-# dissertation
-dissertation.pdf
 
 # JetBrains IDEs
 .idea
