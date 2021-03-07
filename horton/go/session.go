@@ -4,7 +4,7 @@
  *
  * Session
  * Handles creating, generating, removing sessions and cookie checking.
- * Plus logout for when user has no cookie (not logged in).
+ * Plus logout for logging out user or when user has no cookie (not logged in).
  */
 
 package openapi
@@ -109,7 +109,30 @@ func removeSession(userId int) bool {
 	return true
 }
 
-// Function to logout a user.
+// Function to logout a user by replacing their cookie with one that expires in one second.
 func Logout(c *gin.Context) {
-	c.JSON(200, models.Error{Code: 200, Messages: "User logged out."})
+
+	db := config.DbConn()
+	username := wa.Username
+
+	// Check for existing session, remove if one exits.
+	if removeSession(wa.Id) {
+		// Create new session_id for user who logged out.
+		err, session := createSessionId(username)
+
+		if err != nil {
+			fmt.Print(err)
+			c.JSON(500, models.Error{Code: 500, Messages: "Could not create new session_id"})
+		} else {
+			// set a cookie of one second for logged out user.
+			c.SetCookie("session_id", session.Token, 1, "/",
+				"", false, false)
+			c.JSON(204, models.Error{Code: 204, Messages: "User has been logged out"})
+			fmt.Println("\n[INFO]", username, "logged out")
+		}
+	} else {
+		fmt.Println("\n[ALERT] Could not logout", username)
+		c.JSON(500, models.Error{Code: 500, Messages: "Could not logout User"})
+	}
+	defer db.Close()
 }

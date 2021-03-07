@@ -26,7 +26,7 @@ export class LoginPage implements OnInit {
 
     /**
      * @title Error message Handlers
-     * @desc Functions are used to set and get error message for incorrect data.
+     * @desc Functions are used to set and get error message for error responses.
      */
     setErrorMessage(error: String) {
         this.errorMessage = error;

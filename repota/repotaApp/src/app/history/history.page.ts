@@ -27,6 +27,8 @@ export class HistoryPage implements OnInit {
             this.reports = data;
             console.log('[INFO] Reports have been processed.');
             console.log(this.reports);
+        }, error => {
+            console.log(error);
         });
     }
 

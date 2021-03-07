@@ -1,12 +1,13 @@
 import {Inject, Injectable, Optional} from '@angular/core';
 import {
     HttpClient, HttpHeaders,
-    HttpResponse, HttpEvent
+    HttpResponse, HttpEvent, HttpParams
 } from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {InlineObject} from '../model/inlineObject';
 import {BASE_PATH, COLLECTION_FORMATS} from '../variables';
 import {Configuration} from '../configuration';
+import {CustomHttpUrlEncodingCodec} from '../encoder';
 
 /**
  * @author John Shields
@@ -138,6 +139,54 @@ export class AccountService {
         return this.httpClient.request<any>('post', `${this.basePath}/register`,
             {
                 body: body,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Log out
+     * Attempts to log a user out
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public logout(observe?: 'body', reportProgress?: boolean): Observable<Array<InlineObject>>;
+    public logout(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<InlineObject>>>;
+    public logout(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<InlineObject>>>;
+    public logout(observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+
+        let headers = this.defaultHeaders;
+
+        // authentication (LoginRequired) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys['session_id']) {
+            queryParameters = queryParameters.set('session_id', this.configuration.apiKeys['session_id']);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [];
+
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.request<any>('get', `${this.basePath}/logout`,
+            {
+                params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

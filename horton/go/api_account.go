@@ -52,16 +52,16 @@ func Login(c *gin.Context) {
 	if err := bcrypt.CompareHashAndPassword([]byte(wa.Password), []byte(password)); err == nil {
 		fmt.Println("[INFO] User logged in.")
 
-		// Check for existing session, remove if one exits
+		// Check for existing session, remove if one exits.
 		if removeSession(wa.Id) {
-			// Create new session_id for user who logged in
+			// Create new session_id for user who logged in.
 			err, session := createSessionId(username)
 
 			if err != nil {
 				fmt.Print(err)
 				c.JSON(500, models.Error{Code: 500, Messages: "Could not create new session_id"})
 			} else {
-				// set a cookie for logged in user
+				// set a cookie for logged in user.
 				c.SetCookie("session_id", session.Token, session.Expiry, "/",
 					"", false, false)
 				c.JSON(204, nil)
@@ -141,9 +141,11 @@ func registerNewUser(c *gin.Context, username, name, password string) error {
 
 	result, err := insert.Exec(username, name, hashedPassword)
 
+	// return MySQL error if there is a duplicate entry.
 	if err != nil {
-		c.JSON(500, nil)
-		log.Println("\n[ALERT] MySQL Error: Error Creating new user account:\n", err)
+		c.JSON(400, models.Error{Code: 400, Messages: "Please make your name more unique"})
+		log.Println("\n[ALERT] MySQL Error: Duplicate entry:\n", err)
+		return err
 	}
 
 	fmt.Println("\n[INFO] Print MySQL Results for user account:\n", result)

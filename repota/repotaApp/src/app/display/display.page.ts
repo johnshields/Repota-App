@@ -26,6 +26,8 @@ export class DisplayPage implements OnInit {
             console.log(this.route.snapshot.params['jobReportId']);
             this.report = data;
             console.log(data);
+        }, error => {
+            console.log(error);
         });
     }
 
