@@ -18,7 +18,7 @@
                     <ion-card-header>
                         <p align="center">
                             <img class="logo" src="./assets/images/repotaApp_logo.png" alt="logo"/>
-                            <ion-title class="title">Create Report</ion-title>
+                            <ion-label class="title">Create Report</ion-label>
                         </p>
                     </ion-card-header>
                     <hr style="height:2px;border-width:0;color:gray;background-color:black">
@@ -42,6 +42,16 @@
                                 <ion-input name="vehicleLocation" ngModel required="true" #vehicleLocation="ngModel"
                                            type="text" placeholder="Location" class="input">
                                 </ion-input>
+                                <ion-list *ngFor="let i of list1">
+                                    <mat-checkbox [(ngModel)]="i.checked"
+                                                  ngModel="warranty" name="warranty">{{i.title}}
+                                    </mat-checkbox>
+                                </ion-list>
+                                <ion-list *ngFor="let i of list2">
+                                    <mat-checkbox [(ngModel)]="i.checked" ngModel="breakdown"
+                                                  name="breakdown">{{i.title}}
+                                    </mat-checkbox>
+                                </ion-list>
                             </ion-col>
                             <!-- Customer Details -->
                             <ion-col>
@@ -68,40 +78,11 @@
                                 <ion-input name="workHours" ngModel required="true" #workHours="ngModel"
                                            type="number" placeholder="Work Hours" class="input" min="0">
                                 </ion-input>
-                            </ion-col>
-                            <!-- Check Boxes -->
-                            <ion-col>
-                                <ion-label>
-                                    <ion-title class="warranty-box">Warranty
-                                        <ion-list class="check-boxes" *ngFor="let i of list1">
-                                            <ion-checkbox [(ngModel)]="i.checked"
-                                                          ngModel="warranty" name="warranty">{{i.title}}
-                                            </ion-checkbox>
-                                        </ion-list>
-                                    </ion-title>
-                                </ion-label>
-                            </ion-col>
-                            <ion-col>
-                                <ion-label>
-                                    <ion-title class="breakdown-box">Breakdown
-                                        <ion-list class="check-boxes" *ngFor="let i of list2">
-                                            <ion-checkbox [(ngModel)]="i.checked" ngModel="breakdown"
-                                                          name="breakdown">{{i.title}}
-                                            </ion-checkbox>
-                                        </ion-list>
-                                    </ion-title>
-                                </ion-label>
-                            </ion-col>
-                            <ion-col>
-                                <ion-label>
-                                    <ion-title class="job-comp-box">Complete
-                                        <ion-list class="check-boxes" *ngFor="let i of list3">
-                                            <ion-checkbox [(ngModel)]="i.checked" ngModel="jobComplete"
-                                                          name="jobComplete">{{i.title}}
-                                            </ion-checkbox>
-                                        </ion-list>
-                                    </ion-title>
-                                </ion-label>
+                                <ion-list *ngFor="let i of list3">
+                                    <mat-checkbox [(ngModel)]="i.checked" ngModel="jobComplete"
+                                                  name="jobComplete">{{i.title}}
+                                    </mat-checkbox>
+                                </ion-list>
                             </ion-col>
                         </ion-row>
                     </div>

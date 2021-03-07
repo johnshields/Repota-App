@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
-import {AccountService} from './services/client_stubs';
+import {AccountService} from './services/api-service';
 
 /**
  * @author John Shields
@@ -19,11 +19,11 @@ export class AppComponent {
 
     // Logout user by calling API and go to the Account Page.
     logout() {
-            this.api.logout().subscribe(() => {
-                console.log('Success');
-                this.router.navigate(['']);
-            }, error => {
-                console.log(error);
-            });
+        this.api.logout().subscribe(() => {
+            console.log('Success');
+            this.router.navigate(['']);
+        }, error => {
+            console.log(error);
+        });
     }
 }

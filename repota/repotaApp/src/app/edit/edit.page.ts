@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {JobReport, JobReportService} from '../services/client_stubs';
+import {JobReport, JobReportService} from '../services/api-service';
 import {NgForm} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 
@@ -99,7 +99,7 @@ export class EditPage implements OnInit {
         }];
         this.list3 = [{
             id: 1,
-            title: 'Job Complete',
+            title: 'Complete',
             checked: false,
             value: 0
         }];

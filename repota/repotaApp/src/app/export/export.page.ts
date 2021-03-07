@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {JobReportService} from '../services/client_stubs';
+import {JobReportService} from '../services/api-service';
 import {ActivatedRoute, Router} from '@angular/router';
 import * as jspdf from 'jspdf';
 import domtoimage from 'dom-to-image';

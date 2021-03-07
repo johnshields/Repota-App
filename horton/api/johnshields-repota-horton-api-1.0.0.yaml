@@ -1,12 +1,16 @@
+---
 openapi: 3.0.2
 info:
-  title: Horton
+  title: Repota-Horton-API
   version: 1.0.0
 servers:
 - url: /api/v1
 paths:
   /login:
     post:
+      tags:
+      - Account
+      summary: Log in
       description: Attempts to log a user in
       operationId: login
       requestBody:
@@ -17,39 +21,40 @@ paths:
           headers:
             Set-Cookie:
               description: Returns a new session_id to be used for all future requests
+              style: simple
               explode: false
               schema:
                 type: string
-              style: simple
         "403":
+          description: Login Unsuccessful
           content:
             application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
               examples:
                 LoginFailed:
                   value:
                     code: 403
                     messages: Invalid Name and/or password
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Login Unsuccessful
         "500":
+          description: Unable to process request
           content:
             application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
               examples:
                 InternalServerError:
                   value:
                     code: 500
                     messages: Unable to process request
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unable to process request
       security:
       - {}
-      summary: Log in
+  /register:
+    summary: Path used to register a new User
+    post:
       tags:
       - Account
-  /register:
-    post:
+      summary: Registers User
       description: Attempts to register a new user
       operationId: register
       requestBody:
@@ -58,8 +63,11 @@ paths:
         "204":
           description: Successfuly registered a new User
         "400":
+          description: Problem with username or password
           content:
             application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
               examples:
                 InvalidNameOrPassword:
                   value:
@@ -69,352 +77,252 @@ paths:
                   value:
                     code: 400
                     messages: Name too short
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Problem with username or password
         "409":
+          description: Name is taken
           content:
             application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
               examples:
                 NameTaken:
                   value:
                     code: 409
                     messages: NameTaken
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Name is taken
         "500":
+          description: Unable to process request
           content:
             application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
               examples:
                 InternalServerError:
                   value:
                     code: 500
                     messages: Unable to process request
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unable to process request
       security:
       - {}
-      summary: Registers User
-      tags:
-      - Account
-    summary: Path used to register a new User
   /jobReports:
+    summary: Path used to manage the list of reports.
     description: Get all reports for logged in worker.
     get:
+      tags:
+      - Job Report
+      summary: Get all reports for logged in worker
       description: Get all reports for the worker logged in.
       operationId: get_reports
       responses:
         "200":
+          description: Successful response - returns an array of Job Report entities.
           content:
             application/json:
               schema:
+                type: array
                 items:
                   $ref: '#/components/schemas/JobReport'
-                type: array
-          description: Successful response - returns an array of Job Report entities.
         "500":
+          description: Unable to retrieve reports
           content:
             application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
               examples:
                 InternalServerError:
                   value:
                     code: 500
                     messages: Unable to retrieve reports
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unable to retrieve reports
       security:
       - LoginRequired: []
-      summary: Get all reports for logged in worker
+    post:
       tags:
       - Job Report
-    post:
+      summary: Create a report
       description: Creates a new instance of a Job Report.
       operationId: create_report
       requestBody:
+        description: A new report to be created.
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/JobReport'
-        description: A new report to be created.
         required: true
       responses:
         "201":
           description: Successful response.
         "500":
+          description: Unable to create a new job report
           content:
             application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
               examples:
                 InternalServerError:
                   value:
                     code: 500
                     messages: Unable to create a new report
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unable to create a new job report
       security:
       - LoginRequired: []
-      summary: Create a report
-      tags:
-      - Job Report
-    summary: Path used to manage the list of reports.
   /jobReports/{jobReportId}:
-    delete:
-      description: Deletes an existing report.
-      operationId: delete_report
-      parameters:
-      - description: A unique identifier for a Report.
-        explode: false
-        in: path
-        name: jobReportId
-        required: true
-        schema:
-          type: integer
-        style: simple
-      responses:
-        "204":
-          description: Successful response.
-        "404":
-          content:
-            application/json:
-              examples:
-                ReportNotFound:
-                  value:
-                    code: 404
-                    messages: Report not found
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Could not locate Report
-        "500":
-          content:
-            application/json:
-              examples:
-                InternalServerError:
-                  value:
-                    code: 500
-                    messages: Unable to process request
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unable to process request
-      security:
-      - LoginRequired: []
-      summary: Delete a Job Report
+    get:
       tags:
       - Job Report
-    get:
+      summary: Get a job report
       description: Gets the details of a single instance of a report.
       operationId: get_report_by_id
       parameters:
-      - description: A unique identifier for a report.
-        explode: false
+      - name: jobReportId
         in: path
-        name: jobReportId
+        description: A unique identifier for a report.
         required: true
+        style: simple
+        explode: false
         schema:
           type: integer
-        style: simple
       responses:
         "200":
+          description: Successful response - returns a single job report.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/JobReport'
-          description: Successful response - returns a single job report.
         "404":
+          description: Could not locate Report
           content:
             application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
               examples:
                 ReportNotFound:
                   value:
                     code: 404
                     messages: Report not found
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Could not locate Report
         "500":
+          description: Unable to process request
           content:
             application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
               examples:
                 InternalServerError:
                   value:
                     code: 500
                     messages: Unable to process request
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unable to process request
       security:
       - LoginRequired: []
-      summary: Get a job report
+    put:
       tags:
       - Job Report
-    put:
+      summary: Update a job report
       description: Updates an existing job report.
       operationId: update_report
       parameters:
-      - description: A unique identifier for a report.
-        explode: false
+      - name: jobReportId
         in: path
-        name: jobReportId
+        description: A unique identifier for a report.
         required: true
+        style: simple
+        explode: false
         schema:
           type: integer
-        style: simple
       requestBody:
+        description: Updated report information.
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/JobReport'
-        description: Updated report information.
         required: true
       responses:
         "204":
           description: Job report has been updated.
         "404":
+          description: Could not locate job report
           content:
             application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
               examples:
                 ReportNotFound:
                   value:
                     code: 404
                     messages: Job report not found
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Could not locate job report
         "500":
+          description: Unable to process request
           content:
             application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
               examples:
                 InternalServerError:
                   value:
                     code: 500
                     messages: Unable to process request
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unable to process request
       security:
       - LoginRequired: []
-      summary: Update a job report
+    delete:
       tags:
       - Job Report
-  /jobReports/{date}:
-    get:
-      description: Gets all reports for a set date.
-      operationId: get_reports_by_date
+      summary: Delete a Job Report
+      description: Deletes an existing report.
+      operationId: delete_report
       parameters:
-      - description: A set date
-        explode: false
+      - name: jobReportId
         in: path
-        name: date
+        description: A unique identifier for a Report.
         required: true
-        schema:
-          type: string
         style: simple
+        explode: false
+        schema:
+          type: integer
       responses:
-        "200":
+        "204":
+          description: Successful response.
+        "404":
+          description: Could not locate Report
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/JobReport'
-          description: Successful response - returns job reports.
-        "404":
-          content:
-            application/json:
+                $ref: '#/components/schemas/Error'
               examples:
                 ReportNotFound:
                   value:
                     code: 404
                     messages: Report not found
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Could not locate Report
         "500":
+          description: Unable to process request
           content:
             application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
               examples:
                 InternalServerError:
                   value:
                     code: 500
                     messages: Unable to process request
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unable to process request
       security:
       - LoginRequired: []
-      summary: Gets all reports by a set date
-      tags:
-      - Job Report
 components:
-  requestBodies:
-    inline_object:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/inline_object'
-      required: true
-  responses:
-    ReportNotFound:
-      content:
-        application/json:
-          examples:
-            ChannelNotFound:
-              value:
-                code: 404
-                messages: Report not found
-          schema:
-            $ref: '#/components/schemas/Error'
-      description: Could not locate job report
-    InternalServerIssue:
-      content:
-        application/json:
-          examples:
-            ChannelNotFound:
-              value:
-                code: 500
-                messages: Unable to process request
-          schema:
-            $ref: '#/components/schemas/Error'
-      description: Unable to create user
   schemas:
     inline_object:
-      example:
-        username: John Doe
-        password: password
+      type: object
       properties:
         username:
           type: string
         password:
           type: string
-      type: object
+      example:
+        username: John Doe
+        password: password
     Error:
+      required:
+      - code
+      - messages
+      type: object
       properties:
         code:
           type: integer
         messages:
           type: string
-      required:
-      - code
-      - messages
-      type: object
     JobReport:
-      example:
-        jobReportId: 14
-        date: 06/01/2019
-        vehicleModel: Peugeot Spinner
-        vehicleReg: 191-LA-2049
-        milesOnVehicle: 1337
-        vehicleLocation: Drogheda
-        warranty: true
-        breakdown: true
-        customerName: Kyle
-        customerComplaint: Door hangle broken
-        cause: Door lock out of place
-        correction: Door lock has fixed
-        parts: 0
-        workHours: 1
-        workerName: Rick Deckard
-        jobComplete: true
+      type: object
       properties:
         jobReportId:
           type: integer
@@ -448,9 +356,55 @@ components:
           type: string
         jobComplete:
           type: string
-      type: object
+      example:
+        jobReportId: 14
+        date: 06/01/2019
+        vehicleModel: Peugeot Spinner
+        vehicleReg: 191-LA-2049
+        milesOnVehicle: 1337
+        vehicleLocation: Drogheda
+        warranty: true
+        breakdown: true
+        customerName: Kyle
+        customerComplaint: Door hangle broken
+        cause: Door lock out of place
+        correction: Door lock has fixed
+        parts: 0
+        workHours: 1
+        workerName: Rick Deckard
+        jobComplete: true
+  responses:
+    ReportNotFound:
+      description: Could not locate job report
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            ChannelNotFound:
+              value:
+                code: 404
+                messages: Report not found
+    InternalServerIssue:
+      description: Unable to create user
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            ChannelNotFound:
+              value:
+                code: 500
+                messages: Unable to process request
+  requestBodies:
+    inline_object:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_object'
+      required: true
   securitySchemes:
     LoginRequired:
-      in: cookie
-      name: session_id
       type: apiKey
+      name: session_id
+      in: cookie

@@ -74,39 +74,35 @@ ion-card-content {
 
 .warranty-box {
   text-align: center;
-  text-decoration: underline;
   margin-top: 10px;
-  margin-left: 100px;
+  margin-left: 5px;
   border: 1px solid #22222e;
   border-radius: 5px;
-  width: 100px;
-  height: 80px;
+  width: 120px;
+  height: 25px;
 }
 
 .breakdown-box {
   text-align: center;
-  text-decoration: underline;
-  margin-top: 20px;
-  margin-left: 100px;
+  margin-top: 10px;
+  margin-left: 5px;
   border: 1px solid #22222e;
   border-radius: 5px;
-  width: 100px;
-  height: 80px;
+  width: 120px;
+  height: 25px;
 }
 
 .job-comp {
   text-align: center;
-  text-decoration: underline;
-  margin-top: 20px;
-  margin-left: 100px;
+  margin-top: 10px;
+  margin-left: 5px;
   border: 1px solid #22222e;
   border-radius: 5px;
-  width: 100px;
-  height: 80px;
+  width: 120px;
+  height: 25px;
 }
 
-ion-checkbox {
-  margin-left: 38px;
+mat-checkbox {
   height: 25px;
   width: 25px;
 }
@@ -139,9 +135,5 @@ ion-checkbox {
   .info {
     width: 250px;
     font-size: medium;
-  }
-
-  .warranty-box {
-    margin-top: 80px
   }
 }

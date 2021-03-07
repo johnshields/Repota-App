@@ -55,7 +55,7 @@ ion-content {
 }
 
 // computer monitors
-@media only screen and (min-width: 1224px) {
+@media screen and (min-width: 1224px) {
   ion-content {
     background-size: 750px 750px;
   }

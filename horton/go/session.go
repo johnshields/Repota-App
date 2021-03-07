@@ -23,7 +23,7 @@ import (
 // If a cookie exists the request continues, otherwise the un-auth user is logged out.
 func CheckForCookie(c *gin.Context) bool {
 	val, err := c.Cookie("session_id")
-	fmt.Println("Cookie:", val)
+	fmt.Println("\nCookie:", val)
 
 	// Logout if no session_id (cookie) is found
 	if err != nil {
@@ -127,6 +127,7 @@ func Logout(c *gin.Context) {
 			// set a cookie of one second for logged out user.
 			c.SetCookie("session_id", session.Token, 1, "/",
 				"", false, false)
+
 			c.JSON(204, models.Error{Code: 204, Messages: "User has been logged out"})
 			fmt.Println("\n[INFO]", username, "logged out")
 		}

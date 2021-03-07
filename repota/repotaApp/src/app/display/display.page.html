@@ -30,6 +30,12 @@
                             <ion-label class="info"> Reg: {{report["vehicleReg"]}}</ion-label>
                             <ion-label class="info"> Location: {{report["vehicleLocation"]}}</ion-label>
                             <ion-label class="info"> Mileage: {{report["milesOnVehicle"]}}</ion-label>
+                            <ion-label class="warranty-box"> Warranty
+                                <mat-checkbox disabled="true" [(ngModel)]="report.warranty"></mat-checkbox>
+                            </ion-label>
+                            <ion-label class="breakdown-box"> Breakdown
+                                <mat-checkbox disabled="true" [(ngModel)]="report.breakdown"></mat-checkbox>
+                            </ion-label>
                         </ion-col>
                         <!-- Customer Details -->
                         <ion-col>
@@ -48,17 +54,8 @@
                             <ion-label class="info"> Parts: {{report["parts"]}}</ion-label>
                             <ion-label class="info"> Work Hours: {{report["workHours"]}}</ion-label>
                             <ion-label class="worker"> Technician: {{report["workerName"]}}</ion-label>
-                        </ion-col>
-                        <!-- Check Boxes -->
-                        <ion-col>
-                            <ion-label class="warranty-box"> Warranty
-                                <ion-checkbox disabled="true" [(ngModel)]="report.warranty"></ion-checkbox>
-                            </ion-label>
-                            <ion-label class="breakdown-box"> Breakdown
-                                <ion-checkbox disabled="true" [(ngModel)]="report.breakdown"></ion-checkbox>
-                            </ion-label>
                             <ion-label class="job-comp"> Complete
-                                <ion-checkbox disabled="true" [(ngModel)]="report.jobComplete"></ion-checkbox>
+                                <mat-checkbox disabled="true" [(ngModel)]="report.jobComplete"></mat-checkbox>
                             </ion-label>
                         </ion-col>
                     </ion-row>

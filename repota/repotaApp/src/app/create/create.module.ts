@@ -7,6 +7,7 @@ import {IonicModule} from '@ionic/angular';
 import {CreatePageRoutingModule} from './create-routing.module';
 
 import {CreatePage} from './create.page';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
     imports: [
@@ -14,6 +15,7 @@ import {CreatePage} from './create.page';
         FormsModule,
         IonicModule,
         CreatePageRoutingModule,
+        MatCheckboxModule,
     ],
     declarations: [CreatePage]
 })

@@ -7,13 +7,15 @@ import {IonicModule} from '@ionic/angular';
 import {HistoryPageRoutingModule} from './history-routing.module';
 
 import {HistoryPage} from './history.page';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         IonicModule,
-        HistoryPageRoutingModule
+        HistoryPageRoutingModule,
+        MatCheckboxModule
     ],
     declarations: [HistoryPage]
 })

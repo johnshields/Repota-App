@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AccountService, InlineObject} from '../services/client_stubs';
+import {AccountService, InlineObject} from '../services/api-service';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 

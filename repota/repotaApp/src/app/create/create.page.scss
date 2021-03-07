@@ -19,6 +19,7 @@ ion-card-content {
 .title {
   text-align: center;
   color: #0d0d0d;
+  font-size: 20px;
 }
 
 ion-input {
@@ -49,83 +50,19 @@ ion-textarea {
   border-radius: 5px;
   width: 150px;
   height: 80px;
+  padding-left: 15px;
   margin-top: 10px;
 }
 
-.warranty-box {
-  text-align: center;
-  text-decoration: underline;
-  margin-top: 20px;
-  margin-left: 100px;
-  border: 1px solid #22222e;
-  border-radius: 5px;
-  width: 100px;
-  height: 80px;
-}
-
-.breakdown-box {
-  text-align: center;
-  text-decoration: underline;
-  margin-top: 20px;
-  margin-left: 100px;
-  border: 1px solid #22222e;
-  border-radius: 5px;
-  width: 100px;
-  height: 80px;
-}
-
-.job-comp {
-  text-align: center;
-  text-decoration: underline;
-  margin-top: 20px;
-  margin-left: 100px;
-  border: 1px solid #22222e;
-  border-radius: 5px;
-  width: 100px;
-  height: 80px;
-}
-
-ion-checkbox {
-  margin-left: 45px;
-  height: 25px;
-  width: 25px;
-}
-
-.warranty-box {
-  text-align: center;
-  text-decoration: underline;
-  border: 1px solid #22222e;
-  border-radius: 5px;
-  padding-top: 5px;
-  width: 150px;
-  height: 115px;
-  margin-left: 28px;
-}
-
-.breakdown-box {
-  text-align: center;
-  text-decoration: underline;
-  border: 1px solid #22222e;
-  border-radius: 5px;
-  padding-top: 5px;
-  width: 150px;
-  height: 115px;
-  margin-left: 28px;
-}
-
-.job-comp-box {
-  text-align: center;
-  text-decoration: underline;
-  border: 1px solid #22222e;
-  border-radius: 5px;
-  padding-top: 5px;
-  width: 150px;
-  margin-top: 20px;
-  margin-left: 25px;
-}
-
-.check-boxes {
+ion-list {
   background-color: white;
+  text-align: center;
+  border: 1px solid #22222e;
+  border-radius: 5px;
+  width: auto;
+  height: auto;
+  margin-top: 10px;
+  margin-left: 20px;
 }
 
 .create-btn {
@@ -148,9 +85,4 @@ ion-checkbox {
   ion-card-content {
     width: 50%;
   }
-
-  .date {
-    position: center;
-  }
-
 }

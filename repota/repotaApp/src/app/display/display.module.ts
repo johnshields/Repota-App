@@ -7,13 +7,15 @@ import {IonicModule} from '@ionic/angular';
 import {DisplayPageRoutingModule} from './display-routing.module';
 
 import {DisplayPage} from './display.page';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         IonicModule,
-        DisplayPageRoutingModule
+        DisplayPageRoutingModule,
+        MatCheckboxModule
     ],
     declarations: [DisplayPage]
 })

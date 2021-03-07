@@ -3,7 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {IonicModule} from '@ionic/angular';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {ApiModule, JobReportService, AccountService} from './services/client_stubs';
+import {ApiModule, JobReportService, AccountService} from './services/api-service';
 import {HttpClientModule} from '@angular/common/http';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';

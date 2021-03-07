@@ -7,13 +7,15 @@ import {IonicModule} from '@ionic/angular';
 import {EditPageRoutingModule} from './edit-routing.module';
 
 import {EditPage} from './edit.page';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         IonicModule,
-        EditPageRoutingModule
+        EditPageRoutingModule,
+        MatCheckboxModule
     ],
     declarations: [EditPage]
 })

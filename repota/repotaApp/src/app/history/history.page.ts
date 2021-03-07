@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {JobReportService} from '../services/client_stubs';
+import {JobReportService} from '../services/api-service';
 
 /**
  * @author John Shields
@@ -26,7 +26,7 @@ export class HistoryPage implements OnInit {
         this.api.getReports().subscribe(data => {
             this.reports = data;
             console.log('[INFO] Reports have been processed.');
-            console.log(this.reports);
+            console.log(data)
         }, error => {
             console.log(error);
         });
