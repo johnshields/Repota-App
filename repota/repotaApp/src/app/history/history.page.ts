@@ -26,7 +26,7 @@ export class HistoryPage implements OnInit {
         this.api.getReports().subscribe(data => {
             this.reports = data;
             console.log('[INFO] Reports have been processed.');
-            console.log(data)
+            console.log(data);
         }, error => {
             console.log(error);
         });
