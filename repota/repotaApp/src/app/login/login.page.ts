@@ -3,6 +3,15 @@ import {AccountService, InlineObject} from '../services/client_stubs';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 
+/**
+ * @author John Shields
+ * @app Repota
+ * @title Login Page
+ * @desc Handles user logging in.
+ *
+ * Reference
+ * https://stackoverflow.com/questions/57175290/how-to-show-error-message-when-login-fails-in-angular-7/57177646
+ */
 
 @Component({
     selector: 'app-account',
@@ -15,6 +24,10 @@ export class LoginPage implements OnInit {
     constructor(private api: AccountService, private router: Router) {
     }
 
+    /**
+     * @title Error message Handlers
+     * @desc Functions are used to set and get error message for incorrect data.
+     */
     setErrorMessage(error: String) {
         this.errorMessage = error;
     }
@@ -23,23 +36,31 @@ export class LoginPage implements OnInit {
         return this.errorMessage;
     }
 
+    /**
+     * @title Login
+     * @desc Uses the InlineObject Model to take in the input and login a user.
+     */
     login(form: NgForm) {
-        // Worker account model
+        // User (worker) account model.
         const object: InlineObject = {
             username: form.value.username,
             password: form.value.password
         };
 
-        // login worker
-        this.api.login(object).subscribe(data => {
-            if (form.valid) {
-                console.log('Success');
-                this.router.navigate(['/home']);
-            } else {
-                this.setErrorMessage(data.message);
-            }
+        // Push data to API to login user if object data is correct.
+        this.api.login(object).subscribe(() => {
+            console.log('Success');
+            this.setErrorMessage('');
+            form.reset();
+            this.router.navigate(['/home']);
+        }, error => {
+            // get error from response
+            let errorMessage = JSON.stringify(error.error.messages);
+            this.setErrorMessage(errorMessage);
+            console.log(error);
         });
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+    }
 }

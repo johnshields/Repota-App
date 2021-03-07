@@ -1,7 +1,6 @@
 /*
- * Horton
  * John Shields
- * API version: 1.0.0
+ * Horton - API version: 1.0.0
  *
  * Main function to start server.
  */

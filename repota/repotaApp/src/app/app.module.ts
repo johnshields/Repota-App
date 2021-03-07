@@ -16,6 +16,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {AuthGuard} from './services/auth-service/auth.guard';
 
 @NgModule({
     declarations: [AppComponent],
@@ -41,7 +42,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     providers: [{provide: LocationStrategy, useClass: HashLocationStrategy},
         ApiModule,
         JobReportService,
-        AccountService
+        AccountService,
+        AuthGuard
     ],
     bootstrap: [AppComponent]
 })

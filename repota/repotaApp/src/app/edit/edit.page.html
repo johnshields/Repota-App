@@ -18,7 +18,8 @@
                     <ion-card-header>
                         <p align="center">
                             <img class="logo" src="./assets/images/repotaApp_logo.png" alt="logo"/>
-                        <ion-title class="title">Edit Report</ion-title></p>
+                            <ion-title class="title">Edit Report</ion-title>
+                        </p>
                     </ion-card-header>
                     <hr style="height:2px;border-width:0;color:gray;background-color:black">
                     <p align="center">
@@ -32,11 +33,13 @@
                             <ion-col>
                                 <ion-label class="headers"> Vehicle Details:</ion-label>
                                 <ion-input name="vehicleModel" ngModel required="true" #vehicleModel="ngModel"
-                                           type="text" placeholder='{{report["vehicleModel"]}}' class="input"></ion-input>
+                                           type="text" placeholder='{{report["vehicleModel"]}}'
+                                           class="input"></ion-input>
                                 <ion-input name="vehicleReg" ngModel required="true" #vehicleReg="ngModel"
                                            type="text" placeholder='{{report["vehicleReg"]}}' class="input"></ion-input>
                                 <ion-input name="milesOnVehicle" ngModel required="true" #milesOnVehicle="ngModel"
-                                           type="number" placeholder='{{report["milesOnVehicle"]}}' class="input" min="0">
+                                           type="number" placeholder='{{report["milesOnVehicle"]}}' class="input"
+                                           min="0">
                                 </ion-input>
                                 <ion-input name="vehicleLocation" ngModel required="true" #vehicleLocation="ngModel"
                                            type="text" placeholder='{{report["vehicleLocation"]}}' class="input">
@@ -46,21 +49,21 @@
                             <ion-col>
                                 <ion-label class="headers"> Work Details:</ion-label>
                                 <ion-textarea name="cause" ngModel required="true" #cause="ngModel"
-                                           type="text" placeholder='{{report["cause"]}}' class="large-input">
+                                              type="text" placeholder='{{report["cause"]}}' class="large-input">
                                 </ion-textarea>
                                 <ion-textarea name="correction" ngModel required="true" #correction="ngModel"
-                                           type="text" placeholder='{{report["correction"]}}' class="large-input">
+                                              type="text" placeholder='{{report["correction"]}}' class="large-input">
                                 </ion-textarea>
                                 <ion-textarea name="parts" ngModel required="true" #parts="ngModel"
-                                           type="text" placeholder='{{report["parts"]}}' class="large-input">
+                                              type="text" placeholder='{{report["parts"]}}' class="large-input">
                                 </ion-textarea>
                                 <ion-input name="workHours" ngModel required="true" #workHours="ngModel"
                                            type="number" placeholder="Work Hours" class="input" min="0">
                                 </ion-input>
                             </ion-col>
                         </ion-row>
-                            <!-- Check Boxes -->
-                            <ion-row>
+                        <!-- Check Boxes -->
+                        <ion-row>
                             <ion-col>
                                 <ion-label>
                                     <ion-title class="warranty-box">Warranty
@@ -98,7 +101,7 @@
                     </div>
                     <hr style="height:2px;border-width:0;color:gray;background-color:black">
                     <p align="center">
-                        <ion-button class="create-btn" size="large" type="submit"
+                        <ion-button class="edit-btn" size="large" type="submit"
                                     [disabled]="!reportForm.form.valid" expand="block" color="NONE">EDIT
                         </ion-button>
                     </p>

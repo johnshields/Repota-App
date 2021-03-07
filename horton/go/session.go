@@ -1,10 +1,10 @@
 /*
  * John Shields
- * Horton
- * API version: 1.0.0
+ * Horton - API version: 1.0.0
  *
  * Session
  * Handles creating, generating, removing sessions and cookie checking.
+ * Plus logout for when user has no cookie (not logged in).
  */
 
 package openapi

@@ -1,8 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {JobReportService} from '../services/client_stubs';
-import {ActivatedRoute} from '@angular/router';
-import * as jspdf from 'jspdf';
-import domtoimage from 'dom-to-image';
+import {ActivatedRoute, Router} from '@angular/router';
+
+/**
+ * @author John Shields
+ * @title Display Page
+ * @desc Gets requested report by its ID to display the report by itself to the user.
+ * Plus a delete report function for the delete button.
+ */
 
 @Component({
     selector: 'app-display',
@@ -11,14 +16,12 @@ import domtoimage from 'dom-to-image';
 })
 export class DisplayPage implements OnInit {
     report: any = [];
-    public errorMsg: string;
-    public successMsg: string;
 
-    constructor(private api: JobReportService, private route: ActivatedRoute) {
+    constructor(private api: JobReportService, private route: ActivatedRoute, private router: Router) {
     }
 
     ngOnInit() {
-        // Get requested report by its ID
+        // Get requested report by its ID.
         this.api.getReportById(this.route.snapshot.params['jobReportId']).subscribe(data => {
             console.log(this.route.snapshot.params['jobReportId']);
             this.report = data;
@@ -26,11 +29,13 @@ export class DisplayPage implements OnInit {
         });
     }
 
-    // delete report
+    // delete report with requested ID.
     deleteReport(id: number) {
         this.api.deleteReport(id).subscribe(() => {
-            this.successMsg = 'Report deleted.';
-            this.ngOnInit();
+            console.log('Success');
+            this.router.navigate(['/history']);
+        }, error => {
+            console.log(error);
         });
     }
 }

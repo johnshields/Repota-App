@@ -1,6 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {JobReportService} from '../services/client_stubs';
 
+/**
+ * @author John Shields
+ * @app Repota
+ * @title History Page
+ * @desc Gets all user's reports to display.
+ */
+
 @Component({
     selector: 'app-report-history',
     templateUrl: './history.page.html',
@@ -15,7 +22,7 @@ export class HistoryPage implements OnInit {
     }
 
     ngOnInit() {
-        // get all worker's reports
+        // get all user's reports
         this.api.getReports().subscribe(data => {
             this.reports = data;
             console.log('[INFO] Reports have been processed.');

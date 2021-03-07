@@ -1,10 +1,9 @@
 /*
  * John Shields
- * Horton
- * API version: 1.0.0
+ * Horton - API version: 1.0.0
  *
- * Worker Account Model
- * For new worker in workers table
+ * Worker Account
+ * Model for new worker (user) in workers table
  */
 
 package models

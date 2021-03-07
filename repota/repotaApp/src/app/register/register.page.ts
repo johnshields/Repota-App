@@ -3,6 +3,13 @@ import {AccountService, InlineObject} from '../services/client_stubs';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 
+/**
+ * @author John Shields
+ * @app Repota
+ * @title Register Page
+ * @desc Handles user registration.
+ */
+
 @Component({
     selector: 'app-register',
     templateUrl: './register.page.html',
@@ -15,6 +22,10 @@ export class RegisterPage implements OnInit {
     constructor(private api: AccountService, private router: Router) {
     }
 
+    /**
+     * @title Error message Handlers
+     * @desc Functions are used to set and get error message for incorrect data.
+     */
     setErrorMessage(error: String) {
         this.errorMessage = error;
     }
@@ -23,22 +34,29 @@ export class RegisterPage implements OnInit {
         return this.errorMessage;
     }
 
-    registerWorker(form: NgForm) {
+    /**
+     * @title Register
+     * @desc Uses the InlineObject Model to take in the input and register a new user.
+     */
+    register(form: NgForm) {
         const object: InlineObject = {
             username: form.value.username,
             name: form.value.name,
             password: form.value.password
         };
-        this.api.register(object).subscribe(data => {
-            if (form != null) {
-                this.router.navigate(['/login']);
-                this.api.register(data);
-            } else {
-                this.setErrorMessage(data.message);
-            }
+
+        // Push data to API to register user if object data is okay.
+        this.api.register(object).subscribe(() => {
+            console.log('Success');
+            this.setErrorMessage('');
+            form.reset();
+            this.router.navigate(['/login']);
+        }, error => {
+            // get error from response
+            let errorMessage = JSON.stringify(error.error.messages);
+            this.setErrorMessage(errorMessage);
+            console.log(error);
         });
-        console.log(form.value);
-        form.resetForm();
     }
 
     ngOnInit() {

@@ -2,7 +2,7 @@
     <ion-toolbar>
         <!-- hamburger menu -->
         <ion-buttons slot="start">
-        <ion-menu-button menu="hamburger-menu"></ion-menu-button>
+            <ion-menu-button menu="hamburger-menu"></ion-menu-button>
         </ion-buttons>
         <ion-avatar>
             <img src="./assets/images/repotaApp_logo.png" alt="logo"/>
@@ -12,8 +12,8 @@
 
 <ion-content>
     <div align="center">
+        <!-- buttons to navigate to the pages login and register -->
         <ion-button [routerLink]="['/login']" class="login" color="NONE">Login</ion-button>
-        <ion-button class="register" color="NONE">Logout</ion-button>
         <ion-button [routerLink]="['/register']" class="register" color="NONE">Register</ion-button>
     </div>
 </ion-content>

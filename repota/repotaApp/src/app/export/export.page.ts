@@ -4,6 +4,16 @@ import {ActivatedRoute, Router} from '@angular/router';
 import * as jspdf from 'jspdf';
 import domtoimage from 'dom-to-image';
 
+/**
+ * @author John Shields
+ * @title Export Page
+ * @desc Allows a user to export a report to a PDF.
+ *
+ * References
+ * https://www.npmjs.com/package/dom-to-image
+ * https://www.npmjs.com/package/jspdf
+ */
+
 @Component({
     selector: 'app-display-report',
     templateUrl: './export.page.html',
@@ -28,14 +38,13 @@ export class ExportPage implements OnInit {
     // export report to a pdf
     onExportPDF() {
         const content = document.getElementById('job-report');
-        const options = { background: 'white', width: 650, quality: 2};
+        const options = {background: 'white', width: 650, quality: 2};
         domtoimage.toPng(content, options).then(
-            (dataUrl) =>
-            {
+            (dataUrl) => {
                 const doc = new jspdf.jsPDF('portrait', 'mm', 'a4');
                 doc.addImage(dataUrl, 'jpeg', 0, 0, 210, 297);
                 doc.save('job_report.pdf');
-            })
+            });
     }
 }
 

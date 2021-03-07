@@ -1,7 +1,6 @@
 /*
  * John Shields
- * Horton
- * API version: 1.0.0
+ * Horton - API version: 1.0.0
  *
  * Job Report API
  * Handles all Job Reports activities - Create, Update, Delete & Getting Reports.
@@ -26,11 +25,11 @@ import (
 	"net/http"
 )
 
-// Function that takes tin the input data and calls the function insertJobReport to create a new report.
+// Function that takes in the input data and calls the function insertJobReport to create a new report.
 func CreateReport(c *gin.Context) {
 	var report models.JobReport
 
-	// Blind data to object, else throw error
+	// Blind data to object, else throw error.
 	if err := c.BindJSON(&report); err != nil {
 		fmt.Println(err.Error())
 	}
@@ -94,7 +93,7 @@ func insertJobReport(report models.JobReport, username string) error {
 	return nil
 }
 
-// Function that gets a report in the database from a JOIN QUERY by its requested ID and logged in worker's username.
+// Function that gets a report in the database from a JOIN QUERY by its requested ID and logged in user's username.
 func GetReportById(c *gin.Context) {
 
 	db := config.DbConn()
@@ -125,13 +124,13 @@ func GetReportById(c *gin.Context) {
 	fmt.Println("\n[INFO] Processing Report...")
 
 	if err != nil {
-		log.Println("\n[ALERT] Failed to process reports! \n500 Internal Server Error.")
+		log.Println("\n[ALERT] Failed to process reports.")
 		c.JSON(500, nil)
 	}
 
 	fmt.Println("\n[INFO] Loading model...")
 
-	// Run through each record and read values
+	// Run through each record and read values.
 	for selDB.Next() {
 		var report models.JobReport
 
@@ -140,8 +139,7 @@ func GetReportById(c *gin.Context) {
 			&report.Correction, &report.Parts, &report.WorkHours, &report.WorkerName, &report.JobComplete)
 
 		if err != nil {
-			// return user friendly message to client
-			log.Println("\n[ALERT] Failed to load model! \n500 Internal Server Error.")
+			log.Println("\n[ALERT] Failed to load model.")
 			c.JSON(500, nil)
 		}
 		// Add each record to array
@@ -155,7 +153,7 @@ func GetReportById(c *gin.Context) {
 	defer db.Close()
 }
 
-// Function that gets all report in the database from a JOIN QUERY by a logged in worker's username.
+// Function that gets all report in the database from a JOIN QUERY by a logged in user's username.
 func GetReports(c *gin.Context) {
 
 	db := config.DbConn()
@@ -165,8 +163,8 @@ func GetReports(c *gin.Context) {
 	var report models.JobReport
 
 	if !isValidAccount(worker) {
-		log.Println("\n[ALERT] User is not logged in!")
-		c.JSON(401, models.Error{Code: 401, Messages: "User is not logged in!"})
+		log.Println("\n[ALERT] User is not logged in.")
+		c.JSON(401, models.Error{Code: 401, Messages: "User is not logged in"})
 	}
 
 	CheckForCookie(c)
@@ -182,7 +180,7 @@ func GetReports(c *gin.Context) {
 	fmt.Println("\n[INFO] Processing Reports...")
 
 	if err != nil {
-		log.Println("\n[ALERT] Failed to process reports! \n500 Internal Server Error.")
+		log.Println("\n[ALERT] Failed to process reports.")
 		c.JSON(500, nil)
 	}
 
@@ -194,7 +192,7 @@ func GetReports(c *gin.Context) {
 			&report.Correction, &report.Parts, &report.WorkHours, &report.WorkerName, &report.JobComplete)
 
 		if err != nil {
-			log.Println("\n[ALERT] Failed to load model! \n500 Internal Server Error.")
+			log.Println("\n[ALERT] Failed to load model.")
 			c.JSON(500, nil)
 		}
 		// Add each record to array
@@ -219,12 +217,12 @@ func UpdateReport(c *gin.Context) {
 
 	CheckForCookie(c)
 
-	// Blind data to object, else throw error
+	// Blind data to object, else throw error.
 	if err := c.BindJSON(&report); err != nil {
 		fmt.Println(err.Error())
 	}
 
-	// Read in values from client request and build object
+	// Read in values from client request and build object.
 	update, err := db.Exec("UPDATE jobreports jr SET jr.date_stamp = ?, jr.vehicle_model = ?, "+
 		"jr.vehicle_reg = ?, jr.vehicle_location = ?, jr.miles_on_vehicle = ?, jr.warranty = ?, "+
 		"jr.breakdown = ?, jr.cause = ?, jr.correction = ?, jr.parts = ?, jr.work_hours = ?, "+
@@ -250,26 +248,25 @@ func UpdateReport(c *gin.Context) {
 func DeleteReport(c *gin.Context) {
 	db := config.DbConn()
 
-	// Get id from request
+	// Get id from request.
 	reportId := c.Params.ByName("jobReportId")
 	fmt.Printf("Get Report with ID: " + reportId)
 
 	CheckForCookie(c)
 
-	// Create query
+	// Create query.
 	res, err := db.Exec("DELETE FROM jobreports WHERE job_report_id=?", reportId)
 
 	if err != nil {
-		fmt.Printf("500 Internal Server Error.")
+		log.Printf("[ALERT] Report failed to delete.")
 		c.JSON(500, nil)
 	}
 
 	affectedRows, err := res.RowsAffected()
 
 	if err != nil {
-		fmt.Printf("[ALERT] Report not deleted.")
-		// return user friendly message to client
-		c.JSON(500, models.Error{Code: 500, Messages: "Report not deleted"})
+		log.Printf("[ALERT] Report failed to delete.")
+		c.JSON(500, nil)
 	}
 
 	fmt.Printf("The statement affected %d rows\n", affectedRows)

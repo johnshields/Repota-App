@@ -1,7 +1,6 @@
 /*
  * John Shields
- * Horton
- * API version: 1.0.0
+ * Horton - API version: 1.0.0
  *
  * Account API
  * Handles Register, Login & Generates Session Cookies.
@@ -45,9 +44,8 @@ func Login(c *gin.Context) {
 
 	// Check if user exist in the database and check password is not null
 	if err := verifyDetails(username, password); err != nil {
-		fmt.Println("[ALERT] Credentials Error:", err)
-		c.JSON(400, models.Error{Code: 400, Messages: "Credentials are incorrect"})
-		return // Return as there is issues with the credentials
+		c.JSON(400, models.Error{Code: 400, Messages: "Username does not exist"})
+		return // Return as there is issues with the username or password
 	}
 
 	// Compare the hash in the db with the user password provided in the request
@@ -65,7 +63,7 @@ func Login(c *gin.Context) {
 			} else {
 				// set a cookie for logged in user
 				c.SetCookie("session_id", session.Token, session.Expiry, "/",
-					"repota-service.com", true, false)
+					"", false, false)
 				c.JSON(204, nil)
 			}
 		} else {
@@ -74,8 +72,8 @@ func Login(c *gin.Context) {
 		}
 	} else {
 		fmt.Print(err)
-		log.Println("\n[ALERT] User has not logged in!")
-		c.JSON(401, models.Error{Code: 401, Messages: "User has not logged in!"})
+		log.Println("\n[ALERT] Password is incorrect for", username)
+		c.JSON(401, models.Error{Code: 401, Messages: "Password is incorrect"})
 	}
 	defer db.Close()
 }
@@ -93,14 +91,14 @@ func Register(c *gin.Context) {
 	password := user.Password
 
 	// register new user and hash the password
-	if err := registerNewUser(username, user.Name, password); err == nil {
+	if err := registerNewUser(c, username, user.Name, password); err == nil {
 
 		// create a session for the user
 		err, session := createSessionId(username)
 
 		if err != nil {
 			fmt.Print(err)
-			c.JSON(500, models.Error{Code: 500, Messages: "Internal Server Error"})
+			c.JSON(500, nil)
 		} else {
 			c.JSON(200, session)
 		}
@@ -111,37 +109,40 @@ func Register(c *gin.Context) {
 
 // Function that registers a new user and hashes the password.
 // User get registered and are inserted into the database
-func registerNewUser(username, name, password string) error {
+func registerNewUser(c *gin.Context, username, name, password string) error {
 	db := config.DbConn()
 
 	fmt.Println("\n[INFO] Processing User Details...",
 		"\nEntered username:", username, "\nEntered Password:", password)
 
 	if strings.TrimSpace(password) == "" {
-		log.Printf("\n[ALERT] password is null")
+		log.Printf("\n[ALERT] Password is null")
 		return errors.New("password is null")
 	} else if isValidAccount(username) {
-		log.Printf("\n[ALERT] username taken")
+		log.Printf("\n[ALERT] Username taken")
+		c.JSON(400, models.Error{Code: 400, Messages: "Username is already taken"})
 		return errors.New("username is already taken")
 	}
 
 	// Hash the password here
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 
-	// TODO - return responses for each if
 	if err != nil {
+		c.JSON(500, nil)
 		log.Fatal("\n[ALERT] Hash Password failed: ", err)
 	}
 
 	insert, err := db.Prepare("INSERT INTO workers(username, worker_name, hash) VALUES (?, ?, ?)")
 
 	if err != nil {
+		c.JSON(500, nil)
 		log.Println("\n[ALERT] MySQL Error: Error Creating new user account:\n", err)
 	}
 
 	result, err := insert.Exec(username, name, hashedPassword)
 
 	if err != nil {
+		c.JSON(500, nil)
 		log.Println("\n[ALERT] MySQL Error: Error Creating new user account:\n", err)
 	}
 
@@ -160,7 +161,7 @@ func isValidAccount(username string) bool {
 
 	if err != nil {
 		log.Fatal(err)
-		//return false
+		return false
 	}
 
 	if selDB.Next() {
@@ -169,7 +170,7 @@ func isValidAccount(username string) bool {
 		if err != nil {
 			// return false // No user matching username provided
 			log.Println("\n[ALERT] MySQL Error - no matching username:\n", err)
-			//return false
+			return false
 		}
 		defer db.Close()
 		// Username matches return false as its not valid
@@ -190,10 +191,10 @@ func verifyDetails(username, password string) error {
 		"\nEntered username:", username, "\nEntered Password:", password)
 
 	if strings.TrimSpace(password) == "" {
-		log.Printf("\n[ALERT] password is null")
+		log.Printf("\n[ALERT] Password is null")
 		return errors.New("password is null")
 	} else if !isValidAccount(username) {
-		log.Printf("\n[ALERT] unknown username")
+		log.Printf("\n[ALERT] Unknown username")
 		return errors.New("username does not exist")
 	} else {
 		return nil

@@ -1,7 +1,6 @@
 /*
  * John Shields
- * Horton
- * API version: 1.0.0
+ * Horton - API version: 1.0.0
  *
  * Routers
  * Handles GET, HEAD, POST, PUT, DELETE, OPTIONS, PATCH for requests and responses.

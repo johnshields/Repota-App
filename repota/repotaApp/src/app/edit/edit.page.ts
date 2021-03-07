@@ -3,13 +3,18 @@ import {JobReport, JobReportService} from '../services/client_stubs';
 import {NgForm} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 
+/**
+ * @author John Shields
+ * @title Edit Page
+ * @desc Gets requested report by its ID so the user can edit it.
+ */
+
 @Component({
     selector: 'app-edit',
     templateUrl: './edit.page.html',
     styleUrls: ['./edit.page.scss'],
 })
 export class EditPage implements OnInit {
-    errorMsg: string;
     list1: any[];
     list2: any[];
     list3: any[];
@@ -17,17 +22,16 @@ export class EditPage implements OnInit {
     checkBoxValue2: number;
     checkBoxValue3: number;
     report: any;
-    private errorMessage;
 
     constructor(private api: JobReportService, private router: Router, private route: ActivatedRoute) {
     }
 
-    setErrorMessage(error: String) {
-        this.errorMessage = error;
-    }
-
+    /**
+     * @title Edit Report
+     * @desc Uses the JobReport Model to take in the input and edit/update the report.
+     */
     editReport(form: NgForm) {
-        // make the true/false values to 1s and 0s
+        // make the true/false values of check boxes to 1s and 0s.
         // warranty
         if (form.value.warranty === true) {
             this.checkBoxValue1 = 1;
@@ -47,7 +51,7 @@ export class EditPage implements OnInit {
             this.checkBoxValue3 = 0;
         }
 
-        // use JobReports Model
+        // Use JobReports Model
         const object: JobReport = {
             date: form.value.date,
             vehicleModel: form.value.vehicleModel,
@@ -63,14 +67,12 @@ export class EditPage implements OnInit {
             jobComplete: this.checkBoxValue3
         };
 
-        // Update report with object
-        this.api.updateReport(object, this.report[0].jobReportId).subscribe(data => {
-            if (form.submitted) {
-                this.router.navigate(['tabs/history']);
-                console.log('Success');
-            } else {
-                this.setErrorMessage(data.message);
-            }
+        // Push data to API to edit/update report using the model
+        this.api.updateReport(object, this.report[0].jobReportId).subscribe(() => {
+            console.log('Success');
+            this.router.navigate(['/history']);
+        }, error => {
+            console.log(error);
         });
     }
 

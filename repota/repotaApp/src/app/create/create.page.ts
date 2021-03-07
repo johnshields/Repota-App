@@ -3,6 +3,12 @@ import {JobReport, JobReportService} from '../services/client_stubs';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 
+/**
+ * @author John Shields
+ * @title Create Page
+ * @desc Allows a User to create a new report using the JobReport Model.
+ */
+
 @Component({
     selector: 'app-create',
     templateUrl: './create.page.html',
@@ -16,18 +22,16 @@ export class CreatePage implements OnInit {
     checkBoxValue1: number;
     checkBoxValue2: number;
     checkBoxValue3: number;
-    private errorMessage;
 
     constructor(private api: JobReportService, private router: Router) {
     }
 
-    setErrorMessage(error: String) {
-        this.errorMessage = error;
-    }
-
+    /**
+     * @title Create Report
+     * @desc Uses the JobReport Model to take in the input and create a report.
+     */
     createReport(form: NgForm) {
-
-        // make the true/false values to 1s and 0s
+        // make the true/false values of check boxes to 1s and 0s.
         // warranty
         if (form.value.warranty === true) {
             this.checkBoxValue1 = 1;
@@ -47,7 +51,7 @@ export class CreatePage implements OnInit {
             this.checkBoxValue3 = 0;
         }
 
-        // use JobReports Model
+        // Use JobReport Model
         const object: JobReport = {
             date: form.value.date,
             vehicleModel: form.value.vehicleModel,
@@ -65,20 +69,18 @@ export class CreatePage implements OnInit {
             jobComplete: this.checkBoxValue3
         };
 
-        // create the report using the model
+        // Push data to API to create report using the model.
         this.api.createReport(object).subscribe(data => {
-            if (form != null) {
-                this.router.navigate(['/history']);
-                this.api.createReport(data);
-                console.log('Success');
-            } else {
-                this.setErrorMessage(data.message);
-            }
+            console.log('Success');
+            this.api.createReport(data);
+            this.router.navigate(['/history']);
+        }, error => {
+            console.log(error);
         });
     }
 
     ngOnInit() {
-        // Lists for check box values
+        // Lists for check box values.
         this.list1 = [{
             id: 1,
             title: 'Warranty',

@@ -6,20 +6,29 @@ ion-content {
   background-size: 400px 400px;
 }
 
-.about {
-  margin-top: 270px;
-  margin-left: 50%;
-  margin-right: auto;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
+ion-button {
   width: 200px;
-  color: #f5f6f9;
-  text-align: center;
+  margin-top: 15px;
+  background-color: royalblue;
 }
 
-.headers {
+ion-card {
+  top: 46%;
+  left: 48%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  width: 250px;
   color: #f5f6f9;
-  margin-top: 20px;
+  text-align: center;
+  background: transparent;
+}
+
+ion-text {
+  width: 200px;
+}
+
+ion-title {
+  color: #f5f6f9;
   font-size: 18px;
   font-weight: bold;
   text-decoration: underline;
@@ -38,9 +47,9 @@ ion-content {
     background-size: 750px 750px;
   }
 
-  .about {
-    margin-top: 375px;
-    width: 350px;
+  ion-card {
+    top: 40%;
+    left: 49.5%;
   }
 
   .links {

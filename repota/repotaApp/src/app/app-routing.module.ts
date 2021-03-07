@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
+import {AuthGuard} from './services/auth-service/auth.guard';
 
 const routes: Routes = [
     {
@@ -12,19 +13,23 @@ const routes: Routes = [
     },
     {
         path: 'home',
-        loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+        loadChildren: () => import('./home/home.module').then(m => m.HomePageModule),
+        canActivate: [AuthGuard]
     },
     {
         path: 'create',
-        loadChildren: () => import('./create/create.module').then(m => m.CreatePageModule)
+        loadChildren: () => import('./create/create.module').then(m => m.CreatePageModule),
+        canActivate: [AuthGuard]
     },
     {
         path: 'history',
-        loadChildren: () => import('./history/history.module').then(m => m.HistoryPageModule)
+        loadChildren: () => import('./history/history.module').then(m => m.HistoryPageModule),
+        canActivate: [AuthGuard]
     },
     {
         path: 'display',
-        loadChildren: () => import('./display/display.module').then(m => m.DisplayPageModule)
+        loadChildren: () => import('./display/display.module').then(m => m.DisplayPageModule),
+        canActivate: [AuthGuard]
     },
     {
         path: 'display/:jobReportId',
@@ -32,7 +37,8 @@ const routes: Routes = [
     },
     {
         path: 'export',
-        loadChildren: () => import('./export/export.module').then(m => m.ExportPageModule)
+        loadChildren: () => import('./export/export.module').then(m => m.ExportPageModule),
+        canActivate: [AuthGuard]
     },
     {
         path: 'export/:jobReportId',
@@ -48,7 +54,8 @@ const routes: Routes = [
     },
     {
         path: 'edit',
-        loadChildren: () => import('./edit/edit.module').then(m => m.EditPageModule)
+        loadChildren: () => import('./edit/edit.module').then(m => m.EditPageModule),
+        canActivate: [AuthGuard]
     },
     {
         path: 'edit/:jobReportId',
