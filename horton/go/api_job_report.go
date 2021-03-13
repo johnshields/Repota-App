@@ -162,12 +162,12 @@ func GetReports(c *gin.Context) {
 	var res []models.JobReport
 	var report models.JobReport
 
+	CheckForCookie(c)
+
 	if !isValidAccount(worker) {
 		log.Println("\n[ALERT] User is not logged in.")
 		c.JSON(401, models.Error{Code: 401, Messages: "User is not logged in"})
 	}
-
-	CheckForCookie(c)
 
 	// JOIN Query to get worker's job reports
 	selDB, err := db.Query("SELECT DISTINCT jr.job_report_id, jr.date_stamp, jr.vehicle_model, "+

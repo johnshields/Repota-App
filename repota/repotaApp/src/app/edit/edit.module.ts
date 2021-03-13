@@ -8,6 +8,7 @@ import {EditPageRoutingModule} from './edit-routing.module';
 
 import {EditPage} from './edit.page';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatOptionModule} from '@angular/material/core';
 
 @NgModule({
     imports: [
@@ -15,7 +16,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
         FormsModule,
         IonicModule,
         EditPageRoutingModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatOptionModule
     ],
     declarations: [EditPage]
 })

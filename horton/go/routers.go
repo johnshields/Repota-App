@@ -137,10 +137,19 @@ var routes = Routes{
 		"/api/v1/jobReports",
 		GetReports,
 	},
+
 	{
 		"UpdateReport",
 		http.MethodPut,
 		"/api/v1/jobReports/:jobReportId",
 		UpdateReport,
 	},
+
+	{
+		"CarApiData",
+		http.MethodGet,
+		"/api/v1/carApiData",
+		GetCarApiData,
+	},
+
 }

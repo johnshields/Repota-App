@@ -42,25 +42,25 @@
                                 <ion-input name="vehicleLocation" ngModel required="true" #vehicleLocation="ngModel"
                                            type="text" placeholder="Location" class="input">
                                 </ion-input>
-                                <ion-list *ngFor="let i of list1">
+                                <mat-option *ngFor="let i of list1">
                                     <mat-checkbox [(ngModel)]="i.checked"
                                                   ngModel="warranty" name="warranty">{{i.title}}
                                     </mat-checkbox>
-                                </ion-list>
-                                <ion-list *ngFor="let i of list2">
+                                </mat-option>
+                                <mat-option *ngFor="let i of list2">
                                     <mat-checkbox [(ngModel)]="i.checked" ngModel="breakdown"
                                                   name="breakdown">{{i.title}}
                                     </mat-checkbox>
-                                </ion-list>
+                                </mat-option>
                             </ion-col>
                             <!-- Customer Details -->
                             <ion-col>
                                 <ion-label class="headers"> Customer Details:</ion-label>
                                 <ion-input name="customerName" ngModel required="true" #customerName="ngModel"
-                                           type="text" placeholder="Customer Name" class="input">
+                                           type="text" placeholder="Name" class="input">
                                 </ion-input>
                                 <ion-textarea name="complaint" ngModel required="true" #complaint="ngModel"
-                                              type="text" placeholder="Customer complaint..." class="large-input">
+                                              type="text" placeholder="Complaint..." class="large-input">
                                 </ion-textarea>
                             </ion-col>
                             <!-- Work Details -->
@@ -78,17 +78,17 @@
                                 <ion-input name="workHours" ngModel required="true" #workHours="ngModel"
                                            type="number" placeholder="Work Hours" class="input" min="0">
                                 </ion-input>
-                                <ion-list *ngFor="let i of list3">
+                                <mat-option *ngFor="let i of list3">
                                     <mat-checkbox [(ngModel)]="i.checked" ngModel="jobComplete"
                                                   name="jobComplete">{{i.title}}
                                     </mat-checkbox>
-                                </ion-list>
+                                </mat-option>
                             </ion-col>
                         </ion-row>
                     </div>
                     <hr style="height:2px;border-width:0;color:gray;background-color:black">
                     <p align="center">
-                        <ion-button class="create-btn" size="large" type="submit"
+                        <ion-button class="create-btn" size="large" type="submit" [routerLink]="['/history']"
                                     [disabled]="!reportForm.form.valid" expand="block" color="NONE">CREATE
                         </ion-button>
                     </p>

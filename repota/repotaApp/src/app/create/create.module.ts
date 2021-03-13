@@ -8,6 +8,7 @@ import {CreatePageRoutingModule} from './create-routing.module';
 
 import {CreatePage} from './create.page';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatOptionModule} from '@angular/material/core';
 
 @NgModule({
     imports: [
@@ -16,6 +17,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
         IonicModule,
         CreatePageRoutingModule,
         MatCheckboxModule,
+        MatOptionModule,
     ],
     declarations: [CreatePage]
 })

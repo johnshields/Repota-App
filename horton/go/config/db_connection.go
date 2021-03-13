@@ -34,7 +34,7 @@ func DbConn() (db *sql.DB) {
 	username := cfg.Section("database").Key("username")
 	password := cfg.Section("database").Key("password")
 
-	db, err = sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(127.0.0.1:3306)/%s", username, password, dbName))
+	db, err = sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(52.51.6.178:3306)/%s", username, password, dbName))
 
 	if err != nil {
 		panic(err.Error())

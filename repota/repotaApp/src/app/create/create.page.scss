@@ -31,7 +31,6 @@ ion-input {
 ion-textarea {
   background-color: #dedad9;
   margin-left: 20px;
-  text-align: center;
 }
 
 .input {
@@ -54,7 +53,7 @@ ion-textarea {
   margin-top: 10px;
 }
 
-ion-list {
+mat-option {
   background-color: white;
   text-align: center;
   border: 1px solid #22222e;

@@ -9,8 +9,16 @@ ion-title {
   font-weight: bold;
 }
 
+.num {
+  padding-left: 37%;
+}
+
+.date {
+  padding-left: 39%;
+}
+
 .report-content {
-  width: auto;
+  width: 175mm;
   padding-top: 10px;
   background-color: white;
   color: #0d0d0d;
@@ -27,7 +35,7 @@ ion-title {
 }
 
 .info {
-  width: 250px;
+  width: auto;
   font-size: medium;
   padding-left: 5px;
   padding-right: 5px;
@@ -74,6 +82,17 @@ ion-title {
   width: 120px;
 }
 
+.work-hours {
+  width: 170px;
+  font-size: medium;
+  padding-left: 5px;
+  padding-right: 5px;
+  border: 1px solid #22222e;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-left: 5px;
+}
+
 .worker {
   width: 250px;
   font-size: medium;
@@ -99,19 +118,4 @@ ion-title {
   border-radius: 5px;
   background-color: #29c467;
   margin-top: 20px;
-}
-
-// computer monitors
-@media screen and (min-width: 1224px) {
-  .report-content {
-    width: 35%;
-  }
-
-  .num {
-    padding-left: 37%;
-  }
-
-  .date {
-    padding-left: 39%;
-  }
 }

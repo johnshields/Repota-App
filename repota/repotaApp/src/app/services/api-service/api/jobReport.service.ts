@@ -26,8 +26,8 @@ import {Configuration} from '../configuration';
 @Injectable()
 export class JobReportService {
 
-    protected basePath = 'https://api.repota-service.com/api/v1'; // aws elastic beanstalk
-    //protected basePath = 'http://localhost:8080/api/v1'; // local
+    //protected basePath = 'https://api.repota-service.com/api/v1'; // aws elastic beanstalk
+    protected basePath = 'http://localhost:8080/api/v1'; // local
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 

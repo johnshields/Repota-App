@@ -21,7 +21,6 @@ import domtoimage from 'dom-to-image';
 })
 export class ExportPage implements OnInit {
     report: any = [];
-    public errorMsg: string;
 
     constructor(private api: JobReportService, private route: ActivatedRoute, private router: Router) {
     }
@@ -38,10 +37,10 @@ export class ExportPage implements OnInit {
     // export report to a pdf
     onExportPDF() {
         const content = document.getElementById('job-report');
-        const options = {background: 'white', width: 650, quality: 2};
+        const options = {background: 'white', width: 650, quality: 0.98};
         domtoimage.toPng(content, options).then(
             (dataUrl) => {
-                const doc = new jspdf.jsPDF('portrait', 'mm', 'a4');
+                const doc = new jspdf.jsPDF('portrait', 'mm', 'a4', true);
                 doc.addImage(dataUrl, 'jpeg', 0, 0, 210, 297);
                 doc.save('job_report.pdf');
             });

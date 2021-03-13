@@ -51,8 +51,8 @@
                             <p class="desc-info"> {{report["cause"]}}</p>
                             <ion-label class="desc-name"> Correction:</ion-label>
                             <p class="desc-info">{{report["correction"]}}</p>
-                            <ion-label class="info"> Parts: {{report["parts"]}}</ion-label>
-                            <ion-label class="info"> Work Hours: {{report["workHours"]}}</ion-label>
+                            <p class="desc-info"> Parts: {{report["parts"]}}</p>
+                            <ion-label class="work-hours"> Work Hours: {{report["workHours"]}}</ion-label>
                             <ion-label class="worker"> Technician: {{report["workerName"]}}</ion-label>
                             <ion-label class="job-comp"> Complete
                                 <mat-checkbox [(ngModel)]="report.jobComplete" disabled></mat-checkbox>

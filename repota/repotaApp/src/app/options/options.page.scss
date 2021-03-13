@@ -7,13 +7,15 @@ ion-content {
 }
 
 ion-button {
+  border-radius: 5px;
   width: 200px;
-  margin-top: 15px;
+  height: 25px;
+  margin-top: 10px;
   background-color: royalblue;
 }
 
 ion-card {
-  top: 46%;
+  top: 44%;
   left: 48%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -27,7 +29,7 @@ ion-text {
   width: 200px;
 }
 
-ion-title {
+ion-label{
   color: #f5f6f9;
   font-size: 18px;
   font-weight: bold;
@@ -52,7 +54,9 @@ ion-title {
     left: 49.5%;
   }
 
-  .links {
-    margin-top: 30px;
+  ion-button {
+    width: 200px;
+    height: 40px;
+    margin-top: 15px;
   }
 }
