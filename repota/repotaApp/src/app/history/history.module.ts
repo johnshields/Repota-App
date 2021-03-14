@@ -8,6 +8,7 @@ import {HistoryPageRoutingModule} from './history-routing.module';
 
 import {HistoryPage} from './history.page';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
     imports: [
@@ -15,7 +16,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
         FormsModule,
         IonicModule,
         HistoryPageRoutingModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatFormFieldModule
     ],
     declarations: [HistoryPage]
 })

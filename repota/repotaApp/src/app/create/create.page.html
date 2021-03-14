@@ -34,6 +34,7 @@
                                 <ion-label class="headers"> Vehicle Details:</ion-label>
                                 <input list="cars" name="vehicleModel" ngModel required #vehicleModel="ngModel"
                                        type="text" placeholder="Make & Model" class="input">
+                                <!-- data list of vehicles from API-->
                                 <datalist id="cars">
                                     <option *ngFor="let cars of vehicles"
                                             [value]="cars.Make + space + cars.Model"></option>

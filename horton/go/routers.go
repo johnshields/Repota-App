@@ -7,7 +7,7 @@
  * Handles CORS for cross origins to front-end.
  * Handles Endpoint Routes for functions for reports and users.
  *
- * References
+ * Reference
  * https://stackoverflow.com/questions/29418478/go-gin-framework-cors
  */
 
@@ -34,7 +34,7 @@ type Route struct {
 // Routes is the list of the generated Route.
 type Routes []Route
 
-// Cors - To handle cross origin issues while testing
+// Cors - To handle cross origin issues.
 func CORS() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.Writer.Header().Set("Access-Control-Allow-Origin", c.Request.Header.Get("Origin"))
@@ -151,5 +151,4 @@ var routes = Routes{
 		"/api/v1/carApiData",
 		GetCarApiData,
 	},
-
 }

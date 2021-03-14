@@ -15,10 +15,21 @@ import {JobReportService} from '../services/api-service';
 })
 export class HistoryPage implements OnInit {
     reports: any = [];
-    public errorMsg: string;
-    public successMsg: string;
+    private errorMessage;
 
     constructor(private api: JobReportService) {
+    }
+
+    /**
+     * @title Error message Handlers
+     * @desc Functions are used to set and get error message for error responses.
+     */
+    setErrorMessage(error: String) {
+        this.errorMessage = error;
+    }
+
+    getErrorMessage() {
+        return this.errorMessage;
     }
 
     ngOnInit() {
@@ -26,8 +37,15 @@ export class HistoryPage implements OnInit {
         this.api.getReports().subscribe(data => {
             this.reports = data;
             console.log('[INFO] Reports have been processed.');
-            console.log(data);
+            this.setErrorMessage('');
+            // user has no reports
+            if (data == null) {
+                this.setErrorMessage('You have no Reports yet!');
+            }
         }, error => {
+            // get error from response.
+            let errorMessage = JSON.stringify(error.error.messages);
+            this.setErrorMessage(errorMessage);
             console.log(error);
         });
     }

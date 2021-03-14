@@ -50,7 +50,6 @@ func Login(c *gin.Context) {
 
 	// Compare the hash in the db with the user password provided in the request
 	if err := bcrypt.CompareHashAndPassword([]byte(wa.Password), []byte(password)); err == nil {
-		fmt.Println("[INFO] User logged in.")
 
 		// Check for existing session, remove if one exits.
 		if removeSession(wa.Id) {
@@ -58,21 +57,22 @@ func Login(c *gin.Context) {
 			err, session := createSessionId(username)
 
 			if err != nil {
-				fmt.Print(err)
+				log.Print(err)
 				c.JSON(500, models.Error{Code: 500, Messages: "Could not create new session_id"})
 			} else {
 				// set a cookie for logged in user.
 				c.SetCookie("session_id", session.Token, session.Expiry, "/",
 					"", false, false)
+				// user has been logged in and cookie has been set.
 				c.JSON(204, nil)
+				fmt.Println("\n[INFO]", username, "logged in")
 			}
 		} else {
-			fmt.Println("\n[ALERT] Could not remove old session")
+			log.Println("\nCould not remove old session")
 			c.JSON(500, models.Error{Code: 500, Messages: "Could not remove old session"})
 		}
 	} else {
-		fmt.Print(err)
-		log.Println("\n[ALERT] Password is incorrect for", username)
+		log.Println(err, "\n[ALERT] Password is incorrect for", username)
 		c.JSON(401, models.Error{Code: 401, Messages: "Password is incorrect"})
 	}
 	defer db.Close()
@@ -84,7 +84,7 @@ func Register(c *gin.Context) {
 
 	// Blind data to object, else throw error
 	if err := c.BindJSON(&user); err != nil {
-		fmt.Println(err.Error())
+		log.Println(err.Error())
 	}
 
 	username := user.Username
@@ -97,13 +97,13 @@ func Register(c *gin.Context) {
 		err, session := createSessionId(username)
 
 		if err != nil {
-			fmt.Print(err)
+			log.Print(err)
 			c.JSON(500, nil)
 		} else {
 			c.JSON(200, session)
 		}
 	} else {
-		log.Printf("\n[ALERT] Not completing request")
+		log.Println("\n[ALERT] Not completing request")
 	}
 }
 
@@ -116,10 +116,10 @@ func registerNewUser(c *gin.Context, username, name, password string) error {
 		"\nEntered username:", username, "\nEntered Password:", password)
 
 	if strings.TrimSpace(password) == "" {
-		log.Printf("\n[ALERT] Password is null")
+		log.Println("\n[ALERT] Password is null")
 		return errors.New("password is null")
 	} else if isValidAccount(username) {
-		log.Printf("\n[ALERT] Username taken")
+		log.Println("\n[ALERT] Username taken")
 		c.JSON(400, models.Error{Code: 400, Messages: "Username is already taken"})
 		return errors.New("username is already taken")
 	}
@@ -129,9 +129,10 @@ func registerNewUser(c *gin.Context, username, name, password string) error {
 
 	if err != nil {
 		c.JSON(500, nil)
-		log.Fatal("\n[ALERT] Hash Password failed: ", err)
+		log.Fatal("\n[WARN] Hash Password failed: ", err)
 	}
 
+	// insert new user in the workers table.
 	insert, err := db.Prepare("INSERT INTO workers(username, worker_name, hash) VALUES (?, ?, ?)")
 
 	if err != nil {
@@ -151,7 +152,6 @@ func registerNewUser(c *gin.Context, username, name, password string) error {
 	fmt.Println("\n[INFO] Print MySQL Results for user account:\n", result)
 
 	defer db.Close()
-	// Everything is good
 	return nil
 }
 
@@ -159,6 +159,7 @@ func registerNewUser(c *gin.Context, username, name, password string) error {
 func isValidAccount(username string) bool {
 	db := config.DbConn()
 
+	// check username from workers table.
 	selDB, err := db.Query("SELECT * FROM workers WHERE username=?", username)
 
 	if err != nil {
@@ -166,27 +167,24 @@ func isValidAccount(username string) bool {
 		return false
 	}
 
+	// Check to see if a true user exists in the table, if not return false.
 	if selDB.Next() {
 		err = selDB.Scan(&wa.Id, &wa.Username, &wa.WorkerName, &wa.Password)
 
 		if err != nil {
-			// return false // No user matching username provided
+			// No matching username in table
 			log.Println("\n[ALERT] MySQL Error - no matching username:\n", err)
 			return false
 		}
 		defer db.Close()
-		// Username matches return false as its not valid
 		return true
 	} else {
-		// no true exits
 		defer db.Close()
 		return false
 	}
 }
 
-// Function that registers a new user to the database.
-// Check password for null
-// Check if user exists
+// Function to check password for null and if user exists when users login.
 func verifyDetails(username, password string) error {
 
 	fmt.Println("\n[INFO] Processing User Details...",

@@ -22,6 +22,8 @@ export class EditPage implements OnInit {
     checkBoxValue2: number;
     checkBoxValue3: number;
     report: any;
+    vehicles: any = [];
+    space = ' ';
 
     constructor(private api: JobReportService, private router: Router, private route: ActivatedRoute) {
     }
@@ -82,6 +84,16 @@ export class EditPage implements OnInit {
             console.log(this.route.snapshot.params['jobReportId']);
             this.report = data;
             console.log(data);
+        });
+
+        // get vehicle data from API
+        this.api.getCarApiData().subscribe(data => {
+            console.log('[INFO] Vehicles have been processed.');
+            for (let key in data) {
+                this.vehicles = data[key];
+            }
+        }, error => {
+            console.log(error);
         });
 
         // Lists for check box values

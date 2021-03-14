@@ -25,7 +25,8 @@ import (
 	"net/http"
 )
 
-// Function that takes in the input data and calls the function insertJobReport to create a new report.
+// Function that takes in the input data from a user and
+// calls the function insertJobReport to create a new report.
 func CreateReport(c *gin.Context) {
 	var report models.JobReport
 
@@ -34,12 +35,14 @@ func CreateReport(c *gin.Context) {
 		fmt.Println(err.Error())
 	}
 
+	// check for logged in user's cookie.
+	CheckForCookie(c)
+
 	// Insert Job Report details
 	if err := insertJobReport(report, wa.Username); err == nil {
 		c.JSON(201, "Report created successfully")
 	} else {
 		c.JSON(401, models.Error{Code: 401, Messages: "Not able to create Report"})
-		log.Printf("\n[ALERT] Not completing request.")
 	}
 }
 
@@ -68,7 +71,7 @@ func insertJobReport(report models.JobReport, username string) error {
 
 	// Check logged in user
 	if !isValidAccount(username) {
-		log.Println("\n[ALERT] User has not logged in!")
+		log.Println("\n[ALERT] User has not logged in")
 		return errors.New("error creating Report")
 	}
 
@@ -89,7 +92,6 @@ func insertJobReport(report models.JobReport, username string) error {
 	fmt.Println("\n[INFO] Print MySQL Results for Report:\n", reportResult, customerResult)
 
 	defer db.Close()
-	// Everything is good
 	return nil
 }
 
@@ -100,7 +102,6 @@ func GetReportById(c *gin.Context) {
 	var res []models.JobReport
 	worker := wa.Username
 
-	// check for logged in user's cookie
 	CheckForCookie(c)
 
 	// Get id from request
@@ -112,7 +113,7 @@ func GetReportById(c *gin.Context) {
 		c.JSON(401, models.Error{Code: 401, Messages: "User has not logged in!"})
 	}
 
-	// JOIN Query to get report by id
+	// JOIN Query to get report by ID
 	selDB, err := db.Query("SELECT DISTINCT jr.job_report_id, jr.date_stamp, jr.vehicle_model, "+
 		"jr.vehicle_reg, jr.miles_on_vehicle, jr.vehicle_location, jr.warranty, jr.breakdown, "+
 		"cust.customer_name, cust.customer_complaint, jr.cause, jr.correction, jr.parts, jr.work_hours, "+
@@ -121,14 +122,10 @@ func GetReportById(c *gin.Context) {
 		"INNER JOIN workers wkr ON jr.worker_id = wkr.worker_id "+
 		"WHERE jr.job_report_id = ? AND wkr.username = ?", reportId, worker)
 
-	fmt.Println("\n[INFO] Processing Report...")
-
 	if err != nil {
-		log.Println("\n[ALERT] Failed to process reports.")
+		log.Println("\n[ALERT] Failed to process report.")
 		c.JSON(500, nil)
 	}
-
-	fmt.Println("\n[INFO] Loading model...")
 
 	// Run through each record and read values.
 	for selDB.Next() {
@@ -146,7 +143,7 @@ func GetReportById(c *gin.Context) {
 		res = append(res, report)
 		log.Printf(string(report.JobReportId))
 	}
-	// Return values, Status OK
+	// Return result values
 	c.JSON(http.StatusOK, res)
 
 	fmt.Println("\n[INFO] Report Processed.", res)
@@ -176,8 +173,6 @@ func GetReports(c *gin.Context) {
 		"wkr.worker_name, jr.job_report_complete FROM jobreports jr INNER JOIN customers cust "+
 		"ON jr.job_report_id = cust.job_report_id "+
 		"INNER JOIN workers wkr ON jr.worker_id = wkr.worker_id WHERE wkr.username = ?", worker)
-
-	fmt.Println("\n[INFO] Processing Reports...")
 
 	if err != nil {
 		log.Println("\n[ALERT] Failed to process reports.")

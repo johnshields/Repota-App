@@ -47,7 +47,7 @@ func createSessionId(username string) (error, models.Session) {
 	token := generateSessionId() // Create a new session ID
 	expiry := 3600 * 24 * 3      // 3600 * 24 * 3 = 3 days
 
-	// INSERT QUERY to create an Account
+	// INSERT QUERY to create account for user
 	insert, err := db.Prepare("INSERT INTO session(id, user, expire_after) VALUES(?, ?, ?)")
 
 	if err != nil {
@@ -89,11 +89,11 @@ func generateSessionId() string {
 func removeSession(userId int) bool {
 	db := config.DbConn()
 
-	//Create query
+	// delete session for user.
 	res, err := db.Exec("DELETE FROM session WHERE user=?", userId)
 
 	if err != nil {
-		fmt.Printf("Query error")
+		log.Println("[ALERT] Query error")
 		return false
 	}
 
@@ -121,7 +121,7 @@ func Logout(c *gin.Context) {
 		err, session := createSessionId(username)
 
 		if err != nil {
-			fmt.Print(err)
+			log.Print(err)
 			c.JSON(500, models.Error{Code: 500, Messages: "Could not create new session_id"})
 		} else {
 			// set a cookie of one second for logged out user.
@@ -132,7 +132,7 @@ func Logout(c *gin.Context) {
 			fmt.Println("\n[INFO]", username, "logged out")
 		}
 	} else {
-		fmt.Println("\n[ALERT] Could not logout", username)
+		log.Println("\n[ALERT] Could not logout", username)
 		c.JSON(500, models.Error{Code: 500, Messages: "Could not logout User"})
 	}
 	defer db.Close()

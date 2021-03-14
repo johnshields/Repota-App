@@ -51,6 +51,7 @@ export class LoginPage implements OnInit {
         this.api.login(object).subscribe(() => {
             console.log('Success');
             this.setErrorMessage('');
+            this.ngOnInit();
             form.reset();
             this.router.navigate(['/home']);
         }, error => {

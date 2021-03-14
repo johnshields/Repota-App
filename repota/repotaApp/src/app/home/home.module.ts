@@ -5,13 +5,15 @@ import {FormsModule} from '@angular/forms';
 import {HomePage} from './home.page';
 
 import {HomePageRoutingModule} from './home-routing.module';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
     imports: [
         IonicModule,
         CommonModule,
         FormsModule,
-        HomePageRoutingModule
+        HomePageRoutingModule,
+        MatFormFieldModule
     ],
     declarations: [HomePage]
 })

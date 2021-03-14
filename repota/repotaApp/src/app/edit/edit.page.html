@@ -32,6 +32,12 @@
                         <ion-row>
                             <ion-col>
                                 <ion-label class="headers"> Vehicle Details:</ion-label>
+                                <input list="cars" name="vehicleModel" ngModel required #vehicleModel="ngModel"
+                                       type="text" placeholder='{{report["vehicleModel"]}}' class="input">
+                                <datalist id="cars">
+                                    <option *ngFor="let cars of vehicles"
+                                            [value]="cars.Make + space + cars.Model"></option>
+                                </datalist>
                                 <ion-input name="vehicleModel" ngModel required="true" #vehicleModel="ngModel"
                                            type="text" placeholder='{{report["vehicleModel"]}}'
                                            class="input"></ion-input>

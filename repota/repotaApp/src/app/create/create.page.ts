@@ -15,7 +15,6 @@ import {Router} from '@angular/router';
     styleUrls: ['./create.page.scss'],
 })
 export class CreatePage implements OnInit {
-    errorMsg: string;
     list1: any[];
     list2: any[];
     list3: any[];

@@ -13,6 +13,10 @@
     <ion-button class="refresh-btn" (click)="refreshPage()" color="NONE">Refresh</ion-button>
 </p>
 <ion-content>
+    <p align="center" class="message">
+        <!-- error message -->
+        <mat-error class="error-message">{{getErrorMessage()}}</mat-error>
+    </p>
     <ion-card>
         <ion-item *ngFor="let report of reports">
             <ion-card-content>
