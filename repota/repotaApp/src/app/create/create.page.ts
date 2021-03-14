@@ -22,6 +22,8 @@ export class CreatePage implements OnInit {
     checkBoxValue1: number;
     checkBoxValue2: number;
     checkBoxValue3: number;
+    vehicles: any = [];
+    space = ' ';
 
     constructor(private api: JobReportService, private router: Router) {
     }
@@ -79,7 +81,18 @@ export class CreatePage implements OnInit {
         });
     }
 
+
     ngOnInit() {
+        // get vehicle data from API
+        this.api.getCarApiData().subscribe(data => {
+            console.log('[INFO] Vehicles have been processed.');
+            for (let key in data) {
+                this.vehicles = data[key];
+            }
+        }, error => {
+            console.log(error);
+        });
+
         // Lists for check box values.
         this.list1 = [{
             id: 1,

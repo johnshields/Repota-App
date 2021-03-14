@@ -9,6 +9,7 @@ import {CreatePageRoutingModule} from './create-routing.module';
 import {CreatePage} from './create.page';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatOptionModule} from '@angular/material/core';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
     imports: [
@@ -18,6 +19,7 @@ import {MatOptionModule} from '@angular/material/core';
         CreatePageRoutingModule,
         MatCheckboxModule,
         MatOptionModule,
+        MatFormFieldModule,
     ],
     declarations: [CreatePage]
 })

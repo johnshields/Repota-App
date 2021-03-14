@@ -310,4 +310,13 @@ export class JobReportService {
         );
     }
 
+    // Get all Vehicle Data from API that retrieves it from a 3rd Party API.
+    getCarApiData(): Observable<any> {
+        return this.httpClient.request('get', `${this.basePath}/carApiData`,
+            {
+                withCredentials: this.configuration.withCredentials,
+            }
+        );
+    }
+
 }
