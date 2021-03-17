@@ -49,8 +49,9 @@ func CreateReport(c *gin.Context) {
 // Function that creates a new report by starting and committing a MySQL transaction
 // to insert into the tables, jobreports and customers.
 func insertJobReport(report models.JobReport, username string) error {
-
 	db := config.DbConn()
+	//db := mocks.MockDbConn() // for unit tests
+
 	fmt.Println("\n[INFO] Processing Report Details...",
 		"\nReport Date:", report.Date, "\nCustomer Name:", report.CustomerName)
 
@@ -97,8 +98,9 @@ func insertJobReport(report models.JobReport, username string) error {
 
 // Function that gets a report in the database from a JOIN QUERY by its requested ID and logged in user's username.
 func GetReportById(c *gin.Context) {
-
 	db := config.DbConn()
+	//db := mocks.MockDbConn() // for unit tests
+
 	var res []models.JobReport
 	worker := wa.Username
 
@@ -152,8 +154,8 @@ func GetReportById(c *gin.Context) {
 
 // Function that gets all report in the database from a JOIN QUERY by a logged in user's username.
 func GetReports(c *gin.Context) {
-
 	db := config.DbConn()
+	//db := mocks.MockDbConn() // for unit tests
 
 	worker := wa.Username
 	var res []models.JobReport
@@ -204,6 +206,7 @@ func GetReports(c *gin.Context) {
 // Function to update/edit report by its requested ID.
 func UpdateReport(c *gin.Context) {
 	db := config.DbConn()
+	//db := mocks.MockDbConn() // for unit tests
 	var report models.JobReport
 
 	// Get id from request
@@ -242,6 +245,7 @@ func UpdateReport(c *gin.Context) {
 // Function to delete a report by its requested ID.
 func DeleteReport(c *gin.Context) {
 	db := config.DbConn()
+	//db := mocks.MockDbConn() // for unit tests
 
 	// Get id from request.
 	reportId := c.Params.ByName("jobReportId")

@@ -47,7 +47,7 @@ func createSessionId(username string) (error, models.Session) {
 	token := generateSessionId() // Create a new session ID
 	expiry := 3600 * 24 * 3      // 3600 * 24 * 3 = 3 days
 
-	// INSERT QUERY to create account for user
+	// INSERT QUERY to create account for user.
 	insert, err := db.Prepare("INSERT INTO session(id, user, expire_after) VALUES(?, ?, ?)")
 
 	if err != nil {
@@ -111,7 +111,6 @@ func removeSession(userId int) bool {
 
 // Function to logout a user by replacing their cookie with one that expires in one second.
 func Logout(c *gin.Context) {
-
 	db := config.DbConn()
 	username := wa.Username
 

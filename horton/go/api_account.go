@@ -31,6 +31,7 @@ var wa models.WorkerAccount
 // removes the existing session for the user, creates a new one and sets a cookie for the user.
 func Login(c *gin.Context) {
 	db := config.DbConn()
+	//db := mocks.MockDbConn() // for unit tests
 
 	// Object to bind data too
 	var workerForm models.WorkerAccount
@@ -91,7 +92,7 @@ func Register(c *gin.Context) {
 	password := user.Password
 
 	// register new user and hash the password
-	if err := registerNewUser(c, username, user.Name, password); err == nil {
+	if err := RegisterNewUser(c, username, user.Name, password); err == nil {
 
 		// create a session for the user
 		err, session := createSessionId(username)
@@ -109,8 +110,9 @@ func Register(c *gin.Context) {
 
 // Function that registers a new user and hashes the password.
 // User get registered and are inserted into the database
-func registerNewUser(c *gin.Context, username, name, password string) error {
+func RegisterNewUser(c *gin.Context, username, name, password string) error {
 	db := config.DbConn()
+	//db := mocks.MockDbConn() // for unit tests
 
 	fmt.Println("\n[INFO] Processing User Details...",
 		"\nEntered username:", username, "\nEntered Password:", password)
@@ -158,6 +160,7 @@ func registerNewUser(c *gin.Context, username, name, password string) error {
 // Function to do a database look up and check if a username matches one provided.
 func isValidAccount(username string) bool {
 	db := config.DbConn()
+	//db := mocks.MockDbConn() // for unit tests
 
 	// check username from workers table.
 	selDB, err := db.Query("SELECT * FROM workers WHERE username=?", username)
