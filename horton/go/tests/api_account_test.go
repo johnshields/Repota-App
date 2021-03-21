@@ -1,89 +1,115 @@
+/*
+ * John Shields
+ * Horton API - Tests
+ *
+ * Account API Test
+ * Tests for Register & Login
+ * Registers a mock User and Logins in the user to the mock DB.
+ */
+
 package tests
 
 import (
-	"github.com/GIT_USER_ID/GIT_REPO_ID/go"
+	"bytes"
+	"encoding/json"
+	"fmt"
+	"github.com/GIT_USER_ID/GIT_REPO_ID/go/models"
 	"github.com/gin-gonic/gin"
+	"log"
+	"net/http"
 	"testing"
 )
 
-func TestLogin(t *testing.T) {
-	type args struct {
-		c *gin.Context
-	}
-	tests := []struct {
-		name string
-		args func(t *testing.T) args
-	}{
-		{
-			name: "login",
-		},
-	}
-
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			tArgs := tt.args(t)
-
-			openapi.Login(tArgs.c)
-
-		})
-	}
-}
-
+// Function to register a mock User by sending request to /register endpoint.
 func TestRegister(t *testing.T) {
-	type args struct {
-		c *gin.Context
-	}
-	tests := []struct {
-		name string
-		args func(t *testing.T) args
-	}{
-		{
-			name: "register",
-		},
-	}
+	gin.SetMode(gin.TestMode)
+	fmt.Println("[TEST] Testing Register...")
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			tArgs := tt.args(t)
+	t.Run("register", func(t *testing.T) {
+		body := &models.InlineObject{
+			Username: "test_user",
+			Name:     "Test",
+			Password: "@Testing14",
+		}
 
-			openapi.Register(tArgs.c)
+		// encode InLineObject
+		payloadBuf := new(bytes.Buffer)
+		err := json.NewEncoder(payloadBuf).Encode(body)
+		if err != nil {
+			log.Println("[ALERT] Unable to Encode", err)
+		}
 
-		})
-	}
+		// set up request
+		url := "http://localhost:8080/api/v1/register"
+		req, err := http.NewRequest("POST", url, payloadBuf)
+		if err != nil {
+			log.Println(err)
+		}
+		// do request
+		client := &http.Client{}
+		res, err := client.Do(req)
+		if err != nil {
+			// TEST FAILED
+			t.Error("\n[FAIL] failed to Register User", err)
+			t.Fail()
+		}
+		defer res.Body.Close()
+
+		fmt.Println("response Status:", res.Status)
+		if res.Status == "200 OK" {
+			// TEST PASSED
+			fmt.Println("\n[PASS] User was Registered successfully")
+		} else {
+			// TEST FAILED
+			t.Error("\n[FAIL] failed to Register User", err)
+			t.Fail()
+		}
+	})
 }
 
-func Test_registerNewUser(t *testing.T) {
-	type args struct {
-		c        *gin.Context
-		username string
-		name     string
-		password string
-	}
-	tests := []struct {
-		name string
-		args func(t *testing.T) args
+// Function to login a mock User by sending request to login /endpoint.
+func TestLogin(t *testing.T) {
+	gin.SetMode(gin.TestMode)
+	fmt.Println("[TEST] Testing Login...")
 
-		wantErr    bool
-		inspectErr func(err error, t *testing.T) //use for more precise error evaluation after test
-	}{
-		{
-			name: "registerNewUser",
-		},
-	}
+	t.Run("login", func(t *testing.T) {
+		body := &models.InlineObject{
+			Username: "test_user",
+			Password: "@Testing14",
+		}
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			tArgs := tt.args(t)
+		// encode InLineObject
+		payloadBuf := new(bytes.Buffer)
+		err := json.NewEncoder(payloadBuf).Encode(body)
+		if err != nil {
+			log.Println("[ALERT] Unable to Encode", err)
+		}
 
-			err := openapi.RegisterNewUser(tArgs.c, tArgs.username, tArgs.name, tArgs.password)
+		// set up request
+		url := "http://localhost:8080/api/v1/login"
+		req, err := http.NewRequest("POST", url, payloadBuf)
+		if err != nil {
+			log.Println(err)
+		}
 
-			if (err != nil) != tt.wantErr {
-				t.Fatalf("registerNewUser error = %v, wantErr: %t", err, tt.wantErr)
-			}
+		// do request
+		client := &http.Client{}
+		res, err := client.Do(req)
+		if err != nil {
+			// TEST FAILED
+			t.Error("\n[FAIL] failed to Login User", err)
+			t.Fail()
+		}
+		defer res.Body.Close()
 
-			if tt.inspectErr != nil {
-				tt.inspectErr(err, t)
-			}
-		})
-	}
+		fmt.Println("response Status:", res.Status)
+		if res.Status == "204 No Content" {
+			// TEST PASSED
+			fmt.Println("\n[PASS] Logged in User")
+		} else {
+			// TEST FAILED
+			t.Error("\n[FAIL] failed to Login User", err)
+			t.Fail()
+		}
+	})
 }

@@ -42,6 +42,7 @@ func CheckForCookie(c *gin.Context) bool {
 // Returns either an error or a new Session object containing session token and expiry time.
 func createSessionId(username string) (error, models.Session) {
 	db := config.DbConn()
+	//db := mocks.MockDbConn() // for unit tests
 
 	// User has been created now set the following below
 	token := generateSessionId() // Create a new session ID
@@ -88,6 +89,7 @@ func generateSessionId() string {
 // Function to remove existing session for an authenticated user so it can be replaced by a new one.
 func removeSession(userId int) bool {
 	db := config.DbConn()
+	//db := mocks.MockDbConn() // for unit tests
 
 	// delete session for user.
 	res, err := db.Exec("DELETE FROM session WHERE user=?", userId)
@@ -112,6 +114,7 @@ func removeSession(userId int) bool {
 // Function to logout a user by replacing their cookie with one that expires in one second.
 func Logout(c *gin.Context) {
 	db := config.DbConn()
+	//db := mocks.MockDbConn() // for unit tests
 	username := wa.Username
 
 	// Check for existing session, remove if one exits.

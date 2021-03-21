@@ -232,8 +232,7 @@ func UpdateReport(c *gin.Context) {
 		log.Println("\n[ALERT] MySQL Error: Error Updating Report:\n", err)
 		c.JSON(503, models.Error{Code: 503, Messages: "Error Updating Report"})
 	} else {
-		fmt.Println("\n[INFO] Processing Job Report Details...",
-			"\nReport Number:", report.JobReportId, "\nReport Date:", report.Date)
+		fmt.Println("\n[INFO] Processing Job Report Details...", "\nReport ID:", reportId, "\nReport Date:", report.Date)
 
 		// Return 202 response for "Updated"
 		c.JSON(202, gin.H{})
@@ -268,7 +267,7 @@ func DeleteReport(c *gin.Context) {
 		c.JSON(500, nil)
 	}
 
-	fmt.Printf("The statement affected %d rows\n", affectedRows)
+	fmt.Printf("\nThe statement affected %d rows\n", affectedRows)
 
 	c.JSON(204, nil)
 }

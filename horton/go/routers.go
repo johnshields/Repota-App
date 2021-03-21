@@ -3,6 +3,7 @@
  * Horton - API version: 1.0.0
  *
  * Routers
+ * Setup all routes for API.
  * Handles GET, HEAD, POST, PUT, DELETE, OPTIONS, PATCH for requests and responses.
  * Handles CORS for cross origins to front-end.
  * Handles Endpoint Routes for functions for reports and users.

@@ -1,77 +1,57 @@
+/*
+ * John Shields
+ * Horton API - Tests
+ *
+ * Routers Test
+ * Test for Index (routes setup).
+ */
+
 package tests
 
 import (
+	"fmt"
 	_ "fmt"
-	"github.com/GIT_USER_ID/GIT_REPO_ID/go"
-	"reflect"
+	"io"
+	"log"
+	"net/http"
+	"os"
 	"testing"
 
 	"github.com/gin-gonic/gin"
 )
 
-func TestCORS(t *testing.T) {
-	tests := []struct {
-		name string
-
-		want1 gin.HandlerFunc
-	}{
-		{
-			name: "CORS",
-		},
-	}
-
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got1 := openapi.CORS()
-
-			if !reflect.DeepEqual(got1, tt.want1) {
-				t.Errorf("CORS got1 = %v, want1: %v", got1, tt.want1)
-			}
-		})
-	}
-}
-
-func TestNewRouter(t *testing.T) {
-	tests := []struct {
-		name string
-
-		want1 *gin.Engine
-	}{
-		{
-			name: "newRouter",
-		},
-	}
-
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got1 := openapi.NewRouter()
-
-			if !reflect.DeepEqual(got1, tt.want1) {
-				t.Errorf("NewRouter got1 = %v, want1: %v", got1, tt.want1)
-			}
-		})
-	}
-}
-
+// Function to test the IndexController by sending a request to /api/v1/ endpoint.
 func TestIndex(t *testing.T) {
-	type args struct {
-		c *gin.Context
-	}
-	tests := []struct {
-		name string
-		args func(t *testing.T) args
-	}{
-		{
-			name: "index",
-		},
-	}
+	gin.SetMode(gin.TestMode)
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			tArgs := tt.args(t)
+	t.Run("indexController", func(t *testing.T) {
+		fmt.Println("[TEST] Testing IndexController...")
+		// set up request
+		url := "http://localhost:8080/api/v1/"
+		req, err := http.NewRequest("GET", url, nil)
+		if err != nil {
+			log.Println(err)
+		}
+		// do request
+		client := &http.Client{}
+		res, err := client.Do(req)
+		if err != nil {
+			t.Error("\n[FAIL] failed to setup routes", err)
+			t.Fail()
+		}
+		defer res.Body.Close()
 
-			openapi.Index(tArgs.c)
+		fmt.Println("response Status:", res.Status)
+		// print the body to the stdout
+		io.Copy(os.Stdout, res.Body)
 
-		})
-	}
+		if res.Status == "200 OK" {
+			// TEST PASSED
+			fmt.Println("\n[PASS] succeeded to setup routes")
+		} else {
+			// TEST FAILED
+			t.Error("\n[FAIL] failed to setup routes", err)
+			t.Fail()
+		}
+	})
 }

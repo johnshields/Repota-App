@@ -1,60 +1,51 @@
+/*
+ * John Shields
+ * Horton API - Tests
+ *
+ * Session Test
+ * Test for Logout of mock User created in API Account Test.
+ */
+
 package tests
 
 import (
-	"github.com/GIT_USER_ID/GIT_REPO_ID/go"
-	"reflect"
+	"fmt"
+	"log"
+	"net/http"
 	"testing"
 
 	"github.com/gin-gonic/gin"
 )
 
-func TestCheckForCookie(t *testing.T) {
-	type args struct {
-		c *gin.Context
-	}
-	tests := []struct {
-		name string
-		args func(t *testing.T) args
-
-		want1 bool
-	}{
-		{
-			name: "checkForCookie",
-		},
-	}
-
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			tArgs := tt.args(t)
-
-			got1 := openapi.CheckForCookie(tArgs.c)
-
-			if !reflect.DeepEqual(got1, tt.want1) {
-				t.Errorf("CheckForCookie got1 = %v, want1: %v", got1, tt.want1)
-			}
-		})
-	}
-}
-
+// Function to test Logout by sending request to /logout endpoint.
 func TestLogout(t *testing.T) {
-	type args struct {
-		c *gin.Context
-	}
-	tests := []struct {
-		name string
-		args func(t *testing.T) args
-	}{
-		{
-			name: "logout",
-		},
-	}
+	gin.SetMode(gin.TestMode)
+	fmt.Println("[TEST] Testing Logout...")
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			tArgs := tt.args(t)
+	t.Run("logout", func(t *testing.T) {
+		// set up request
+		url := "http://localhost:8080/api/v1/logout"
+		req, err := http.NewRequest("GET", url, nil)
+		if err != nil {
+			log.Println(err)
+		}
+		// do request
+		client := &http.Client{}
+		res, err := client.Do(req)
+		if err != nil {
+			t.Error("\n[FAIL] failed to logout User", err)
+			t.Fail()
+		}
+		defer res.Body.Close()
 
-			openapi.Logout(tArgs.c)
-
-		})
-	}
+		fmt.Println("response Status:", res.Status)
+		if res.Status == "204 No Content" {
+			// TEST PASSED
+			fmt.Println("\n[PASS] succeeded to logout User")
+		} else {
+			// TEST FAILED
+			t.Error("\n[FAIL] failed to logout User", err)
+			t.Fail()
+		}
+	})
 }
