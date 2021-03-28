@@ -5,7 +5,6 @@ import {Router} from '@angular/router';
 
 /**
  * @author John Shields
- * @app Repota
  * @title Register Page
  * @desc Handles user registration.
  */

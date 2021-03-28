@@ -45,7 +45,7 @@ func Login(c *gin.Context) {
 
 	// Check if user exist in the database and check password is not null
 	if err := verifyDetails(username, password); err != nil {
-		c.JSON(400, models.Error{Code: 400, Messages: "Username does not exist"})
+		c.JSON(403, models.Error{Code: 403, Messages: "Username does not exist"})
 		return // Return as there is issues with the username or password
 	}
 
@@ -122,7 +122,7 @@ func RegisterNewUser(c *gin.Context, username, name, password string) error {
 		return errors.New("password is null")
 	} else if isValidAccount(username) {
 		log.Println("\n[ALERT] Username taken")
-		c.JSON(400, models.Error{Code: 400, Messages: "Username is already taken"})
+		c.JSON(409, models.Error{Code: 409, Messages: "Username is already taken"})
 		return errors.New("username is already taken")
 	}
 
@@ -146,7 +146,7 @@ func RegisterNewUser(c *gin.Context, username, name, password string) error {
 
 	// return MySQL error if there is a duplicate entry.
 	if err != nil {
-		c.JSON(400, models.Error{Code: 400, Messages: "Please make your name more unique"})
+		c.JSON(409, models.Error{Code: 409, Messages: "Please make your name more unique"})
 		log.Println("\n[ALERT] MySQL Error: Duplicate entry:\n", err)
 		return err
 	}

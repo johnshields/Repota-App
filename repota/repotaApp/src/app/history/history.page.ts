@@ -3,7 +3,6 @@ import {JobReportService} from '../services/api-service';
 
 /**
  * @author John Shields
- * @app Repota
  * @title History Page
  * @desc Gets all user's reports to display.
  */

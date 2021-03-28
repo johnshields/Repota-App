@@ -5,7 +5,6 @@ import {Router} from '@angular/router';
 
 /**
  * @author John Shields
- * @app Repota
  * @title Login Page
  * @desc Handles user logging in.
  *
@@ -50,10 +49,10 @@ export class LoginPage implements OnInit {
         // Push data to API to login user if object data is correct.
         this.api.login(object).subscribe(() => {
             console.log('Success');
-            this.setErrorMessage('');
+            this.setErrorMessage(''); // clear error message.
             this.ngOnInit();
             form.reset();
-            this.router.navigate(['/home']);
+            this.router.navigate(['/home']); // allow user in.
         }, error => {
             // get error from response
             let errorMessage = JSON.stringify(error.error.messages);

@@ -16,8 +16,21 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class DisplayPage implements OnInit {
     report: any = [];
+    private errorMessage;
 
     constructor(private api: JobReportService, private route: ActivatedRoute, private router: Router) {
+    }
+
+    /**
+     * @title Error message Handlers
+     * @desc Functions are used to set and get error message for error responses.
+     */
+    setErrorMessage(error: String) {
+        this.errorMessage = error;
+    }
+
+    getErrorMessage() {
+        return this.errorMessage;
     }
 
     ngOnInit() {
@@ -25,20 +38,28 @@ export class DisplayPage implements OnInit {
         this.api.getReportById(this.route.snapshot.params['jobReportId']).subscribe(data => {
             console.log(this.route.snapshot.params['jobReportId']);
             this.report = data;
-            console.log(data);
+            this.setErrorMessage(''); // clear error message.
         }, error => {
+            let errorMessage = JSON.stringify(error.error.messages);
+            this.setErrorMessage(errorMessage);
             console.log(error);
         });
     }
 
     // delete report with requested ID.
     deleteReport(id: number) {
-        this.api.deleteReport(id).subscribe(() => {
-            console.log('Success');
-            this.router.navigate(['/history']);
-        }, error => {
-            console.log(error);
-        });
+        // Pop up box to make sure the User wants to delete the Report.
+        if(confirm("Are you sure to delete" + " Report Number " + id + "?")) {
+            this.api.deleteReport(id).subscribe(() => {
+                console.log('Success');
+                this.setErrorMessage(''); // clear error message.
+                this.router.navigate(['/history']);
+            }, error => {
+                let errorMessage = JSON.stringify(error.error.messages);
+                this.setErrorMessage(errorMessage);
+                console.log(error);
+            });
+        }
     }
 }
 

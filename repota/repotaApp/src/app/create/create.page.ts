@@ -23,8 +23,21 @@ export class CreatePage implements OnInit {
     checkBoxValue3: number;
     vehicles: any = [];
     space = ' ';
+    private errorMessage;
 
     constructor(private api: JobReportService, private router: Router) {
+    }
+
+    /**
+     * @title Error message Handlers
+     * @desc Functions are used to set and get error message for error responses.
+     */
+    setErrorMessage(error: String) {
+        this.errorMessage = error;
+    }
+
+    getErrorMessage() {
+        return this.errorMessage;
     }
 
     /**
@@ -74,8 +87,11 @@ export class CreatePage implements OnInit {
         this.api.createReport(object).subscribe(data => {
             console.log('Success');
             this.api.createReport(data);
+            this.setErrorMessage(''); // clear error message.
             this.router.navigate(['/history']);
         }, error => {
+            let errorMessage = JSON.stringify(error.error.messages);
+            this.setErrorMessage(errorMessage);
             console.log(error);
         });
     }
@@ -88,7 +104,10 @@ export class CreatePage implements OnInit {
             for (let key in data) {
                 this.vehicles = data[key];
             }
+            this.setErrorMessage(''); // clear error message.
         }, error => {
+            let errorMessage = JSON.stringify(error.error.messages);
+            this.setErrorMessage(errorMessage);
             console.log(error);
         });
 

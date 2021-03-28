@@ -5,7 +5,7 @@
             <ion-menu-button menu="hamburger-menu"></ion-menu-button>
         </ion-buttons>
         <ion-avatar>
-            <img src="./assets/images/repotaApp_logo.png" alt="logo"/>
+            <img src="./assets/icons/favicon.ico" alt="logo"/>
         </ion-avatar>
     </ion-toolbar>
 </ion-header>
@@ -28,7 +28,7 @@
                 <mat-error *ngIf="username.invalid">Please enter your password.</mat-error>
             </mat-form-field>
             <!-- login user -->
-            <ion-button class="login-btn" size="large" type="submit"
+            <ion-button class="login-btn" size="large" type="submit" id="loginButton"
                         [disabled]="!workerForm.form.valid" expand="block" color="NONE">Login
             </ion-button>
         </form>

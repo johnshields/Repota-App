@@ -5,13 +5,15 @@
             <ion-menu-button menu="hamburger-menu"></ion-menu-button>
         </ion-buttons>
         <ion-avatar>
-            <img class="tool-bar-logo" src="./assets/images/repotaApp_logo.png" alt="logo"/>
+            <img src="./assets/icons/favicon.ico" alt="logo"/>
         </ion-avatar>
     </ion-toolbar>
 </ion-header>
 <ion-content>
     <ion-card>
         <form (submit)="editReport(reportForm)" #reportForm="ngForm">
+            <!-- error message -->
+            <mat-error class="error-message">{{getErrorMessage()}}</mat-error>
             <ion-item *ngFor="let report of report">
                 <ion-card-content>
                     <!-- report -->

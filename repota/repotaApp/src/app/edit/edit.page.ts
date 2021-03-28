@@ -24,8 +24,21 @@ export class EditPage implements OnInit {
     report: any;
     vehicles: any = [];
     space = ' ';
+    private errorMessage;
 
     constructor(private api: JobReportService, private router: Router, private route: ActivatedRoute) {
+    }
+
+    /**
+     * @title Error message Handlers
+     * @desc Functions are used to set and get error message for error responses.
+     */
+    setErrorMessage(error: String) {
+        this.errorMessage = error;
+    }
+
+    getErrorMessage() {
+        return this.errorMessage;
     }
 
     /**
@@ -72,8 +85,11 @@ export class EditPage implements OnInit {
         // Push data to API to edit/update report using the model
         this.api.updateReport(object, this.report[0].jobReportId).subscribe(() => {
             console.log('Success');
+            this.setErrorMessage(''); // clear error message.
             this.router.navigate(['/history']);
         }, error => {
+            let errorMessage = JSON.stringify(error.error.messages);
+            this.setErrorMessage(errorMessage);
             console.log(error);
         });
     }
@@ -92,7 +108,10 @@ export class EditPage implements OnInit {
             for (let key in data) {
                 this.vehicles = data[key];
             }
+            this.setErrorMessage(''); // clear error message.
         }, error => {
+            let errorMessage = JSON.stringify(error.error.messages);
+            this.setErrorMessage(errorMessage);
             console.log(error);
         });
 

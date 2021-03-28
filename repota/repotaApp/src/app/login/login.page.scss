@@ -6,6 +6,12 @@ ion-content {
   background-size: 400px 400px;
 }
 
+input:-webkit-autofill {
+  -webkit-box-shadow:200px 200px 100px #0d0d0d inset;
+  box-shadow:200px 200px 100px #0d0d0d inset;
+  width: 275px;
+}
+
 .user {
   background-color: #2a2a2a;
   position: absolute;

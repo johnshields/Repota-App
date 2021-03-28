@@ -8,6 +8,7 @@ import {DisplayPageRoutingModule} from './display-routing.module';
 
 import {DisplayPage} from './display.page';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
     imports: [
@@ -15,7 +16,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
         FormsModule,
         IonicModule,
         DisplayPageRoutingModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatFormFieldModule
     ],
     declarations: [DisplayPage]
 })

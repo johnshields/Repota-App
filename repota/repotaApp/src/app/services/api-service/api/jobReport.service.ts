@@ -14,7 +14,6 @@ import {Configuration} from '../configuration';
 
 /**
  * @author John Shields
- * @app Repota
  * @title Job Report Service - OpenAPI spec version: 1.0.0
  * @desc Job Report API Service for Getting, Creating, Updating and Deleting Reports.
  *
@@ -318,5 +317,4 @@ export class JobReportService {
             }
         );
     }
-
 }

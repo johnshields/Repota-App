@@ -1,4 +1,12 @@
-package main
+/*
+ * John Shields
+ * Horton API - Tests
+ *
+ * Main Test
+ * Tests Main to see if the router was launched.
+ */
+
+package tests
 
 import (
 	"fmt"

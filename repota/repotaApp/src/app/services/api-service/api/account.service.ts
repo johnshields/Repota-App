@@ -11,7 +11,6 @@ import {CustomHttpUrlEncodingCodec} from '../encoder';
 
 /**
  * @author John Shields
- * @app Repota
  * @title Account Service - OpenAPI spec version: 1.0.0
  * @desc Account API Service for Logging in and Registering Users.
  *
