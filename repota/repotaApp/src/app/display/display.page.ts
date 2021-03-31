@@ -33,8 +33,8 @@ export class DisplayPage implements OnInit {
         return this.errorMessage;
     }
 
+    // Get requested report by its ID from API.
     ngOnInit() {
-        // Get requested report by its ID.
         this.api.getReportById(this.route.snapshot.params['jobReportId']).subscribe(data => {
             console.log(this.route.snapshot.params['jobReportId']);
             this.report = data;
@@ -46,7 +46,7 @@ export class DisplayPage implements OnInit {
         });
     }
 
-    // delete report with requested ID.
+    // delete report with requested ID from API.
     deleteReport(id: number) {
         // Pop up box to make sure the User wants to delete the Report.
         if(confirm("Are you sure to delete" + " Report Number " + id + "?")) {

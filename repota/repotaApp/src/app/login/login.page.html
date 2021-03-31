@@ -18,13 +18,13 @@
             <!-- username input -->
             <mat-form-field class="user">
                 <input matInput type="text" name="username" ngModel required placeholder="Enter Username"
-                       #username="ngModel"/>
+                       #username="ngModel" id="username"/>
                 <mat-error *ngIf="username.invalid">Please enter your username.</mat-error>
             </mat-form-field>
             <!-- password input -->
             <mat-form-field class="password">
                 <input matInput type="password" name="password" ngModel required placeholder="Enter Password"
-                       #password="ngModel"/>
+                       #password="ngModel" id="password"/>
                 <mat-error *ngIf="username.invalid">Please enter your password.</mat-error>
             </mat-form-field>
             <!-- login user -->

@@ -67,7 +67,7 @@ func TestRegister(t *testing.T) {
 	})
 }
 
-// Function to login a mock User by sending request to login /endpoint.
+// Function to login a mock User by sending request to /login endpoint.
 func TestLogin(t *testing.T) {
 	gin.SetMode(gin.TestMode)
 	fmt.Println("[TEST] Testing Login...")

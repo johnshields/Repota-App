@@ -18,23 +18,23 @@
             <!-- username input -->
             <mat-form-field class="user">
                 <input matInput type="text" name="username" ngModel required placeholder="Enter Username"
-                       #username="ngModel"/>
+                       #username="ngModel" id="username"/>
                 <mat-error *ngIf="username.invalid">Please enter a username.</mat-error>
             </mat-form-field>
             <!-- name input -->
             <mat-form-field class="name">
                 <input matInput type="text" name="name" ngModel required placeholder="Enter Full Name"
-                       #name="ngModel"/>
+                       #name="ngModel" id="name"/>
                 <mat-error *ngIf="username.invalid">Please enter your name.</mat-error>
             </mat-form-field>
             <!-- password input -->
             <mat-form-field class="password">
                 <input matInput type="password" name="password" ngModel required placeholder="Enter Password"
-                       #password="ngModel"/>
+                       #password="ngModel" id="password"/>
                 <mat-error *ngIf="username.invalid">Please enter a password.</mat-error>
             </mat-form-field>
             <!-- register user -->
-            <ion-button class="register-btn" size="large" type="submit"
+            <ion-button class="register-btn" size="large" type="submit" id="register-btn"
                         [disabled]="!workerForm.form.valid" expand="block" color="NONE">Register
             </ion-button>
         </form>

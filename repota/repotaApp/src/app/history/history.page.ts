@@ -31,8 +31,8 @@ export class HistoryPage implements OnInit {
         return this.errorMessage;
     }
 
+    // get all user's reports from API.
     ngOnInit() {
-        // get all user's reports
         this.api.getReports().subscribe(data => {
             this.reports = data;
             console.log('[INFO] Reports have been processed.');
@@ -49,7 +49,7 @@ export class HistoryPage implements OnInit {
         });
     }
 
-    // refresh page to see new reports
+    // Refresh page to see new reports.
     refreshPage() {
         window.location.reload();
     }

@@ -19,7 +19,7 @@ export class AuthService {
     constructor(private cookieService: CookieService) {
     }
 
-    // get the cookie 'session_id' set by Horton (Backend).
+    // get the cookie 'session_id' set by API.
     loggedIn() {
         return !!this.cookieService.get('session_id');
     }

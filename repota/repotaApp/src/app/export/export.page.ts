@@ -22,11 +22,11 @@ import domtoimage from 'dom-to-image';
 export class ExportPage implements OnInit {
     report: any = [];
 
-    constructor(private api: JobReportService, private route: ActivatedRoute, private router: Router) {
+    constructor(private api: JobReportService, private route: ActivatedRoute) {
     }
 
+    // Get requested report by its ID from API.
     ngOnInit() {
-        // Get requested report by its ID
         this.api.getReportById(this.route.snapshot.params['jobReportId']).subscribe(data => {
             console.log(this.route.snapshot.params['jobReportId']);
             this.report = data;

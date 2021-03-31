@@ -94,17 +94,18 @@ export class EditPage implements OnInit {
         });
     }
 
+    // Get the request report by its ID from API.
     ngOnInit() {
-        // Get the request report by its ID
         this.api.getReportById(this.route.snapshot.params['jobReportId']).subscribe(data => {
             console.log(this.route.snapshot.params['jobReportId']);
             this.report = data;
             console.log(data);
         });
 
-        // get vehicle data from API
+        // Get vehicle data from API.
         this.api.getCarApiData().subscribe(data => {
             console.log('[INFO] Vehicles have been processed.');
+            // Extract JSON data.
             for (let key in data) {
                 this.vehicles = data[key];
             }

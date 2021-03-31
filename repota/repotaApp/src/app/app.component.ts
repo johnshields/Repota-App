@@ -5,7 +5,7 @@ import {AccountService} from './services/api-service';
 /**
  * @author John Shields
  * @title App Component
- * @desc Allows a user to logout with logout button on Hamburger Menu.
+ * @desc Allows a User to logout with logout button on Hamburger Menu.
  */
 
 @Component({
