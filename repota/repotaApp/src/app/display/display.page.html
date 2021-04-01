@@ -63,11 +63,11 @@
                     </ion-row>
                 </div>
                 <hr style="height:2px;border-width:0;color:gray;background-color:black">
-                <ion-button class="edit" color="NONE" [routerLink]="['/edit/' + report.jobReportId]">EDIT
+                <ion-button class="edit" color="NONE" [routerLink]="['/edit/' + report.jobReportId]" id="edit">EDIT
                 </ion-button>
-                <ion-button class="pdf" color="NONE" [routerLink]="['/export/' +  report.jobReportId]">PDF
+                <ion-button class="pdf" color="NONE" [routerLink]="['/export/' +  report.jobReportId]" id="pdf">PDF
                 </ion-button>
-                <ion-button class="delete" color="NONE" (click)="deleteReport(report.jobReportId)">DELETE</ion-button>
+                <ion-button class="delete" color="NONE" (click)="deleteReport(report.jobReportId)" id="delete">DELETE</ion-button>
             </ion-card-content>
             <!-- end of report -->
         </ion-item>

@@ -1,7 +1,7 @@
-Feature: Login
+Feature: Login User
   In order to login to Repota
   As a User
-  I need to enter the Valid username and Password
+  I need to enter my valid Username and Password
 
   Scenario Outline: Log a User into Repota
     Given user navigates to the Login Page

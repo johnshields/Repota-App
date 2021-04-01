@@ -26,8 +26,8 @@
                     <hr style="height:2px;border-width:0;color:gray;background-color:black">
                     <p align="center">
                         <ion-label class="headers">Date of Job</ion-label>
-                        <ion-input name="date" ngModel required="true" #date="ngModel"
-                                   type="date" class="input"></ion-input>
+                        <input name="date" ngModel required #date="ngModel"
+                                   type="date" class="input" id="date">
                     </p>
                     <div>
                         <!-- Report Details -->
@@ -35,59 +35,60 @@
                             <ion-col>
                                 <ion-label class="headers"> Vehicle Details:</ion-label>
                                 <input list="cars" name="vehicleModel" ngModel required #vehicleModel="ngModel"
-                                       type="text" placeholder="Make & Model" class="input">
-                                <!-- data list of vehicles from API-->
+                                       type="text" placeholder="Make & Model" class="input" id="model">
+                                <!-- data list of vehicles from API -->
                                 <datalist id="cars">
                                     <option *ngFor="let cars of vehicles"
                                             [value]="cars.Make + space + cars.Model"></option>
                                 </datalist>
-                                <ion-input name="vehicleReg" ngModel required="true" #vehicleReg="ngModel"
-                                           type="text" placeholder="Registration" class="input"></ion-input>
-                                <ion-input name="milesOnVehicle" ngModel required="true" #milesOnVehicle="ngModel"
-                                           type="number" placeholder="Mileage" class="input" min="0">
+                                <ion-input name="vehicleReg" ngModel required #vehicleReg="ngModel"
+                                           type="text" placeholder="Registration" class="input" id="reg">
                                 </ion-input>
-                                <ion-input name="vehicleLocation" ngModel required="true" #vehicleLocation="ngModel"
-                                           type="text" placeholder="Location" class="input">
+                                <ion-input name="milesOnVehicle" ngModel required #milesOnVehicle="ngModel"
+                                           type="number" placeholder="Mileage" class="input" min="0" id="miles">
+                                </ion-input>
+                                <ion-input name="vehicleLocation" ngModel required #vehicleLocation="ngModel"
+                                           type="text" placeholder="Location" class="input" id="location">
                                 </ion-input>
                                 <mat-option *ngFor="let i of list1">
-                                    <mat-checkbox [(ngModel)]="i.checked"
+                                    <mat-checkbox [(ngModel)]="i.checked" id="warranty"
                                                   ngModel="warranty" name="warranty">{{i.title}}
                                     </mat-checkbox>
                                 </mat-option>
                                 <mat-option *ngFor="let i of list2">
-                                    <mat-checkbox [(ngModel)]="i.checked" ngModel="breakdown"
-                                                  name="breakdown">{{i.title}}
+                                    <mat-checkbox [(ngModel)]="i.checked" id="breakdown"
+                                                  ngModel="breakdown" name="breakdown">{{i.title}}
                                     </mat-checkbox>
                                 </mat-option>
                             </ion-col>
                             <!-- Customer Details -->
                             <ion-col>
                                 <ion-label class="headers"> Customer Details:</ion-label>
-                                <ion-input name="customerName" ngModel required="true" #customerName="ngModel"
-                                           type="text" placeholder="Name" class="input">
+                                <ion-input name="customerName" ngModel required #customerName="ngModel"
+                                           type="text" placeholder="Name" class="input" id="customerName">
                                 </ion-input>
-                                <ion-textarea name="complaint" ngModel required="true" #complaint="ngModel"
-                                              type="text" placeholder="Complaint..." class="large-input">
+                                <ion-textarea name="complaint" ngModel required #complaint="ngModel"
+                                              type="text" placeholder="Complaint..." class="large-input" id="complaint">
                                 </ion-textarea>
                             </ion-col>
                             <!-- Work Details -->
                             <ion-col>
                                 <ion-label class="headers"> Work Details:</ion-label>
-                                <ion-textarea name="cause" ngModel required="true" #cause="ngModel"
-                                              type="text" placeholder="Cause of problem..." class="large-input">
+                                <ion-textarea name="cause" ngModel required #cause="ngModel" type="text"
+                                              placeholder="Cause of problem..." class="large-input" id="cause">
                                 </ion-textarea>
-                                <ion-textarea name="correction" ngModel required="true" #correction="ngModel"
-                                              type="text" placeholder="Correction of problem..." class="large-input">
+                                <ion-textarea name="correction" ngModel required #correction="ngModel" type="text"
+                                              placeholder="Correction of problem..." class="large-input" id="correction">
                                 </ion-textarea>
-                                <ion-textarea name="parts" ngModel required="true" #parts="ngModel"
-                                              type="text" placeholder="Parts used in job..." class="large-input">
+                                <ion-textarea name="parts" ngModel required #parts="ngModel" type="text"
+                                              placeholder="Parts used in job..." class="large-input" id="parts">
                                 </ion-textarea>
-                                <ion-input name="workHours" ngModel required="true" #workHours="ngModel"
-                                           type="number" placeholder="Work Hours" class="input" min="0">
+                                <ion-input name="workHours" ngModel required #workHours="ngModel"
+                                           type="number" placeholder="Work Hours" class="input" min="0" id="hours">
                                 </ion-input>
                                 <mat-option *ngFor="let i of list3">
                                     <mat-checkbox [(ngModel)]="i.checked" ngModel="jobComplete"
-                                                  name="jobComplete">{{i.title}}
+                                                  name="jobComplete" id="complete">{{i.title}}
                                     </mat-checkbox>
                                 </mat-option>
                             </ion-col>
@@ -96,7 +97,7 @@
                     <hr style="height:2px;border-width:0;color:gray;background-color:black">
                     <p align="center">
                         <ion-button class="create-btn" size="large" type="submit" [routerLink]="['/history']"
-                                    [disabled]="!reportForm.form.valid" expand="block" color="NONE">CREATE
+                                    [disabled]="!reportForm.form.valid" expand="block" color="NONE" id="create-btn">CREATE
                         </ion-button>
                     </p>
                 </ion-card-content>

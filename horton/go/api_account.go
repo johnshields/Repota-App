@@ -115,7 +115,7 @@ func RegisterNewUser(c *gin.Context, username, name, password string) error {
 	//db := mocks.MockDbConn() // for unit tests
 
 	fmt.Println("\n[INFO] Processing User Details...",
-		"\nEntered username:", username, "\nEntered Password:", password)
+		"\nEntered username:", username)
 
 	if strings.TrimSpace(password) == "" {
 		log.Println("\n[ALERT] Password is null")
@@ -191,7 +191,7 @@ func isValidAccount(username string) bool {
 func verifyDetails(username, password string) error {
 
 	fmt.Println("\n[INFO] Processing User Details...",
-		"\nEntered username:", username, "\nEntered Password:", password)
+		"\nEntered username:", username)
 
 	if strings.TrimSpace(password) == "" {
 		log.Printf("\n[ALERT] Password is null")

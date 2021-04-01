@@ -26,8 +26,7 @@
                     <hr style="height:2px;border-width:0;color:gray;background-color:black">
                     <p align="center">
                         <ion-label class="headers">Date of Job</ion-label>
-                        <ion-input name="date" ngModel required="true" #date="ngModel"
-                                   type="date" class="input"></ion-input>
+                        <ion-input name="date" ngModel required #date="ngModel" type="date" class="input" id="date"></ion-input>
                     </p>
                     <div>
                         <!-- Report Details -->
@@ -35,49 +34,47 @@
                             <ion-col>
                                 <ion-label class="headers"> Vehicle Details:</ion-label>
                                 <input list="cars" name="vehicleModel" ngModel required #vehicleModel="ngModel"
-                                       type="text" placeholder='{{report["vehicleModel"]}}' class="input">
+                                       type="text" placeholder='{{report["vehicleModel"]}}' class="input" id="model">
                                 <datalist id="cars">
                                     <option *ngFor="let cars of vehicles"
                                             [value]="cars.Make + space + cars.Model"></option>
                                 </datalist>
-                                <ion-input name="vehicleReg" ngModel required="true" #vehicleReg="ngModel"
-                                           type="text" placeholder='{{report["vehicleReg"]}}' class="input"></ion-input>
-                                <ion-input name="milesOnVehicle" ngModel required="true" #milesOnVehicle="ngModel"
+                                <ion-input name="vehicleReg" ngModel required #vehicleReg="ngModel"
+                                           type="text" placeholder='{{report["vehicleReg"]}}' class="input" id="reg">
+                                </ion-input>
+                                <ion-input name="milesOnVehicle" ngModel required #milesOnVehicle="ngModel"
                                            type="number" placeholder='{{report["milesOnVehicle"]}}' class="input"
-                                           min="0">
-                                </ion-input>
-                                <ion-input name="vehicleLocation" ngModel required="true" #vehicleLocation="ngModel"
-                                           type="text" placeholder='{{report["vehicleLocation"]}}' class="input">
-                                </ion-input>
+                                           min="0" id="miles"></ion-input>
+                                <ion-input name="vehicleLocation" ngModel required #vehicleLocation="ngModel" id="location"
+                                           type="text" placeholder='{{report["vehicleLocation"]}}' class="input"></ion-input>
                                 <mat-option *ngFor="let i of list1">
-                                    <mat-checkbox [(ngModel)]="i.checked"
+                                    <mat-checkbox [(ngModel)]="i.checked" id="warranty"
                                                   ngModel="warranty" name="warranty">{{i.title}}
                                     </mat-checkbox>
                                 </mat-option>
                                 <mat-option *ngFor="let i of list2">
-                                    <mat-checkbox [(ngModel)]="i.checked" ngModel="breakdown"
-                                                  name="breakdown">{{i.title}}
+                                    <mat-checkbox [(ngModel)]="i.checked" id="breakdown"
+                                                  ngModel="breakdown" name="breakdown">{{i.title}}
                                     </mat-checkbox>
                                 </mat-option>
                             </ion-col>
                             <!-- Work Details -->
                             <ion-col>
                                 <ion-label class="headers"> Work Details:</ion-label>
-                                <ion-textarea name="cause" ngModel required="true" #cause="ngModel"
+                                <ion-textarea name="cause" ngModel required #cause="ngModel" id="cause"
                                               type="text" placeholder='{{report["cause"]}}' class="large-input">
                                 </ion-textarea>
-                                <ion-textarea name="correction" ngModel required="true" #correction="ngModel"
+                                <ion-textarea name="correction" ngModel required #correction="ngModel" id="correction"
                                               type="text" placeholder='{{report["correction"]}}' class="large-input">
                                 </ion-textarea>
-                                <ion-textarea name="parts" ngModel required="true" #parts="ngModel"
+                                <ion-textarea name="parts" ngModel required #parts="ngModel" id="parts"
                                               type="text" placeholder='{{report["parts"]}}' class="large-input">
                                 </ion-textarea>
-                                <ion-input name="workHours" ngModel required="true" #workHours="ngModel"
-                                           type="number" placeholder="Work Hours" class="input" min="0">
-                                </ion-input>
+                                <ion-input name="workHours" ngModel required #workHours="ngModel" id="hours"
+                                           type="number" placeholder="Work Hours" class="input" min="0"></ion-input>
                                 <mat-option *ngFor="let i of list3">
-                                    <mat-checkbox [(ngModel)]="i.checked" ngModel="jobComplete"
-                                                  name="jobComplete">{{i.title}}
+                                    <mat-checkbox [(ngModel)]="i.checked" id="complete"
+                                                  ngModel="jobComplete" name="jobComplete">{{i.title}}
                                     </mat-checkbox>
                                 </mat-option>
                             </ion-col>
@@ -86,7 +83,7 @@
                     <hr style="height:2px;border-width:0;color:gray;background-color:black">
                     <p align="center">
                         <ion-button class="edit-btn" size="large" type="submit" [routerLink]="['/history']"
-                                    [disabled]="!reportForm.form.valid" expand="block" color="NONE">EDIT
+                                    [disabled]="!reportForm.form.valid" expand="block" color="NONE" id="edit-btn">EDIT
                         </ion-button>
                     </p>
                 </ion-card-content>
