@@ -15,9 +15,7 @@ import {Router} from '@angular/router';
     styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-    errorMsg: string;
     private errorMessage;
-
     constructor(private api: AccountService, private router: Router) {
     }
 
@@ -41,7 +39,7 @@ export class RegisterPage implements OnInit {
         const object: InlineObject = {
             username: form.value.username,
             name: form.value.name,
-            password: form.value.password
+            password: form.value.password,
         };
 
         // Push data to API to register user if object data is okay.

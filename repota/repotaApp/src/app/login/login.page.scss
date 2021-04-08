@@ -3,19 +3,19 @@ ion-content {
   background-image: url('../../assets/images/app_logo_box.png');
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 400px 400px;
+  background-size: 500px 500px;
 }
 
 input:-webkit-autofill {
-  -webkit-box-shadow:200px 200px 100px #0d0d0d inset;
-  box-shadow:200px 200px 100px #0d0d0d inset;
-  width: 275px;
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: #fff !important;
+  width: 150px;
 }
 
 .user {
   background-color: #2a2a2a;
   position: absolute;
-  top: 38%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -68,6 +68,10 @@ button {
 
 // computer monitors
 @media screen and (min-width: 1224px) {
+  input:-webkit-autofill {
+    width: 275px;
+  }
+
   ion-content {
     background-size: 750px 750px;
   }

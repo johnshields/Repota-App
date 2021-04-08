@@ -73,7 +73,7 @@ func Login(c *gin.Context) {
 			c.JSON(500, models.Error{Code: 500, Messages: "Could not remove old session"})
 		}
 	} else {
-		log.Println(err, "\n[ALERT] Password is incorrect for", username)
+		log.Println(err, "\nPassword is incorrect for", username)
 		c.JSON(401, models.Error{Code: 401, Messages: "Password is incorrect"})
 	}
 	defer db.Close()
@@ -104,7 +104,7 @@ func Register(c *gin.Context) {
 			c.JSON(200, session)
 		}
 	} else {
-		log.Println("\n[ALERT] Not completing request")
+		log.Println("\nNot completing request")
 	}
 }
 
@@ -118,10 +118,10 @@ func RegisterNewUser(c *gin.Context, username, name, password string) error {
 		"\nEntered username:", username)
 
 	if strings.TrimSpace(password) == "" {
-		log.Println("\n[ALERT] Password is null")
+		log.Println("\nPassword is null")
 		return errors.New("password is null")
 	} else if isValidAccount(username) {
-		log.Println("\n[ALERT] Username taken")
+		log.Println("\nUsername taken")
 		c.JSON(409, models.Error{Code: 409, Messages: "Username is already taken"})
 		return errors.New("username is already taken")
 	}
@@ -131,7 +131,7 @@ func RegisterNewUser(c *gin.Context, username, name, password string) error {
 
 	if err != nil {
 		c.JSON(500, nil)
-		log.Fatal("\n[WARN] Hash Password failed: ", err)
+		log.Fatal("\nHash Password failed: ", err)
 	}
 
 	// insert new user in the workers table.
@@ -139,7 +139,7 @@ func RegisterNewUser(c *gin.Context, username, name, password string) error {
 
 	if err != nil {
 		c.JSON(500, nil)
-		log.Println("\n[ALERT] MySQL Error: Error Creating new user account:\n", err)
+		log.Println("\nMySQL Error: Error Creating new user account:\n", err)
 	}
 
 	result, err := insert.Exec(username, name, hashedPassword)
@@ -147,7 +147,7 @@ func RegisterNewUser(c *gin.Context, username, name, password string) error {
 	// return MySQL error if there is a duplicate entry.
 	if err != nil {
 		c.JSON(409, models.Error{Code: 409, Messages: "Please make your name more unique"})
-		log.Println("\n[ALERT] MySQL Error: Duplicate entry:\n", err)
+		log.Println("\nMySQL Error: Duplicate entry:\n", err)
 		return err
 	}
 
@@ -176,7 +176,7 @@ func isValidAccount(username string) bool {
 
 		if err != nil {
 			// No matching username in table
-			log.Println("\n[ALERT] MySQL Error - no matching username:\n", err)
+			log.Println("\nMySQL Error - no matching username:\n", err)
 			return false
 		}
 		defer db.Close()
@@ -194,10 +194,8 @@ func verifyDetails(username, password string) error {
 		"\nEntered username:", username)
 
 	if strings.TrimSpace(password) == "" {
-		log.Printf("\n[ALERT] Password is null")
 		return errors.New("password is null")
 	} else if !isValidAccount(username) {
-		log.Printf("\n[ALERT] Unknown username")
 		return errors.New("username does not exist")
 	} else {
 		return nil

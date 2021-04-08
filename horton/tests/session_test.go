@@ -10,11 +10,10 @@ package tests
 
 import (
 	"fmt"
+	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
 	"testing"
-
-	"github.com/gin-gonic/gin"
 )
 
 // Function to test Logout by sending request to /logout endpoint.

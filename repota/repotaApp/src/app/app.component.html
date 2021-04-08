@@ -20,11 +20,14 @@
                     <ion-icon name="settings-outline" slot="start"></ion-icon>
                     <ion-label>Options</ion-label>
                 </ion-item>
-                <ion-item>
+                <!-- Only show Logout Button if user is logged in -->
+                <ion-item *ngIf="this.authService.loggedIn()">
                     <ion-icon name="log-out-outline"></ion-icon>
                     <ion-button id="logout-btn" class="logout" color="NONE" (click)="logout()">Logout</ion-button>
                 </ion-item>
             </ion-list>
+            <!-- error message -->
+            <mat-error class="error-message">{{getErrorMessage()}}</mat-error>
         </ion-content>
     </ion-menu>
 

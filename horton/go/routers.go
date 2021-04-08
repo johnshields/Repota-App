@@ -10,6 +10,7 @@
  *
  * Reference
  * https://stackoverflow.com/questions/29418478/go-gin-framework-cors
+ * https://semaphoreci.com/community/tutorials/building-go-web-applications-and-microservices-using-gin
  */
 
 package openapi
@@ -35,7 +36,7 @@ type Route struct {
 // Routes is the list of the generated Route.
 type Routes []Route
 
-// Cors - To handle cross origin issues.
+// CORS - To handle cross origin issues.
 func CORS() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.Writer.Header().Set("Access-Control-Allow-Origin", c.Request.Header.Get("Origin"))
@@ -55,11 +56,11 @@ func CORS() gin.HandlerFunc {
 func NewRouter() *gin.Engine {
 
 	router := gin.Default()
-	// set logo for tab & "/" endpoint
+	// set logo for tab & "/" endpoint.
 	router.StaticFile("/favicon.ico", "./favicon.ico")
 	router.StaticFile("/", "./favicon.ico")
 
-	// CORS must be called before any routes are called
+	// CORS must be called before any routes are called.
 	router.Use(CORS())
 	for _, route := range routes {
 		switch route.Method {
@@ -82,6 +83,7 @@ func Index(c *gin.Context) {
 	c.String(http.StatusOK, "[INFO] Horton is online...")
 }
 
+// HTTP methods, RESTful Route endpoints and Handler Functions.
 var routes = Routes{
 	{
 		"Index",

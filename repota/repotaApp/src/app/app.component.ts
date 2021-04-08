@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {AccountService} from './services/api-service';
+import {AuthService} from "./services/auth-service/auth.service";
 
 /**
  * @author John Shields
@@ -14,16 +15,37 @@ import {AccountService} from './services/api-service';
     styleUrls: ['app.component.scss']
 })
 export class AppComponent {
-    constructor(private api: AccountService, private router: Router) {
+    private errorMessage;
+    constructor(private router: Router, private api: AccountService, public authService: AuthService) {
     }
 
-    // Logout user by calling API and go to the Account Page.
+    /**
+     * @title Error message Handlers
+     * @desc Functions are used to set and get error message for error responses.
+     */
+    setErrorMessage(error: String) {
+        this.errorMessage = error;
+    }
+
+    getErrorMessage() {
+        return this.errorMessage;
+    }
+
+    /**
+     * @title Logout
+     * @desc Logout user by calling API and go to the Account Page.
+     * Only allow a logged in user to use Logout button.
+     */
     logout() {
-        this.api.logout().subscribe(() => {
-            console.log('Success');
-            this.router.navigate(['']);
-        }, error => {
-            console.log(error);
-        });
+        if (this.authService.loggedIn()) {
+            this.api.logout().subscribe(() => {
+                console.log('Success');
+                this.router.navigate(['']);
+            }, error => {
+                let errorMessage = JSON.stringify(error.error.messages);
+                this.setErrorMessage(errorMessage);
+                console.log(error);
+            });
+        }
     }
 }

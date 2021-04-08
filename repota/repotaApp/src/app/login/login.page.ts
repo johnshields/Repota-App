@@ -19,7 +19,6 @@ import {Router} from '@angular/router';
 })
 export class LoginPage implements OnInit {
     private errorMessage;
-
     constructor(private api: AccountService, private router: Router) {
     }
 

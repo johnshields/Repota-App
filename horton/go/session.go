@@ -27,7 +27,7 @@ func CheckForCookie(c *gin.Context) bool {
 
 	// Logout if no session_id (cookie) is found
 	if err != nil {
-		log.Println("[ALERT] no cookie found", err)
+		log.Println("No cookie found", err)
 		c.JSON(403, models.Error{Code: 403, Messages: "User has no cookie."})
 		Logout(c)
 		return false
@@ -61,18 +61,17 @@ func createSessionId(username string) (error, models.Session) {
 
 	// Check if user account exists
 	if !isValidAccount(username) {
-		log.Println("\n[ALERT] User has not logged in!", err)
+		log.Println("\nUser has not logged in!", err)
 	}
 
 	// Execute query to db, handle errors if any
 	if _, err = insert.Exec(token, wa.Id, expiry); err != nil {
-		log.Println("[ALERT] MYSQL Error: Error creating new session record\n", err)
+		log.Println("MYSQL Error: Error creating new session record\n", err)
 		defer db.Close()
-		return errors.New("[ALERT] MYSQL Error: Error creating new session record"), models.Session{}
+		return errors.New("MYSQL Error: Error creating new session record"), models.Session{}
 	} else {
 		fmt.Println("\n[INFO] Session has been generated. Records:", "\nSession Token:", token, "\nWorker ID:", wa.Id,
-			"\nExpiry time in seconds:", expiry)
-		fmt.Println("\n[INFO] Worker Username:", username)
+			"\nExpiry time in seconds:", expiry, "\n[INFO] Worker Username:", username)
 		defer db.Close()
 
 		// Returns Session object
@@ -95,7 +94,7 @@ func removeSession(userId int) bool {
 	res, err := db.Exec("DELETE FROM session WHERE user=?", userId)
 
 	if err != nil {
-		log.Println("[ALERT] Query error")
+		log.Println("MySQL error", err)
 		return false
 	}
 
@@ -103,7 +102,7 @@ func removeSession(userId int) bool {
 
 	if err != nil {
 		// return false
-		fmt.Printf("\n[ALERT] Error updating record for deleting session")
+		fmt.Printf("\nError updating record for deleting session")
 		return false
 	}
 
@@ -134,7 +133,7 @@ func Logout(c *gin.Context) {
 			fmt.Println("\n[INFO]", username, "logged out")
 		}
 	} else {
-		log.Println("\n[ALERT] Could not logout", username)
+		log.Println("\nCould not logout", username)
 		c.JSON(500, models.Error{Code: 500, Messages: "Could not logout User"})
 	}
 	defer db.Close()

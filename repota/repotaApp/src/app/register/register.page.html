@@ -25,13 +25,17 @@
             <mat-form-field class="name">
                 <input matInput type="text" name="name" ngModel required placeholder="Enter Full Name"
                        #name="ngModel" id="name"/>
-                <mat-error *ngIf="username.invalid">Please enter your name.</mat-error>
+                <mat-error *ngIf="name.invalid">Please enter your name.</mat-error>
             </mat-form-field>
             <!-- password input -->
             <mat-form-field class="password">
-                <input matInput type="password" name="password" ngModel required placeholder="Enter Password"
-                       #password="ngModel" id="password"/>
-                <mat-error *ngIf="username.invalid">Please enter a password.</mat-error>
+                <!--Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character-->
+                <input matInput type="password" name="password"
+                       ngModel required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                       placeholder="Enter Password" #password="ngModel" id="password"/>
+                <mat-error *ngIf="password.errors?.pattern || password.invalid">
+                    Enter a <u>STRONG</u> password.
+                </mat-error>
             </mat-form-field>
             <!-- register user -->
             <ion-button class="register-btn" size="large" type="submit" id="register-btn"

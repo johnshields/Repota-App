@@ -50,7 +50,7 @@ func GetCarApiData(c *gin.Context) {
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
-		log.Println("[ALERT] Unable to do request", err)
+		log.Println("Unable to do request", err)
 		c.JSON(500, nil)
 	}
 
@@ -58,7 +58,7 @@ func GetCarApiData(c *gin.Context) {
 	var data map[string]interface{}
 	err = json.NewDecoder(resp.Body).Decode(&data)
 	if err != nil {
-		log.Println("[ALERT] Unable to decode", err)
+		log.Println("Unable to decode", err)
 		c.JSON(500, nil)
 	}
 

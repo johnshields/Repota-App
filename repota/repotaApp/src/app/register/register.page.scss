@@ -3,19 +3,19 @@ ion-content {
   background-image: url('../../assets/images/app_logo_box.png');
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 400px 400px;
+  background-size: 500px 500px;
 }
 
 input:-webkit-autofill {
-  -webkit-box-shadow:200px 200px 100px #0d0d0d inset;
-  box-shadow:200px 200px 100px #0d0d0d inset;
-  width: 275px;
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: #fff !important;
+  width: 150px;
 }
 
 .user {
   background-color: #2a2a2a;
   position: absolute;
-  top: 34%;
+  top: 28%;
   left: 50%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -32,7 +32,7 @@ input:-webkit-autofill {
 .name {
   background-color: #2a2a2a;
   position: absolute;
-  top: 44%;
+  top: 42%;
   left: 50%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -48,7 +48,7 @@ input:-webkit-autofill {
 .password {
   background-color: #2a2a2a;
   position: absolute;
-  top: 54%;
+  top: 57%;
   left: 50%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -81,19 +81,25 @@ input:-webkit-autofill {
 
 // computer monitors
 @media screen and (min-width: 1224px) {
+  input:-webkit-autofill {
+    -webkit-box-shadow:200px 200px 100px #0d0d0d inset;
+    box-shadow:200px 200px 100px #0d0d0d inset;
+    width: 275px;
+  }
+
   ion-content {
     background-size: 750px 750px;
   }
 
   .user {
-    top: 30%;
+    top: 28%;
     font-size: 20px;
     width: 300px;
     height: 60px;
   }
 
   .name {
-    top: 40%;
+    top: 39%;
     font-size: 20px;
     width: 300px;
     height: 60px;

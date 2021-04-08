@@ -11,10 +11,8 @@ package tests
 import (
 	"fmt"
 	_ "fmt"
-	"io"
 	"log"
 	"net/http"
-	"os"
 	"testing"
 
 	"github.com/gin-gonic/gin"
@@ -42,9 +40,6 @@ func TestIndex(t *testing.T) {
 		defer res.Body.Close()
 
 		fmt.Println("response Status:", res.Status)
-		// print the body to the stdout
-		io.Copy(os.Stdout, res.Body)
-
 		if res.Status == "200 OK" {
 			// TEST PASSED
 			fmt.Println("\n[PASS] succeeded to setup routes")

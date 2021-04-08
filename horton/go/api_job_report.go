@@ -40,7 +40,7 @@ func CreateReport(c *gin.Context) {
 
 	// Insert Job Report details
 	if err := insertJobReport(report, wa.Username); err == nil {
-		c.JSON(201, "Report created successfully")
+		c.JSON(201, models.Error{Code: 201, Messages: "Report created successfully"})
 	} else {
 		c.JSON(401, models.Error{Code: 401, Messages: "Not able to create Report"})
 	}
@@ -66,13 +66,13 @@ func insertJobReport(report models.JobReport, username string) error {
 		" VALUES (LAST_INSERT_ID(), ?, ?)")
 
 	if err != nil {
-		log.Println("\n[ALERT] MySQL Error: Error Creating new Report:\n", err)
+		log.Println("\nMySQL Error: Error Creating new Report:\n", err)
 		return errors.New("error creating Report")
 	}
 
 	// Check logged in user
 	if !isValidAccount(username) {
-		log.Println("\n[ALERT] User has not logged in")
+		log.Println("\nUser has not logged in")
 		return errors.New("error creating Report")
 	}
 
@@ -87,7 +87,7 @@ func insertJobReport(report models.JobReport, username string) error {
 	db.Query("COMMIT") // commit MySQL transition
 
 	if err != nil {
-		log.Println("\n[ALERT] MySQL Error: Error Inserting Report Details.\n", err)
+		log.Println("\nMySQL Error: Error Inserting Report Details.\n", err)
 		return errors.New("error creating Report")
 	}
 	fmt.Println("\n[INFO] Print MySQL Results for Report:\n", reportResult, customerResult)
@@ -111,7 +111,7 @@ func GetReportById(c *gin.Context) {
 	fmt.Printf("Get Report with ID: " + reportId)
 
 	if !isValidAccount(worker) {
-		log.Println("\n[ALERT] User has not logged in!")
+		log.Println("\nUser has not logged in!")
 		c.JSON(401, models.Error{Code: 401, Messages: "User has not logged in!"})
 	}
 
@@ -125,7 +125,7 @@ func GetReportById(c *gin.Context) {
 		"WHERE jr.job_report_id = ? AND wkr.username = ?", reportId, worker)
 
 	if err != nil {
-		log.Println("\n[ALERT] Failed to process report.")
+		log.Println("\nFailed to process report.")
 		c.JSON(500, nil)
 	}
 
@@ -138,7 +138,7 @@ func GetReportById(c *gin.Context) {
 			&report.Correction, &report.Parts, &report.WorkHours, &report.WorkerName, &report.JobComplete)
 
 		if err != nil {
-			log.Println("\n[ALERT] Failed to load model.")
+			log.Println("\nFailed to load model.")
 			c.JSON(500, nil)
 		}
 		// Add each record to array
@@ -164,7 +164,7 @@ func GetReports(c *gin.Context) {
 	CheckForCookie(c)
 
 	if !isValidAccount(worker) {
-		log.Println("\n[ALERT] User is not logged in.")
+		log.Println("\nUser is not logged in.")
 		c.JSON(401, models.Error{Code: 401, Messages: "User is not logged in"})
 	}
 
@@ -177,19 +177,18 @@ func GetReports(c *gin.Context) {
 		"INNER JOIN workers wkr ON jr.worker_id = wkr.worker_id WHERE wkr.username = ?", worker)
 
 	if err != nil {
-		log.Println("\n[ALERT] Failed to process reports.")
+		log.Println("\nFailed to process reports.")
 		c.JSON(500, nil)
 	}
 
 	// Run through each record and read values
 	for selDB.Next() {
-
 		err = selDB.Scan(&report.JobReportId, &report.Date, &report.VehicleModel, &report.VehicleReg, &report.MilesOnVehicle,
 			&report.VehicleLocation, &report.Warranty, &report.Breakdown, &report.CustomerName, &report.Complaint, &report.Cause,
 			&report.Correction, &report.Parts, &report.WorkHours, &report.WorkerName, &report.JobComplete)
 
 		if err != nil {
-			log.Println("\n[ALERT] Failed to load model.")
+			log.Println("\nFailed to load model.")
 			c.JSON(500, nil)
 		}
 		// Add each record to array
@@ -229,7 +228,7 @@ func UpdateReport(c *gin.Context) {
 		report.WorkHours, report.JobComplete, reportId)
 
 	if err != nil {
-		log.Println("\n[ALERT] MySQL Error: Error Updating Report:\n", err)
+		log.Println("\nMySQL Error: Error Updating Report:\n", err)
 		c.JSON(503, models.Error{Code: 503, Messages: "Error Updating Report"})
 	} else {
 		fmt.Println("\n[INFO] Processing Job Report Details...", "\nReport ID:", reportId, "\nReport Date:", report.Date)
@@ -256,14 +255,14 @@ func DeleteReport(c *gin.Context) {
 	res, err := db.Exec("DELETE FROM jobreports WHERE job_report_id=?", reportId)
 
 	if err != nil {
-		log.Printf("[ALERT] Report failed to delete.")
+		log.Printf("Report failed to delete.")
 		c.JSON(500, nil)
 	}
 
 	affectedRows, err := res.RowsAffected()
 
 	if err != nil {
-		log.Printf("[ALERT] Report failed to delete.")
+		log.Printf("Report failed to delete.")
 		c.JSON(500, nil)
 	}
 

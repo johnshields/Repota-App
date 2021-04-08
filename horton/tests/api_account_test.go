@@ -36,7 +36,7 @@ func TestRegister(t *testing.T) {
 		payloadBuf := new(bytes.Buffer)
 		err := json.NewEncoder(payloadBuf).Encode(body)
 		if err != nil {
-			log.Println("[ALERT] Unable to Encode", err)
+			log.Println("Unable to Encode", err)
 		}
 
 		// set up request
@@ -82,7 +82,7 @@ func TestLogin(t *testing.T) {
 		payloadBuf := new(bytes.Buffer)
 		err := json.NewEncoder(payloadBuf).Encode(body)
 		if err != nil {
-			log.Println("[ALERT] Unable to Encode", err)
+			log.Println("Unable to Encode", err)
 		}
 
 		// set up request
