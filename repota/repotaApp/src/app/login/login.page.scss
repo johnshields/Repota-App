@@ -1,9 +1,9 @@
 ion-content {
   --background: none;
-  background-image: url('../../assets/images/app_logo_box.png');
+  background-image: url('../../assets/images/app_logo_box-phone.png');
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 500px 500px;
+  background-size: 700px 700px;
 }
 
 input:-webkit-autofill {
@@ -32,7 +32,7 @@ input:-webkit-autofill {
 .password {
   background-color: #2a2a2a;
   position: absolute;
-  top: 55%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -47,14 +47,14 @@ input:-webkit-autofill {
 
 .login-btn {
   position: absolute;
-  top: 90%;
+  top: 91%;
   left: 50%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   background-color: #ff0021;
   color: black;
   font-size: 20px;
-  border: none;
+  border: 1px;
   border-radius: 5px;
   margin-left: auto;
   margin-right: auto;
@@ -73,6 +73,7 @@ button {
   }
 
   ion-content {
+    background-image: url('../../assets/images/app_logo_box.png');
     background-size: 750px 750px;
   }
 

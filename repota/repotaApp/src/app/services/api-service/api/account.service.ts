@@ -1,11 +1,8 @@
 import {Inject, Injectable, Optional} from '@angular/core';
-import {
-    HttpClient, HttpHeaders,
-    HttpResponse, HttpEvent, HttpParams
-} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpResponse, HttpEvent, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {InlineObject} from '../model/inlineObject';
-import {BASE_PATH, COLLECTION_FORMATS} from '../variables';
+import {BASE_PATH} from '../variables';
 import {Configuration} from '../configuration';
 import {CustomHttpUrlEncodingCodec} from '../encoder';
 

@@ -37,6 +37,7 @@ input {
 ion-textarea {
   background-color: #dedad9;
   margin-left: 20px;
+  width: 400px;
 }
 
 .input {
@@ -53,7 +54,7 @@ ion-textarea {
   font-size: small;
   border: 1px solid #22222e;
   border-radius: 5px;
-  width: 150px;
+  width: auto;
   height: 80px;
   padding-left: 15px;
   margin-top: 10px;

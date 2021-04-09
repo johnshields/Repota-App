@@ -10,15 +10,15 @@ ion-title {
 }
 
 .num {
-  padding-left: 37%;
+  padding-left: 30%;
 }
 
 .date {
-  padding-left: 39%;
+  padding-left: 35%;
 }
 
 .report-content {
-  width: 175mm;
+  width: 100mm;
   padding-top: 10px;
   background-color: white;
   color: #0d0d0d;
@@ -35,7 +35,7 @@ ion-title {
 }
 
 .info {
-  width: auto;
+  width: 225px;
   font-size: medium;
   padding-left: 5px;
   padding-right: 5px;
@@ -52,7 +52,7 @@ ion-title {
 }
 
 .desc-info {
-  width: 300px;
+  width: 225px;
   height: 80px;
   font-size: medium;
   padding-left: 5px;
@@ -94,7 +94,7 @@ ion-title {
 }
 
 .worker {
-  width: 250px;
+  width: 200px;
   font-size: medium;
   padding-left: 5px;
   padding-right: 5px;
@@ -118,4 +118,31 @@ ion-title {
   border-radius: 5px;
   background-color: #29c467;
   margin-top: 20px;
+}
+
+// computer monitors
+@media screen and (min-width: 600px) {
+  .num {
+    padding-left: 37%;
+  }
+
+  .date {
+    padding-left: 39%;
+  }
+
+  .report-content {
+    width: 175mm;
+  }
+
+  .info {
+    width: auto;
+  }
+
+  .desc-info {
+    width: auto;
+  }
+
+  .worker {
+    width: 225px;
+  }
 }

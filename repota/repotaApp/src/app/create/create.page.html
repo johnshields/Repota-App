@@ -82,8 +82,9 @@
                                 <ion-textarea name="parts" ngModel required #parts="ngModel" type="text"
                                               placeholder="Parts used in job..." class="large-input" id="parts">
                                 </ion-textarea>
-                                <ion-input name="workHours" ngModel required #workHours="ngModel"
-                                           type="number" placeholder="Work Hours" class="input" min="0" id="hours">
+                                <ion-input name="workHours" ngModel required #workHours="ngModel" type="number"
+                                           placeholder="Work Hours" class="input" min="0" id="hours" value="0"
+                                           oninput="this.value=(parseInt(this.value)||0)">
                                 </ion-input>
                                 <mat-option *ngFor="let i of list3">
                                     <mat-checkbox [(ngModel)]="i.checked" ngModel="jobComplete"

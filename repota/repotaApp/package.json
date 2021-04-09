@@ -30,6 +30,7 @@
     "@ionic/angular": "^5.5.5",
     "@types/chai": "^4.2.15",
     "@types/cucumber": "^7.0.0",
+    "alert-service": "^1.0.1",
     "cookie": "^0.4.1",
     "cordova-android": "9.0.0",
     "cordova-browser": "6.0.0",

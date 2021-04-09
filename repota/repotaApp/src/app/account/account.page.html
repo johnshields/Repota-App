@@ -11,6 +11,9 @@
 </ion-header>
 
 <ion-content>
+    <div *ngIf="!this.authService.loggedIn()" class="welcome">
+        <ion-label>Welcome to Repota!</ion-label>
+    </div>
     <div align="center">
         <!-- buttons to navigate to the pages login and register -->
         <ion-button [routerLink]="['/login']" class="login" color="NONE">Login</ion-button>

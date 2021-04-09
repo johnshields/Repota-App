@@ -10,15 +10,17 @@
     </ion-toolbar>
 </ion-header>
 <ion-content>
+    <!-- error message -->
+    <mat-error class="error-message">{{getErrorMessage()}}</mat-error>
     <div id="job-report">
         <ion-item *ngFor="let report of report">
             <div class="report-content">
                 <!-- report -->
                 <header>
                     <p align="center">
-                        <img class="logo" src="./assets/images/repotaApp_logo.png" alt="logo"/></p>
-                    <ion-title class="num">Report Number: {{report["jobReportId"]}}</ion-title>
-                    <ion-title class="date">Date: {{report["date"]}}</ion-title>
+                        <img class="logo" src="./assets/icons/favicon.ico" alt="logo"/></p>
+                    <ion-label class="num">Report Number: {{report["jobReportId"]}}</ion-label>
+                    <ion-label class="date">Date: {{report["date"]}}</ion-label>
                 </header>
                 <hr style="height:2px;border-width:0;color:gray;background-color:black">
                 <div>

@@ -19,7 +19,7 @@ import (
 	"log"
 )
 
-// Function is used to allow for checking if a session id exists when a request is made from the client.
+// CheckForCookie Function is used to allow for checking if a session id exists when a request is made from the client.
 // If a cookie exists the request continues, otherwise the un-auth user is logged out.
 func CheckForCookie(c *gin.Context) bool {
 	val, err := c.Cookie("session_id")
@@ -110,7 +110,7 @@ func removeSession(userId int) bool {
 	return true
 }
 
-// Function to logout a user by replacing their cookie with one that expires in one second.
+// Logout Function to logout a user by replacing their cookie with one that expires in one second.
 func Logout(c *gin.Context) {
 	db := config.DbConn()
 	//db := mocks.MockDbConn() // for unit tests

@@ -70,8 +70,10 @@
                                 <ion-textarea name="parts" ngModel required #parts="ngModel" id="parts"
                                               type="text" placeholder='{{report["parts"]}}' class="large-input">
                                 </ion-textarea>
-                                <ion-input name="workHours" ngModel required #workHours="ngModel" id="hours"
-                                           type="number" placeholder="Work Hours" class="input" min="0"></ion-input>
+                                <ion-input name="workHours" ngModel required #workHours="ngModel" id="hours" type="number"
+                                           placeholder="Work Hours" class="input" min="0" value="0"
+                                           oninput="this.value=(parseInt(this.value)||0)">
+                                </ion-input>
                                 <mat-option *ngFor="let i of list3">
                                     <mat-checkbox [(ngModel)]="i.checked" id="complete"
                                                   ngModel="jobComplete" name="jobComplete">{{i.title}}

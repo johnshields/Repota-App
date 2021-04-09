@@ -21,7 +21,7 @@ import (
 	"net/http"
 )
 
-// Function to get Vehicle data from 3rd Party API and send to Client.
+// GetCarApiData Function to get Vehicle data from 3rd Party API and send to Client.
 func GetCarApiData(c *gin.Context) {
 	// read config files.
 	id, err := ioutil.ReadFile("go/config/api_id.txt")

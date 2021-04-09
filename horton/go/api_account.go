@@ -27,7 +27,7 @@ import (
 
 var wa models.WorkerAccount
 
-// Function that logs in a user by comparing the entered password with the hashed password in the database,
+// Login Function that logs in a user by comparing the entered password with the hashed password in the database,
 // removes the existing session for the user, creates a new one and sets a cookie for the user.
 func Login(c *gin.Context) {
 	db := config.DbConn()
@@ -79,7 +79,7 @@ func Login(c *gin.Context) {
 	defer db.Close()
 }
 
-// Function to register a new user and creates a session id for the user.
+// Register Function to register a new user and creates a session id for the user.
 func Register(c *gin.Context) {
 	var user models.InlineObject
 
@@ -108,7 +108,7 @@ func Register(c *gin.Context) {
 	}
 }
 
-// Function that registers a new user and hashes the password.
+// RegisterNewUser Function that registers a new user and hashes the password.
 // User get registered and are inserted into the database
 func RegisterNewUser(c *gin.Context, username, name, password string) error {
 	db := config.DbConn()

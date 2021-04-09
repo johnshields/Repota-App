@@ -17,23 +17,23 @@
             <mat-error class="error-message">{{getErrorMessage()}}</mat-error>
             <!-- username input -->
             <mat-form-field class="user">
-                <input matInput type="text" name="username" ngModel required placeholder="Enter Username"
-                       #username="ngModel" id="username"/>
-                <mat-error *ngIf="username.invalid">Please enter a username.</mat-error>
+                <input matInput type="text" name="username" ngModel required minlength="8"
+                       placeholder="Enter Username" #username="ngModel" id="username"/>
+                <mat-error *ngIf="username.invalid">Please enter an 8 letter username.</mat-error>
             </mat-form-field>
             <!-- name input -->
             <mat-form-field class="name">
-                <input matInput type="text" name="name" ngModel required placeholder="Enter Full Name"
-                       #name="ngModel" id="name"/>
-                <mat-error *ngIf="name.invalid">Please enter your name.</mat-error>
+                <input matInput type="text" name="name" ngModel required minlength="5"
+                       placeholder="Enter Full Name" #name="ngModel" id="name"/>
+                <mat-error *ngIf="name.invalid">Please enter your full name.</mat-error>
             </mat-form-field>
             <!-- password input -->
             <mat-form-field class="password">
                 <!--Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character-->
                 <input matInput type="password" name="password"
-                       ngModel required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                       ngModel required pattern="^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W_]){1,})(?!.*\s).{8,}$"
                        placeholder="Enter Password" #password="ngModel" id="password"/>
-                <mat-error *ngIf="password.errors?.pattern || password.invalid">
+                <mat-error *ngIf="password.errors?.pattern || password ">
                     Enter a <u>STRONG</u> password.
                 </mat-error>
             </mat-form-field>
