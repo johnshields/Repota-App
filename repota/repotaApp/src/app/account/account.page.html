@@ -11,6 +11,7 @@
 </ion-header>
 
 <ion-content>
+    <!-- Only show welcome message to Users who are not logged in -->
     <div *ngIf="!this.authService.loggedIn()" class="welcome">
         <ion-label>Welcome to Repota!</ion-label>
     </div>

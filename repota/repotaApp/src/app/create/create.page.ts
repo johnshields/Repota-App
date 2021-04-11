@@ -85,26 +85,30 @@ export class CreatePage implements OnInit {
 
         // Push data to API to create report using the model.
         this.api.createReport(object).subscribe(data => {
-            console.log('Success');
+            console.log('Report Created');
             this.api.createReport(data);
             this.setErrorMessage(''); // clear error message.
             this.router.navigate(['/history']);
         }, error => {
+            // Set error from response.
             let errorMessage = JSON.stringify(error.error.messages);
             this.setErrorMessage(errorMessage);
             console.log(error);
         });
     }
 
-
+    /**
+     * @title ngOnInit
+     * @desc Gets vehicle data from API & lists for form check boxes.
+     */
     ngOnInit() {
-        // get vehicle data from API
+        // Get vehicle data from API.
         this.api.getCarApiData().subscribe(data => {
-            console.log('[INFO] Vehicles have been processed.');
+            console.log('Vehicles have been processed.');
             for (let key in data) {
                 this.vehicles = data[key];
             }
-            this.setErrorMessage(''); // clear error message.
+            this.setErrorMessage('');
         }, error => {
             let errorMessage = JSON.stringify(error.error.messages);
             this.setErrorMessage(errorMessage);

@@ -8,7 +8,7 @@
         </ion-header>
         <ion-content>
             <ion-list>
-                <ion-item routerLink="/home">
+                <ion-item routerLink="/home" (click)="home()">
                     <ion-icon name="home-outline" slot="start"></ion-icon>
                     <ion-label>Home</ion-label>
                 </ion-item>
@@ -27,7 +27,7 @@
                 </ion-item>
             </ion-list>
             <!-- error message -->
-            <mat-error class="error-message">{{getErrorMessage()}}</mat-error>
+            <mat-error class="error-message"><p>{{getErrorMessage()}}</p></mat-error>
         </ion-content>
     </ion-menu>
 

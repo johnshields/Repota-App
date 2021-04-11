@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {JobReportService} from '../services/api-service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import * as jspdf from 'jspdf';
 import domtoimage from 'dom-to-image';
 
@@ -43,14 +43,17 @@ export class ExportPage implements OnInit {
         return this.errorMessage;
     }
 
-    // Get requested report by its ID from API.
+    /**
+     * @title ngOnInit
+     * @desc Get requested report by its ID from API.
+     */
     ngOnInit() {
         this.api.getReportById(this.route.snapshot.params['jobReportId']).subscribe(data => {
-            console.log(this.route.snapshot.params['jobReportId']);
+            console.log('Report Number ' + this.route.snapshot.params['jobReportId'] + ' processed');
             this.report = data;
-            console.log(data);
             this.setErrorMessage(''); // clear error message.
         }, error => {
+            // Get error from response.
             let errorMessage = JSON.stringify(error.error.messages);
             this.setErrorMessage(errorMessage);
             console.log(error);
@@ -77,7 +80,6 @@ export class ExportPage implements OnInit {
         const options = {background: 'white', width: this.pdfWidth, height: this.pdfHeight, quality: 0.98};
         domtoimage.toPng(content, options).then(
             (dataUrl) => {
-                // Setup PDF dimensions.
                 const doc = new jspdf.jsPDF('portrait', 'mm', 'a4', true);
                 doc.addImage(dataUrl, 'jpeg', 0, 0,  this.imgWidth, this.imgHeight);
                 doc.save('job_report.pdf');

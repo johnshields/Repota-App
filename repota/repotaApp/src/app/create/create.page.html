@@ -26,7 +26,7 @@
                     <hr style="height:2px;border-width:0;color:gray;background-color:black">
                     <p align="center">
                         <ion-label class="headers">Date of Job</ion-label>
-                        <ion-input name="date" ngModel required #date="ngModel" type="date" class="input" id="date"></ion-input>
+                        <input name="date" ngModel required #date="ngModel" type="date" class="input" id="date">
                     </p>
                     <div>
                         <!-- Report Details -->
@@ -40,15 +40,12 @@
                                     <option *ngFor="let cars of vehicles"
                                             [value]="cars.Make + space + cars.Model"></option>
                                 </datalist>
-                                <ion-input name="vehicleReg" ngModel required #vehicleReg="ngModel"
-                                           type="text" placeholder="Registration" class="input" id="reg">
-                                </ion-input>
-                                <ion-input name="milesOnVehicle" ngModel required #milesOnVehicle="ngModel"
-                                           type="number" placeholder="Mileage" class="input" min="0" id="miles">
-                                </ion-input>
-                                <ion-input name="vehicleLocation" ngModel required #vehicleLocation="ngModel"
-                                           type="text" placeholder="Location" class="input" id="location">
-                                </ion-input>
+                                <input name="vehicleReg" ngModel required #vehicleReg="ngModel"
+                                       type="text" placeholder="Registration" class="input" id="reg">
+                                <input name="milesOnVehicle" ngModel required #milesOnVehicle="ngModel"
+                                       type="number" placeholder="Mileage" class="input" min="0" id="miles">
+                                <input name="vehicleLocation" ngModel required #vehicleLocation="ngModel"
+                                       type="text" placeholder="Location" class="input" id="location">
                                 <mat-option *ngFor="let i of list1">
                                     <mat-checkbox [(ngModel)]="i.checked" id="warranty"
                                                   ngModel="warranty" name="warranty">{{i.title}}
@@ -63,29 +60,27 @@
                             <!-- Customer Details -->
                             <ion-col>
                                 <ion-label class="headers"> Customer Details:</ion-label>
-                                <ion-input name="customerName" ngModel required #customerName="ngModel"
-                                           type="text" placeholder="Name" class="input" id="customerName">
-                                </ion-input>
-                                <ion-textarea name="complaint" ngModel required #complaint="ngModel"
-                                              type="text" placeholder="Complaint..." class="large-input" id="complaint">
-                                </ion-textarea>
+                                <input name="customerName" ngModel required #customerName="ngModel"
+                                       type="text" placeholder="Name" class="input" id="customerName">
+                                <textarea name="complaint" ngModel required #complaint="ngModel"
+                                          type="text" placeholder="Complaint..." class="large-input" id="complaint">
+                                </textarea>
                             </ion-col>
                             <!-- Work Details -->
                             <ion-col>
                                 <ion-label class="headers"> Work Details:</ion-label>
-                                <ion-textarea name="cause" ngModel required #cause="ngModel" type="text"
-                                              placeholder="Cause of problem..." class="large-input" id="cause">
-                                </ion-textarea>
-                                <ion-textarea name="correction" ngModel required #correction="ngModel" type="text"
-                                              placeholder="Correction of problem..." class="large-input" id="correction">
-                                </ion-textarea>
-                                <ion-textarea name="parts" ngModel required #parts="ngModel" type="text"
-                                              placeholder="Parts used in job..." class="large-input" id="parts">
-                                </ion-textarea>
-                                <ion-input name="workHours" ngModel required #workHours="ngModel" type="number"
-                                           placeholder="Work Hours" class="input" min="0" id="hours" value="0"
-                                           oninput="this.value=(parseInt(this.value)||0)">
-                                </ion-input>
+                                <textarea name="cause" ngModel required #cause="ngModel" type="text"
+                                          placeholder="Cause of problem..." class="large-input" id="cause">
+                                </textarea>
+                                <textarea name="correction" ngModel required #correction="ngModel" type="text"
+                                          placeholder="Correction of problem..." class="large-input" id="correction">
+                                </textarea>
+                                <textarea name="parts" ngModel required #parts="ngModel" type="text"
+                                          placeholder="Parts used in job..." class="large-input" id="parts">
+                                </textarea>
+                                <input name="workHours" ngModel required #workHours="ngModel" type="number"
+                                       placeholder="Work Hours" class="input" min="0" id="hours" value="0"
+                                       oninput="this.value=(parseInt(this.value)||0)">
                                 <mat-option *ngFor="let i of list3">
                                     <mat-checkbox [(ngModel)]="i.checked" ngModel="jobComplete"
                                                   name="jobComplete" id="complete">{{i.title}}
@@ -97,7 +92,8 @@
                     <hr style="height:2px;border-width:0;color:gray;background-color:black">
                     <p align="center">
                         <ion-button class="create-btn" size="large" type="submit" [routerLink]="['/history']"
-                                    [disabled]="!reportForm.form.valid" expand="block" color="NONE" id="create-btn">CREATE
+                                    [disabled]="!reportForm.form.valid" expand="block" color="NONE" id="create-btn">
+                            CREATE
                         </ion-button>
                     </p>
                 </ion-card-content>

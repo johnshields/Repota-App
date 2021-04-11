@@ -45,15 +45,15 @@ export class LoginPage implements OnInit {
             password: form.value.password
         };
 
-        // Push data to API to login user if object data is correct.
+        // Push data to API to login user.
         this.api.login(object).subscribe(() => {
-            console.log('Success');
+            console.log('Logged in');
             this.setErrorMessage(''); // clear error message.
             this.ngOnInit();
             form.reset();
             this.router.navigate(['/home']); // allow user in.
         }, error => {
-            // get error from response
+            // Get error from response.
             let errorMessage = JSON.stringify(error.error.messages);
             this.setErrorMessage(errorMessage);
             console.log(error);

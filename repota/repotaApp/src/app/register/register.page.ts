@@ -42,14 +42,14 @@ export class RegisterPage implements OnInit {
             password: form.value.password,
         };
 
-        // Push data to API to register user if object data is okay.
+        // Push data to API to register user.
         this.api.register(object).subscribe(() => {
-            console.log('Success');
-            this.setErrorMessage('');
+            console.log('Registered');
+            this.setErrorMessage(''); // clear error message.
             form.reset();
             this.router.navigate(['/login']);
         }, error => {
-            // get error from response
+            // Get error from response.
             let errorMessage = JSON.stringify(error.error.messages);
             this.setErrorMessage(errorMessage);
             console.log(error);

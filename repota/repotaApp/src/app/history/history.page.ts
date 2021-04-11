@@ -31,25 +31,28 @@ export class HistoryPage implements OnInit {
         return this.errorMessage;
     }
 
-    // get all user's reports from API.
+    /**
+     * @title ngOnInit
+     * @desc Get all user's reports from API.
+     */
     ngOnInit() {
         this.api.getReports().subscribe(data => {
             this.reports = data;
-            console.log('[INFO] Reports have been processed.');
+            console.log('Reports have been processed.');
             this.setErrorMessage('');
             // user has no reports
             if (data == null) {
                 this.setErrorMessage('You have no Reports yet!');
             }
         }, error => {
-            // get error from response.
+            // Get error from response.
             let errorMessage = JSON.stringify(error.error.messages);
             this.setErrorMessage(errorMessage);
             console.log(error);
         });
     }
 
-    // Refresh page to see new reports.
+    // Refresh page to see reports.
     refreshPage() {
         window.location.reload();
     }

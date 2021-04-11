@@ -46,7 +46,7 @@ export class EditPage implements OnInit {
      * @desc Uses the JobReport Model to take in the input and edit/update the report.
      */
     editReport(form: NgForm) {
-        // make the true/false values of check boxes to 1s and 0s.
+        // Make the true/false values of check boxes to 1s and 0s.
         // warranty
         if (form.value.warranty === true) {
             this.checkBoxValue1 = 1;
@@ -84,32 +84,40 @@ export class EditPage implements OnInit {
 
         // Push data to API to edit/update report using the model
         this.api.updateReport(object, this.report[0].jobReportId).subscribe(() => {
-            console.log('Success');
+            console.log('Report Updated');
             this.setErrorMessage(''); // clear error message.
             this.router.navigate(['/history']);
         }, error => {
+            // Get error from response.
             let errorMessage = JSON.stringify(error.error.messages);
             this.setErrorMessage(errorMessage);
             console.log(error);
         });
     }
 
-    // Get the request report by its ID from API.
+    /**
+     * @title ngOnInit
+     * @desc  Get requested report by its ID from API. Get vehicle data from API & lists for form check boxes.
+     */
     ngOnInit() {
         this.api.getReportById(this.route.snapshot.params['jobReportId']).subscribe(data => {
-            console.log(this.route.snapshot.params['jobReportId']);
+            console.log('Report Number ' + this.route.snapshot.params['jobReportId'] + ' processed');
             this.report = data;
-            console.log(data);
+            this.setErrorMessage('');
+        }, error => {
+            let errorMessage = JSON.stringify(error.error.messages);
+            this.setErrorMessage(errorMessage);
+            console.log(error);
         });
 
         // Get vehicle data from API.
         this.api.getCarApiData().subscribe(data => {
-            console.log('[INFO] Vehicles have been processed.');
+            console.log('Vehicles have been processed.');
             // Extract JSON data.
             for (let key in data) {
                 this.vehicles = data[key];
             }
-            this.setErrorMessage(''); // clear error message.
+            this.setErrorMessage('');
         }, error => {
             let errorMessage = JSON.stringify(error.error.messages);
             this.setErrorMessage(errorMessage);

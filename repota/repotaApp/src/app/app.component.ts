@@ -14,7 +14,7 @@ import {AuthService} from "./services/auth-service/auth.service";
     templateUrl: 'app.component.html',
     styleUrls: ['app.component.scss']
 })
-export class AppComponent {
+export class AppComponent{
     private errorMessage;
     constructor(private router: Router, private api: AccountService, public authService: AuthService) {
     }
@@ -32,6 +32,19 @@ export class AppComponent {
     }
 
     /**
+     * @title Home
+     * @desc If a User clicks Home when not logged in notify them then clear it after 5000ms.
+     */
+    async home() {
+        const delay = ms => new Promise(res => setTimeout(res, ms));
+        if (!this.authService.loggedIn()) {
+            this.setErrorMessage('Please login first');
+            await delay(5000);
+            this.setErrorMessage(''); // clear error message.
+        }
+    }
+
+    /**
      * @title Logout
      * @desc Logout user by calling API and go to the Account Page.
      * Only allow a logged in user to use Logout button.
@@ -39,8 +52,9 @@ export class AppComponent {
     logout() {
         if (this.authService.loggedIn()) {
             this.api.logout().subscribe(() => {
-                console.log('Success');
+                console.log('Logged out');
                 this.router.navigate(['']);
+                this.setErrorMessage('');
             }, error => {
                 let errorMessage = JSON.stringify(error.error.messages);
                 this.setErrorMessage(errorMessage);

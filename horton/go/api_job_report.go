@@ -35,7 +35,7 @@ func CreateReport(c *gin.Context) {
 		fmt.Println(err.Error())
 	}
 
-	// check for logged in user's cookie.
+	// Check for logged in user's cookie.
 	CheckForCookie(c)
 
 	// Insert Job Report details
@@ -111,8 +111,8 @@ func GetReportById(c *gin.Context) {
 	fmt.Printf("Get Report with ID: " + reportId)
 
 	if !isValidAccount(worker) {
-		log.Println("\nUser has not logged in!")
-		c.JSON(401, models.Error{Code: 401, Messages: "User has not logged in!"})
+		log.Println("\nUser has not logged in.")
+		c.JSON(401, models.Error{Code: 401, Messages: "User has not logged in"})
 	}
 
 	// JOIN Query to get report by ID

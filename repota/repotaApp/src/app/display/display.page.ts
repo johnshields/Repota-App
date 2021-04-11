@@ -33,26 +33,33 @@ export class DisplayPage implements OnInit {
         return this.errorMessage;
     }
 
-    // Get requested report by its ID from API.
+    /**
+     * @title ngOnInit
+     * @desc Get requested report by its ID from API.
+     */
     ngOnInit() {
         this.api.getReportById(this.route.snapshot.params['jobReportId']).subscribe(data => {
-            console.log(this.route.snapshot.params['jobReportId']);
+            console.log('Report Number ' + this.route.snapshot.params['jobReportId'] + ' processed');
             this.report = data;
             this.setErrorMessage(''); // clear error message.
         }, error => {
+            // Get error from response.
             let errorMessage = JSON.stringify(error.error.messages);
             this.setErrorMessage(errorMessage);
             console.log(error);
         });
     }
 
-    // delete report with requested ID from API.
+    /**
+     * @title Delete Report
+     * @desc Delete report with requested ID from API.
+     */
     deleteReport(id: number) {
         // Pop up box to make sure the User wants to delete the Report.
-        if(confirm("Are you sure to delete" + " Report Number " + id + "?")) {
+        if(confirm("Are you sure to delete Report Number " + id + "?")) {
             this.api.deleteReport(id).subscribe(() => {
-                console.log('Success');
-                this.setErrorMessage(''); // clear error message.
+                console.log('Report Deleted');
+                this.setErrorMessage('');
                 this.router.navigate(['/history']);
             }, error => {
                 let errorMessage = JSON.stringify(error.error.messages);

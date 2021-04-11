@@ -12,5 +12,5 @@ Feature: User Registration
     Then user should be successfully registered
 
     Examples:
-      | username | name  | password   |
-      | bob_test | Bob   | @Testing14 |
+      | username      | name     | password   |
+      | bob_mock_test | Bob Mock | @Testing14 |

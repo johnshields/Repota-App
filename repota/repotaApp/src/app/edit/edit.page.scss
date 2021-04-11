@@ -28,19 +28,13 @@ ion-card-content {
   font-size: 20px;
 }
 
-ion-input {
-  background-color: #dedad9;
-  margin-left: 20px;
-  text-align: center;
-}
-
 input {
   background-color: #dedad9;
   margin-left: 20px;
   text-align: center;
 }
 
-ion-textarea {
+textarea {
   background-color: #dedad9;
   margin-left: 20px;
   width: 400px;
@@ -101,9 +95,12 @@ mat-option {
   .input {
     font-size: medium;
     width: 250px;
+    height: 35px;
   }
 
   .large-input {
     font-size: medium;
+    width: 400px;
+    height: 100px;
   }
 }

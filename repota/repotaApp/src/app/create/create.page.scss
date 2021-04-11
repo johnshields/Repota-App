@@ -22,19 +22,13 @@ ion-card-content {
   font-size: 20px;
 }
 
-ion-input {
-  background-color: #dedad9;
-  margin-left: 20px;
-  text-align: center;
-}
-
 input {
   background-color: #dedad9;
   margin-left: 20px;
   text-align: center;
 }
 
-ion-textarea {
+textarea {
   background-color: #dedad9;
   margin-left: 20px;
   width: 400px;
@@ -44,7 +38,7 @@ ion-textarea {
   font-size: small;
   border: 1px solid #22222e;
   border-radius: 5px;
-  width: 150px;
+  width: auto;
   height: 35px;
   padding-left: 15px;
   margin-top: 10px;
@@ -84,11 +78,19 @@ mat-option {
 
 // computer monitors
 @media screen and (min-width: 1224px) {
-  ion-card {
-    padding-left: 32%;
+  ion-card-content {
+    width: auto;
   }
 
-  ion-card-content {
-    width: 50%;
+  .input {
+    font-size: medium;
+    width: 200px;
+    height: 35px;
+  }
+
+  .large-input {
+    font-size: medium;
+    width: 400px;
+    height: 100px;
   }
 }

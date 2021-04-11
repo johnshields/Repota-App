@@ -303,9 +303,8 @@ export class JobReportService {
     }
 
     /**
-     * Get Car API Data
-     *
-     * Get all Vehicle Data from API that retrieves it from a 3rd Party API.
+     * @tile GetCarApiData
+     * @disc Get all Vehicle Data from API that retrieves it from a 3rd Party API.
      * 3rd Party API - https://www.back4app.com/database/back4app/car-make-model-dataset
      */
     getCarApiData(): Observable<any> {

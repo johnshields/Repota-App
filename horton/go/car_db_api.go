@@ -28,6 +28,7 @@ func GetCarApiData(c *gin.Context) {
 	key, err := ioutil.ReadFile("go/config/api_key.txt")
 	if err != nil {
 		log.Println("Unable to read files", err)
+		c.JSON(500, nil)
 	}
 	// set text from config files.
 	appID := string(id)
@@ -36,13 +37,13 @@ func GetCarApiData(c *gin.Context) {
 	// 3rd party API URL
 	url := "https://parseapi.back4app.com/classes/Car_Model_List?limit=1000&keys=Make,Model"
 
-	// set up request from URL.
+	// Set up request from URL.
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		log.Println(err)
 		c.JSON(500, nil)
 	}
-	// set auth Headers for API access.
+	// Set auth Headers for API access.
 	req.Header.Set("X-Parse-Application-Id", appID)
 	req.Header.Set("X-Parse-Master-Key", apiKey)
 
@@ -54,7 +55,7 @@ func GetCarApiData(c *gin.Context) {
 		c.JSON(500, nil)
 	}
 
-	// decode JSON from response body.
+	// Decode JSON from response body.
 	var data map[string]interface{}
 	err = json.NewDecoder(resp.Body).Decode(&data)
 	if err != nil {

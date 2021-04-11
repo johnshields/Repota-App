@@ -11,5 +11,5 @@ Feature: Login User
     Then user should be successfully logged in to Repota
 
     Examples:
-      | username  | password   |
-      | test_user | @Testing14 |
+      | username      | password   |
+      | bob_mock_test | @Testing14 |
