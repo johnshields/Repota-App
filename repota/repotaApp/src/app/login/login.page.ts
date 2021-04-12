@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AccountService, InlineObject} from '../services/api-service';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
+import {AuthService} from "../services/auth-service/auth.service";
 
 /**
  * @author John Shields
@@ -19,7 +20,9 @@ import {Router} from '@angular/router';
 })
 export class LoginPage implements OnInit {
     private errorMessage;
-    constructor(private api: AccountService, private router: Router) {
+    loginMessage;
+
+    constructor(private api: AccountService, private router: Router, public authService: AuthService) {
     }
 
     /**
@@ -60,6 +63,17 @@ export class LoginPage implements OnInit {
         });
     }
 
-    ngOnInit() {
+    /**
+     * @title ngOnInit
+     * @desc If a user navigates to this page when already logged in
+     * notify them then clear it after 5000ms.
+     */
+    async ngOnInit() {
+        const delay = ms => new Promise(res => setTimeout(res, ms));
+        if (this.authService.loggedIn()) {
+            this.loginMessage = 'You are already logged in!'
+            await delay(5000);
+            this.loginMessage = ''
+        }
     }
 }

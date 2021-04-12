@@ -40,12 +40,12 @@
                                             [value]="cars.Make + space + cars.Model"></option>
                                 </datalist>
                                 <input name="vehicleReg" ngModel required #vehicleReg="ngModel"
-                                           type="text" placeholder='{{report["vehicleReg"]}}' class="input" id="reg">
+                                       type="text" placeholder='{{report["vehicleReg"]}}' class="input" id="reg">
                                 <input name="milesOnVehicle" ngModel required #milesOnVehicle="ngModel"
-                                           type="number" placeholder='{{report["milesOnVehicle"]}}' class="input"
-                                           min="0" id="miles">
+                                       type="number" placeholder='{{report["milesOnVehicle"]}}' class="input"
+                                       min="0" id="miles">
                                 <input name="vehicleLocation" ngModel required #vehicleLocation="ngModel" id="location"
-                                           type="text" placeholder='{{report["vehicleLocation"]}}' class="input">
+                                       type="text" placeholder='{{report["vehicleLocation"]}}' class="input">
                                 <mat-option *ngFor="let i of list1">
                                     <mat-checkbox [(ngModel)]="i.checked" id="warranty"
                                                   ngModel="warranty" name="warranty">{{i.title}}
@@ -61,17 +61,17 @@
                             <ion-col>
                                 <ion-label class="headers"> Work Details:</ion-label>
                                 <textarea name="cause" ngModel required #cause="ngModel" id="cause"
-                                              type="text" placeholder='{{report["cause"]}}' class="large-input">
+                                          type="text" placeholder='{{report["cause"]}}' class="large-input">
                                 </textarea>
                                 <textarea name="correction" ngModel required #correction="ngModel" id="correction"
-                                              type="text" placeholder='{{report["correction"]}}' class="large-input">
+                                          type="text" placeholder='{{report["correction"]}}' class="large-input">
                                 </textarea>
                                 <textarea name="parts" ngModel required #parts="ngModel" id="parts"
-                                              type="text" placeholder='{{report["parts"]}}' class="large-input">
+                                          type="text" placeholder='{{report["parts"]}}' class="large-input">
                                 </textarea><br>
                                 <input name="workHours" ngModel required #workHours="ngModel" id="hours" type="number"
-                                           placeholder="Work Hours" class="input" min="0" value="0"
-                                           oninput="this.value=(parseInt(this.value)||0)">
+                                       placeholder="Work Hours" class="input" min="0" value="0"
+                                       oninput="this.value=(parseInt(this.value)||0)">
                                 <mat-option *ngFor="let i of list3">
                                     <mat-checkbox [(ngModel)]="i.checked" id="complete"
                                                   ngModel="jobComplete" name="jobComplete">{{i.title}}

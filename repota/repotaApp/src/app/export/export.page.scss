@@ -132,14 +132,17 @@ ion-title {
 
   .report-content {
     width: 175mm;
+    min-height: 235mm;
   }
 
   .info {
     width: auto;
+    min-width: 250px;
   }
 
   .desc-info {
     width: auto;
+    min-width: 300px;
   }
 
   .worker {

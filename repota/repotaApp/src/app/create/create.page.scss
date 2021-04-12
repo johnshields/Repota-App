@@ -22,6 +22,12 @@ ion-card-content {
   font-size: 20px;
 }
 
+input:-webkit-autofill {
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: #000000 !important;
+  width: 150px;
+}
+
 input {
   background-color: #dedad9;
   margin-left: 20px;
@@ -31,14 +37,13 @@ input {
 textarea {
   background-color: #dedad9;
   margin-left: 20px;
-  width: 400px;
 }
 
 .input {
   font-size: small;
   border: 1px solid #22222e;
   border-radius: 5px;
-  width: auto;
+  width: 250px;
   height: 35px;
   padding-left: 15px;
   margin-top: 10px;
@@ -48,7 +53,7 @@ textarea {
   font-size: small;
   border: 1px solid #22222e;
   border-radius: 5px;
-  width: auto;
+  width: 250px;
   height: 80px;
   padding-left: 15px;
   margin-top: 10px;

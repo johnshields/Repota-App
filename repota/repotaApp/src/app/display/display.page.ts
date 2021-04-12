@@ -56,7 +56,7 @@ export class DisplayPage implements OnInit {
      */
     deleteReport(id: number) {
         // Pop up box to make sure the User wants to delete the Report.
-        if(confirm("Are you sure to delete Report Number " + id + "?")) {
+        if (confirm("Are you sure to delete Report Number " + id + "?")) {
             this.api.deleteReport(id).subscribe(() => {
                 console.log('Report Deleted');
                 this.setErrorMessage('');

@@ -90,7 +90,7 @@ export class CreatePage implements OnInit {
             this.setErrorMessage(''); // clear error message.
             this.router.navigate(['/history']);
         }, error => {
-            // Set error from response.
+            // Get error from response.
             let errorMessage = JSON.stringify(error.error.messages);
             this.setErrorMessage(errorMessage);
             console.log(error);

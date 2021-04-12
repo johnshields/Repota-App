@@ -97,7 +97,7 @@ export class EditPage implements OnInit {
 
     /**
      * @title ngOnInit
-     * @desc  Get requested report by its ID from API. Get vehicle data from API & lists for form check boxes.
+     * @desc Get requested report by its ID from API. Get vehicle data from API & lists for form check boxes.
      */
     ngOnInit() {
         this.api.getReportById(this.route.snapshot.params['jobReportId']).subscribe(data => {

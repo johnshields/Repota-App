@@ -39,10 +39,10 @@ export class HistoryPage implements OnInit {
         this.api.getReports().subscribe(data => {
             this.reports = data;
             console.log('Reports have been processed.');
-            this.setErrorMessage('');
-            // user has no reports
+            this.setErrorMessage(''); // clear error message.
+            // If User has no reports.
             if (data == null) {
-                this.setErrorMessage('You have no Reports yet!');
+                this.setErrorMessage('You have no reports yet!');
             }
         }, error => {
             // Get error from response.
@@ -52,8 +52,8 @@ export class HistoryPage implements OnInit {
         });
     }
 
-    // Refresh page to see reports.
+    // Refresh ngOnInit to see Reports.
     refreshPage() {
-        window.location.reload();
+        this.ngOnInit();
     }
 }

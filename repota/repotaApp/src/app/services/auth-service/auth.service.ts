@@ -19,7 +19,10 @@ export class AuthService {
     constructor(private cookieService: CookieService) {
     }
 
-    // get the cookie 'session_id' set by API.
+    /**
+     * @title Logged In
+     * @desc Get the cookie 'session_id' set by API.
+     */
     loggedIn() {
         return !!this.cookieService.get('session_id');
     }

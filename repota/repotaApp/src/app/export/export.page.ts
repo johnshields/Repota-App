@@ -22,11 +22,11 @@ import domtoimage from 'dom-to-image';
 export class ExportPage implements OnInit {
     report: any = [];
     private errorMessage;
-    smallScreen = window.innerWidth <= 600;
-    pdfWidth: number;
-    pdfHeight: number;
-    imgWidth: number;
-    imgHeight: number;
+    private smallScreen = window.innerWidth <= 600;
+    private pdfWidth: number;
+    private pdfHeight: number;
+    private imgWidth: number;
+    private imgHeight: number;
 
     constructor(private api: JobReportService, private route: ActivatedRoute) {
     }
@@ -74,10 +74,13 @@ export class ExportPage implements OnInit {
         }
     }
 
-    // Export report to a PDF.
+    /**
+     * @title On Export PDF
+     * @desc Allows User to Export a Report to a PDF.
+     */
     onExportPDF() {
         const content = document.getElementById('job-report');
-        const options = {background: 'white', width: this.pdfWidth, height: this.pdfHeight, quality: 0.98};
+        const options = {background: 'white', width: this.pdfWidth, height: this.pdfHeight, quality: 1};
         domtoimage.toPng(content, options).then(
             (dataUrl) => {
                 const doc = new jspdf.jsPDF('portrait', 'mm', 'a4', true);

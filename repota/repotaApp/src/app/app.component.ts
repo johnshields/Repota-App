@@ -6,7 +6,7 @@ import {AuthService} from "./services/auth-service/auth.service";
 /**
  * @author John Shields
  * @title App Component
- * @desc Allows a User to logout with logout button on Hamburger Menu.
+ * @desc Main Component & Handles the Hamburger Menu.
  */
 
 @Component({
@@ -14,8 +14,9 @@ import {AuthService} from "./services/auth-service/auth.service";
     templateUrl: 'app.component.html',
     styleUrls: ['app.component.scss']
 })
-export class AppComponent{
+export class AppComponent {
     private errorMessage;
+
     constructor(private router: Router, private api: AccountService, public authService: AuthService) {
     }
 
@@ -50,12 +51,15 @@ export class AppComponent{
      * Only allow a logged in user to use Logout button.
      */
     logout() {
+        const delay = ms => new Promise(res => setTimeout(res, ms));
         if (this.authService.loggedIn()) {
-            this.api.logout().subscribe(() => {
+            this.api.logout().subscribe(async () => {
                 console.log('Logged out');
-                this.router.navigate(['']);
                 this.setErrorMessage('');
+                await delay(1000); // Wait for cookie to expire.
+                await this.router.navigate(['']);
             }, error => {
+                // Get error message from response.
                 let errorMessage = JSON.stringify(error.error.messages);
                 this.setErrorMessage(errorMessage);
                 console.log(error);

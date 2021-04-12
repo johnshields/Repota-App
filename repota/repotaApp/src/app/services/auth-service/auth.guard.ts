@@ -17,7 +17,10 @@ export class AuthGuard implements CanActivate {
     constructor(private authService: AuthService, private router: Router) {
     }
 
-    // Works with auth.service.ts to check if user is logged in.
+    /**
+     * @title Can Activate
+     * @desc Works with auth.service.ts to check if user is logged in.
+     */
     canActivate(): boolean {
         // if user is logged in return true
         if (this.authService.loggedIn()) {

@@ -28,7 +28,7 @@ ion-card-content {
 
 .info {
   width: auto;
-  font-size: small;
+  font-size: medium;
   padding-left: 5px;
   padding-right: 5px;
   border: 1px solid #22222e;
@@ -47,7 +47,6 @@ ion-card-content {
 
 .desc-info {
   width: auto;
-  height: 80px;
   font-size: medium;
   padding-left: 5px;
   padding-right: 5px;
@@ -60,8 +59,8 @@ ion-card-content {
 }
 
 .worker {
-  width: 175px;
-  font-size: small;
+  width: 250px;
+  font-size: medium;
   padding-left: 5px;
   padding-right: 5px;
   border: 1px solid #22222e;
@@ -134,6 +133,5 @@ mat-checkbox {
 
   .info {
     width: 250px;
-    font-size: medium;
   }
 }

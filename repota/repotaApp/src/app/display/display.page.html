@@ -53,7 +53,7 @@
                             <p class="desc-info"> {{report["cause"]}}</p>
                             <ion-label class="desc-name"> Correction:</ion-label>
                             <p class="desc-info">{{report["correction"]}}</p>
-                            <ion-label class="info"> Parts: {{report["parts"]}}</ion-label>
+                            <p class="desc-info"> Parts: {{report["parts"]}}</p>
                             <ion-label class="info"> Work Hours: {{report["workHours"]}}</ion-label>
                             <ion-label class="worker"> Technician: {{report["workerName"]}}</ion-label>
                             <ion-label class="job-comp"> Complete
@@ -67,7 +67,8 @@
                 </ion-button>
                 <ion-button class="pdf" color="NONE" [routerLink]="['/export/' +  report.jobReportId]" id="pdf">PDF
                 </ion-button>
-                <ion-button class="delete" color="NONE" (click)="deleteReport(report.jobReportId)" id="delete">DELETE</ion-button>
+                <ion-button class="delete" color="NONE" (click)="deleteReport(report.jobReportId)" id="delete">DELETE
+                </ion-button>
             </ion-card-content>
             <!-- end of report -->
         </ion-item>

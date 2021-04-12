@@ -11,7 +11,11 @@
 </ion-header>
 
 <ion-content>
-    <div class="item" align="center">
+    <div class="login-message">
+        <ion-label [textContent]="loginMessage"></ion-label>
+    </div>
+    <!-- Only show Login Form to Users who are not logged in -->
+    <div class="item" align="center" *ngIf="!this.authService.loggedIn()">
         <form (submit)="login(workerForm)" #workerForm="ngForm">
             <!-- error message -->
             <mat-error class="error-message">{{getErrorMessage()}}</mat-error>
