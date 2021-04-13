@@ -104,6 +104,9 @@ export class EditPage implements OnInit {
             console.log('Report Number ' + this.route.snapshot.params['jobReportId'] + ' processed');
             this.report = data;
             this.setErrorMessage('');
+            if (data == null){
+                this.setErrorMessage('Report Number ' + this.route.snapshot.params['jobReportId'] + ' not found');
+            }
         }, error => {
             let errorMessage = JSON.stringify(error.error.messages);
             this.setErrorMessage(errorMessage);

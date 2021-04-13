@@ -16,28 +16,32 @@ package openapi
 import (
 	"encoding/json"
 	"github.com/gin-gonic/gin"
+	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
 )
 
-// GetCarApiData Function to get Vehicle data from 3rd Party API and send to Client.
+// GetCarApiData
+// Function to get Vehicle Data from Back4App (3rd Party API) and send to Client.
+// Read in the config files for API access, set up the request, set the auth headers from the config files,
+// do the request and then send the data from Back4App to client.
 func GetCarApiData(c *gin.Context) {
-	// read config files.
+	// Read in config files.
 	id, err := ioutil.ReadFile("go/config/api_id.txt")
 	key, err := ioutil.ReadFile("go/config/api_key.txt")
 	if err != nil {
 		log.Println("Unable to read files", err)
 		c.JSON(500, nil)
 	}
-	// set text from config files.
+	// Set text from config files to strings - for setting auth Headers.
 	appID := string(id)
 	apiKey := string(key)
 
-	// 3rd party API URL
+	// Back4App URL with data of a 1000 Vehicle Makes and Models.
 	url := "https://parseapi.back4app.com/classes/Car_Model_List?limit=1000&keys=Make,Model"
 
-	// Set up request from URL.
+	// Set up request with URL.
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		log.Println(err)
@@ -47,7 +51,14 @@ func GetCarApiData(c *gin.Context) {
 	req.Header.Set("X-Parse-Application-Id", appID)
 	req.Header.Set("X-Parse-Master-Key", apiKey)
 
-	// send request
+	// Check for user's cookie - if they do not have one abort the request.
+	// Status code handled by CheckForCookie.
+	if !CheckForCookie(c) {
+		log.Println("User is unauthorized")
+		return
+	}
+
+	// Do GET request - get data from Back4App.
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
@@ -65,5 +76,11 @@ func GetCarApiData(c *gin.Context) {
 
 	// Send data to client.
 	c.JSON(http.StatusOK, data)
-	defer resp.Body.Close()
+	// Close the response body.
+	defer func(Body io.ReadCloser) {
+		err := Body.Close()
+		if err != nil {
+			log.Println("Failed to close body from request.")
+		}
+	}(resp.Body)
 }

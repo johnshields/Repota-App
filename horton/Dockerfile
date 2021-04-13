@@ -1,4 +1,4 @@
-# Dockerfile for AWS Elastic Beanstalk
+# Dockerfile for hosting Horton on AWS Elastic Beanstalk
 
 # golang version
 FROM golang:1.15.3

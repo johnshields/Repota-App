@@ -8,7 +8,7 @@
  * Handles CORS for cross origins to front-end.
  * Handles Endpoint Routes for functions for reports and users.
  *
- * Reference
+ * References
  * https://stackoverflow.com/questions/29418478/go-gin-framework-cors
  * https://semaphoreci.com/community/tutorials/building-go-web-applications-and-microservices-using-gin
  */
@@ -25,7 +25,7 @@ import (
 type Route struct {
 	// Name is the name of this Route.
 	Name string
-	// Method is the string for the HTTP method. ex) GET, POST etc..
+	// Method is the string for the HTTP method. e.g. GET, POST, DELETE etc.
 	Method string
 	// Pattern is the pattern of the URI.
 	Pattern string
@@ -56,7 +56,7 @@ func CORS() gin.HandlerFunc {
 func NewRouter() *gin.Engine {
 
 	router := gin.Default()
-	// set logo for tab & "/" endpoint.
+	// Set logo for tab & "/" endpoint.
 	router.StaticFile("/favicon.ico", "./favicon.ico")
 	router.StaticFile("/", "./favicon.ico")
 
@@ -78,7 +78,7 @@ func NewRouter() *gin.Engine {
 	return router
 }
 
-// Index is the index handler.
+// Index is the index handler - / endpoint.
 func Index(c *gin.Context) {
 	c.String(http.StatusOK, "[INFO] Horton is online...")
 }

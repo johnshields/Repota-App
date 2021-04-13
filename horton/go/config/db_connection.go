@@ -20,9 +20,9 @@ import (
 	"os"
 )
 
-// Function to use the config.ini file to log into MySQL for database access.
+// DbConn use the config.ini file to log into MySQL for database access.
 func DbConn() (db *sql.DB) {
-	// Load config
+	// Load config file.
 	cfg, err := ini.Load("go/config/config.ini")
 
 	if err != nil {
@@ -32,9 +32,10 @@ func DbConn() (db *sql.DB) {
 
 	dbName := cfg.Section("database").Key("db_name")
 	username := cfg.Section("database").Key("username")
+	ip := cfg.Section("database").Key("ip")
 	password := cfg.Section("database").Key("password")
 
-	db, err = sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(127.0.0.1:3306)/%s", username, password, dbName))
+	db, err = sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:3306)/%s", username, password, ip, dbName))
 
 	if err != nil {
 		panic(err.Error())

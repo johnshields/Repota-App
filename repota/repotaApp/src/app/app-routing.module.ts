@@ -14,7 +14,7 @@ const routes: Routes = [
     {
         path: 'home',
         loadChildren: () => import('./home/home.module').then(m => m.HomePageModule),
-        canActivate: [AuthGuard] // Block User if they are not logged in.
+        canActivate: [AuthGuard] // Block User if they are not logged in (no cookie).
     },
     {
         path: 'create',
@@ -33,7 +33,8 @@ const routes: Routes = [
     },
     {
         path: 'display/:jobReportId',
-        loadChildren: './display/display.module#DisplayPageModule'
+        loadChildren: './display/display.module#DisplayPageModule',
+        canActivate: [AuthGuard]
     },
     {
         path: 'export',
@@ -42,7 +43,8 @@ const routes: Routes = [
     },
     {
         path: 'export/:jobReportId',
-        loadChildren: './export/export.module#ExportPageModule'
+        loadChildren: './export/export.module#ExportPageModule',
+        canActivate: [AuthGuard]
     },
     {
         path: 'login',
@@ -59,7 +61,8 @@ const routes: Routes = [
     },
     {
         path: 'edit/:jobReportId',
-        loadChildren: './edit/edit.module#EditPageModule'
+        loadChildren: './edit/edit.module#EditPageModule',
+        canActivate: [AuthGuard]
     }
 ];
 

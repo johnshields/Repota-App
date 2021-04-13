@@ -3,8 +3,7 @@
  * Horton - API version: 1.0.0
  *
  * Session
- * Handles creating, generating, removing sessions and cookie checking.
- * Plus logout for logging out user or when user has no cookie (not logged in).
+ * Handles  cookie checking, creating, generating and removing sessions.
  */
 
 package openapi
@@ -19,36 +18,35 @@ import (
 	"log"
 )
 
-// CheckForCookie Function is used to allow for checking if a session id exists when a request is made from the client.
-// If a cookie exists the request continues, otherwise the un-auth user is logged out.
+// CheckForCookie
+// Check if user has a cookie - Used to abort requests made from the client if a user has no cookie (not logged in).
 func CheckForCookie(c *gin.Context) bool {
 	val, err := c.Cookie("session_id")
 	fmt.Println("\nCookie:", val)
 
-	// Logout if no session_id (cookie) is found
+	// Return false if no cookie is found.
 	if err != nil {
-		log.Println("No cookie found", err)
-		c.JSON(403, models.Error{Code: 403, Messages: "User has no cookie."})
-		Logout(c)
+		c.JSON(403, models.Error{Code: 403, Messages: "User is unauthorized"})
 		return false
 	}
-	// Else return true as one exists
+	// Else return true as one exists.
 	return true
 }
 
-// Function to create a session id for authenticated user.
-// Session tables is updated with the session token(UUID) and expiry time of three days and that is tied to the user by
-// by the users id.
+// Function to create a session ID for authenticated user.
+// Works with generateSessionId & isValidAccount.
+// Session tables is updated with the session token (UUID) and expiry time of three days and that is tied to the user
+// by the user's ID.
 // Returns either an error or a new Session object containing session token and expiry time.
 func createSessionId(username string) (error, models.Session) {
 	db := config.DbConn()
 	//db := mocks.MockDbConn() // for unit tests
 
-	// User has been created now set the following below
+	// Set up the session requirements.
 	token := generateSessionId() // Create a new session ID
 	expiry := 3600 * 24 * 3      // 3600 * 24 * 3 = 3 days
 
-	// INSERT QUERY to create account for user.
+	// Prepare Insert Query to create session for user.
 	insert, err := db.Prepare("INSERT INTO session(id, user, expire_after) VALUES(?, ?, ?)")
 
 	if err != nil {
@@ -59,28 +57,26 @@ func createSessionId(username string) (error, models.Session) {
 	fmt.Println("\n[INFO] Printing Worker Account details:", "\nSession Token:", token, "\nWorker ID:", wa.Id,
 		"\nExpiry time in seconds:", expiry)
 
-	// Check if user account exists
+	// Check if user account exists - mainly for attaching session to user.
 	if !isValidAccount(username) {
-		log.Println("\nUser has not logged in!", err)
+		log.Println("\nUser has not logged in.", err)
 	}
 
-	// Execute query to db, handle errors if any
+	// Execute query to db (create session for user), handle errors if any.
 	if _, err = insert.Exec(token, wa.Id, expiry); err != nil {
 		log.Println("MYSQL Error: Error creating new session record\n", err)
 		defer db.Close()
 		return errors.New("MYSQL Error: Error creating new session record"), models.Session{}
 	} else {
-		fmt.Println("\n[INFO] Session has been generated. Records:", "\nSession Token:", token, "\nWorker ID:", wa.Id,
-			"\nExpiry time in seconds:", expiry, "\n[INFO] Worker Username:", username)
+		fmt.Println("\n[INFO] Session has been generated for", username)
 		defer db.Close()
-
-		// Returns Session object
+		// Returns Session object.
 		return nil, models.Session{Token: token, Expiry: expiry}
 	}
 }
 
-// Function to create a session ID using UUID for an authenticated user.
-// This session id will be needed to allow the user to make requests from the client to the server.
+// Function to create a session ID using UUID (Universally Unique ID) for an authenticated user.
+// This ID will be needed for users and their cookies to allow the user to make requests from the client to the server.
 func generateSessionId() string {
 	return uuid.New().String()
 }
@@ -90,16 +86,15 @@ func removeSession(userId int) bool {
 	db := config.DbConn()
 	//db := mocks.MockDbConn() // for unit tests
 
-	// delete session for user.
+	// Delete session for user.
 	res, err := db.Exec("DELETE FROM session WHERE user=?", userId)
 
 	if err != nil {
-		log.Println("MySQL error", err)
+		log.Println("MySQL Error: Deleting of session failed", err)
 		return false
 	}
 
 	affectedRows, err := res.RowsAffected()
-
 	if err != nil {
 		// return false
 		fmt.Printf("\nError updating record for deleting session")
@@ -107,34 +102,5 @@ func removeSession(userId int) bool {
 	}
 
 	fmt.Printf("The statement affected %d rows\n", affectedRows)
-	return true
-}
-
-// Logout Function to logout a user by replacing their cookie with one that expires in one second.
-func Logout(c *gin.Context) {
-	db := config.DbConn()
-	//db := mocks.MockDbConn() // for unit tests
-	username := wa.Username
-
-	// Check for existing session, remove if one exits.
-	if removeSession(wa.Id) {
-		// Create new session_id for user who logged out.
-		err, session := createSessionId(username)
-
-		if err != nil {
-			log.Print(err)
-			c.JSON(500, models.Error{Code: 500, Messages: "Could not create new session_id"})
-		} else {
-			// set a cookie of one second for logged out user.
-			c.SetCookie("session_id", session.Token, 1, "/",
-				"", false, false)
-
-			c.JSON(204, models.Error{Code: 204, Messages: "User has been logged out"})
-			fmt.Println("\n[INFO]", username, "logged out")
-		}
-	} else {
-		log.Println("\nCould not logout", username)
-		c.JSON(500, models.Error{Code: 500, Messages: "Could not logout User"})
-	}
-	defer db.Close()
+	return true // Session has been removed.
 }

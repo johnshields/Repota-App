@@ -2,7 +2,7 @@
  * John Shields
  * Horton - API version: 1.0.0
  *
- * Main function to start server.
+ * Main function to start server by calling routers.
  */
 
 package main

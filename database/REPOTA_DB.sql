@@ -18,7 +18,6 @@ CREATE TABLE IF NOT EXISTS workers
     UNIQUE KEY (worker_name)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 6;
--- workers table --
 INSERT INTO workers (worker_id, username, worker_name, hash)
 VALUES (141, 'john_shields', 'John Shields', '$2a$10$ttINUB.yZkZUKiKSBqRMf.jzRYIL8.MLMldre63SA5u9DtJjuvMNO'),
        (174, 'steve_mon', 'Steve Maloney', '$2a$10$56hLopYTrwAvJs/4Q84vTOcC.T5KCUmR1.m92gcqkKBnQg7qnW8pW');
@@ -45,7 +44,6 @@ CREATE TABLE IF NOT EXISTS jobreports
     FOREIGN KEY (worker_id) REFERENCES workers (worker_id) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 6;
--- jobReports table --
 INSERT INTO jobreports (job_report_id, worker_id, date_stamp, vehicle_model, vehicle_reg,
                         vehicle_location,
                         miles_on_vehicle, warranty, breakdown, cause, correction, parts, work_hours,
@@ -75,7 +73,6 @@ CREATE TABLE IF NOT EXISTS customers
     FOREIGN KEY (job_report_id) REFERENCES jobreports (job_report_id) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 6;
--- customers table --
 INSERT INTO customers (job_report_id, customer_name, customer_complaint)
 VALUES (121, 'Freddie Quell', 'The passenger side door will not open.'),
        (251, 'Peggy Dod', 'The left back wheel is shaking.'),

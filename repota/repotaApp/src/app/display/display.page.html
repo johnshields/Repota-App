@@ -10,10 +10,12 @@
     </ion-toolbar>
 </ion-header>
 <ion-content>
+    <p align="center" class="message">
+        <!-- error message -->
+        <mat-error class="error-message">{{getErrorMessage()}}</mat-error>
+    </p>
     <ion-card>
         <ion-item *ngFor="let report of report">
-            <!-- error message -->
-            <mat-error class="error-message">{{getErrorMessage()}}</mat-error>
             <ion-card-content>
                 <!-- report -->
                 <ion-card-header>

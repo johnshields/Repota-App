@@ -52,6 +52,9 @@ export class ExportPage implements OnInit {
             console.log('Report Number ' + this.route.snapshot.params['jobReportId'] + ' processed');
             this.report = data;
             this.setErrorMessage(''); // clear error message.
+            if (data == null){
+                this.setErrorMessage('Report Number ' + this.route.snapshot.params['jobReportId'] + ' not found');
+            }
         }, error => {
             // Get error from response.
             let errorMessage = JSON.stringify(error.error.messages);

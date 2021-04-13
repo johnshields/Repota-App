@@ -13,9 +13,9 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-// Function to set up a mock db.
+// MockDbConn to set up a Mock Database for testing.
 func MockDbConn() (db *sql.DB) {
-	db, err := sql.Open("mysql", "john:local@tcp(127.0.0.1:3306)/repotadb")
+	db, err := sql.Open("mysql", "mock_user:mock@tcp(127.0.0.1:3306)/mock_repotadb")
 
 	if err != nil {
 		panic(err.Error())
