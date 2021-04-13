@@ -61,7 +61,7 @@ textarea {
   border: 1px solid #22222e;
   border-radius: 5px;
   width: 250px;
-  height: 80px;
+  height: 40px;
   padding-left: 15px;
   margin-top: 10px;
 }
@@ -101,12 +101,13 @@ mat-option {
   .input {
     font-size: medium;
     width: 250px;
+    min-width: 250px;
     height: 35px;
   }
 
   .large-input {
     font-size: medium;
     width: 400px;
-    height: 100px;
+    height: 40px;
   }
 }

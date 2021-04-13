@@ -36,18 +36,27 @@
                             <ion-col class="col">
                                 <ion-label class="headers"> Vehicle Details:</ion-label>
                                 <input list="cars" name="vehicleModel" ngModel required #vehicleModel="ngModel"
-                                       type="text" placeholder='{{report["vehicleModel"]}}' class="input" id="model">
+                                       type="text" placeholder='Make & Model' class="input" id="model">
                                 <datalist id="cars">
+                                    <option>{{report["vehicleModel"]}}</option>
                                     <option *ngFor="let cars of vehicles"
                                             [value]="cars.Make + space + cars.Model"></option>
                                 </datalist>
-                                <input name="vehicleReg" ngModel required #vehicleReg="ngModel"
-                                       type="text" placeholder='{{report["vehicleReg"]}}' class="input" id="reg">
-                                <input name="milesOnVehicle" ngModel required #milesOnVehicle="ngModel"
-                                       type="number" placeholder='{{report["milesOnVehicle"]}}' class="input"
-                                       min="0" id="miles">
-                                <input name="vehicleLocation" ngModel required #vehicleLocation="ngModel" id="location"
-                                       type="text" placeholder='{{report["vehicleLocation"]}}' class="input">
+                                <input list="rg" name="vehicleReg" ngModel required #vehicleReg="ngModel" type="text"
+                                       placeholder='Registration' class="input" id="reg">
+                                <datalist id="rg">
+                                    <option>{{report["vehicleReg"]}}</option>
+                                </datalist>
+                                <input list="mileage" name="milesOnVehicle" ngModel required #milesOnVehicle="ngModel"
+                                       type="number" placeholder='Mileage' class="input" min="0" id="miles">
+                                <datalist id="mileage">
+                                    <option>{{report["milesOnVehicle"]}}</option>
+                                </datalist>
+                                <input list="loc" name="vehicleLocation" ngModel required #vehicleLocation="ngModel"
+                                       id="location" type="text" placeholder='Location' class="input">
+                                <datalist id="loc">
+                                    <option>{{report["vehicleLocation"]}}</option>
+                                </datalist>
                                 <mat-option *ngFor="let i of list1">
                                     <mat-checkbox [(ngModel)]="i.checked" id="warranty"
                                                   ngModel="warranty" name="warranty">{{i.title}}
@@ -62,18 +71,28 @@
                             <!-- Work Details -->
                             <ion-col>
                                 <ion-label class="headers"> Work Details:</ion-label>
-                                <textarea name="cause" ngModel required #cause="ngModel" id="cause"
-                                          type="text" placeholder='{{report["cause"]}}' class="large-input">
-                                </textarea>
-                                <textarea name="correction" ngModel required #correction="ngModel" id="correction"
-                                          type="text" placeholder='{{report["correction"]}}' class="large-input">
-                                </textarea>
-                                <textarea name="parts" ngModel required #parts="ngModel" id="parts"
-                                          type="text" placeholder='{{report["parts"]}}' class="large-input">
-                                </textarea><br>
-                                <input name="workHours" ngModel required #workHours="ngModel" id="hours" type="number"
-                                       placeholder="Work Hours" class="input" min="0" value="0"
+                                <input list="cse" name="cause" ngModel required #cause="ngModel" id="cause"
+                                       type="text" placeholder='Cause of problem...' class="large-input">
+                                <datalist id="cse">
+                                    <option>{{report["cause"]}}</option>
+                                </datalist>
+                                <input list="corr" name="correction" ngModel required #correction="ngModel"
+                                       id="correction"
+                                       type="text" placeholder='Correction of problem...' class="large-input">
+                                <datalist id="corr">
+                                    <option>{{report["correction"]}}</option>
+                                </datalist>
+                                <input list="prts" name="parts" ngModel required #parts="ngModel" id="parts"
+                                       type="text" placeholder='{{report["parts"]}}' class="large-input">
+                                <datalist id="prts">
+                                    <option>{{report["parts"]}}</option>
+                                </datalist>
+                                <input list="wrkHours" name="workHours" ngModel required #workHours="ngModel" id="hours"
+                                       type="number" placeholder="Work Hours" class="input" min="0" value="0"
                                        oninput="this.value=(parseInt(this.value)||0)">
+                                <datalist id="wrkHours">
+                                    <option>{{report["workHours"]}}</option>
+                                </datalist>
                                 <mat-option *ngFor="let i of list3">
                                     <mat-checkbox [(ngModel)]="i.checked" id="complete"
                                                   ngModel="jobComplete" name="jobComplete">{{i.title}}
