@@ -3,7 +3,7 @@
  * Horton - API version: 1.0.0
  *
  * Session
- * Handles  cookie checking, creating, generating and removing sessions.
+ * Handles cookie checking, creating, generating and removing sessions.
  */
 
 package openapi
@@ -21,8 +21,7 @@ import (
 // CheckForCookie
 // Check if user has a cookie - Used to abort requests made from the client if a user has no cookie (not logged in).
 func CheckForCookie(c *gin.Context) bool {
-	val, err := c.Cookie("session_id")
-	fmt.Println("\nCookie:", val)
+	_, err := c.Cookie("session_id")
 
 	// Return false if no cookie is found.
 	if err != nil {
@@ -54,7 +53,7 @@ func createSessionId(username string) (error, models.Session) {
 		return errors.New(err.Error()), models.Session{}
 	}
 
-	fmt.Println("\n[INFO] Printing Worker Account details:", "\nSession Token:", token, "\nWorker ID:", wa.Id,
+	fmt.Println("\n[INFO] Printing Session Record...", "\nSession Token:", token, "\nWorker ID:", wa.Id,
 		"\nExpiry time in seconds:", expiry)
 
 	// Check if user account exists - mainly for attaching session to user.
@@ -68,7 +67,7 @@ func createSessionId(username string) (error, models.Session) {
 		defer db.Close()
 		return errors.New("MYSQL Error: Error creating new session record"), models.Session{}
 	} else {
-		fmt.Println("\n[INFO] Session has been generated for", username)
+		fmt.Println("\n[INFO] Session has been generated for User")
 		defer db.Close()
 		// Returns Session object.
 		return nil, models.Session{Token: token, Expiry: expiry}
@@ -96,7 +95,6 @@ func removeSession(userId int) bool {
 
 	affectedRows, err := res.RowsAffected()
 	if err != nil {
-		// return false
 		fmt.Printf("\nError updating record for deleting session")
 		return false
 	}

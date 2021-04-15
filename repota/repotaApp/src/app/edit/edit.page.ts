@@ -101,7 +101,6 @@ export class EditPage implements OnInit {
      */
     ngOnInit() {
         this.api.getReportById(this.route.snapshot.params['jobReportId']).subscribe(data => {
-            console.log('Report Number ' + this.route.snapshot.params['jobReportId'] + ' processed');
             this.report = data;
             this.setErrorMessage('');
             if (data == null){

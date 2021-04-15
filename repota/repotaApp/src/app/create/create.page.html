@@ -12,11 +12,11 @@
 <ion-content>
     <ion-card>
         <form (submit)="createReport(reportForm)" #reportForm="ngForm">
-            <!-- error message -->
+            <!-- Error message -->
             <mat-error class="error-message">{{getErrorMessage()}}</mat-error>
             <ion-item>
                 <ion-card-content>
-                    <!-- report -->
+                    <!-- Report -->
                     <ion-card-header>
                         <p align="center">
                             <img class="logo" src="./assets/images/repotaApp_logo.png" alt="logo"/>
@@ -29,13 +29,13 @@
                         <input name="date" ngModel required #date="ngModel" type="date" class="input" id="date">
                     </p>
                     <div>
-                        <!-- Report Details -->
                         <ion-row>
+                            <!-- Vehicle Details -->
                             <ion-col>
                                 <ion-label class="headers"> Vehicle Details:</ion-label>
                                 <input list="cars" name="vehicleModel" ngModel required #vehicleModel="ngModel"
                                        type="text" placeholder="Make & Model" class="input" id="model">
-                                <!-- data list of vehicles from API -->
+                                <!-- Data list of vehicles from API -->
                                 <datalist id="cars">
                                     <option *ngFor="let cars of vehicles"
                                             [value]="cars.Make + space + cars.Model"></option>
@@ -91,13 +91,14 @@
                     </div>
                     <hr style="height:2px;border-width:0;color:gray;background-color:black">
                     <p align="center">
+                        <!-- Submit CREATE Report -->
                         <ion-button class="create-btn" size="large" type="submit" [routerLink]="['/history']"
                                     [disabled]="!reportForm.form.valid" expand="block" color="NONE" id="create-btn">
                             CREATE
                         </ion-button>
                     </p>
                 </ion-card-content>
-                <!-- end of report -->
+                <!-- End of Report -->
             </ion-item>
         </form>
     </ion-card>

@@ -47,7 +47,6 @@ export class RegisterPage implements OnInit {
 
         // Push data to API to register user.
         this.api.register(object).subscribe(() => {
-            console.log('Registered');
             this.setErrorMessage(''); // clear error message.
             form.reset();
             this.router.navigate(['/login']);

@@ -11,13 +11,13 @@
 </ion-header>
 <ion-content>
     <p align="center" class="message">
-        <!-- error message -->
+        <!-- Error message -->
         <mat-error class="error-message">{{getErrorMessage()}}</mat-error>
     </p>
     <ion-card>
         <ion-item *ngFor="let report of report">
             <ion-card-content>
-                <!-- report -->
+                <!-- Report -->
                 <ion-card-header>
                     <p align="center">
                         <img class="logo" src="./assets/images/repotaApp_logo.png" alt="logo"/></p>
@@ -26,8 +26,8 @@
                 </ion-card-header>
                 <hr style="height:2px;border-width:0;color:gray;background-color:black">
                 <div>
-                    <!-- Report Details -->
                     <ion-row>
+                        <!-- Vehicle Details -->
                         <ion-col>
                             <ion-label class="headers"> Vehicle Details:</ion-label>
                             <ion-label class="info"> Model: {{report["vehicleModel"]}}</ion-label>
@@ -65,14 +65,17 @@
                     </ion-row>
                 </div>
                 <hr style="height:2px;border-width:0;color:gray;background-color:black">
+                <!-- Go to Edit with Report ID -->
                 <ion-button class="edit" color="NONE" [routerLink]="['/edit/' + report.jobReportId]" id="edit">EDIT
                 </ion-button>
+                <!-- Go to Export with Report ID -->
                 <ion-button class="pdf" color="NONE" [routerLink]="['/export/' +  report.jobReportId]" id="pdf">PDF
                 </ion-button>
+                <!-- Delete Report by ID -->
                 <ion-button class="delete" color="NONE" (click)="deleteReport(report.jobReportId)" id="delete">DELETE
                 </ion-button>
             </ion-card-content>
-            <!-- end of report -->
+            <!-- End of Report -->
         </ion-item>
     </ion-card>
 </ion-content>

@@ -18,31 +18,31 @@
     <!-- Only show Register Form to Users who are not logged in -->
     <div class="item" align="center" *ngIf="!this.authService.loggedIn()">
         <form (submit)="register(workerForm)" #workerForm="ngForm">
+            <!-- Error Message -->
             <mat-error class="error-message">{{getErrorMessage()}}</mat-error>
-            <!-- username input -->
+            <!-- Username input -->
             <mat-form-field class="user">
                 <input matInput type="text" name="username" ngModel required minlength="8"
                        placeholder="Enter Username" #username="ngModel" id="username"/>
                 <mat-error *ngIf="username.invalid">Please enter at least 8 characters.</mat-error>
             </mat-form-field>
-            <!-- name input -->
+            <!-- Name input -->
             <mat-form-field class="name">
-                <input matInput type="text" name="name" ngModel required minlength="5"
+                <input matInput type="text" name="name" ngModel required minlength="6"
                        placeholder="Enter Full Name" #name="ngModel" id="name"/>
                 <mat-error *ngIf="name.invalid">Please enter your full name.</mat-error>
             </mat-form-field>
-            <!-- password input -->
+            <!-- Password input -->
             <mat-form-field class="password">
-                <!--Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character-->
-                <input matInput type="password" name="password"
-                       ngModel required
+                <!-- Minimum 8 characters, at least 1 uppercase & lowercase letter, 1 number and 1 special character -->
+                <input matInput type="password" name="password" ngModel required
                        pattern="^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W_]){1,})(?!.*\s).{8,}$"
                        placeholder="Enter Password" #password="ngModel" id="password"/>
                 <mat-error *ngIf="password.errors?.pattern || password.invalid">
                     Enter a <u>STRONG</u> password.
                 </mat-error>
             </mat-form-field>
-            <!-- register user -->
+            <!-- Register user -->
             <ion-button class="register-btn" size="large" type="submit" id="register-btn"
                         [disabled]="!workerForm.form.valid" expand="block" color="NONE">Register
             </ion-button>

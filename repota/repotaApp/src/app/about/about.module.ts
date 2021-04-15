@@ -3,19 +3,19 @@ import {RouterModule} from '@angular/router';
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {OptionsPage} from './options.page';
+import {AboutPage} from './about.page';
 
-import {OptionsPageRoutingModule} from './options-routing.module';
+import {AboutPageRoutingModule} from './about-routing.module';
 
 @NgModule({
     imports: [
         IonicModule,
         CommonModule,
         FormsModule,
-        RouterModule.forChild([{path: '', component: OptionsPage}]),
-        OptionsPageRoutingModule,
+        RouterModule.forChild([{path: '', component: AboutPage}]),
+        AboutPageRoutingModule,
     ],
-    declarations: [OptionsPage]
+    declarations: [AboutPage]
 })
-export class OptionsPageModule {
+export class AboutPageModule {
 }

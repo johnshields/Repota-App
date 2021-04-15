@@ -11,13 +11,13 @@
 </ion-header>
 <ion-content>
     <p align="center" class="message">
-        <!-- error message -->
+        <!-- Error message -->
         <mat-error class="error-message">{{getErrorMessage()}}</mat-error>
     </p>
     <div id="job-report">
         <ion-item *ngFor="let report of report">
             <div class="report-content">
-                <!-- report -->
+                <!-- Report -->
                 <header>
                     <p align="center">
                         <img class="logo" src="./assets/icons/favicon.ico" alt="logo"/></p>
@@ -26,8 +26,8 @@
                 </header>
                 <hr style="height:2px;border-width:0;color:gray;background-color:black">
                 <div>
-                    <!-- Report Details -->
                     <ion-row>
+                        <!-- Vehicle Details -->
                         <ion-col>
                             <ion-label class="headers"> Vehicle Details:</ion-label>
                             <ion-label class="info"> Model: {{report["vehicleModel"]}}</ion-label>
@@ -66,10 +66,11 @@
                 </div>
                 <hr style="height:2px;border-width:0;color:gray;background-color:black">
             </div>
-            <!-- end of report -->
+            <!-- End of report -->
         </ion-item>
     </div>
-    <p align="center">
+    <!-- Call onExportPDF -->
+    <p align="center" *ngIf="report != null">
         <ion-button class="pdf" color="NONE" (click)="onExportPDF()" id="export">EXPORT PDF</ion-button>
     </p>
 </ion-content>

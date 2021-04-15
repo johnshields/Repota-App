@@ -35,10 +35,9 @@ export class HistoryPage implements OnInit {
      * @title ngOnInit
      * @desc Get all user's reports from API.
      */
-    ngOnInit() {
+     ngOnInit() {
         this.api.getReports().subscribe(data => {
             this.reports = data;
-            console.log('Reports have been processed.');
             this.setErrorMessage(''); // clear error message.
             // If User has no reports.
             if (data == null) {

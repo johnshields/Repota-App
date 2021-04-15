@@ -50,7 +50,6 @@ export class LoginPage implements OnInit {
 
         // Push data to API to login user.
         this.api.login(object).subscribe(() => {
-            console.log('Logged in');
             this.setErrorMessage(''); // clear error message.
             this.ngOnInit();
             form.reset();

@@ -85,7 +85,6 @@ export class CreatePage implements OnInit {
 
         // Push data to API to create report using the model.
         this.api.createReport(object).subscribe(data => {
-            console.log('Report Created');
             this.api.createReport(data);
             this.setErrorMessage(''); // clear error message.
             this.router.navigate(['/history']);

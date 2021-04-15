@@ -14,17 +14,17 @@
 </p>
 <ion-content>
     <p align="center" class="message">
-        <!-- error message -->
+        <!-- Error message -->
         <mat-error class="error-message">{{getErrorMessage()}}</mat-error>
     </p>
     <ion-card>
         <ion-item *ngFor="let report of reports">
             <ion-card-content>
-                <!-- report -->
+                <!-- Report -->
                 <hr style="height:2px;border-width:0;color:gray;background-color:black">
                 <div>
-                    <!-- Report Details -->
                     <ion-row>
+                        <!-- Report Details -->
                         <ion-col>
                             <ion-label class="info">Report Number: {{report["jobReportId"]}}</ion-label>
                             <ion-label class="info">Date: {{report["date"]}}</ion-label>
@@ -34,17 +34,18 @@
                         <ion-label class="job-comp">Complete
                             <mat-checkbox disabled="true" [(ngModel)]="report.jobComplete"></mat-checkbox>
                         </ion-label>
+                        <!-- End of Report -->
                     </ion-row>
                 </div>
                 <hr style="height:2px;border-width:0;color:gray;background-color:black">
                 <p align="center">
+                    <!-- Go to Display with Report ID -->
                     <ion-button id="open" class="open-btn" color="NONE"
                                 [routerLink]="['/display/' + report.jobReportId]">
                         OPEN
                     </ion-button>
                 </p>
             </ion-card-content>
-            <!-- end of report -->
         </ion-item>
     </ion-card>
 </ion-content>

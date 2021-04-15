@@ -11,14 +11,14 @@
 </ion-header>
 <ion-content>
     <p align="center" class="message">
-        <!-- error message -->
+        <!-- Error message -->
         <mat-error class="error-message">{{getErrorMessage()}}</mat-error>
     </p>
     <ion-card>
         <form (submit)="editReport(reportForm)" #reportForm="ngForm">
             <ion-item *ngFor="let report of report">
                 <ion-card-content>
-                    <!-- report -->
+                    <!-- Report -->
                     <ion-card-header>
                         <p align="center">
                             <img class="logo" src="./assets/images/repotaApp_logo.png" alt="logo"/>
@@ -31,8 +31,8 @@
                         <input name="date" ngModel required #date="ngModel" type="date" class="input" id="date">
                     </p>
                     <div>
-                        <!-- Report Details -->
                         <ion-row>
+                            <!-- Vehicle Details -->
                             <ion-col class="col">
                                 <ion-label class="headers"> Vehicle Details:</ion-label>
                                 <input list="cars" name="vehicleModel" ngModel required #vehicleModel="ngModel"
@@ -83,7 +83,7 @@
                                     <option>{{report["correction"]}}</option>
                                 </datalist>
                                 <input list="prts" name="parts" ngModel required #parts="ngModel" id="parts"
-                                       type="text" placeholder='{{report["parts"]}}' class="large-input">
+                                       type="text" placeholder='Parts used in job...' class="large-input">
                                 <datalist id="prts">
                                     <option>{{report["parts"]}}</option>
                                 </datalist>
@@ -103,12 +103,13 @@
                     </div>
                     <hr style="height:2px;border-width:0;color:gray;background-color:black">
                     <p align="center">
+                        <!-- Submit EDIT of Report -->
                         <ion-button class="edit-btn" size="large" type="submit" [routerLink]="['/history']"
                                     [disabled]="!reportForm.form.valid" expand="block" color="NONE" id="edit-btn">EDIT
                         </ion-button>
                     </p>
                 </ion-card-content>
-                <!-- end of report -->
+                <!-- End of Report -->
             </ion-item>
         </form>
     </ion-card>

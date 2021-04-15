@@ -41,7 +41,7 @@ func GetCarApiData(c *gin.Context) {
 	// Back4App URL with data of a 1000 Vehicle Makes and Models.
 	url := "https://parseapi.back4app.com/classes/Car_Model_List?limit=1000&keys=Make,Model"
 
-	// Set up request with URL.
+	// Set up GET request with URL.
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		log.Println(err)

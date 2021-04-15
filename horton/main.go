@@ -2,7 +2,7 @@
  * John Shields
  * Horton - API version: 1.0.0
  *
- * Main function to start server by calling routers.
+ * Main function to start server by running routers.
  */
 
 package main
@@ -19,7 +19,7 @@ func main() {
 	router := sw.NewRouter()
 	fmt.Println("[INFO] Horton is starting...")
 
-	// start up router
+	// Start up router.
 	err := router.Run()
 	if err != nil {
 		log.Fatal(err)

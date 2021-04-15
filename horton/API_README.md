@@ -6,6 +6,8 @@ alt="Horton Logo" width="200" height="200"/>
 
 Horton is the back-end to [www.repota-service.com](https://www.repota-service.com)
 
+To see how Horton was designed go [here](https://johnshields.github.io/horton.api.doc).
+
 For more information on how Horton works, go [here](https://github.com/johnshields/Repota-App/blob/main/horton/go/README.md).
 
 ### Run Horton

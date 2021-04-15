@@ -54,7 +54,6 @@ export class AppComponent {
         const delay = ms => new Promise(res => setTimeout(res, ms));
         if (this.authService.loggedIn()) {
             this.api.logout().subscribe(async () => {
-                console.log('Logged out');
                 this.setErrorMessage('');
                 await delay(1000); // Wait for cookie to expire.
                 await this.router.navigate(['']);
