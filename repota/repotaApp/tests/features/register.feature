@@ -1,6 +1,6 @@
-Feature: User Registration
-  In order to use Repota
-  As a User
+Feature: Registration
+  As a unregistered User
+  So that I can use Repota
   I need to create an Account
 
   Scenario Outline: Allow a new User to be registered

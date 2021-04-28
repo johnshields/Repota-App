@@ -23,7 +23,6 @@ export class EditPage implements OnInit {
     checkBoxValue3: number;
     report: any;
     vehicles: any = [];
-    space = ' ';
     private errorMessage;
 
     constructor(private api: JobReportService, private router: Router, private route: ActivatedRoute) {
@@ -84,22 +83,40 @@ export class EditPage implements OnInit {
 
         // Push data to API to edit/update report using the model
         this.api.updateReport(object, this.report[0].jobReportId).subscribe(() => {
-            console.log('Report Updated');
             this.setErrorMessage(''); // clear error message.
             this.router.navigate(['/history']);
         }, error => {
             // Get error from response.
             let errorMessage = JSON.stringify(error.error.messages);
-            this.setErrorMessage(errorMessage);
+            this.setErrorMessage(JSON.parse(errorMessage));
             console.log(error);
         });
     }
 
     /**
-     * @title ngOnInit
-     * @desc Get requested report by its ID from API. Get vehicle data from API & lists for form check boxes.
+     * @title loadCarData
+     * @desc Get vehicle data from API.
      */
-    ngOnInit() {
+    loadCarData() {
+        // Get vehicle data from API.
+        this.api.getCarApiData().subscribe(data => {
+            // Strip out the keys from data.
+            for (let key in data) {
+                this.vehicles = data[key];
+            }
+            this.setErrorMessage('');
+        }, error => {
+            let errorMessage = JSON.stringify(error.error.messages);
+            this.setErrorMessage(JSON.parse(errorMessage));
+            console.log(error);
+        });
+    }
+
+    /**
+     * @title loadReportById
+     * @desc Get requested report by its ID from API.
+     */
+    loadReportById() {
         this.api.getReportById(this.route.snapshot.params['jobReportId']).subscribe(data => {
             this.report = data;
             this.setErrorMessage('');
@@ -108,23 +125,18 @@ export class EditPage implements OnInit {
             }
         }, error => {
             let errorMessage = JSON.stringify(error.error.messages);
-            this.setErrorMessage(errorMessage);
+            this.setErrorMessage(JSON.parse(errorMessage));
             console.log(error);
         });
+    }
 
-        // Get vehicle data from API.
-        this.api.getCarApiData().subscribe(data => {
-            console.log('Vehicles have been processed.');
-            // Extract JSON data.
-            for (let key in data) {
-                this.vehicles = data[key];
-            }
-            this.setErrorMessage('');
-        }, error => {
-            let errorMessage = JSON.stringify(error.error.messages);
-            this.setErrorMessage(errorMessage);
-            console.log(error);
-        });
+    /**
+     * @title ngOnInit
+     * @desc Call loadReportById & loadCarData and lists for form check boxes.
+     */
+    ngOnInit() {
+        this.loadReportById()
+        this.loadCarData();
 
         // Lists for check box values
         this.list1 = [{

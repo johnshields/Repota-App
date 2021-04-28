@@ -47,7 +47,7 @@ export class DisplayPage implements OnInit {
         }, error => {
             // Get error from response.
             let errorMessage = JSON.stringify(error.error.messages);
-            this.setErrorMessage(errorMessage);
+            this.setErrorMessage(JSON.parse(errorMessage));
             console.log(error);
         });
     }
@@ -60,12 +60,11 @@ export class DisplayPage implements OnInit {
         // Pop up box to make sure the User wants to delete the Report.
         if (confirm("Are you sure to delete Report Number " + id + "?")) {
             this.api.deleteReport(id).subscribe(() => {
-                console.log('Report Deleted');
                 this.setErrorMessage('');
                 this.router.navigate(['/history']);
             }, error => {
                 let errorMessage = JSON.stringify(error.error.messages);
-                this.setErrorMessage(errorMessage);
+                this.setErrorMessage(JSON.parse(errorMessage));
                 console.log(error);
             });
         }

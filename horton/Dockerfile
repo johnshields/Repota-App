@@ -12,7 +12,7 @@ WORKDIR /usr/src/horton
 # copy go modules dependency requirements file
 COPY go.mod .
 
-# copy go modules - hashes the file
+# copy go modules
 COPY go.sum .
 
 # download dependencies

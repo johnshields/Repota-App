@@ -1,0 +1,71 @@
+\chapter{Methodology}
+\section{Project Scope \& Goal}
+The project scope had to have a system with several functioning parts that worked with as many new technologies as possible. Original ideas for this project were initially the uniformity of Desktop Application Development and Game Development. These possible routes for the project were researched with the focus on User Interface and experience. One of these ideas was a desktop application for people to send Curriculum Vitaes (CV) to companies that their CV related to. On the app, the user would upload their CV. That CV would be then sent through a system that would read it, pick out the keywords, and send it to companies looking for future employees in that field. At first, this was a great concept but constructing an app for this service was an extensive scope as it would have to either have a vast database or a third party API (Application Programming Interface) to find all these companies from different sources. 
+\\\\ Another initial idea was to develop a fully-fledged open-world Game in the 'Unreal Engine' with C++. This idea was drastically different from the others due to it being from a creative perspective and personal interest. Old noir films and parallel universes inspired the game. Making a mix of these two genres was quite exciting and meant that this open-world would have to be huge. This idea was a favourite and unfortunately had to be forfeited as it was overly ambitious. Perhaps, this project will be pursued in the future with a time allocation to permit it. 
+\\\\ The chosen idea was to be a service report application for automobile technicians to fill out service reports for auto dealerships and rental companies. This idea was inspired by my brothers line of work. The company he is employed with specializes in the supply and service of new and used Mobile Plant and Equipment. This app was originally focused on being a desktop app, but it was believed that this app would be very suitable to work on a tablet or a mobile phone. So, therefore, the Angular and Ionic framework was chosen for the front-end. The app needed to be trusted with work-related data. Therefore, the desktop app focus was not ideal as some app's data may needed to be temporally held on the computer running it. Thus making the data less secure than it would be on a back-end database server. \cite{ref1}
+\\\\ This app would need a quick and robust back-end and Google's relatively new language Golang (Go) was chosen. This language is relatively new compared to other languages and had not been covered in the course's modules. Go is based of C and is proven to be up to the speed of other languages such as Java and C++. Go being an open-source language made finding suitable packages and web frameworks a challenge. There are several web frameworks for Go out there, such as Gorilla, Martini and Gin Gonic. After researching and testing Gin proved to be the best web framework to use as it proved to have the necessary requirements. After the research and testing was done Go seemed to be the a very good choice for the back-end.
+\\\\ A reliable and strong database was essential as this project purpose was to be used in a working environment meaning it would have to store a large quantity of data that needed to be accessed quickly and be able to add and update the data freely. MySQL was chosen for the database as it is proven to have these mentioned qualities. 
+\\\\ The entire application would need to be hosted through a cloud platform. AWS (Amazon Web Services) provides a first year free tier. AWS seemed to be a great platform for hosting the application as it has a wide range of services. The ideal setup for the hosting would be S3 Bucket for the front-end, Elastic Beanstalk for the back-end and an EC2 Ubuntu Virtual Machine for the database.
+
+\section{Development Methodology}
+The planned approach for the development method was the Agile methodology, Personal Scrum, which consisted of plans and implementations that allowed for flexibility and adaption. Waterfall was considered as it would be ideal to have everything planned and documented before implementation. However, with new frameworks and technologies, Waterfall was not suitable as some problems could arise with these unfamiliar frameworks and technologies. With the use of Personal Scrum, the project was separated into sprints to focus on robustness more than anything else. This section's remainder discusses why and how this approach benefited the development and shows how a Waterfall approach was not suitable. Also, Figure 2.1 shows how Waterfall and Agile structure projects.
+
+\subsection{Waterfall}
+Waterfall is based on Civil Engineering and how software packages for spacecraft mission planning, commanding, and post-flight analysis were developed. \cite{ref2} It requires almost a complete prediction of the project with a "Big Design Up Front" from planning and documenting the development process. Before coding, the project manager makes a plan and then writes detailed documentation of all plan phases. These phases happen in a strict order.
+
+\subsubsection{The Five Phases of Waterfall Life-cycle}
+\begin{itemize}
+    \item Requirements Analysis and Specification
+    \item Architectural Design
+    \item Implementation and Integration
+    \item Verification/Testing
+    \item Operation and Maintenance
+\end{itemize}\cite{ref3}
+
+With Waterfall, each stage is fully completed before the next one is attended. This project has a setup of a Front-end and Back-end, meaning if Waterfall were used, it would have required to have most likely the back-end built before the front-end was ever touched. This process is not ideal as some cross-origin issues (CORS) can happen between both ends and result in refactoring the back-end in order for it to be able to connect to the front.
+
+\subsection{Agile}
+Agile project management and software development is an iterative approach that enables teams to be flexible and adaptable. This method allows for versatility and, depending on the project, allows for delivering a valuable product to consumers faster and with less hassle than Waterfall. Agile employs the scrum framework, which involves sprints which are fixed-length work iterations. Each sprint has four ceremonies that provide structure.
+
+\subsubsection{The Four Ceremonies of Scrum}
+\begin{itemize}
+    \item Sprint Planning
+    \item Sprint Review
+    \item Sprint Retrospective
+    \item Daily Scrum
+\end{itemize}\cite{ref3}
+
+\subsubsection{Personal Scrum}
+Personal Scrum is an Agile methodology that employs scrum practices for one-person projects. Observation, adaptation, incremental elaboration, prioritizing and sizing work, and time-boxing are all used in this approach to improve personal productivity.
+"While intended for big, collaborative projects, there were a lot of elements of Scrum that could be adapted pretty well to individual productivity." \cite{ref4}
+ 
+Having this approach allowed to have 1-2 days a week to block out other college work and have them dedicated to the project. The first day mainly consisted of a review the week previous' work, plans and setups for implementations to be done the next day. On the second, if the implementations were either finished or in part, the project's supervisor was informed of the progress, any problems that occurred, and what was next to be done. These days were usually allocated to the end of the week, and during college time off, more days were designated to increase productivity time.
+
+\begin{figure}[H]
+    \caption{Agile VS Waterfall}
+    \label{image:agileVSwaterfall}
+    \centering
+    \includegraphics[width=0.72\textwidth]{images/misc/agile-vs-waterfall.png}
+\end{figure}
+
+\subsection{Project \& Time Management}
+In order to have a structured schedule for the project, this required a tracking software with a Scrum Board. Softwares such as Jira and YouTrack were considered, but they seemed a bit over the top for a one-person project. GitHub's repositories have a section titled 'Projects' (Figure 2.2). Here a work board for the repository can be created to organize the work into cards. GitHub issues can be referenced to allow a card to keep track of a particular issue. GitHub's Projects was very convenient, especially with it being in the project's repository. Therefore it was chosen. GitHub Issues (Figure 2.3) are a way of tracking enhancements and any problems encountered for projects and are also located in the project's repository.
+
+\begin{figure}[!ht]
+    \caption{GitHub Projects}
+    \label{image:gitProjects}
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/misc/git-projects.png}
+\end{figure}
+
+\begin{figure}[!ht]
+    \caption{GitHub Issues}
+    \label{image:gitIssues}
+    \centering
+    \includegraphics[width=0.8
+    \textwidth]{images/misc/git-issues.png}
+\end{figure}
+
+\subsection{Verification \& Testing}
+In order to get the project set up, a prototype MySQL database was structured with just an automobiles table. Then a basic Go back-end with the web framework Gorilla Mux was set up to have access to that database. Next was a simple Angular and Ionic front-end that connected to the back-end to present that table on a history page of reports. The first issue to be dealt with was CORS. Data from the back-end was unable to cross over to the front-end. In order to resolved this issue the web framework was changed to Gin Gonic to allow a CORS function to be implemented into the back-end to allow the cross-over to resolve this issue. Once that was all working, an AWS E2C Ubuntu Virtual Machine (VM) was initiated to host the database and the back-end. With the server now in the project, the front-end was altered to connect to the back-end running on the VM. This initial setup fined tuned the environment which, allowed the real development to begin. 
+

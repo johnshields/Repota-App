@@ -22,7 +22,7 @@ import (
 )
 
 // Function to test CreateReport by sending request to /jobReports endpoint.
-// Tests the functions CreateReport, CheckForCookie & insertJobReport.
+// Tests the functions CreateReport, CheckForCookie, InsertJobReport & isValidAccount.
 // Passes if the Report was successfully created from the user input.
 func TestCreateReport(t *testing.T) {
 	gin.SetMode(gin.TestMode)
@@ -63,7 +63,7 @@ func TestCreateReport(t *testing.T) {
 		client := &http.Client{}
 		res, err := client.Do(req)
 		if err != nil {
-			log.Println(err) // Error could happen if theres no internet connection.
+			log.Println(err)
 		}
 		defer res.Body.Close()
 
@@ -90,7 +90,8 @@ func TestGetReportById(t *testing.T) {
 
 	t.Run("getReportById", func(t *testing.T) {
 		// Set up /jobReports/ID request.
-		req, err := http.NewRequest("GET", "http://localhost:8080/api/v1/jobReports/656", nil)
+		url := "http://localhost:8080/api/v1/jobReports/656"
+		req, err := http.NewRequest("GET", url, nil)
 		if err != nil {
 			log.Println(err)
 		}
@@ -168,8 +169,6 @@ func TestUpdateReport(t *testing.T) {
 			MilesOnVehicle:  1337,
 			Warranty:        1,
 			Breakdown:       0,
-			CustomerName:    "Joe Kendal",
-			Complaint:       "Door handle broken.",
 			Cause:           "Door lock out of place.",
 			Correction:      "Door lock has been fixed.",
 			Parts:           "NONE",

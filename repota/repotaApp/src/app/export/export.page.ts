@@ -57,7 +57,7 @@ export class ExportPage implements OnInit {
         }, error => {
             // Get error from response.
             let errorMessage = JSON.stringify(error.error.messages);
-            this.setErrorMessage(errorMessage);
+            this.setErrorMessage(JSON.parse(errorMessage));
             console.log(error);
         });
 
@@ -82,12 +82,15 @@ export class ExportPage implements OnInit {
      */
     onExportPDF() {
         const content = document.getElementById('job-report');
+        // Set the PDF requirements.
         const options = {background: 'white', width: this.pdfWidth, height: this.pdfHeight, quality: 1};
+        // Convert the dom to an image.
         domtoimage.toPng(content, options).then(
             (dataUrl) => {
+                // Add the image to a PDF.
                 const doc = new jspdf.jsPDF('portrait', 'mm', 'a4', true);
                 doc.addImage(dataUrl, 'jpeg', 0, 0,  this.imgWidth, this.imgHeight);
-                doc.save('job_report.pdf');
+                doc.save('service_report.pdf');
             });
     }
 }

@@ -36,7 +36,7 @@ Then(/^user clicks the login button$/, function () {
 });
 
 // Mock User has been logged in.
-Then('user should be successfully logged in to Repota', function () {
+Then('user should be successfully logged in', function () {
     console.log('User successfully Logged in');
     return driver.close();
 });

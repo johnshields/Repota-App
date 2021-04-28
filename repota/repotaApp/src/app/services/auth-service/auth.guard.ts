@@ -22,11 +22,11 @@ export class AuthGuard implements CanActivate {
      * @desc Works with auth.service.ts to check if user is logged in.
      */
     canActivate(): boolean {
-        // if user is logged in return true
+        // If user is logged in return true.
         if (this.authService.loggedIn()) {
             return true;
         }
-        // if user is not logged in return false and navigate to account page.
+        // If user is not logged in return false and navigate to account page.
         else {
             this.router.navigate(['']);
             return false;

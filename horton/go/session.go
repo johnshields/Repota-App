@@ -19,7 +19,8 @@ import (
 )
 
 // CheckForCookie
-// Check if user has a cookie - Used to abort requests made from the client if a user has no cookie (not logged in).
+// Check if user has a cookie.
+// Used to abort requests made from the client if a user has no cookie (not logged in).
 func CheckForCookie(c *gin.Context) bool {
 	_, err := c.Cookie("session_id")
 

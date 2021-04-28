@@ -47,7 +47,7 @@ func TestRegister(t *testing.T) {
 		url := "http://localhost:8080/api/v1/register"
 		req, err := http.NewRequest("POST", url, payloadBuf)
 		if err != nil {
-			log.Println(err) // Error could happen if theres no internet connection.
+			log.Println(err)
 		}
 		// Do POST request (Register User).
 		client := &http.Client{}

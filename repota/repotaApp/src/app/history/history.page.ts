@@ -46,7 +46,7 @@ export class HistoryPage implements OnInit {
         }, error => {
             // Get error from response.
             let errorMessage = JSON.stringify(error.error.messages);
-            this.setErrorMessage(errorMessage);
+            this.setErrorMessage(JSON.parse(errorMessage));
             console.log(error);
         });
     }

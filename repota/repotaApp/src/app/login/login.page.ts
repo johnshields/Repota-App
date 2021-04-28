@@ -42,7 +42,6 @@ export class LoginPage implements OnInit {
      * @desc Uses the InlineObject Model to take in the input and login a user.
      */
     login(form: NgForm) {
-        // User (worker) account model.
         const object: InlineObject = {
             username: form.value.username,
             password: form.value.password
@@ -57,7 +56,7 @@ export class LoginPage implements OnInit {
         }, error => {
             // Get error from response.
             let errorMessage = JSON.stringify(error.error.messages);
-            this.setErrorMessage(errorMessage);
+            this.setErrorMessage(JSON.parse(errorMessage));
             console.log(error);
         });
     }

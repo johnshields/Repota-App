@@ -38,7 +38,7 @@
                                 <!-- Data list of vehicles from API -->
                                 <datalist id="cars">
                                     <option *ngFor="let cars of vehicles"
-                                            [value]="cars.Make + space + cars.Model"></option>
+                                            [value]="cars.Make + ' ' + cars.Model"></option>
                                 </datalist>
                                 <input name="vehicleReg" ngModel required #vehicleReg="ngModel"
                                        type="text" placeholder="Registration" class="input" id="reg">

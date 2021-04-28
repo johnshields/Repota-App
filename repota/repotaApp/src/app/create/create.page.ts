@@ -22,7 +22,6 @@ export class CreatePage implements OnInit {
     checkBoxValue2: number;
     checkBoxValue3: number;
     vehicles: any = [];
-    space = ' ';
     private errorMessage;
 
     constructor(private api: JobReportService, private router: Router) {
@@ -45,7 +44,7 @@ export class CreatePage implements OnInit {
      * @desc Uses the JobReport Model to take in the input and create a report.
      */
     createReport(form: NgForm) {
-        // make the true/false values of check boxes to 1s and 0s.
+        // Make the true/false values of check boxes to 1s and 0s.
         // warranty
         if (form.value.warranty === true) {
             this.checkBoxValue1 = 1;
@@ -91,7 +90,7 @@ export class CreatePage implements OnInit {
         }, error => {
             // Get error from response.
             let errorMessage = JSON.stringify(error.error.messages);
-            this.setErrorMessage(errorMessage);
+            this.setErrorMessage(JSON.parse(errorMessage));
             console.log(error);
         });
     }
@@ -103,7 +102,7 @@ export class CreatePage implements OnInit {
     ngOnInit() {
         // Get vehicle data from API.
         this.api.getCarApiData().subscribe(data => {
-            console.log('Vehicles have been processed.');
+            // Strip out the keys from data.
             for (let key in data) {
                 this.vehicles = data[key];
             }

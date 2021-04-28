@@ -32,7 +32,7 @@ import (
 func CreateReport(c *gin.Context) {
 	var report models.JobReport
 
-	// Blind entered JobReport data from user to object, else throw error.
+	// Bind entered JobReport data from user to object, else throw error.
 	if err := c.BindJSON(&report); err != nil {
 		fmt.Println(err.Error()) // Failed to Bind data.
 		c.JSON(500, nil)
@@ -244,7 +244,7 @@ func UpdateReport(c *gin.Context) {
 		return
 	}
 
-	// Blind JobReport data to object, else throw error.
+	// Bind JobReport data to object, else throw error.
 	if err := c.BindJSON(&report); err != nil {
 		fmt.Println(err.Error())
 	}
@@ -253,9 +253,9 @@ func UpdateReport(c *gin.Context) {
 	update, err := db.Exec("UPDATE jobreports jr SET jr.date_stamp = ?, jr.vehicle_model = ?, "+
 		"jr.vehicle_reg = ?, jr.vehicle_location = ?, jr.miles_on_vehicle = ?, jr.warranty = ?, "+
 		"jr.breakdown = ?, jr.cause = ?, jr.correction = ?, jr.parts = ?, jr.work_hours = ?, "+
-		"jr.job_report_complete = ? WHERE jr.job_report_id = ?", report.Date, report.VehicleModel, report.VehicleReg, report.VehicleLocation,
-		report.MilesOnVehicle, report.Warranty, report.Breakdown, report.Cause, report.Correction, report.Parts,
-		report.WorkHours, report.JobComplete, reportId)
+		"jr.job_report_complete = ? WHERE jr.job_report_id = ?", report.Date, report.VehicleModel, report.VehicleReg,
+		report.VehicleLocation, report.MilesOnVehicle, report.Warranty, report.Breakdown, report.Cause, report.Correction,
+		report.Parts, report.WorkHours, report.JobComplete, reportId)
 
 	if err != nil {
 		log.Println("\nMySQL Error: Error Updating Report:\n", err)
@@ -287,20 +287,17 @@ func DeleteReport(c *gin.Context) {
 
 	// Create query to delete the report with its requested ID.
 	res, err := db.Exec("DELETE FROM jobreports WHERE job_report_id=?", reportId)
-
 	if err != nil {
 		log.Printf("Report failed to delete.")
 		c.JSON(500, nil)
 	}
 
 	affectedRows, err := res.RowsAffected()
-
 	if err != nil {
 		log.Printf("Report failed to delete.")
 		c.JSON(500, nil)
 	}
 
 	fmt.Printf("\nThe statement affected %d rows\n", affectedRows)
-
 	c.JSON(204, nil) // Report has been deleted successfully.
 }

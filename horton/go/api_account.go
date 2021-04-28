@@ -87,7 +87,7 @@ func Login(c *gin.Context) {
 func Register(c *gin.Context) {
 	var user models.InlineObject
 
-	// Blind user's data to object, else throw error.
+	// Bind user's data to object, else throw error.
 	if err := c.BindJSON(&user); err != nil {
 		log.Println(err.Error())
 		c.JSON(500, nil)
@@ -103,14 +103,14 @@ func Register(c *gin.Context) {
 		err, session := createSessionId(username)
 
 		if err != nil {
-			log.Print(err)
+			log.Print( "Failed to Register User.", err)
 			c.JSON(500, nil)
 		} else {
 			c.JSON(200, session) // Session has been created for user.
 		}
 	} else {
-		log.Println("\nUnable to complete request", "\n Failed to Register User.")
-		c.JSON(500, nil)
+		// Issue with user's details - username or name taken.
+		log.Println("\nUnable to complete request")
 	}
 }
 
@@ -127,8 +127,8 @@ func RegisterNewUser(c *gin.Context, username, name, password string) error {
 		log.Println("\nPassword is null")
 		return errors.New("password is null")
 	} else if isValidAccount(username) {
-		log.Println("\nUsername taken")
 		c.JSON(409, models.Error{Code: 409, Messages: "Username is already taken"})
+		log.Println("\nUsername taken")
 		return errors.New("username is already taken")
 	}
 
@@ -175,7 +175,7 @@ func isValidAccount(username string) bool {
 	selDB, err := db.Query("SELECT * FROM workers WHERE username=?", username)
 
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal(err) // error with Query.
 		return false
 	}
 

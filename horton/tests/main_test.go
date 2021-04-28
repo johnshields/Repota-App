@@ -30,9 +30,8 @@ func Test_main(t *testing.T) {
 		// Do GET request (See if Horton is up and running).
 		client := &http.Client{}
 		res, err := client.Do(req)
-
 		if err != nil {
-			log.Println(err) // Error could happen if theres no internet connection.
+			log.Println(err)
 		}
 		defer res.Body.Close()
 

@@ -1,0 +1,83 @@
+\chapter{Appendices}
+
+\section{GitHub Repository \& Web Application URLs}
+\begin{itemize}
+    \item GitHub Repository: 
+    \url{https://github.com/johnshields/Repota-App}
+    \item Repota Web Application: 
+    \url{https://www.repota-service.com}
+\end{itemize}
+
+\section{How to Install and Run}
+\begin{itemize}
+\item All changes (besides MySQL details, the database, and 3rd Party API config files) have been made for anyone to run locally.
+\end{itemize}
+
+\begin{itemize}
+  \item Requirements
+    \begin{itemize}
+    \item Git = \url{https://git-scm.com/downloads}
+    \item NPM = \url{https://www.npmjs.com/get-npm}
+    \item Golang - 1.15.3 = \url{https://golang.org/dl/}
+    \item MySQL = \url{https://dev.mysql.com/downloads/shell/}
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Clone the GitHub Repository}
+\begin{itemize}
+  \item Open a directory of your choice in Command-Line and enter:
+    \begin{itemize}
+    \item git clone https://github.com/johnshields/Repota-App.git
+    \end{itemize}
+\end{itemize}
+
+\newpage
+\subsubsection{Repota Front-end}
+\begin{itemize}
+  \item Open the repository directory in Command-Line and enter:
+    \begin{itemize}
+    \item cd repota/repotaApp
+    \item npm install @angular/cli
+    \item npm install
+    \item npm run build
+    \item ionic serve
+    \end{itemize}
+\begin{itemize}
+\item Running on Localhost: \url{http://localhost:8100}
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Horton Back-end}
+\begin{itemize}
+  \item Ensure the following have been updated:
+    \begin{itemize}
+    \item Create the Database in a MySQL Console.
+        \begin{itemize}
+            \item Location - \url{/database/REPOTA_DB.sql}
+        \end{itemize}
+    \item Edit the config.ini file with your MySQL details.
+        \begin{itemize}
+            \item Location - \url{/horton/go/config/config.ini}
+        \end{itemize}
+    \item Acquire an App ID and API key from Back4App to use their service. (First 10k requests are free).
+        \begin{itemize}
+            \item URL - \url{https://www.back4app.com/}
+        \end{itemize}
+    \item Add in the App ID and API key into the .txt config files.
+        \begin{itemize}
+            \item Location - \url{/horton/go/config}
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+  \item Open the repository directory in Command-Line and enter:
+    \begin{itemize}
+    \item cd horton
+    \item go mod download
+    \item go build \&\& go run main.go
+    \end{itemize}
+\begin{itemize}
+\item Running on Localhost: \url{http://localhost:8080/api/v1}
+\end{itemize}
+\end{itemize}

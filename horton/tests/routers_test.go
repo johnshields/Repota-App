@@ -34,7 +34,7 @@ func TestIndex(t *testing.T) {
 		client := &http.Client{}
 		res, err := client.Do(req)
 		if err != nil {
-			log.Println(err) // Error could happen if theres no internet connection.
+			log.Println(err)
 		}
 		defer res.Body.Close()
 

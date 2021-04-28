@@ -1,6 +1,7 @@
 Feature: Edit a Report
   As a Worker
-  I have to edit a Report as I forgot some minor details
+  So that I can edit a Report
+  I want to change some minor details
 
   Scenario Outline: Allow Worker to edit a Report
     Given worker is on the history page
@@ -22,4 +23,4 @@ Feature: Edit a Report
 
     Examples:
       | date       | model         | reg      | miles | location         | cause           | correction      | parts            | hours |
-      | 02-04-2021 | Ford Focus ST | 15-G-643 | 23496 | Gort, Co. Galway | Worn out tires. | Replaced tires. | 4 Goodyear Tires | 1     |
+      | 02-04-2021 | Ford Focus ST | 15-G-643 | 23496 | Gort, Co. Galway | Worn out tyres. | Replaced tyres. | 4 Goodyear Tyres | 1     |

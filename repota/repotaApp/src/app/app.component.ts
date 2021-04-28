@@ -60,7 +60,7 @@ export class AppComponent {
             }, error => {
                 // Get error message from response.
                 let errorMessage = JSON.stringify(error.error.messages);
-                this.setErrorMessage(errorMessage);
+                this.setErrorMessage(JSON.parse(errorMessage));
                 console.log(error);
             });
         }

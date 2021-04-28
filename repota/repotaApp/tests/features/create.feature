@@ -1,7 +1,7 @@
 Feature: Create a Report
-  I have a vehicle in for a service
   As a Worker
-  I need to fill out a Report
+  So that I can have a report on a vehicle I serviced
+  I want to add the report to the Repota database for safe keeping
 
   Scenario Outline: Allow Worker to create a Report
     Given worker is on the create page
@@ -23,4 +23,4 @@ Feature: Create a Report
 
     Examples:
       | date       | model      | reg      | miles | location     | customerName | complaint                   | cause           | correction      | parts            | hours |
-      | 01-04-2021 | Ford Focus | 15-G-643 | 23476 | Gort, Galway | Tony Keely   | Tires have lost their grip. | Worn out tires. | Replaced tires. | 4 Goodyear Tires | 1     |
+      | 01-04-2021 | Ford Focus | 15-G-643 | 23476 | Gort, Galway | Tony Keely   | Tyres have lost their grip. | Worn out tyres. | Replaced tyres. | 4 Goodyear Tyres | 1     |

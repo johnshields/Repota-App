@@ -7,8 +7,6 @@ alt="GMIT Logo" width="500" height="200"/>
 
 ##### John Shields - G00348436
 ***
-The Repository for my `Final Year Project`. <br>
-The Project is an `Application` titled `Repota`.
 
 # Project Details
 | **Project Title** | Repota |
@@ -22,7 +20,6 @@ The Project is an `Application` titled `Repota`.
 
 ***
 
-
 <p align="center"><img src="https://i.ibb.co/wBQGdvT/repota-App-logo.png"
 alt="Repota Logo" width="200" height="200"/>
 </p>
@@ -30,33 +27,29 @@ alt="Repota Logo" width="200" height="200"/>
 # Repota
 Repota is designed for automobile technicians to fill out service reports for auto dealerships and rental companies.
 
+##### View and use Repota @ <u>[www.repota-service.com](https://www.repota-service.com/)</u>
+##### View the Application <u>[Guide](https://github.com/johnshields/Repota-App/wiki/Repota-Guide)</u>
+#### How to Run Locally -> <u>[click here](https://github.com/johnshields/AP-MD-FYP/wiki)</u>
+#### Check out the OpenAPI's <u>[documentation](https://johnshields.github.io/horton.api.doc/)</u>
 ***
 
 # Repository Contents
-
-#### [Dissertation](https://github.com/johnshields/Repota-App/tree/main/dissertation)
-The Project's `Dissertation`.
-
-#### [Repota](https://github.com/johnshields/Repota-App/tree/main/repota/repotaApp/src/app)
-The Repota `Application`.
-
-#### [Horton](https://github.com/johnshields/Repota-App/tree/main/horton)
-The Application's `Backend Server`.
+#### [API Specification](https://github.com/johnshields/Repota-App/tree/main/database)
+OpenAPI Specification of the Application.
 
 #### [Database](https://github.com/johnshields/Repota-App/tree/main/database)
-The script for the Application's `Database`.
+The script for the Application's Database.
+
+#### [Dissertation](https://github.com/johnshields/Repota-App/tree/main/dissertation)
+The Project's Dissertation.
+
+#### [Repota](https://github.com/johnshields/Repota-App/tree/main/repota/repotaApp/src/app)
+The source code of the Front-end.
+
+#### [Horton](https://github.com/johnshields/Repota-App/tree/main/horton)
+The source code of the Back-end.
 
 #### [Workings](https://github.com/johnshields/Repota-App/tree/main/workings)
 All workings for the project.
-
-***
-
-# View the App
-
-#### View and use Repota @ [www.repota-service.com](https://www.repota-service.com/)
-
-***
-#### View the Project's Wiki [HERE](https://github.com/johnshields/AP-MD-FYP/wiki) for more detail on the project.
-***
 
 ###### END OF README

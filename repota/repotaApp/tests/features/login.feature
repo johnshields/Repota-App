@@ -1,15 +1,18 @@
-Feature: Login User
-  In order to login to Repota
+Feature: Login
   As a User
-  I need to enter my valid Username and Password
+  So that I can access my reports
+  I need to login with my valid Username and Password
 
-  Scenario Outline: Log a User into Repota
+  Scenario Outline: Login User
     Given user navigates to the Login Page
     When user enters username "<username>"
     When user enters password "<password>"
     Then user clicks the login button
-    Then user should be successfully logged in to Repota
+    Then user should be successfully logged in
 
     Examples:
       | username      | password   |
       | bob_mock_test | @Testing14 |
+
+
+
