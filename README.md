@@ -26,7 +26,7 @@ alt="Repota Logo" width="200" height="200"/>
 
 # Repota
 Repota is designed for automobile technicians to fill out service reports for auto dealerships and rental companies.
-
+***
 ##### View and use Repota @ <u>[www.repota-service.com](https://www.repota-service.com/)</u>
 ##### View the Application <u>[Guide](https://github.com/johnshields/Repota-App/wiki/Repota-Guide)</u>
 #### How to Run Locally -> <u>[click here](https://github.com/johnshields/AP-MD-FYP/wiki)</u>
@@ -34,8 +34,14 @@ Repota is designed for automobile technicians to fill out service reports for au
 ***
 
 # Repository Contents
+#### [Repota](https://github.com/johnshields/Repota-App/tree/main/repota/repotaApp/src/app)
+The source code of the Front-end.
+
+#### [Horton](https://github.com/johnshields/Repota-App/tree/main/horton)
+The source code of the Back-end.
+
 #### [API Specification](https://github.com/johnshields/Repota-App/tree/main/database)
-OpenAPI Specification of the Application.
+OpenAPI Specification of the Front-end and Back-end APIs.
 
 #### [Database](https://github.com/johnshields/Repota-App/tree/main/database)
 The script for the Application's Database.
@@ -43,13 +49,8 @@ The script for the Application's Database.
 #### [Dissertation](https://github.com/johnshields/Repota-App/tree/main/dissertation)
 The Project's Dissertation.
 
-#### [Repota](https://github.com/johnshields/Repota-App/tree/main/repota/repotaApp/src/app)
-The source code of the Front-end.
-
-#### [Horton](https://github.com/johnshields/Repota-App/tree/main/horton)
-The source code of the Back-end.
-
 #### [Workings](https://github.com/johnshields/Repota-App/tree/main/workings)
 All workings for the project.
 
+***
 ###### END OF README

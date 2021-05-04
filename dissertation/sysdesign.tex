@@ -1,9 +1,9 @@
 \chapter{System Design}
 \section{The Database}
-The MySQL database is the core foundation of Repota. The database stores worker, session, job report (service report) and customer details in their own respected tables. In the database everything is connected to a worker. 
+The MySQL database is the core foundation of Repota. The database stores workers, sessions, job reports (service report) and customer details in their own respected tables. In the database everything is connected to a worker. 
 
 \subsubsection{Workers \& Session}
-The workers table is in relation of a users table and consists of a worker\_id, user\_name, worker\_name and a hash (password). The ID is set up to be automatically incremented, meaning when a new worker is inserted to the table an ID does not have to be specified. Their username is set as unique to avoid collisions with other workers. Their worker name is set as as the unique key as this name is to be presented with all their reports on the front-end. Their ID connects them to the session table making it a foreign key. Here the session ID is set up to be a UUID (Universally Unique ID). An expiry time is set this is to be used for login sessions. The session ID and expiry time are also used as the set up for Browser Cookies.
+The workers table is in relation of a users table and consists of a worker\_id, user\_name, worker\_name and a hash (password). The ID is set up to be automatically incremented, meaning when a new worker is inserted to the table an ID does not have to be specified. Their username is set as unique to avoid collisions with other workers. Their worker name is set as as the unique key as this name is to be presented with all their reports on the front-end. Their ID connects them to the session table making it a foreign key. Here the session ID is set up to be a UUID (Universally Unique ID). An expiry time is set this is to be used for login sessions. The session ID and expiry time are also used as the set up for browser cookies.
 
 \subsubsection{Job Reports \& Customers}
 Workers are connected to their reports by their ID making this a foreign key for the jobreports table. The report's ID is a foreign for the customers table. The jobreports table holds quite a bit of information. This information is split into fourteen fields. The customers table consists of a customer\_id, job\_report\_id (foreign key), customer\_name and customer\_complaint.  The following describes how the tables; workers, jobreports and customers all link together. 
@@ -26,17 +26,17 @@ A full report (Figure 4.1) required a lot of information which is in sixteen com
 \end{figure}
 
 \subsubsection{Refactoring}
-The first refactor was due to duplicate results coming from JOIN QUERYs. Even though the data was unique the query had trouble selecting all the report's data. The reports ID were then altered to be drastically different having them is the hundreds instead of 1-2-3-4-5 and the duplicate problem was solved. The jobreports table was originally split into two tables, jobreports, and workdone. When it came to implementing the CRUD operations in the back-end, it made a lot more sense to have this information in one table as it would have made for some monstrous queries for updating and creating. In the old jobreports table, the fields warranty and breakdown were originally varchars for a simple "YES" or "NO". With this refactoring, these fields were changed to booleans along with the addition of 'job\_report\_complete' to allow workers to keep track of their incomplete reports. The figure below shows the finalized database design.
+The first refactor was due to duplicate results coming from JOIN QUERYs. Even though the data was unique the query had trouble selecting all the report's data. The reports ID were then altered to be drastically different having them is the hundreds instead of 1-2-3-4-5 and the duplicate problem was solved. The jobreports table was originally split into two tables, jobreports, and workdone. When it came to implementing the CRUD operations in the back-end, it made a lot more sense to have this information in one table as it would have made for some monstrous queries for updating and creating. In the old jobreports table, the fields warranty and breakdown were originally varchars for a simple "YES" or "NO". With this refactoring, these fields were changed to booleans along with the addition of 'job\_report\_complete' to allow workers to keep track of their complete and incomplete reports. The figure below shows the finalized database design.
 
 \begin{figure}[H]
     \caption{Database Schema}
     \label{image:db}
     \centering
-    \includegraphics[width=0.5\textwidth]{images/database/database.png}
+    \includegraphics[width=0.4\textwidth]{images/database/database.png}
 \end{figure}
 
 \subsubsection{Database Hosting}
-The database is hosted on a AWS EC2 Linux Ubuntu Server. This provides a virtual private cloud (VPC) for it with transmission control protocol (TCP) for the ports 22 (SSH login (Secure Shell)) and 3306 (MySQL). This holds the database in a secure environment which only the back-end has access to though a configuration file with the MySQL details. Therefore the data on workers and customers is kept safe. The figure below show the entire set of the server.
+The database is hosted on a AWS EC2 Ubuntu Virtual Machine as a server. This provides a virtual private cloud (VPC) for it with transmission control protocol (TCP) for the ports 22 (SSH login (Secure Shell)) and 3306 (MySQL). This holds the database in a secure environment which only the back-end has access to though a configuration file with the MySQL details. Therefore the data on workers, reports and customers is kept safe. The figure below show the entire set of the server.
 
 \begin{figure}[H]
     \caption{AWS Server}
@@ -70,9 +70,7 @@ In OpenAPI specification, operations are identified by operationIds which is a u
 Horton's designed routes consist of two paths for user registration and login. For CRUD operations on reports there are five paths (Figure 4.6). These paths provided structure for the API and for HTTP methods.
 
 \subsubsection{Schema Models}
-Figure 4.7 shows the finalized models that were designed to represent user details, status codes with messages and reports. The user and report details were based off the first version of the database. 
-
-Implementing the API’s design resulted in refactoring the initial models designed to accommodate the databases changes and an addition of three other routes for a logout, a 3rd Party API and an Index Handler, which will be discussed in the next section.
+Figure 4.7 shows the finalized models that were designed to represent user details, status codes with messages and reports. Implementing the API’s design resulted in refactoring the initial models designed to accommodate the databases changes and an addition of three other routes for a logout, a 3rd Party API and an Index Handler, which will be discussed in the next section.
 
 \begin{figure}[!ht]
     \caption{API Paths}
@@ -89,7 +87,7 @@ Implementing the API’s design resulted in refactoring the initial models desig
 \end{figure}
 
 \subsection{Go Horton}
-Horton himself is written in Go using the web framework Gin Gonic to design and implement him into a robust API. When the API specification had the core fundamentals, it was time to generate the prototype code stubs. Swagger does not provide an option for Gin; this resulted in using another OpenAPI generator with Docker. This prototype set up the necessary functions for registration, login, and all report CRUD operations. The remainder of this section coveys how the final product has come a long way from these generated stubs.
+Horton himself is written in Go using the web framework Gin Gonic to design and implement him into a robust API. When the API specification had the core fundamentals, it was time to generate the prototype code stubs. Swagger does not provide an option for Gin; this resulted in using another OpenAPI generator with Docker. This prototype set up the necessary functions for registration, login, and all report CRUD operations. The remainder of this section conveys how the final product has come a long way from these generated stubs.
 
 \subsubsection{Data Models}
 The data models from the API specification, 'InLineObject' and 'JobReport', required some light refactoring. InLineObject is for new users in the system. This model now consists of a username, name, and password. The name is now included as for the reports required a name to be displayed with all the other details. For the JobReport model, 'Warranty', 'Breakdown' and the addition of 'JobComplete' were all set as int values (to accommodated the database changes of booleans) to allow them to be check-box values on the front-end. New models were created for login sessions and a 'worker account'. These models are used to send JSON data to the front-end. See the figures below for the Go Structs of the finalized models. 
@@ -137,7 +135,7 @@ The following sections will go into detail on how the handler functions work wit
 
 \subsection{Account \& Session System}
 \subsubsection{Registration}
-When a user registers, they become a 'worker' as the app is revolved around a work environment. Users POST a request to register by their username, name, and password which relies on the InLineObject model. The user's username and name are checked to ensure they do not already exist in the database. The password gets hashed using Go's package 'bcrypt', which implements the Provos and Mazières's bcrypt adaptive hashing algorithm. \cite{ref14} After the details check and the password hashing, the new user is inserted into the database, and a session ID (token) is generated with the Session model and is inserted into the database for them (Figures 4.12-4.16). Once a user is in the database, they are uniquely identified by their worker ID. This ID is also attached to their session in the database (Figure 4.17). This session is designed for Cookies to let the user make all future requests to the API.
+When a user registers, they become a 'worker' as the app is revolved around a work environment. Users POST a request to register by their username, name, and password which relies on the InLineObject model. The user's username and name are checked to ensure they do not already exist in the database. The password gets hashed using Go's package 'bcrypt', which implements the Provos and Mazières's bcrypt adaptive hashing algorithm. \cite{ref15} After the details check and the password hashing, the new user is inserted into the database, and a session ID (token) is generated with the Session model and is inserted into the database for them (Figures 4.12-4.16). Once a user is in the database, they are uniquely identified by their worker ID. This ID is also attached to their session in the database (Figure 4.17). This session is designed for Cookies to let the user make all future requests to the API.
 
 \begin{figure}[H]
 \begin{minipage}[b]{0.6\linewidth}
@@ -341,14 +339,14 @@ The back-end is hosted on AWS's Elastic Beanstalk (EB). This means it is constan
 \end{figure}
 
 \section{The Front-end}
+The front-end (Repota) is the face of it all. Repota itself was built with Angular and Ionic, while the OpenAPI specification provided the TypeScript code stubs to link Repota to Horton. The remainder of this section will explain how Repota and Horton are integrated for the users and their reports through the app's pages (Figure below).
 \begin{figure}[H]
     \caption{Repota's Pages}
     \label{image:repotaPages}
     \centering
     \includegraphics[width=1.0\textwidth]{images/repota/pages_diagram.png}
 \end{figure}
-
-The front-end (Repota) is the face of it all. Repota itself was built with Angular and Ionic, while the OpenAPI specification provided the TypeScript code stubs to link Repota to Horton. The remainder of this section will explain how Repota and Horton are integrated for the users and their reports through the app's pages (Figure above).
+\newpage
 
 \subsection{Repota \& Horton Integration}
 \subsubsection{Account \& Report Service}
