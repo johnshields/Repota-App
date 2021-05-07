@@ -58,7 +58,7 @@ func CreateReport(c *gin.Context) {
 // with data inputted by user to insert into the tables, jobreports and customers.
 func InsertJobReport(c *gin.Context, report models.JobReport, username string) error {
 	db := config.DbConn()
-	//db := mocks.MockDbConn() // for unit tests
+	//db := mocks.MockDbConn() // mock db for testing
 
 	fmt.Println("\n[INFO] Processing Report Details...")
 
@@ -112,7 +112,7 @@ func InsertJobReport(c *gin.Context, report models.JobReport, username string) e
 // get it in the database with a JOIN QUERY by its requested ID and logged in user's username.
 func GetReportById(c *gin.Context) {
 	db := config.DbConn()
-	//db := mocks.MockDbConn() // for unit tests
+	//db := mocks.MockDbConn()
 
 	var res []models.JobReport
 	worker := wa.Username
@@ -176,7 +176,7 @@ func GetReportById(c *gin.Context) {
 // get all the reports belonging to the user in the database from a JOIN QUERY by the logged in user's username.
 func GetReports(c *gin.Context) {
 	db := config.DbConn()
-	//db := mocks.MockDbConn() // for unit tests
+	//db := mocks.MockDbConn()
 
 	worker := wa.Username
 	var res []models.JobReport
@@ -232,7 +232,7 @@ func GetReports(c *gin.Context) {
 // If the user has a cookie allow them to update/edit report in the database by its requested ID.
 func UpdateReport(c *gin.Context) {
 	db := config.DbConn()
-	//db := mocks.MockDbConn() // for unit tests
+	//db := mocks.MockDbConn()
 	var report models.JobReport
 
 	// Get ID from request.
@@ -274,7 +274,7 @@ func UpdateReport(c *gin.Context) {
 // If the user has a cookie allow them to delete a report in the database by its requested ID.
 func DeleteReport(c *gin.Context) {
 	db := config.DbConn()
-	//db := mocks.MockDbConn() // for unit tests
+	//db := mocks.MockDbConn()
 
 	// Get ID from request.
 	reportId := c.Params.ByName("jobReportId")

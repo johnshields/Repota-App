@@ -34,7 +34,7 @@ var wa models.WorkerAccount
 // removes the existing session for the user, creates a new one and sets a cookie for the user.
 func Login(c *gin.Context) {
 	db := config.DbConn()
-	//db := mocks.MockDbConn() // for unit tests
+	//db := mocks.MockDbConn() // mock db for testing
 
 	// Object to bind user data too.
 	var workerForm models.WorkerAccount
@@ -120,7 +120,7 @@ func Register(c *gin.Context) {
 // User gets registered and are inserted into the database.
 func RegisterNewUser(c *gin.Context, username, name, password string) error {
 	db := config.DbConn()
-	//db := mocks.MockDbConn() // for unit tests
+	//db := mocks.MockDbConn()
 
 	// Check if password is null or if username is taken.
 	if strings.TrimSpace(password) == "" {
@@ -169,7 +169,7 @@ func RegisterNewUser(c *gin.Context, username, name, password string) error {
 // And for selecting users for report functions in API Job Report.
 func isValidAccount(username string) bool {
 	db := config.DbConn()
-	//db := mocks.MockDbConn() // for unit tests
+	//db := mocks.MockDbConn()
 
 	// Check username from workers table.
 	selDB, err := db.Query("SELECT * FROM workers WHERE username=?", username)
@@ -214,7 +214,7 @@ func verifyDetails(username, password string) error {
 // Set a new Cookie with the new session to logout the user after one second.
 func Logout(c *gin.Context) {
 	db := config.DbConn()
-	//db := mocks.MockDbConn() // for unit tests
+	//db := mocks.MockDbConn()
 	username := wa.Username
 
 	// Check for existing session, remove if one exits.

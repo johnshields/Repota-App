@@ -78,7 +78,7 @@ func NewRouter() *gin.Engine {
 	return router
 }
 
-// Index is the index handler - / endpoint.
+// Index is the index handler - /api/v1/ endpoint.
 func Index(c *gin.Context) {
 	c.String(http.StatusOK, "[INFO] Horton is online...")
 }
