@@ -6,7 +6,7 @@
 %----------------------------------------------------------------------------------------
 
 \documentclass{book}
-
+%%%%%%% PACKAGES %%%%%%%%
 \usepackage{graphicx} % Required for the inclusion of images
 \usepackage[numbers]{natbib} % Required to change bibliography style to APA
 \usepackage{amsmath} % Required for some math elements 
@@ -28,40 +28,40 @@ anchorcolor = hexablack]{hyperref}
 \usepackage{tabularx}
 \usepackage{pbox}
 \setlength\parindent{0pt} % Removes all indentation from paragraphs
-\newcommand*{\customTitle}{\begingroup % Create the command for including the title page in the document
+\newcommand*{\customTitle}{\begingroup
 \centering % Center all text
 \vspace*{\baselineskip} % White space at the top of the page
+\rule{\linewidth}{0.5mm} \\[0.4cm] % Thick horizontal line
 
-\rule{\textwidth}{1.6pt}\vspace*{-\baselineskip}\vspace*{2pt} % Thick horizontal line
-\rule{\textwidth}{0.4pt}\\[\baselineskip] % Thin horizontal line
+% cmds %
+\newcommand{\projecttitle}{Repota \\[2ex] A Service Report Application}
+\newcommand{\projectprogramme}{B.Sc. (Hons) in Software Development}
+\newcommand{\projectauthor}{John Shields}
+\newcommand{\projectadvisor}{Andrew Beatty}
 
 %----------------------------------------------------------------------------------------
-{\Large REPOTA \\[2ex] A SERVICE REPORT APPLICATION}\\[0.2\baselineskip] % Title
+\textbf{\LARGE \projecttitle}\\[0.2\baselineskip] % Title
 %----------------------------------------------------------------------------------------
 
 
-\rule{\textwidth}{0.4pt}\vspace*{-\baselineskip}\vspace{3.2pt} % Thin horizontal line
-\rule{\textwidth}{1.6pt}\\[\baselineskip] % Thick horizontal line
-\scshape % Small caps \\[\baselineskip] % Tagline(s) or further description
-\Large \textbf{Applied Project And Minor Dissertation}\\
-\textbf{Bachelor of Honours in Software Development}\par  
+\rule{\linewidth}{0.5mm} \\[0.4cm] % Thick horizontal line
 \normalsize
-\vspace*{2\baselineskip} % White-space between location/year and editors
 
 %----------------------------------------------------------------------------------------
-{by \\ John Shields\par}
+{\projectauthor \par}
+\textbf{\\\projectprogramme}  
 %----------------------------------------------------------------------------------------
 
 \vspace*{2\baselineskip} % White-space between location/year and editors
 \vfill % White-space between editor names and publisher logo
 {\scshape \today} \\[0.3\baselineskip] % Year published
+\textbf{Applied Project And Minor Dissertation}\\[0.3cm]
 %----------------------------------------------------------------------------------------
 
-{\textbf{Advised by: Andrew Beatty}}\par % Supervisor
+{{Advised by: \projectadvisor}}\\[0.1cm] % Supervisor
 
-{Department of Computer Science and Applied Physics Galway-Mayo Institute of Technology (GMIT)}\par % Department
+{Department of Computer Science and Applied Physics \\ Galway-Mayo Institute of Technology (GMIT)}\par 
 %----------------------------------------------------------------------------------------
-
 
 \endgroup}
 \begin{document} 

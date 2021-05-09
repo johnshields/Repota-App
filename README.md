@@ -20,15 +20,15 @@ alt="GMIT Logo" width="500" height="200"/>
 
 ***
 
-<p align="center"><img src="https://i.ibb.co/wBQGdvT/repota-App-logo.png"
+<p align="center"><img src="https://user-images.githubusercontent.com/26766163/117576734-e7049e80-b0de-11eb-9817-e735f94734d6.png"
 alt="Repota Logo" width="200" height="200"/>
 </p>
 
 # Repota
-Repota is designed for automobile technicians to fill out service reports for auto dealerships and rental companies.
+Repota is designed to be a service report application for automobile technicians for auto dealerships and rental companies. With Repota, technicians are free to create, review, edit and delete their reports for services they have performed on automobiles with the option to export them to PDFs.
 ***
 ##### View and use Repota @ <u>[www.repota-service.com](https://www.repota-service.com/)</u>
-##### View the Application <u>[Guide](https://github.com/johnshields/Repota-App/wiki/Repota-Guide)</u>
+##### View the Application's <u>[Guide](https://github.com/johnshields/Repota-App/wiki/Repota-Guide)</u>
 #### How to Run Locally -> <u>[click here](https://github.com/johnshields/AP-MD-FYP/wiki)</u>
 #### Check out the OpenAPI's <u>[documentation](https://johnshields.github.io/horton.api.doc/)</u>
 ***
