@@ -9,7 +9,7 @@ The workers table is in relation of a users table and consists of a worker\_id, 
 Workers are connected to their reports by their ID making this a foreign key for the jobreports table. The report's ID is a foreign for the customers table. The jobreports table holds quite a bit of information. This information is split into fourteen fields. The customers table consists of a customer\_id, job\_report\_id (foreign key), customer\_name and customer\_complaint.  The following describes how the tables; workers, jobreports and customers all link together. 
 \newpage
 \subsubsection{Full Report Details}
-A full report (Figure 4.1) required a lot of information which is in sixteen components. Meaning the information had to spread out between tables to have them all still link to the workers and customers to avoid one large table and still keep the workers and session table intact. All this information is obtained by quite a large JOIN Query (Figure 4.2).
+A full report (Figure 4.1) required a lot of information which is in sixteen fields. Meaning the information had to spread out between tables to have them all still link to the workers and customers to avoid one large table and still keep the workers and session table intact. All this information is obtained by quite a large JOIN Query (Figure 4.2).
 
 \begin{figure}[H]
     \caption{Example of a Full Report}
@@ -26,7 +26,7 @@ A full report (Figure 4.1) required a lot of information which is in sixteen com
 \end{figure}
 
 \subsubsection{Refactoring}
-The first refactor was due to duplicate results coming from JOIN QUERYs. Even though the data was unique the query had trouble selecting all the report's data. The report IDs were then altered to be drastically different having them is the hundreds instead of '1-2-3-4-5' and the duplicate problem was solved. The jobreports table was originally split into two tables, jobreports, and workdone. When it came to implementing the CRUD operations in the back-end, it made a lot more sense to have this information in one table as it would have made for some monstrous queries for updating and creating. In the old jobreports table, the fields warranty and breakdown were originally varchars for a simple "YES" or "NO". With this refactoring, these fields were changed to booleans along with the addition of 'job\_report\_complete' to allow workers to keep track of their complete and incomplete reports. The figure below shows the finalized database design.
+The first refactor was due to duplicate results coming from JOIN QUERYs. Even though the data was unique the query had trouble selecting all the report's data. The report IDs were then altered to be drastically different having them in the hundreds instead of '1-2-3-4-5' and the duplicate problem was solved. The jobreports table was originally split into two tables, jobreports and workdone. When it came to implementing the CRUD operations in the back-end, it made a lot more sense to have this information in one table as it would have made for some monstrous queries for updating and creating. In the old jobreports table, the fields warranty and breakdown were originally varchars for a simple "YES" or "NO". With this refactoring, these fields were changed to booleans along with the addition of 'job\_report\_complete' to allow workers to keep track of their complete and incomplete reports. The figure below shows the finalized database design.
 
 \begin{figure}[H]
     \caption{Database Schema}
@@ -48,7 +48,7 @@ The database is hosted on an AWS EC2 Ubuntu Virtual Machine as a server. This pr
 \newpage
 \section{The Back-end}
 Repota depends on the robust and quick back-end nicknamed 'Horton'. 
-Horton handles all user registration, login, logout, sessions, report CRUD operations, and has access to a 3rd Party API named 'Back4App' for vehicle information. Without him Repota would be quite limited in terms of the service it provides. 
+Horton handles all user registration, login, logout, sessions, report CRUD operations and has access to a 3rd Party API named 'Back4App' for vehicle information. Without him Repota would be quite limited in terms of the service it provides. 
 
 \subsection{Horton API Specification}
 Horton's API specification was designed using the OpenAPI tools from Swagger and is written in YAML. The specification design consists of RESTful routes, operationIds, HTTP methods, status codes and schema models. 
@@ -58,7 +58,7 @@ Swagger provided HTML documentation of Horton's specification. This documentatio
 \url{https://johnshields.github.io/horton.api.doc/}
 
 \subsubsection{Operations}
-In OpenAPI specification, operations are identified by operationIds which is a unique string identifier. These operations are templates of CRUD operations with HTTP methods, e.g., POST, GET, DELETE, PUT. Operations contain tags, a description, parameters such as an ID, a request body for data, a response status, headers, login requirements and a URL. The user account system and report system were both designed initially as operationIds with their respected paths. Figure 4.5 shows how the login operation was designed. All these operations provided the necessary templates for the handler functions of each path. 
+As discussed in the Technology Review, OpenAPI specification's operations are identified by operationIds which is a unique string identifier. These operations are templates of CRUD operations with HTTP methods, such as POST, GET, DELETE and PUT. Operations contain tags, a description, parameters such as an ID, a request body for data, a response status, headers, login requirements and a URL. The user account system and report system were both designed initially as operationIds with their respected paths. Figure 4.5 shows how the login operation was designed. All these operations provided the necessary templates for the handler functions of each path.
 
 \begin{figure}[H]
     \caption{Login Operation}
@@ -91,7 +91,7 @@ Figure 4.7 shows the finalized models that were designed to represent user detai
 Horton himself is written in Go using the web framework Gin Gonic to design and implement him into a robust API. When the API specification had the core fundamentals, it was time to generate the prototype code stubs. Swagger does not provide an option for Gin; this resulted in using another OpenAPI generator with Docker. This prototype set up the necessary functions for registration, login, and all report CRUD operations. The remainder of this section conveys how the final product has come a long way from these generated stubs.
 
 \subsubsection{Database Connection}
-The MySQL database connection is made in db\_connection.go with the function DbConn. The MySQL details are loaded from a configuration (config) file then a MySQL driver is opened with the details for access to the database. The config file is to be sure the database details are kept safe and not exposed. Errors are handled for loading the config and the MySQL driver connection to ensure the failure of a database connection is alerted. 
+The MySQL database connection is made in db\_connection.go with the function DbConn. The MySQL details are loaded from a configuration (config) file then a MySQL driver is opened with the details for access to the database. The config file is to be sure the database details are kept safe and not exposed. Errors are handled for loading the config and the MySQL driver connection to ensure the failure of a database connection is alerted. This function is then used throughout the Account, Session and Report systems discussed in the next subsections.
 
 \begin{figure}[H]
     \caption{DbConn Function}
@@ -145,10 +145,10 @@ Register      & POST /api/v1/register        & User Registration      \\ \hline
 Login         & POST /api/v1/login           & User Login             \\ \hline
 Logout        & GET /api/v1/logout           & User Logout            \\ \hline
 CreateReport  & POST /api/v1/jobReports      & Create a Report        \\ \hline
-DeleteReport  & DELETE /api/v1/jobReports/ID & Delete a Report        \\ \hline
-GetReportById & GET /api/v1/jobReports/ID    & Get a Report           \\ \hline
 GetReports    & GET /api/v1/jobReports       & Get all Reports        \\ \hline
+GetReportById & GET /api/v1/jobReports/ID    & Get a Report           \\ \hline
 UpdateReport  & PUT /api/v1/jobReports/ID    & Update a Report        \\ \hline
+DeleteReport  & DELETE /api/v1/jobReports/ID & Delete a Report        \\ \hline
 GetCarApiData & GET /api/v1/carApiData       & Get data from Back4App \\
 \hline
 \end{tabular}
@@ -158,7 +158,7 @@ The following sections will go into detail on how the handler functions work wit
 
 \subsection{Account \& Session System}
 \subsubsection{Registration}
-When a user registers, they become a 'worker' as the app is revolved around a work environment. Users POST a request to register by their username, name, and password which relies on the InLineObject model. The user's username and name are checked with the function isValidAccount to ensure they do not already exist. The password gets hashed using Go's package 'bcrypt', which implements the Provos and Mazières's bcrypt adaptive hashing algorithm. \cite{ref25} After the details check and the password hashing, the new user is inserted into the database, and a session ID (token) is generated with the Session model and is inserted into the database for them (Figures 4.14-4.18). Once a user is in the database, they are uniquely identified by their worker ID. This ID is also attached to their session in the database (Figure 4.19). This session is designed for Cookies to let the user make all future requests to the API.
+When a user registers, they become a 'worker' as the app is revolved around a work environment. Users POST a request to register with their username, name, and password which relies on the InLineObject model. The user's username and name are checked with the function isValidAccount to ensure they do not already exist. The password gets hashed using Go's package 'bcrypt', which implements the Provos and Mazières's bcrypt adaptive hashing algorithm. \cite{ref25} After the details check and the password hashing, the new user is inserted into the database and a session ID/token is generated with the Session model and is inserted into the database for them (Figures 4.14-4.18). Once a user is in the database, they are uniquely identified by their worker ID. This ID is also attached to their session in the database (Figure 4.19). This session is designed for Cookies to let the user make all future requests to the API.
 
 \begin{figure}[H]
 \begin{minipage}[b]{0.6\linewidth}
@@ -219,13 +219,13 @@ A user logs in by their username and password which works with the WorkerAccount
 \end{figure}
 
 \subsubsection{Logout}
-A user is logged out by removing their current session and replacing it with a new one. The new session is set to expire after one second. A new cookie is then set for the user with this session, and then the user is logged out after the cookie expires the one second (Figure 4.23). This was mainly to accommodate how browser cookies work. Only users have control of removing their cookies, and setting a new cookie of one second was the best way to log them out as a user requires a cookie to make all report requests to the API. In the session controller, there is a function for cookie checking (Figure 4.24). The purpose of this function is to block requests on reports if a user have no cookie. In other words an unauthorized user.
+A user is logged out by removing their current session and replacing it with a new one. A new cookie is then set for the user with an expiry time of one second and then the user is logged out after the one second cookie expires (Figure 4.23). This was mainly to accommodate how browser cookies work. Only users have control of removing their cookies and setting a new cookie of one second was seen as the best way to log them out as a user requires a cookie to make all report requests to the API. In the session controller, there is a function for cookie checking (Figure 4.24). The purpose of this function is to block requests on reports if a user have no cookie. In other words an unauthorized user.
 
 \begin{figure}[H]
     \caption{Logout}
     \label{image:logout}
     \centering
-    \includegraphics[width=1.0\textwidth]{images/horton/account_system/logout_func.png}
+    \includegraphics[width=0.8\textwidth]{images/horton/account_system/logout_func.png}
 \end{figure}
 
 \begin{figure}[H]
@@ -235,7 +235,7 @@ A user is logged out by removing their current session and replacing it with a n
     \includegraphics[width=0.8\textwidth]{images/horton/account_system/check_cookie.png}
 \end{figure}
 
-Please view the figure below for an overview of how the account and session system works with the controllers, handler functions, HTTP methods, and paths.
+Please view the figure below for an overview of how the account and session system works with the controllers, handler functions, HTTP methods and paths.
 \begin{figure}[H]
     \caption{Account System}
     \label{image:accountSystem}
@@ -248,7 +248,7 @@ Users are required to be logged in for all the report operations. This requireme
 
 \subsubsection{Create A Report}
 Creating a report is handled by the functions, CreateReport, CheckForCookie, InsertJobReport
-and isValidAccount. The process begins with a POST request from the client (front-end) of a new report with the information bound as JSON data with the JobReports. Then the CheckForCookie function comes in, and if that checks out, InsertJobReport is called with the new report data as a parameter along with the user's username and one for Gin to handle status codes (Figure 4.26). The data is then prepared as MySQL INSERT QUERIES for the tables: jobreports and customers in the database (Figure 4.27). Once these are in place, the user is again checked with isValidAccount. This second check is mainly to have the user's 'worker name' in the report's details. Next, a MySQL transaction is begun to execute the INSERTs into the two tables (Figure 4.28). Once the transaction is committed, a new report has been successfully created and a status code of 201 is sent to inform the client it was created. 
+and isValidAccount. The process begins with a POST request from the client (front-end) of a new report with the information bound as JSON data with the JobReports. Then the CheckForCookie function comes in and if that checks out, InsertJobReport is called with the new report data as a parameter along with the user's username and one for Gin to handle status codes (Figure 4.26). The data is then prepared as MySQL INSERT QUERIES for the tables: jobreports and customers in the database (Figure 4.27). Once these are in place, the user is again checked with isValidAccount. This second check is mainly to have the user's 'worker name' in the report's details. Next, a MySQL transaction is begun to execute the INSERTs into the two tables (Figure 4.28). Once the transaction is committed, a new report has been successfully created and a status code of 201 is sent to inform the client it was created. 
 
 \begin{figure}[H]
     \caption{CreateReport Function}
@@ -326,7 +326,7 @@ Deleting a Report begins with a DELETE request from the client request report by
     \includegraphics[width=0.6\textwidth]{images/horton/report_system/delete_report.png}
 \end{figure}
 
-Please view the figure below for an overview of how the report system works with the controllers, handler functions, HTTP methods, and paths.
+Please view the figure below for an overview of how the report system works with the controllers, handler functions, HTTP methods and paths.
 \begin{figure}[H]
     \caption{Report System}
     \label{image:reportSystem}
@@ -335,7 +335,7 @@ Please view the figure below for an overview of how the report system works with
 \end{figure}
 
 \subsection{3rd Party API}
-The back-end has access to a 3rd Party API named Back4App which lists vehicle make and model data to make the creating and updating of reports convenient for the users. The data is gathered from the API with a GET request. Before this request is done, authorization headers are set from a configuration file to be allowed to use the API's service. After the headers are set the CheckForCookie function comes in to stop the request if the user is not logged in. This done as only the first 10k requests are free with Back4App and unauthorized users could take up all the requests. Next the GET request is done and the JSON data is decoded from the response body and sent the client with a status code 200 and the response body is closed. Figure 4.36 below shows a sample of the data from Back4App.
+The back-end has access to a 3rd Party API named Back4App which lists vehicle make and model data to make the creating and updating of reports convenient for the users. The data is gathered from the API with a GET request. Before this request is done, authorization headers are set from a config file to be allowed to use the API's service. After the headers are set the CheckForCookie function comes in to stop the request if the user is not logged in. This done as only the first 10k requests are free with Back4App and unauthorized users could take up all the requests. Next the GET request is done and the JSON data is decoded from the response body and sent the client with a status code 200 and the response body is closed. Figure 4.36 below shows a sample of the data from Back4App.
 
 \begin{figure}[H]
     \caption{Back4App Vehicle Data}
@@ -412,7 +412,7 @@ The model interfaces named InLineObject and JobReport (Figures below) also came 
 \subsection{Account Pages}
 
 \subsubsection{Registration}
-User registration is done through the Register Page. The method register (Figure 4.44) is set up as a form that uses the InLineObject model to have the user's enter details (username, name, and password) as an object to push the data with a POST request to the API with the AccountService's register method and insert the details into the database. The user must have their username at least eight characters long, their name to be their full name (as this is displayed on their reports). The password is ensured by a regular expression on the HTML side to have at least eight characters, one uppercase and lowercase letter, one number, and a special character to provide extra security (Figure 4.45). Once the user has the form filled out, they click the register button on the UI to send the data, and once the data in the database, the user is navigated to the login page. If there are errors with the registration process (e.g., the username is already taken), an error message is displayed on the UI to the user (Figure 4.46).
+User registration is done through the Register Page. The method register (Figure 4.44) is set up as a form that uses the InLineObject model to have the user's enter details (username, name and password) as an object to push the data with a POST request to the API with the AccountService's register method and insert the details into the database. The user must have their username at least eight characters long, their name to be their full name (as this is displayed on their reports). The password is ensured by a regular expression on the HTML side to have at least eight characters, one uppercase and lowercase letter, one number and a special character to provide extra security (Figure 4.45). Once the user has the form filled out, they click the register button on the UI to send the data, once the data is in the database and the API has responded, the user is navigated to the login page. If there are errors with the registration process (e.g. the username is already taken), an error message is displayed on the UI to the user (Figure 4.46).
 
 \begin{figure}[H]
     \caption{Register Method}
@@ -453,7 +453,7 @@ User login is managed on the Login Page. This process is handled by the login me
 \end{figure}
 
 \subsubsection{Logout}
-Logout is available to a logged-in user on any page of the front-end. The logout button is available to users in the hamburger menu (Figure 4.49). When a user clicks on the logout button, this calls the logout method (Figure 4.50). That method then sends a GET request with the AccountService's logout method to the API, and after one second, the user is officially logged out and navigated to the account page. The wait for one second is to allow the logged-out cookie set by the API to expire; therefore, the user does not send the logout request multiple times within that one second.
+Logout is available to a logged-in user on any page of the front-end. The logout button is available to users in the hamburger menu (Figure 4.49). When a user clicks on the logout button, this calls the logout method (Figure 4.50). That method then sends a GET request with the AccountService's logout method to the API and after one second, the user is officially logged out and navigated to the account page. The wait for one second is to allow the logged-out cookie set by the API to expire; therefore, the user does not send the logout request multiple times within that one second.
 
 \begin{figure}[H]
     \caption{Hamburger Menu - Logout Button}
@@ -472,7 +472,7 @@ Logout is available to a logged-in user on any page of the front-end. The logout
 \subsection{Report Pages}
 
 \subsubsection{History}
-The History Page displays all the reports owned by a user. Only the report's number (ID), date, customer name, and the complete box are displayed here (Figure 4.51). The reports are loaded in from the API by the JobReportService's getReports method. The method ngOnInit (Figure 4.52) calls getReports from JobReportService, and the reports are automatically loaded for the user when they navigate to this page from a ngFor on the HTML side. If the user does not have any reports, a message is displayed to notify them (Figure 4.53). 
+The History Page displays all the reports owned by a user. Only the report's number (ID), date, customer name and the complete checkbox are displayed here (Figure 4.51). The reports are loaded in from the API by the JobReportService's getReports method. The method ngOnInit (Figure 4.52) calls getReports from JobReportService, and the reports are automatically loaded for the user when they navigate to this page from a ngFor on the HTML side. If the user does not have any reports, a message is displayed to notify them (Figure 4.53). 
 
 \begin{figure}[H]
     \caption{History Page}
@@ -520,7 +520,7 @@ The Display Page shows a single report. A user can see the report by clicking th
 \end{figure}
 
 \subsubsection{Create}
-Users construct their reports through a form on the Create page. The method createReport uses the JobReport model as an object for all the data the user enters (Figure 4.57). The values, warranty, breakdown, and complete are checkboxes. These values required lists to input the data along with an if/else statement to turn the check box values from true and false to 1 and 0 (Figure 4.58). This alteration is to accommodate the values on the Go side of the model and the database. Once the user has entered the report's information and clicks the create button, this data gets sent through a POST request to the API through the JobReportService. After the report is in the database, the user is navigated to the history page. The data from Back4App is loaded in though the ngOnInit method (Figure 4.59) from the API and is displayed to the user as a HTML data list (Figure 4.60).  
+Users construct their reports through a form on the Create page. The method createReport uses the JobReport model as an object for all the data the user enters (Figure 4.57). The values, warranty, breakdown, and complete are checkboxes. These values required lists to input the data along with an if/else statement to turn the check box values from true and false to 1 and 0 (Figure 4.58). This alteration is to accommodate the values on the Go side of the model and the database. Once the user has entered the report's information and clicks the create button, this data gets sent through a POST request to the API through the JobReportService. After the report is in the database and the API has responded, the user is navigated to the history page. The data from Back4App is loaded in though the ngOnInit method (Figure 4.59) from the API and is displayed to the user as a HTML data list (Figure 4.60).  
 
 \begin{figure}[H]
     \centering
@@ -552,7 +552,7 @@ Users construct their reports through a form on the Create page. The method crea
 \end{figure}
 
 \subsubsection{Edit}
-Users can make changes or complete their reports on the Edit Page. They can access the edit page from the display page by clicking the edit button on the report. This carries over the report's ID to the edit page. The report's data is available through the loadReportById method (Figure 4.61) in HTML data lists (Figure 4.62). This setup was an improvise as when the data was loaded straight into the input boxes, it was unchangeable, and users would still have to retype it all. If the data were loaded into an input box, there would be two inputs updated in the database. For example, the 'Make \& Model' box would have the value 'Ford Focus', and the user types in 'Ford Focus' again and submitted the edit. In the database, the value would be 'Ford Focus Ford Focus'. This method was not suitable. The HTML data list solved this problem as the user only has to click the data to have it in the input box again.
+Users can make changes or complete their reports on the Edit Page. They can access the edit page from the display page by clicking the edit button on the report. This carries over the report's ID to the edit page. The report's data is available through the loadReportById method (Figure 4.61) in HTML data lists (Figure 4.62). This setup was an improvise as when the data was loaded straight into the input boxes, it was unchangeable and users would still have to retype it all. If the data were loaded into an input box, there would be two inputs updated in the database. For example, the 'Make \& Model' box would have the value 'Ford Focus' and the user types in 'Ford Focus' again and submitted the edit. In the database, the value would be 'Ford Focus Ford Focus'. This method was not suitable. The HTML data list solved this problem as the user only has to click the data to have it in the input box again.
 
 \begin{figure}[H]
     \centering
@@ -568,12 +568,12 @@ Users can make changes or complete their reports on the Edit Page. They can acce
     \includegraphics[width=1.0\textwidth]{images/repota/UI/edit-page.png}
 \end{figure}
 
-Similar to the create page, the Back4App's data is retrieved from the API to the Make \& Model input box. The only difference is that the request is made through the method loadCarData and, along with loadReportById, are called in ngOnInit. This abstraction was done to ensure code quality and performance. Initially, all the code for retrieving Back4App's and the report's data, along with the lists for the checkboxes, was in the ngOnInit method. The checkboxes' structure is in relation the the create page's structure for them.
+Similar to the create page, the Back4App's data is retrieved from the API to the Make \& Model input box. The only difference is that the request is made through the method loadCarData and along with loadReportById, are called in ngOnInit. This abstraction was done to ensure code quality and performance. Initially, all the code for retrieving Back4App's and the report's data, along with the lists for the checkboxes, was in the ngOnInit method. The checkboxes' structure is in relation the the create page's structure for them.
 
 The user submits the edit with the edit button. This submission calls the editReport method and correspondent with the createReport method. editReport uses the JobReport model as an object with the report's altered data and calls the updateReport method from JobReportService with a PUT request to the API. This process updates the report in the database and navigates the user back to the history page.
 
 \subsubsection{Export}
-Users can export their reports to PDFs from the Export Page. Exporting reports is accessed on the display page of a report by the PDF button. When a user clicks on this button, the report is brought and load over by its ID through the ngOnInit method from the API on the export page. The export page presents the report in a printable format (Figure 4.63). When a user clicks on the Export PDF button, this calls the method onExportPDF (Figure 4.64), which brings up a file explore window for the user to save the report locally. onExportPDF uses the libraries dom-to-image and jsPDF. dom-to-image converts the HTML DOM (Document Object Model) to a PNG image, then this image is added to a PDF made by jsPDF. Next, the report is saved to a file named service\_report.pdf (Figure 4.65).
+Users can export their reports to PDFs from the Export Page. Exporting reports is accessed on the display page of a report by the PDF button. When a user clicks on this button, the report is brought and load over by its ID through the ngOnInit method from the API. The export page presents the report in a printable format (Figure 4.63). When a user clicks on the Export PDF button, this calls the method onExportPDF (Figure 4.64), which depending on the browser, brings up a file explore window for the user to save the report locally. onExportPDF uses the libraries dom-to-image and jsPDF. dom-to-image converts the HTML DOM (Document Object Model) to a PNG image, then this image is added to a PDF made by jsPDF. Next, the report is saved to a file named service\_report.pdf (Figure 4.65).
 
 \begin{figure}[H]
     \centering
@@ -597,7 +597,7 @@ Users can export their reports to PDFs from the Export Page. Exporting reports i
 \end{figure}
 
 \subsubsection{Delete}
-The deletion of a report is handled on the display page. When a user clicks the delete option, a popup box displays asking them are they sure to delete it (Figure 4.66). When the user clicks 'OK' on the popup box, the method deleteReport (Figure 4.67) is called to send a DELETE request to the API through the JobReportService with the corresponding method. Once the request is complete, the report is removed from the database, and the user is navigated back to the history page.
+The deletion of a report is handled on the display page. When a user clicks the delete option, a popup box displays asking them are they sure to delete it (Figure 4.66). When the user clicks 'OK' on the popup box, the method deleteReport (Figure 4.67) is called to send a DELETE request to the API through the JobReportService with the corresponding method. Once the request is complete, the report is removed from the database and the user is navigated back to the history page.
 
 \begin{figure}[H]
     \centering
@@ -614,7 +614,7 @@ The deletion of a report is handled on the display page. When a user clicks the 
 \end{figure}
 
 \subsubsection{Error Messages}
-All error messages for user registration, login, and logout, along with the CRUD operations for reports, are handled with getters and setters (Figure 4.68). As shown and discussed above, error messages are displayed for invalid user inputs and 404s (Not found errors). Any errors from the API are extracted into a string format and then set as the parsed message to the setter (Figure 4.69). The getter is then used on the HTML side to display the error to the user, as shown above. These errors can also let users know of any serious errors from the API. For instance, an error with the status code 500 (Internal Server Error) if a request went horribly wrong on the API's side. For example, an internal server error could be a failure to process a request, and the users must be notified immediately to avoid confusion.
+All error messages for user registration, login and logout, along with the CRUD operations for reports, are handled with getters and setters (Figure 4.68). As shown and discussed above, error messages are displayed for invalid user inputs and 404s (Not found errors). Any errors from the API are extracted into a string format and then set as the parsed message to the setter (Figure 4.69). The getter is then used on the HTML side to display the error to the user, as shown above. These errors can also let users know of any serious errors from the API. For instance, an error with the status code 500 (Internal Server Error) if a request went horribly wrong on the API's side. For example, an internal server error could be a failure to process a request and the users must be notified immediately to avoid confusion.
 
 \begin{figure}[H]
     \centering
@@ -631,7 +631,7 @@ All error messages for user registration, login, and logout, along with the CRUD
 \end{figure}
 
 \subsection{AuthGuard}
-When an unauthorized user visits Repota the pages home, history, display, create, edit, export are blocked. If the user tries to navigate to the home page through the hamburger menu the error message 'Please login first' displays (Figure 4.70). Also the history page and logout button are also not available. This security is a result of the AuthGuard implementation into the app. The AuthGuard blocks pages to users that do not have cookies (unauthorized users). The classes AuthGaurd and AuthService work together. AuthService uses the method loggedIn (Figure 4.71) to check if a user has a cookie or not. If the user is not logged in a boolean is set as false with the method canActivate (Figure 4.72) in the AuthGaurd class. canActivate is then used in the class AppRoutingModule to block the pages listed above (Figure 4.73).
+When an unauthorized user visits Repota the pages home, history, display, create, edit and export are blocked. If the user tries to navigate to the home page through the hamburger menu the error message 'Please login first' displays (Figure 4.70). Also the history page and logout button are also not available. This security is a result of the AuthGuard implementation into the app. The AuthGuard blocks pages to users that do not have cookies (unauthorized users). The classes AuthGaurd and AuthService work together. AuthService uses the method loggedIn (Figure 4.71) to check if a user has a cookie or not. If the user is not logged in a boolean is set as false with the method canActivate (Figure 4.72) in the AuthGaurd class. canActivate is then used in the class AppRoutingModule to block the pages listed above (Figure 4.73).
 
 \begin{figure}[H]
     \centering
@@ -661,7 +661,7 @@ When an unauthorized user visits Repota the pages home, history, display, create
     \includegraphics[width=0.9\textwidth]{images/repota/auth_guard/blocked_routes.png}
 \end{figure}
 
-As mentioned above, when a user logs in, they receive a cookie. Once they are logged in, all the pages are unblocked, and they are free to explore the app through the hamburger menu. The method loggedIn is used throughout the app with Angular's ngIf to disable the login and register if a user is already logged in/registered. Suppose a user is logged in and navigates to the login or register page a message displays to notify them that they are already authorized (Figure 4.74). 
+As mentioned above, when a user logs in, they receive a cookie. Once they are logged in, all the pages are unblocked and they are free to explore the app through the hamburger menu. The method loggedIn is used throughout the app with Angular's ngIf to disable the login and register if a user is already logged in/registered. Suppose a user is logged in and navigates to the login or register page a message displays to notify them that they are already authorized (Figure 4.74). 
 
 \begin{figure}[H]
     \centering
@@ -671,7 +671,7 @@ As mentioned above, when a user logs in, they receive a cookie. Once they are lo
 \end{figure}
 
 \subsection{Repota UI}
-Throughout this chapter, a majority of Repota's UI has been shown. This section will go through the UI pages Home, Account, and About. As seen on the login and register page, the app's logo is used throughout these pages to provide consistency and an iconic style. When a user logs in, they are navigated to the home page. There are two buttons to navigate to the pages create and history (Figure 4.75). The about page (Figure 4.76) can be accessed and navigated to through the hamburger menu. This page displays a short description of the app and two buttons as hyperlinks for the app's guide located at the project's Wiki of the GitHub repository and the repository itself. The initial visiting page of the app is the account page (Figure 4.77). When a user is not logged in, a welcome message is displayed, controlled by the loggedIn method from the AuthService class. The buttons on the page provide navigation to the pages login and register. 
+Throughout this chapter, a majority of Repota's UI has been shown. This section will go through the UI pages Home, Account and About. As seen on the login and register page, the app's logo is used throughout these pages to provide consistency and an iconic style. When a user logs in, they are navigated to the home page. There are two buttons to navigate to the pages create and history (Figure 4.75). The about page (Figure 4.76) can be accessed and navigated to through the hamburger menu. This page displays a short description of the app and two buttons as hyperlinks for the app's guide located at the project's Wiki of the GitHub repository and the repository itself. The initial visiting page of the app is the account page (Figure 4.77). When a user is not logged in, a welcome message is displayed, controlled by the loggedIn method from the AuthService class. The buttons on the page provide navigation to the pages login and register. 
 
 \begin{figure}[H]
     \centering
@@ -695,7 +695,7 @@ Throughout this chapter, a majority of Repota's UI has been shown. This section 
 \end{figure}
 
 \subsection{Repota Bucket}
-Repota is hosted on AWS's S3 bucket. This procedure was reached through the AWS S3 CLI. The app was built for production using the Angular command 'ng build --prod'. The production directory was then deployed to S3 Bucket. Resembling Horton, Repota is also HTTPS. This process was achieved through AWS's Route 53, CloudFront, and Certificate Manager. The bought domain from GoDaddy was set to 'www.repota-service.com' through AWS's Route 53 to point to the bucket. Then the SSL certificate was retrieved from the Certificate Manager. CloudFront was then used to have the bucket attach to the SSL certificate. Resulting in Repota being secure (Figure below).
+Repota is hosted on AWS's S3 bucket. This procedure was reached through the AWS S3 CLI. The app was built for production using the Angular command 'ng build --prod'. The production directory was then deployed to S3 Bucket. Resembling Horton, Repota is also HTTPS. This process was achieved through AWS's Route 53, CloudFront and Certificate Manager. The bought domain from GoDaddy was set to 'www.repota-service.com' through AWS's Route 53 to point to the bucket. Then the SSL certificate was retrieved from the Certificate Manager. CloudFront was then used to have the bucket attach to the SSL certificate. Resulting in Repota being secure (Figure below).
 
 \begin{figure}[H]
     \centering

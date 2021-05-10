@@ -86,8 +86,8 @@ If the details are correct and if they have a current session it is removed and 
 A `Cookie` of three days is set for the user, and then are logged in.
 
 ## Logout
-Users are logged out by removing their current session and replacing it with one that expires in one
-second. A cookie is set with this new session, and they are logged out after it expires.
+Users are logged out by removing their current session and replacing it with one.
+A cookie is set with an expiry time of one second and they are logged out after it expires.
 
 ***
 

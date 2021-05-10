@@ -23,7 +23,8 @@ func TestGetCarApiData(t *testing.T) {
 	t.Run("getCarApiData", func(t *testing.T) {
 		fmt.Println("[TEST] Testing GetCarApiData...")
 		// Set up request for /carApiData endpoint.
-		req, err := http.NewRequest("GET", "http://localhost:8080/api/v1/carApiData", nil)
+		url := "http://localhost:8080/api/v1/carApiData"
+		req, err := http.NewRequest("GET", url, nil)
 		if err != nil {
 			log.Println(err)
 		}

@@ -49,7 +49,7 @@ func Login(c *gin.Context) {
 	// Check if user exists in the database and check password is not null.
 	if err := verifyDetails(username, password); err != nil {
 		c.JSON(403, models.Error{Code: 403, Messages: "Username does not exist"})
-		return // Return as there is issues with the username or password.
+		return // Return as there is issues with the username.
 	}
 
 	// Compare the hash in the db with the user's password provided in the request using golang.org/x/crypto/bcrypt.
@@ -106,7 +106,7 @@ func Register(c *gin.Context) {
 			log.Print( "Failed to Register User.", err)
 			c.JSON(500, nil)
 		} else {
-			c.JSON(200, session) // Session has been created for user.
+			c.JSON(200, session) // Account & Session has been created for user.
 		}
 	} else {
 		// Issue with user's details - username or name taken.
@@ -210,8 +210,7 @@ func verifyDetails(username, password string) error {
 
 // Logout
 // Works with removeSession & createSessionId to remove the user's current session.
-// Then creates a new one that expires in one second.
-// Set a new Cookie with the new session to logout the user after one second.
+// Then creates a new one and set a new Cookie with an expiry time of one second to logout user.
 func Logout(c *gin.Context) {
 	db := config.DbConn()
 	//db := mocks.MockDbConn()
