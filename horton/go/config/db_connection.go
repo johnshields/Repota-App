@@ -3,7 +3,7 @@
  * Horton - API version: 1.0.0
  *
  * DB Connection
- * Logs into MySQL with the details in db_config.ini and uses the Repota Database.
+ * Logs into MySQL with the details in config.ini and uses the Repota Database.
  *
  * Reference
  * https://ini.unknwon.io/docs/intro/getting_started
@@ -20,21 +20,21 @@ import (
 	"os"
 )
 
-// DbConn use the db_config.ini file to log into MySQL for database access.
+// DbConn use the config.ini file to log into MySQL for database access.
 func DbConn() (db *sql.DB) {
 	// Load config file.
-	cfg, err := ini.Load("go/config/db_config.ini")
-
+	cfg, err := ini.Load("go/config/config.ini")
 	if err != nil {
 		log.Println("Failed to load config file for database.", cfg)
 		os.Exit(1) // Failed to start service
 	}
-
+	// Set MySQL details from from config file.
 	dbName := cfg.Section("database").Key("db_name")
 	username := cfg.Section("database").Key("username")
 	ip := cfg.Section("database").Key("ip")
 	password := cfg.Section("database").Key("password")
 
+	// Log into MySQL driver with details from config file.
 	db, err = sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:3306)/%s", username, password, ip, dbName))
 
 	if err != nil {

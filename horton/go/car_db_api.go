@@ -7,6 +7,7 @@
  * 3rd Party API - https://www.back4app.com/database/back4app/car-make-model-dataset
  *
  * References
+ * https://ini.unknwon.io/docs/intro/getting_started
  * https://stackoverflow.com/questions/51452148/how-can-i-make-a-request-with-a-bearer-token-in-go
  * https://www.alexedwards.net/blog/how-to-properly-parse-a-json-request-body
  */
@@ -29,7 +30,7 @@ import (
 // do the request and then send the data from Back4App to client.
 func GetCarApiData(c *gin.Context) {
 	// Load config file.
-	cfg, err := ini.Load("go/config/back4app_config.ini")
+	cfg, err := ini.Load("go/config/config.ini")
 	if err != nil {
 		log.Println("Failed to load config file for back4app.", cfg)
 		c.JSON(500, nil)
