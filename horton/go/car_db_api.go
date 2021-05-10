@@ -15,28 +15,28 @@ package openapi
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/gin-gonic/gin"
+	"gopkg.in/ini.v1"
 	"io"
-	"io/ioutil"
 	"log"
 	"net/http"
 )
 
 // GetCarApiData
 // Function to get Vehicle Data from Back4App (3rd Party API) and send to Client.
-// Read in the config files for API access, set up the request, set the auth headers from the config files,
+// Load config file for API access, set up the request, set the auth headers from config file,
 // do the request and then send the data from Back4App to client.
 func GetCarApiData(c *gin.Context) {
-	// Read in config files.
-	id, err := ioutil.ReadFile("go/config/api_id.txt")
-	key, err := ioutil.ReadFile("go/config/api_key.txt")
+	// Load config file.
+	cfg, err := ini.Load("go/config/back4app_config.ini")
 	if err != nil {
-		log.Println("Unable to read files", err)
+		log.Println("Failed to load config file for back4app.", cfg)
 		c.JSON(500, nil)
 	}
-	// Set text from config files to strings - for setting auth Headers.
-	appID := string(id)
-	apiKey := string(key)
+	// Set text from config file - for setting auth Headers.
+	appID := cfg.Section("back4app").Key("api_id")
+	apiKey := cfg.Section("back4app").Key("api_key")
 
 	// Back4App URL with data of a 1000 Vehicle Makes and Models.
 	url := "https://parseapi.back4app.com/classes/Car_Model_List?limit=1000&keys=Make,Model"
@@ -48,15 +48,15 @@ func GetCarApiData(c *gin.Context) {
 		c.JSON(500, nil)
 	}
 	// Set auth Headers for API access.
-	req.Header.Set("X-Parse-Application-Id", appID)
-	req.Header.Set("X-Parse-Master-Key", apiKey)
+	req.Header.Set("X-Parse-Application-Id", fmt.Sprintf("%s", appID))
+	req.Header.Set("X-Parse-Master-Key", fmt.Sprintf("%s", apiKey))
 
 	// Check for user's cookie - if they do not have one abort the request.
 	// Status code handled by CheckForCookie.
-	if !CheckForCookie(c) {
-		log.Println("User is unauthorized")
-		return
-	}
+	//if !CheckForCookie(c) {
+	//	log.Println("User is unauthorized")
+	//	return
+	//}
 
 	// Do GET request - get data from Back4App.
 	client := &http.Client{}

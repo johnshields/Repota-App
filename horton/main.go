@@ -14,7 +14,7 @@ import (
 	"log"
 )
 
-// CORS are set up in ./go/routers.go
+// Routes & CORS are set up in ./go/routers.go
 func main() {
 	router := sw.NewRouter()
 	fmt.Println("[INFO] Horton is starting...")
