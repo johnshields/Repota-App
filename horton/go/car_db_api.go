@@ -34,7 +34,7 @@ func GetCarApiData(c *gin.Context) {
 		log.Println("Failed to load config file for back4app.", cfg)
 		c.JSON(500, nil)
 	}
-	// Set text from config file - for setting auth Headers.
+	// Set Back4App details from config file - for setting auth Headers.
 	appID := cfg.Section("back4app").Key("api_id")
 	apiKey := cfg.Section("back4app").Key("api_key")
 
@@ -53,10 +53,10 @@ func GetCarApiData(c *gin.Context) {
 
 	// Check for user's cookie - if they do not have one abort the request.
 	// Status code handled by CheckForCookie.
-	//if !CheckForCookie(c) {
-	//	log.Println("User is unauthorized")
-	//	return
-	//}
+	if !CheckForCookie(c) {
+		log.Println("User is unauthorized")
+		return
+	}
 
 	// Do GET request - get data from Back4App.
 	client := &http.Client{}
