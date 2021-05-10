@@ -25,7 +25,7 @@ func DbConn() (db *sql.DB) {
 	// Load config file.
 	cfg, err := ini.Load("go/config/config.ini")
 	if err != nil {
-		log.Println("Failed to load config file for database.", cfg)
+		log.Println("Failed to load config file for database.", err)
 		os.Exit(1) // Failed to start service
 	}
 	// Set MySQL details from from config file.

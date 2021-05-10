@@ -32,11 +32,11 @@ func GetCarApiData(c *gin.Context) {
 	// Load config file.
 	cfg, err := ini.Load("go/config/config.ini")
 	if err != nil {
-		log.Println("Failed to load config file for back4app.", cfg)
+		log.Println("Failed to load config file for back4app.", err)
 		c.JSON(500, nil)
 	}
 	// Set Back4App details from config file - for setting auth Headers.
-	appID := cfg.Section("back4app").Key("api_id")
+	appID := cfg.Section("back4app").Key("app_id")
 	apiKey := cfg.Section("back4app").Key("api_key")
 
 	// Back4App URL with data of a 1000 Vehicle Makes and Models.
