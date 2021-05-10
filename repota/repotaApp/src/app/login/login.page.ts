@@ -10,7 +10,7 @@ import {AuthService} from "../services/auth-service/auth.service";
  * @desc Handles user logging in.
  *
  * Reference
- * https://stackoverflow.com/questions/57175290/how-to-show-error-message-when-login-fails-in-angular-7/57177646
+ * https://stackoverflow.com/a/57177646
  */
 
 @Component({

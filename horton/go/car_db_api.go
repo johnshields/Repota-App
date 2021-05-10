@@ -8,7 +8,7 @@
  *
  * References
  * https://ini.unknwon.io/docs/intro/getting_started
- * https://stackoverflow.com/questions/51452148/how-can-i-make-a-request-with-a-bearer-token-in-go
+ * https://stackoverflow.com/a/51453196
  * https://www.alexedwards.net/blog/how-to-properly-parse-a-json-request-body
  */
 
