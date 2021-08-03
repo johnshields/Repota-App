@@ -17,6 +17,7 @@ alt="GMIT Logo" width="500" height="200"/>
 | **Student**             | [John Shields](https://github.com/johnshields) |
 | **Project Advisor**     | Andrew Beatty |
 | **Module Supervisor**   | Dr. John Healy |
+| **Grade Achieved**      | 71% |
 
 ***
 
@@ -27,9 +28,8 @@ alt="Repota Logo" width="200" height="200"/>
 # Repota
 Repota is designed to be a service report application for automobile technicians for auto dealerships and rental companies. With Repota, technicians are free to create, review, edit and delete their reports for services they have performed on automobiles with the option to export them to PDFs.
 ***
-#### View and use Repota @ <u>[www.repota-service.com](https://www.repota-service.com/)</u>
-#### View the Application's <u>[Guide](https://github.com/johnshields/Repota-App/wiki/Repota-Guide)</u>
 #### How to Run Locally -> <u>[click here](https://github.com/johnshields/AP-MD-FYP/wiki)</u>
+#### View the Application's <u>[Guide](https://github.com/johnshields/Repota-App/wiki/Repota-Guide)</u>
 #### Check out the OpenAPI's <u>[documentation](https://johnshields.github.io/horton.api.doc/)</u>
 ***
 
